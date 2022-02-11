@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Common.Models.RefitModels
+namespace StepEbay.Common.Models.RefitModels
 {
     public class ResponseData<T> : ResponseData
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace StepEbay.Main.Api.Common.Services
+namespace StepEbay.Worker.Services
 {
     public static class ServiceExtensions
     {

@@ -1,9 +1,9 @@
-﻿using Common.Models.RefitModels;
-using Refit;
+﻿using Refit;
+using StepEbay.Common.Models.RefitModels;
 using System.Net;
 using System.Text.Json;
 
-namespace Common.Client.ApiServices
+namespace StepEbay.Common.Client.ApiServices
 {
     public class DefaultApiService<TApiMethods> : IDefaultApiService<TApiMethods>
     {

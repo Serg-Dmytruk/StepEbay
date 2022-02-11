@@ -1,4 +1,4 @@
-﻿namespace Common.Client.Models.Auth
+﻿namespace StepEbay.Common.Client.Models.Auth
 {
     public class RefreshTokenData
     {
