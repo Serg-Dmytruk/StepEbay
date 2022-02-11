@@ -1,7 +1,7 @@
 ﻿using StepEbay.Data.Models.Default;
 using System.ComponentModel.DataAnnotations;
 
-namespace Data.Models.Auth
+namespace StepEbay.Data.Models.Auth
 {
     public class Role : IDbServiceEntity<int>
     {
