@@ -1,7 +1,7 @@
 ﻿using Refit;
 using StepEbay.Common.Models.RefitModels;
 
-namespace StepEbay.Common.Client.ApiServices
+namespace StepEbay.Common.ApiServices
 {
     public interface IDefaultApiService<TApiMethods>
     {

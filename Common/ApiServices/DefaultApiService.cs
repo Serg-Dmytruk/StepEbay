@@ -3,7 +3,7 @@ using StepEbay.Common.Models.RefitModels;
 using System.Net;
 using System.Text.Json;
 
-namespace StepEbay.Common.Client.ApiServices
+namespace StepEbay.Common.ApiServices
 {
     public class DefaultApiService<TApiMethods> : IDefaultApiService<TApiMethods>
     {

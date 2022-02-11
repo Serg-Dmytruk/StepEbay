@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{D2D4F8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{7DFC3554-3753-4CC1-84A8-6B0E2F77D80A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Common.Client", "Common\StepEbay.Common.Client.csproj", "{93CA75F6-F986-47B9-9509-A057B57493B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Common", "Common\StepEbay.Common.csproj", "{93CA75F6-F986-47B9-9509-A057B57493B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Data", "Data\StepEbay.Data.csproj", "{19A43373-6A8F-47FF-95E0-C59F8F75C589}"
 EndProject
