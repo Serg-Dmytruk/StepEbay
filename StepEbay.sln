@@ -19,31 +19,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{D2D4F8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{7DFC3554-3753-4CC1-84A8-6B0E2F77D80A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Common", "Common\StepEbay.Common.csproj", "{93CA75F6-F986-47B9-9509-A057B57493B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Common", "Common\StepEbay.Common.csproj", "{93CA75F6-F986-47B9-9509-A057B57493B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Data", "Data\StepEbay.Data.csproj", "{19A43373-6A8F-47FF-95E0-C59F8F75C589}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Data", "Data\StepEbay.Data.csproj", "{19A43373-6A8F-47FF-95E0-C59F8F75C589}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{C7D5858B-8F51-4B46-A937-09F636010FDE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{71CB0644-6317-4272-AC2B-1C79138417B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Data.Common", "Data.Common\StepEbay.Data.Common.csproj", "{02DE1086-82C4-4FCF-BE69-8DA8F3AB1367}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Data.Common", "Data.Common\StepEbay.Data.Common.csproj", "{02DE1086-82C4-4FCF-BE69-8DA8F3AB1367}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Admin.Api", "Admin.Api\StepEbay.Admin.Api.csproj", "{209C89CA-6B8B-4107-BB68-980B031734E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Admin.Api", "Admin.Api\StepEbay.Admin.Api.csproj", "{209C89CA-6B8B-4107-BB68-980B031734E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Admin.Api.Common", "Admin.Api.Common\StepEbay.Admin.Api.Common.csproj", "{93E345F5-4D0F-4925-AC6A-17390EE8E0E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Admin.Api.Common", "Admin.Api.Common\StepEbay.Admin.Api.Common.csproj", "{93E345F5-4D0F-4925-AC6A-17390EE8E0E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Admin.Common", "Admin.Common\StepEbay.Admin.Common.csproj", "{F0F32B36-8D09-478E-AEBA-648E89EA3B83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Admin.Common", "Admin.Common\StepEbay.Admin.Common.csproj", "{F0F32B36-8D09-478E-AEBA-648E89EA3B83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Main.Api", "StepEbay.Api\StepEbay.Main.Api.csproj", "{C8E69448-A427-4DF3-BCEF-D4E47AFF469D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Main.Api", "StepEbay.Api\StepEbay.Main.Api.csproj", "{C8E69448-A427-4DF3-BCEF-D4E47AFF469D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Main.Api.Common", "StepEbay.Api.Common\StepEbay.Main.Api.Common.csproj", "{C62CC629-FD57-48A4-88C5-83798F1B6A2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Main.Api.Common", "StepEbay.Api.Common\StepEbay.Main.Api.Common.csproj", "{C62CC629-FD57-48A4-88C5-83798F1B6A2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Main.Common", "StepEbay.Common\StepEbay.Main.Common.csproj", "{779B006E-B18B-4974-ACEC-68EB02EAD517}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Main.Common", "StepEbay.Common\StepEbay.Main.Common.csproj", "{779B006E-B18B-4974-ACEC-68EB02EAD517}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Worker", "Worker", "{E565E74E-8587-4814-A6A3-A0875AED74B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Worker", "StepEbay.Worker\StepEbay.Worker.csproj", "{4FF40C97-86D8-45FF-ADEF-B26239E0E3B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Worker", "StepEbay.Worker\StepEbay.Worker.csproj", "{4FF40C97-86D8-45FF-ADEF-B26239E0E3B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Main.Client", "StepEbay.Main.Client\StepEbay.Main.Client.csproj", "{AE199DC2-45DA-4B43-8A4E-5DAA2C9CE1F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Main.Client.Common", "StepEbay.Main.Client.Common\StepEbay.Main.Client.Common.csproj", "{1C896098-AD60-442C-861F-321B8B7D26C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +95,14 @@ Global
 		{4FF40C97-86D8-45FF-ADEF-B26239E0E3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FF40C97-86D8-45FF-ADEF-B26239E0E3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FF40C97-86D8-45FF-ADEF-B26239E0E3B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE199DC2-45DA-4B43-8A4E-5DAA2C9CE1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE199DC2-45DA-4B43-8A4E-5DAA2C9CE1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE199DC2-45DA-4B43-8A4E-5DAA2C9CE1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE199DC2-45DA-4B43-8A4E-5DAA2C9CE1F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C896098-AD60-442C-861F-321B8B7D26C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C896098-AD60-442C-861F-321B8B7D26C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C896098-AD60-442C-861F-321B8B7D26C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C896098-AD60-442C-861F-321B8B7D26C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +124,8 @@ Global
 		{C62CC629-FD57-48A4-88C5-83798F1B6A2C} = {7DFC3554-3753-4CC1-84A8-6B0E2F77D80A}
 		{779B006E-B18B-4974-ACEC-68EB02EAD517} = {71CB0644-6317-4272-AC2B-1C79138417B8}
 		{4FF40C97-86D8-45FF-ADEF-B26239E0E3B4} = {E565E74E-8587-4814-A6A3-A0875AED74B6}
+		{AE199DC2-45DA-4B43-8A4E-5DAA2C9CE1F2} = {D2D4F82B-94DE-4F98-9411-1C02D0D5281B}
+		{1C896098-AD60-442C-861F-321B8B7D26C8} = {D2D4F82B-94DE-4F98-9411-1C02D0D5281B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F2FAC1D-2C2A-4C98-A235-7382D5F68578}

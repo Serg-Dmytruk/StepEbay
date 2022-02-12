@@ -38,5 +38,15 @@ namespace StepEbay.Main.Api.Controllers
             //eeturn await _authService.SignIn(request);
             return null;
         }
+
+        /// <summary>
+        /// Оновлення авторизаційних токенів
+        /// </summary>
+        [HttpPost("refresh")]
+        public async Task<ResponseData> RefreshToken(RefreshTokenRequestDto request)
+        {
+            //return await _authService.RefreshToken(request);
+            return null;
+        }
     }
 }
