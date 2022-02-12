@@ -12,7 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StepEbay.Common\StepEbay.Main.Common.csproj" />
+    <ProjectReference Include="..\StepEbay.Main.Client.Common\StepEbay.Main.Client.Common.csproj" />
   </ItemGroup>
 
 </Project>

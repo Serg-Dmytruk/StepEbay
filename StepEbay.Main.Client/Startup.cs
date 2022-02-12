@@ -5,10 +5,14 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http;
+using StepEbay.Main.Client.Common.RestServices;
+using StepEbay.Main.Client.Services;
 
 namespace StepEbay.Main.Client
 {
@@ -25,6 +29,10 @@ namespace StepEbay.Main.Client
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<HttpClient>();
+            services.AddScoped<IApiService, ApiService>();
+
+            services.AddAuthorization();
             services.AddRazorPages();
             services.AddServerSideBlazor();
         }

@@ -45,9 +45,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Worker", "Worker", "{E565E7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Worker", "StepEbay.Worker\StepEbay.Worker.csproj", "{4FF40C97-86D8-45FF-ADEF-B26239E0E3B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Main.Client.Base", "StepEbay.Main.Client.Base\StepEbay.Main.Client.Base.csproj", "{0B1B18A3-A6F2-476A-BA3E-9A701E9DE025}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Main.Client.Base", "StepEbay.Main.Client.Base\StepEbay.Main.Client.Base.csproj", "{0B1B18A3-A6F2-476A-BA3E-9A701E9DE025}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Main.Client", "StepEbay.Main.Client\StepEbay.Main.Client.csproj", "{B2BECA81-8205-4F56-8B7E-4098206D9CFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Main.Client", "StepEbay.Main.Client\StepEbay.Main.Client.csproj", "{B2BECA81-8205-4F56-8B7E-4098206D9CFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Main.Client.Common", "StepEbay.Main.Client.Common\StepEbay.Main.Client.Common.csproj", "{8C7F3D41-137B-4B1A-94E4-9AB702D9A83B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +105,10 @@ Global
 		{B2BECA81-8205-4F56-8B7E-4098206D9CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2BECA81-8205-4F56-8B7E-4098206D9CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2BECA81-8205-4F56-8B7E-4098206D9CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C7F3D41-137B-4B1A-94E4-9AB702D9A83B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7F3D41-137B-4B1A-94E4-9AB702D9A83B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7F3D41-137B-4B1A-94E4-9AB702D9A83B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C7F3D41-137B-4B1A-94E4-9AB702D9A83B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{4FF40C97-86D8-45FF-ADEF-B26239E0E3B4} = {E565E74E-8587-4814-A6A3-A0875AED74B6}
 		{0B1B18A3-A6F2-476A-BA3E-9A701E9DE025} = {D2D4F82B-94DE-4F98-9411-1C02D0D5281B}
 		{B2BECA81-8205-4F56-8B7E-4098206D9CFD} = {D2D4F82B-94DE-4F98-9411-1C02D0D5281B}
+		{8C7F3D41-137B-4B1A-94E4-9AB702D9A83B} = {D2D4F82B-94DE-4F98-9411-1C02D0D5281B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F2FAC1D-2C2A-4C98-A235-7382D5F68578}
