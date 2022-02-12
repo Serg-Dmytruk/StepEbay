@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using StepEbay.Data.Common.Services.UserDbServices;
+using StepEbay.Main.Api.Common.Services.AuthServices;
+
 
 namespace StepEbay.Main.Api.Common.Services
 {
@@ -8,6 +11,7 @@ namespace StepEbay.Main.Api.Common.Services
         //usually use AddTransient
         public static IServiceCollection AddService(this IServiceCollection services)
         {
+            services.AddTransient<IAuthService, AuthService>();
 
             return services;
         }
@@ -15,7 +19,7 @@ namespace StepEbay.Main.Api.Common.Services
         //usually use AddScoped
         public static IServiceCollection AddDbService(this IServiceCollection services)
         {
-
+            services.AddScoped<IUserDbService, UserDbService>();
             return services;
         }
 

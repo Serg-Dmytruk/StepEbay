@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StepEbay.Common.Models.RefitModels;
+using StepEbay.Main.Api.Common.Services.AuthServices;
 using StepEbay.Main.Common.Models.Auth;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -8,9 +9,10 @@ namespace StepEbay.Main.Api.Controllers
     [Route("auth")]
     public class AuthController : ControllerBase
     {
-        public AuthController()
+        private readonly IAuthService _authService;
+        public AuthController(IAuthService authService)
         {
-
+            _authService = authService;
         }
 
         /// <summary>
@@ -20,8 +22,8 @@ namespace StepEbay.Main.Api.Controllers
         [SwaggerResponse(200, Type = typeof(SignInResponseDto))]
         public async Task<ResponseData<SignInResponseDto>> SignUp(SignUpRequestDto request)
         {
-            //TODO add auth service
-            // return await _authService.SignUp(request);
+            //TODO add validation to service
+           
             return null;
         }
 
