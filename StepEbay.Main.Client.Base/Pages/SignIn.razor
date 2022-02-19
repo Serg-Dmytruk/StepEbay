@@ -3,15 +3,18 @@
 <div class="divCenter">
     @if (!_showPreloader)
     {
-        <input class="myInput" type="text" @bind="_signInRequestDto.NickName" placeholder="Nickname" />
-        <input class="myInput" type="password" @bind="_signInRequestDto.Password" placeholder="Password" />
-        <span><input type="checkbox" style="cursor: pointer" class="myInput" @bind="_rememberMe" /> Save me</span>
-        <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SigninRequest">Login</button>
+        <input class="myInput" type="text" @bind="_signInRequestDto.NickName" placeholder="Нікнейм" />
+        <input class="myInput" type="password" @bind="_signInRequestDto.Password" placeholder="Пароль" />
+        <span><input type="checkbox" style="cursor: pointer" class="myInput" @bind="_rememberMe" /> Запам'ятати</span>
+
+        <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignInRequest">Увійти</button>
+
+        <a href="/signup">Реєстрація</a>
     }
     else
     {
         <div class="spinner-border centerOnParrentHorizontal" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only">Завантаження...</span>
         </div>
     }
 </div>

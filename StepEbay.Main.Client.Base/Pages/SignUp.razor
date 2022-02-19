@@ -1,1 +1,18 @@
 ﻿<h3>SignUp</h3>
+<div class="divCenter">
+    @if (!_showPreloader)
+    {
+        <input class="myInput" type="text" @bind="_signUpRequestDto.NickName" placeholder="Нікнейм" />
+        <input class="myInput" type="text" @bind="_signUpRequestDto.FullName" placeholder="Повне ім'я" />
+        <input class="myInput" type="email" @bind="_signUpRequestDto.Email" placeholder="Електронна пошта" />
+        <input class="myInput" type="password" @bind="_signUpRequestDto.Password" placeholder="Пароль" />
+        <input class="myInput" type="password" @bind="_signUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
+        <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignUpRequest">Зареєструватися</button>
+    }
+    else
+    {
+        <div class="spinner-border centerOnParrentHorizontal" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    }
+</div>

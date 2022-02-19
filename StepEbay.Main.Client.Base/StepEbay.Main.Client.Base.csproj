@@ -20,4 +20,8 @@
     <ProjectReference Include="..\StepEbay.Main.Client.Common\StepEbay.Main.Client.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
+
 </Project>

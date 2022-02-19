@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
+using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Client.Base.Layout;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Auth;
+using System.Net;
 
 namespace StepEbay.Main.Client.Base.Pages
 {
@@ -13,8 +15,11 @@ namespace StepEbay.Main.Client.Base.Pages
         [Inject] NavigationManager _navigationManager { get; set; }
         [Inject] IApiService _apiService { get; set; }
         private SignInRequestDto _signInRequestDto { get; set; } = new();
+        private SignInResponseDto _signInResponseDto { get; set; } = new();
         private bool _showPreloader { get; set; } = true;      
         private bool _rememberMe { get; set; }
+
+        private Dictionary<string, List<string>> _errors = new();
 
         protected override void OnAfterRender(bool firstRender)
         {
@@ -22,13 +27,21 @@ namespace StepEbay.Main.Client.Base.Pages
             {
                 _showPreloader = false;
                 StateHasChanged();
-            }
-            
+            }           
         }
-        private async Task SigninRequest()
+
+        private async Task SignInRequest()
         {
             _showPreloader = true;
-            await _apiService.ExecuteRequest(()=> _apiService.ApiMethods.SignIn(_signInRequestDto));
+
+            _errors = new();
+            ResponseData<SignInResponseDto> response = await _apiService.ExecuteRequest(()=> _apiService.ApiMethods.SignIn(_signInRequestDto));
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                _navigationManager.NavigateTo("/main");
+
+            _errors = response.Errors;
+
             _showPreloader = false;
             StateHasChanged();
         }
