@@ -22,11 +22,8 @@ namespace StepEbay.Main.Api.Controllers
         [SwaggerResponse(200, Type = typeof(SignInResponseDto))]
         public async Task<ResponseData<SignInResponseDto>> SignUp(SignUpRequestDto request)
         {
-            //TODO add validation to service
-           
-            return null;
+            return await _authService.SignUp(request);
         }
-
 
         /// <summary>
         /// Авторизація користувача
@@ -35,8 +32,7 @@ namespace StepEbay.Main.Api.Controllers
         [SwaggerResponse(200, Type = typeof(SignInResponseDto))]
         public async Task<ResponseData<SignInResponseDto>> SignIn(SignInRequestDto request)
         {
-            //eeturn await _authService.SignIn(request);
-            return null;
+            return await _authService.SignIn(request);
         }
 
         /// <summary>
@@ -45,8 +41,7 @@ namespace StepEbay.Main.Api.Controllers
         [HttpPost("refresh")]
         public async Task<ResponseData> RefreshToken(RefreshTokenRequestDto request)
         {
-            //return await _authService.RefreshToken(request);
-            return null;
+            return await _authService.RefreshToken(request);
         }
     }
 }

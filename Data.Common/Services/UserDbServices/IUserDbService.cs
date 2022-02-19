@@ -5,5 +5,7 @@ namespace StepEbay.Data.Common.Services.UserDbServices
 {
     public interface IUserDbService : IDefaultDbService<int, User>
     {
+        Task<bool> AnyByNickName(string nickName);
+
     }
 }

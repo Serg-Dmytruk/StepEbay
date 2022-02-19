@@ -13,13 +13,13 @@ namespace StepEbay.Data
         }
 
         #region Auth
-        public virtual RefreshToken RefreshTokens { get; set; }
-        public virtual Role Roles {get; set;}
-        public virtual UserRole UserRoles { get; set;}
+        public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
+        public virtual DbSet<Role> Roles {get; set;}
+        public virtual DbSet<UserRole> UserRoles { get; set;}
         #endregion
 
         #region Users
-        public virtual User Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         #endregion
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,7 +31,7 @@ namespace StepEbay.Data
 
             builder.Entity<User>().HasIndex(x => x.FullName);
             builder.Entity<User>().HasIndex(x => x.Email);
-            builder.Entity<User>().HasIndex(x => x.NickName);
+            builder.Entity<User>().HasIndex(x => x.NickName).IsUnique();
 
             builder.Entity<RefreshToken>().ToTable("RefreshTokens");
             builder.Entity<Role>().ToTable("Roles");
