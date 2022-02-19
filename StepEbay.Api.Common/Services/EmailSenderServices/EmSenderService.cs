@@ -23,8 +23,8 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 
             await Task.Run(() => {
                 string to = mail;
-                string from = "lazokivan0@gmail.com";
-                string fromPassword = "254478254478";
+                string from = "";
+                string fromPassword = "";
                 MailMessage message = new MailMessage(from, to);
                 message.Subject = title;
                 message.Body = description;
@@ -37,5 +37,6 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
                 client.Send(message);
             });
         }
+        
     }
 }
