@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,8 +11,16 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 {
     internal class EmailSenderService:IEmailSenderService
     {
+        IConfiguration _configuration;
+        public EmSenderService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public async Task SendEmail(string mail, string title, string description)
         {
+            //var TestFrom = _configuration.GetSection("");
+
             await Task.Run(() => {
                 string to = mail;
                 string from = "";

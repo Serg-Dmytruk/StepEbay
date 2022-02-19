@@ -22,5 +22,17 @@ namespace StepEbay.Main.Api.Controllers
         {
             await _emailSenderService.SendEmail(mail, title, description);
         }
+
+        [HttpPost("end1")]
+        public async Task Send1(string mail, string title, string description)
+        {
+            await _emailSenderService.SendEmail(mail, title, description);
+        }
+
+        [HttpPost("end2")]
+        public async Task Send2(string mail, string title, string description)
+        {
+            await _emailSenderService.SendEmail(mail, title, description);
+        }
     }
 }
