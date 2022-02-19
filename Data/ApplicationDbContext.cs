@@ -30,7 +30,7 @@ namespace StepEbay.Data
             builder.Entity<Role>().HasIndex(x => x.Name);
 
             builder.Entity<User>().HasIndex(x => x.FullName);
-            builder.Entity<User>().HasIndex(x => x.Email);
+            builder.Entity<User>().HasIndex(x => x.Email).IsUnique();
             builder.Entity<User>().HasIndex(x => x.NickName).IsUnique();
 
             builder.Entity<RefreshToken>().ToTable("RefreshTokens");

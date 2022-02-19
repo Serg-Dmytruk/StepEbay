@@ -6,15 +6,10 @@ using StepEbay.Data.Common.Services.UserDbServices;
 using StepEbay.Data.Models.Auth;
 using StepEbay.Data.Models.Users;
 using StepEbay.Main.Common.Models.Auth;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-
 using BC = BCrypt.Net.BCrypt;
 
 namespace StepEbay.Main.Api.Common.Services.AuthServices
@@ -40,7 +35,30 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
 
         public async Task<ResponseData<SignInResponseDto>> SignIn(SignInRequestDto request)
         {
-            return null;
+            User user = await _userDbService.GetUserByNickName(request.NickName);
+            if (user == null)
+                return ResponseData<SignInResponseDto>.Fail("Authorization", "Нікнейм не знайдено");
+
+            if(!BC.Verify(request.Password, user.Password))
+                return ResponseData<SignInResponseDto>.Fail("Authorization", "Невірний нікнейм або пароль");
+
+            string refreshToken = GenerateRefreshToken();
+            await _refreshTokenDbService.Add(new RefreshToken 
+            { 
+                Token = refreshToken, 
+                UpdateTime =  DateTime.UtcNow.Add(_expires), 
+                UserId =  user.Id 
+            });
+
+            return new ResponseData<SignInResponseDto>()
+            {
+                Data = new SignInResponseDto()
+                {
+                    AccessToken = GenerateJWT(user, (int)_expires.TotalSeconds, await _roleDbService.GetUserRoleNames(user.Id)),
+                    RefreshToken = refreshToken,
+                    Expires = DateTime.UtcNow.Add(_expires)
+                }
+            };
         }
 
         public async Task<ResponseData<SignInResponseDto>> SignUp(SignUpRequestDto request)
@@ -49,10 +67,10 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
             //ResponseData<SignInResponseDto>.Fail("Нік нейм", "Користувач з таким нікнеймом вже існує!" ))
 
             if (await _userDbService.AnyByNickName(request.NickName))
-                return ResponseData<SignInResponseDto>.Fail("Нікнейм", "Користувач з таким нікнеймом вже існує!" );
+                return ResponseData<SignInResponseDto>.Fail("Registration", "Користувач з таким нікнеймом вже існує!");
 
             if (await _userDbService.AnyByEmail(request.Email))
-                return ResponseData<SignInResponseDto>.Fail("Емейл", "Вказаний емейл вже використовуєтсья!");
+                return ResponseData<SignInResponseDto>.Fail("Registration", "Вказаний емейл вже використовуєтсья!");
 
             User newUser = await _userDbService.Add(new User
             {
@@ -76,7 +94,7 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
             User user = await _userDbService.Get(int.Parse(principal.Identity.Name));
 
             if (!await _refreshTokenDbService.Any(user.Id, request.RefreshToken))
-                return ResponseData<RefreshTokenResponseDto>.Fail("Токен", "Відмова в авторизації");
+                return ResponseData<RefreshTokenResponseDto>.Fail("Token", "Відмова в авторизації");
 
             await _refreshTokenDbService.RemoveRefreshToken(user.Id, request.RefreshToken);
 
@@ -129,7 +147,7 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             ClaimsPrincipal principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
 
-            if(securityToken is not JwtSecurityToken jwtSecurityToken
+            if (securityToken is not JwtSecurityToken jwtSecurityToken
                 || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
             {
                 throw new SecurityTokenException("Невірний токен");
