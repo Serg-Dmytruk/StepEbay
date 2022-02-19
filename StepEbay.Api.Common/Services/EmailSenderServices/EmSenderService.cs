@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 {
-    internal class EmSenderService:IEmSenderService
+    internal class EmSenderService : IEmSenderService
     {
         IConfiguration _configuration;
         public EmSenderService(IConfiguration configuration)
@@ -21,7 +21,8 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
         {
             //var TestFrom = _configuration.GetSection("");
 
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 string to = mail;
                 string from = "";
                 string fromPassword = "";
@@ -37,6 +38,6 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
                 client.Send(message);
             });
         }
-        
+
     }
 }
