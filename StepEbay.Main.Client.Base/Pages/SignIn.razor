@@ -3,6 +3,10 @@
 <div class="divCenter">
     @if (!_showPreloader)
     {
+        @if(_showModal)
+        {
+            <ModalDialog Title="@_errors.FirstOrDefault().Key" Text="@_errors.FirstOrDefault().Value" OnClose='@CloseModal'/>
+        }
         <input class="myInput" type="text" @bind="_signInRequestDto.NickName" placeholder="Нікнейм" />
         <input class="myInput" type="password" @bind="_signInRequestDto.Password" placeholder="Пароль" />
         <span><input type="checkbox" style="cursor: pointer" class="myInput" @bind="_rememberMe" /> Запам'ятати</span>

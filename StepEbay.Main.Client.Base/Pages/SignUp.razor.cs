@@ -18,6 +18,9 @@ namespace StepEbay.Main.Client.Base.Pages
         private bool _showPreloader { get; set; } = true;
 
         private Dictionary<string, List<string>> _errors = new();
+
+        private bool _showModal { get; set; } = false;
+
         protected override void OnAfterRender(bool firstRender)
         {
             if (firstRender)
@@ -41,7 +44,16 @@ namespace StepEbay.Main.Client.Base.Pages
 
             _errors = response.Errors;
 
+            if (_errors.Count > 0)
+                _showModal = true;
+
             _showPreloader = false;
+            StateHasChanged();
+        }
+
+        private void CloseModal(bool show)
+        {
+            _showModal = show;
             StateHasChanged();
         }
     }

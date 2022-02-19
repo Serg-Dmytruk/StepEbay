@@ -17,3 +17,4 @@ namespace StepEbay.Main.Client.Common.RestServices
         Task<ApiResponse<SignInResponseDto>> SignUp(SignUpRequestDto request);
     }
 }
+

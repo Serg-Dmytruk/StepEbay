@@ -15,9 +15,9 @@ namespace StepEbay.Main.Client.Base.Pages
         [Inject] NavigationManager _navigationManager { get; set; }
         [Inject] IApiService _apiService { get; set; }
         private SignInRequestDto _signInRequestDto { get; set; } = new();
-        private SignInResponseDto _signInResponseDto { get; set; } = new();
         private bool _showPreloader { get; set; } = true;      
         private bool _rememberMe { get; set; }
+        public bool _showModal { get; set; } = false;
 
         private Dictionary<string, List<string>> _errors = new();
 
@@ -42,7 +42,16 @@ namespace StepEbay.Main.Client.Base.Pages
 
             _errors = response.Errors;
 
+            if (_errors.Count > 0)
+                _showModal = true;
+
             _showPreloader = false;
+            StateHasChanged();
+        }
+
+        private void CloseModal(bool show)
+        {
+            _showModal = show;
             StateHasChanged();
         }
 

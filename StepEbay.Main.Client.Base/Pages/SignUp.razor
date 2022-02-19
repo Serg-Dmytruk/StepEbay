@@ -2,6 +2,10 @@
 <div class="divCenter">
     @if (!_showPreloader)
     {
+        @if (_showModal)
+        {
+            <ModalDialog Title="@_errors.FirstOrDefault().Key" Text="@_errors.FirstOrDefault().Value" OnClose='@CloseModal' />
+        }
         <input class="myInput" type="text" @bind="_signUpRequestDto.NickName" placeholder="Нікнейм" />
         <input class="myInput" type="text" @bind="_signUpRequestDto.FullName" placeholder="Повне ім'я" />
         <input class="myInput" type="email" @bind="_signUpRequestDto.Email" placeholder="Електронна пошта" />
