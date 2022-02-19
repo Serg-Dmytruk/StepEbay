@@ -5,10 +5,10 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace StepEbay.Main.Api.Controllers
 {
     [Route("email")]
-    public class EmailController: ControllerBase
+    public class EmailController : ControllerBase
     {
-        private IEmSenderService _emailSenderService;
-        public EmailController(IEmSenderService emailSenderService)
+        private IEmailSenderService _emailSenderService;
+        public EmailController(IEmailSenderService emailSenderService)
         {
             _emailSenderService = emailSenderService;
         }
@@ -20,7 +20,7 @@ namespace StepEbay.Main.Api.Controllers
         [SwaggerResponse(200)]
         public async Task Send(string mail, string title, string description)
         {
-            await _emailSenderService.SendEmail(mail,title, description);
+            await _emailSenderService.SendEmail(mail, title, description);
         }
 
         [HttpPost("end1")]

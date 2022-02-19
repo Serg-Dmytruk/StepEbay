@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 {
-    internal class EmSenderService : IEmSenderService
+    internal class EmailSenderService:IEmailSenderService
     {
         IConfiguration _configuration;
         public EmSenderService(IConfiguration configuration)
