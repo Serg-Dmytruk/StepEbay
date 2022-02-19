@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 {
-    internal class EmSenderService:IEmSenderService
+    internal class EmailSenderService:IEmailSenderService
     {
         public async Task SendEmail(string mail, string title, string description)
         {
