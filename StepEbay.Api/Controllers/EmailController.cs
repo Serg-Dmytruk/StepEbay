@@ -14,25 +14,30 @@ namespace StepEbay.Main.Api.Controllers
         }
 
         /// <summary>
-        /// Відправлення емейлу з стандартного адресу
+        /// Відправлення новин з стандартного адресу
         /// </summary>
-        [HttpPost]
-        [SwaggerResponse(200)]
-        public async Task Send(string mail, string title, string description)
+        [HttpPost("SendNews")]
+        public async Task SendNews(string mail, string title, string description)
         {
-            await _emailSenderService.SendEmail(mail, title, description);
+            await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
         }
 
-        [HttpPost("end1")]
-        public async Task Send1(string mail, string title, string description)
+        /// <summary>
+        /// Відправлення інформації про ставку з стандартного адресу
+        /// </summary>
+        [HttpPost("SendBetMessage")]
+        public async Task SendBetMessage(string mail, string title, string description)
         {
-            await _emailSenderService.SendEmail(mail, title, description);
+            await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
         }
 
-        [HttpPost("end2")]
-        public async Task Send2(string mail, string title, string description)
+        /// <summary>
+        /// Відправлення "підтвердження реєстрації" з стандартного адресу
+        /// </summary>
+        [HttpPost("SendRegistrationConfirm")]
+        public async Task SendRegistrationConfirm(string mail, string title, string description)
         {
-            await _emailSenderService.SendEmail(mail, title, description);
+            await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
         }
     }
 }

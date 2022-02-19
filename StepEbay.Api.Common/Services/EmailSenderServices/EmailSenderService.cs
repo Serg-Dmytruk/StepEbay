@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 {
-    public class EmailSenderService:IEmailSenderService
+    public class EmailSenderService : IEmailSenderService
     {
         IConfiguration _configuration;
         public EmailSenderService(IConfiguration configuration)
@@ -19,8 +19,6 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 
         public async Task SendEmail(string mail, string title, string description)
         {
-            
-
             await Task.Run(() =>
             {
                 string to = mail;
