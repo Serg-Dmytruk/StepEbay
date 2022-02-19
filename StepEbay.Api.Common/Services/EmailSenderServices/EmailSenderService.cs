@@ -12,7 +12,7 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
     internal class EmailSenderService:IEmailSenderService
     {
         IConfiguration _configuration;
-        public EmSenderService(IConfiguration configuration)
+        public EmailSenderService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
