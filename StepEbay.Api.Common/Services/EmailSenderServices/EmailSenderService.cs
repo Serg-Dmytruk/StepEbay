@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 {
-    internal class EmailSenderService:IEmailSenderService
+    public class EmailSenderService:IEmailSenderService
     {
         IConfiguration _configuration;
         public EmailSenderService(IConfiguration configuration)
@@ -19,13 +19,13 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 
         public async Task SendEmail(string mail, string title, string description)
         {
-            //var TestFrom = _configuration.GetSection("");
+            
 
             await Task.Run(() =>
             {
                 string to = mail;
-                string from = "";
-                string fromPassword = "";
+                string from = _configuration.GetSection("Email").Value;
+                string fromPassword = _configuration.GetSection("EmailPassword").Value;
                 MailMessage message = new MailMessage(from, to);
                 message.Subject = title;
                 message.Body = description;
