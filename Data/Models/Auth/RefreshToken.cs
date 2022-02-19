@@ -15,6 +15,6 @@ namespace StepEbay.Data.Models.Auth
         public User User { get; set; }
 
         public DateTime UpdateTime { get; set; }
-        public string Value { get; set; }
+        public string Token { get; set; }
     }
 }

@@ -17,5 +17,10 @@ namespace StepEbay.Data.Common.Services.UserDbServices
         {
             return await _context.Users.AnyAsync(x => x.NickName == nickName);
         }
+
+        public async Task<bool> AnyByEmail(string email)
+        {
+            return await _context.Users.AnyAsync(x => x.Email == email);
+        }
     }
 }
