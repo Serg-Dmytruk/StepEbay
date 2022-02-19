@@ -29,10 +29,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 //DB
 string applicationDbContext = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(applicationDbContext));
+
 //Services
 builder.Services.AddService();
 builder.Services.AddDbService();
-//
+
+//Default
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => 
