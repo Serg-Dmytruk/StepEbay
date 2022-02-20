@@ -119,7 +119,8 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
             List<Claim> claims = new()
             {
                 new Claim(ClaimTypes.Name, user.Id.ToString()),
-                new Claim("nickName", user.NickName)
+                new Claim("nickName", user.NickName),
+                new Claim("userEmail", user.Email)
             };
 
             JwtSecurityToken token = new JwtSecurityToken(

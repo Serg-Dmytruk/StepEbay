@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StepEbay.Main.Api.Common.Services.EmailSenderServices;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace StepEbay.Main.Api.Controllers
 {
@@ -16,28 +15,37 @@ namespace StepEbay.Main.Api.Controllers
         /// <summary>
         /// Відправлення новин з стандартного адресу
         /// </summary>
-        [HttpPost("SendNews")]
-        public async Task SendNews(string mail, string title, string description)
+        [HttpPost("news")]
+        public async Task SendNews(string title, string description)
         {
-            await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
+            await _emailSenderService.SendNews(title, description);
         }
 
         /// <summary>
         /// Відправлення інформації про ставку з стандартного адресу
         /// </summary>
-        [HttpPost("SendBetMessage")]
-        public async Task SendBetMessage(string mail, string title, string description)
+        [HttpPost("place/bet")]
+        public async Task SendBetMessage()
         {
-            await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
+            await _emailSenderService.SendBetPlace(User.Claims.First(c => c.Type == "userEmail").Value);
         }
 
         /// <summary>
         /// Відправлення "підтвердження реєстрації" з стандартного адресу
         /// </summary>
-        [HttpPost("SendRegistrationConfirm")]
-        public async Task SendRegistrationConfirm(string mail, string title, string description)
+        [HttpPost("registration")]
+        public async Task SendRegistrationConfirm()
         {
-            await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
+            await _emailSenderService.SendRegistrationConfirm(User.Claims.First(c => c.Type == "userEmail").Value);
         }
+
+        ///// <summary>
+        ///// Відправлення інформації про ставку з стандартного адресу
+        ///// </summary>
+        //[HttpPost("win/bet")]
+        //public async Task SendWinBetMessage()
+        //{
+        //    await _emailSenderService.SendBetWin(User.Claims.First(c => c.Type == "email").Value);
+        //}
     }
 }
