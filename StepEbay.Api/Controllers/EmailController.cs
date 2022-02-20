@@ -18,7 +18,6 @@ namespace StepEbay.Main.Api.Controllers
         [HttpPost("news")]
         public async Task SendNews(string title, string description)
         {
-            string mail = "";//get mail from session
             await _emailSenderService.SendNews(title, description);//TODO: content of mail must be changed
 
         }
