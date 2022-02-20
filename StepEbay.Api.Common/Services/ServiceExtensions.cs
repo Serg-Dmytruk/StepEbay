@@ -2,7 +2,7 @@
 using StepEbay.Data.Common.Services.AuthDbServices;
 using StepEbay.Data.Common.Services.UserDbServices;
 using StepEbay.Main.Api.Common.Services.AuthServices;
-
+using StepEbay.Main.Api.Common.Services.EmailSenderServices;
 
 namespace StepEbay.Main.Api.Common.Services
 {
@@ -13,6 +13,7 @@ namespace StepEbay.Main.Api.Common.Services
         public static IServiceCollection AddService(this IServiceCollection services)
         {
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IEmailSenderService, EmailSenderService>();
 
             return services;
         }
