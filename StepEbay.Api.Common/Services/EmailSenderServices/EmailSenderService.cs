@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 {
@@ -17,7 +12,28 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
             _configuration = configuration;
         }
 
-        public async Task SendEmail(string mail, string title, string description)
+        //TODO IMPLEMENTATION
+        public async Task SendRegistrationConfirm(string email)
+        {
+            //await SendEmail();
+        }
+
+        public async Task SendBetPlace(string email)
+        {
+            //await SendEmail();
+        }
+
+        public async Task SendNews(string title, string description)
+        {
+            //await SendEmail();
+        }
+
+        //public async Task SendBetWin(string email)
+        //{
+        //    //await SendEmail();
+        //}
+
+        private async Task SendEmail(string mail, string title, string description)
         {
             await Task.Run(() =>
             {
@@ -36,6 +52,5 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
                 client.Send(message);
             });
         }
-
     }
 }

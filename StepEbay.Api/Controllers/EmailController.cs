@@ -18,28 +18,34 @@ namespace StepEbay.Main.Api.Controllers
         [HttpPost("news")]
         public async Task SendNews(string title, string description)
         {
-            string mail = "";//get mail from session
             await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
         }
 
         /// <summary>
         /// Відправлення інформації про ставку з стандартного адресу
         /// </summary>
-        [HttpPost("bet")]
-        public async Task SendBetMessage()
+        [HttpPost("SendBetMessage")]
+        public async Task SendBetMessage(string mail, string title, string description)
         {
-            string mail = "";//get mail from session
-            await _emailSenderService.SendEmail(mail, ""/*title*/, ""/*description*/);//TODO: content of mail must be changed
+            await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
         }
 
         /// <summary>
         /// Відправлення "підтвердження реєстрації" з стандартного адресу
         /// </summary>
         [HttpPost("SendRegistrationConfirm")]
-        public async Task SendRegistrationConfirm()
+        public async Task SendRegistrationConfirm(string mail, string title, string description)
         {
-            string mail = "";//get mail from session
-            await _emailSenderService.SendEmail(mail, ""/*title*/, ""/*description*/);//TODO: content of mail must be changed
+            await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
         }
+
+        ///// <summary>
+        ///// Відправлення інформації про ставку з стандартного адресу
+        ///// </summary>
+        //[HttpPost("win/bet")]
+        //public async Task SendWinBetMessage()
+        //{
+        //    await _emailSenderService.SendBetWin(User.Claims.First(c => c.Type == "email").Value);
+        //}
     }
 }
