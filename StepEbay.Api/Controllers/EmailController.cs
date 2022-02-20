@@ -29,7 +29,7 @@ namespace StepEbay.Main.Api.Controllers
         public async Task SendBetMessage()
         {
             string mail = "";//get mail from session
-            await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
+            await _emailSenderService.SendEmail(mail, ""/*title*/, ""/*description*/);//TODO: content of mail must be changed
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace StepEbay.Main.Api.Controllers
         public async Task SendRegistrationConfirm()
         {
             string mail = "";//get mail from session
-            await _emailSenderService.SendEmail(mail, title, description);//TODO: content of mail must be changed
+            await _emailSenderService.SendEmail(mail, ""/*title*/, ""/*description*/);//TODO: content of mail must be changed
         }
     }
 }
