@@ -13,6 +13,11 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Client.Services;
+using StepEbay.Main.Client.Common.Providers;
+using StepEbay.Common.Storages;
+using StepEbay.Common;
+using StepEbay.Main.Client.Common.Options;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace StepEbay.Main.Client
 {
@@ -29,12 +34,25 @@ namespace StepEbay.Main.Client
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddTransient<HttpClient>();
             services.AddScoped<IApiService, ApiService>();
 
+            services.AddStorages();
+
+            CookieOptions cookieOptions = Configuration.GetSection("CookieOptions").Get<CookieOptions>();
+            DomainOptions domainOptions = Configuration.GetSection("DomainOptions").Get<DomainOptions>();
+
             services.AddAuthorization();
+            services.AddScoped<ITokenProvider, TokenProvider>(p => new TokenProvider(p.GetService<CookieStorage>(),
+               cookieOptions.AccessToken, cookieOptions.RefreshToken, cookieOptions.Expires, domainOptions.Cookie));
+
+            services.AddScoped<AuthenticationStateProvider>(p => (TokenProvider)p.GetService<ITokenProvider>());
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            services.Configure<DomainOptions>(Configuration.GetSection("DomainOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
