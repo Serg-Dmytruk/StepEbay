@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StepEbay.Data.Models.Auth;
+using StepEbay.Data.Models.Products;
 using StepEbay.Data.Models.Users;
 
 namespace StepEbay.Data
@@ -20,7 +21,14 @@ namespace StepEbay.Data
 
         #region Users
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Favorite> Favorites { get; set; }
         #endregion
+        #region Products
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<ProductState> ProductStates { get; set; }
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -33,11 +41,20 @@ namespace StepEbay.Data
             builder.Entity<User>().HasIndex(x => x.Email).IsUnique();
             builder.Entity<User>().HasIndex(x => x.NickName).IsUnique();
 
+            builder.Entity<Product>().HasIndex(x => x.Title);
+
+            builder.Entity<ProductState>().HasIndex(x => x.Name);
+
+            builder.Entity<Category>().HasIndex(x => x.Name);
+
             builder.Entity<RefreshToken>().ToTable("RefreshTokens");
             builder.Entity<Role>().ToTable("Roles");
             builder.Entity<UserRole>().ToTable("UserRoles");
             builder.Entity<User>().ToTable("Users");
-
+            builder.Entity<Favorite>().ToTable("Favorites");
+            builder.Entity<Product>().ToTable("Products");
+            builder.Entity<ProductState>().ToTable("ProductStates");
+            builder.Entity<Category>().ToTable("Categories");
         }
     }
 }
