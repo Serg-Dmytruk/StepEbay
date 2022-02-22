@@ -1,5 +1,4 @@
 ﻿using StepEbay.Data.Models.Default;
-using StepEbay.Data.Models.Users;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -22,6 +21,6 @@ namespace StepEbay.Data.Models.Products
         public virtual Category Category { get; set; }
         [ForeignKey("ProductState")]
         public byte ProductStateId { get; set; }
-        public ProductState ProductState { get; set; }
+        public virtual ProductState ProductState { get; set; }
     }
 }
