@@ -21,7 +21,14 @@ namespace StepEbay.Data
 
         #region Users
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Favorite> Favorites { get; set; }
         #endregion
+        #region Products
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<ProductState> ProductStates { get; set; }
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -40,16 +47,11 @@ namespace StepEbay.Data
 
             builder.Entity<Category>().HasIndex(x => x.Name);
 
-            builder.Entity<Product>().HasOne(x => x.Category).WithMany(x=>x.Products);
-            builder.Entity<Product>().HasOne(x => x.ProductState).WithMany(x => x.Products);
-
-            builder.Entity<Favorite>().HasOne(x => x.Product).WithMany(x => x.Favorites);
-            builder.Entity<Favorite>().HasOne(x => x.User).WithMany(x => x.Favorites);
-
             builder.Entity<RefreshToken>().ToTable("RefreshTokens");
             builder.Entity<Role>().ToTable("Roles");
             builder.Entity<UserRole>().ToTable("UserRoles");
             builder.Entity<User>().ToTable("Users");
+            builder.Entity<Favorite>().ToTable("Favorites");
             builder.Entity<Product>().ToTable("Products");
             builder.Entity<ProductState>().ToTable("ProductStates");
             builder.Entity<Category>().ToTable("Categorys");
