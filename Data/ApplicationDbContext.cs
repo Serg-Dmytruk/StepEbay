@@ -54,7 +54,7 @@ namespace StepEbay.Data
             builder.Entity<Favorite>().ToTable("Favorites");
             builder.Entity<Product>().ToTable("Products");
             builder.Entity<ProductState>().ToTable("ProductStates");
-            builder.Entity<Category>().ToTable("Categorys");
+            builder.Entity<Category>().ToTable("Categories");
         }
     }
 }
