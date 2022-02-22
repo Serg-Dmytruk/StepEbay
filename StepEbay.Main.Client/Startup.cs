@@ -18,6 +18,7 @@ using StepEbay.Common.Storages;
 using StepEbay.Common;
 using StepEbay.Main.Client.Common.Options;
 using Microsoft.AspNetCore.Components.Authorization;
+using StepEbay.Common.Lockers;
 
 namespace StepEbay.Main.Client
 {
@@ -48,6 +49,7 @@ namespace StepEbay.Main.Client
                cookieOptions.AccessToken, cookieOptions.RefreshToken, cookieOptions.Expires, domainOptions.Cookie));
 
             services.AddScoped<AuthenticationStateProvider>(p => (TokenProvider)p.GetService<ITokenProvider>());
+            services.AddScoped<SemaphoreManager>();
 
             services.AddRazorPages();
             services.AddServerSideBlazor();

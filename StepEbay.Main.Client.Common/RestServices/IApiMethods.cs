@@ -15,6 +15,9 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Post("/auth/signup")]
         Task<ApiResponse<SignInResponseDto>> SignUp(SignUpRequestDto request);
+
+        [Post("/auth/refresh")]
+        Task<ApiResponse<RefreshTokenResponseDto>> RefreshToken(RefreshTokenRequestDto request);
     }
 }
 
