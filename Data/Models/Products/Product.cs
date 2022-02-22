@@ -18,6 +18,7 @@ namespace StepEbay.Data.Models.Products
 
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
+
         [ForeignKey("ProductState")]
         public byte ProductStateId { get; set; }
 

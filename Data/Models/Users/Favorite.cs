@@ -12,6 +12,7 @@ namespace StepEbay.Data.Models.Users
 
         [ForeignKey("Product")]
         public int ProductId { get; set; }
+
         [ForeignKey("User")]
         public int UserId { get; set; }
 
