@@ -1,4 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using StepEbay.Admin.Api.Common.Services;
+using StepEbay.Data;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +19,16 @@ builder.Services.AddSwaggerGen(c =>
     string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
+
+
+//DB
+
+string applicationDbContext = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(applicationDbContext));
+
+//Services
+builder.Services.AddService();
+builder.Services.AddDbService();
 
 var app = builder.Build();
 

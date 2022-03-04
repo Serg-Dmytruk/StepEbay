@@ -20,7 +20,11 @@
 	  <ProjectReference Include="..\Admin.Api.Common\StepEbay.Admin.Api.Common.csproj" />
 	  <ProjectReference Include="..\Admin.Common\StepEbay.Admin.Common.csproj" />
 	  <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
-	  <ProjectReference Include="..\Data\StepEbay.Data.csproj" />
+    <ProjectReference Include="..\Data\StepEbay.Data.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Services\" />
 	</ItemGroup>
 
 </Project>
