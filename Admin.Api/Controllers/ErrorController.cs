@@ -12,18 +12,21 @@ namespace StepEbay.Admin.Api.Controllers
         public ErrorController(ITelegramService serviceTg, IDeveloperGroupDbService groups)
         {
             _serviceTg = serviceTg;
-            _groups= groups;
+            _groups = groups;
         }
 
         /// <summary>
-        /// 
+        /// This will send error message through telegram bot
         /// </summary>
         [HttpPost("log")]
         public async Task AceptError(string errorMessage)
         {
             await _serviceTg.SendErrorMessage(errorMessage, _groups);
-            
         }
+
+        /// <summary>
+        /// Use it for registrate groups where bot will send messages
+        /// </summary>
         [HttpPost("group")]
         public async Task AddGroup(string groupTg)
         {
