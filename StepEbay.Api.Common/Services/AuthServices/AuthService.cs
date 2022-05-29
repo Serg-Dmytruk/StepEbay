@@ -68,7 +68,7 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
             var result = await validator.ValidateAsync(request);
             if (!result.IsValid)
             {
-                return ResponseData<SignInResponseDto>.Fail("Registration", result.Errors.ToString());
+                return ResponseData<SignInResponseDto>.Fail("Registration", result.Errors.First().ErrorMessage);
             }
             
             if (await _userDbService.AnyByNickName(request.NickName))
