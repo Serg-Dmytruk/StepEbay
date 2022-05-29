@@ -65,15 +65,12 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
         public async Task<ResponseData<SignInResponseDto>> SignUp(SignUpRequestDto request)
         {
             var validator = new AuthValidator();
-            var result = validator.ValidateAsync(request);
-            if (!result.Result.IsValid)
+            var result = await validator.ValidateAsync(request);
+            if (!result.IsValid)
             {
-                return ResponseData<SignInResponseDto>.Fail("Registration", result.Result.Errors.ToString());
+                return ResponseData<SignInResponseDto>.Fail("Registration", result.Errors.ToString());
             }
             
-            //Вова тут тобі тре добавити валідацію даних перед орцією перевіркою на нік нейм (для повернення помилкі на клієнт використовуй оце як приклад
-            //ResponseData<SignInResponseDto>.Fail("Нік нейм", "Користувач з таким нікнеймом вже існує!" ))
-
             if (await _userDbService.AnyByNickName(request.NickName))
                 return ResponseData<SignInResponseDto>.Fail("Registration", "Користувач з таким нікнеймом вже існує!");
 
