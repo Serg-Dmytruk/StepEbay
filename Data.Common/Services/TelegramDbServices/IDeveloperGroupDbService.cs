@@ -6,5 +6,6 @@ namespace StepEbay.Data.Common.Services.TelegramDbServices
     public interface IDeveloperGroupDbService : IDefaultDbService<int, DeveloperGroup>
     {
         Task<List<DeveloperGroup>> GetAll();
+        Task<DeveloperGroup> GetByToken(string token);
     }
 }
