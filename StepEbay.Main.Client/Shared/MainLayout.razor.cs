@@ -12,10 +12,8 @@ namespace StepEbay.Main.Client.Shared
 
         protected override async Task OnInitializedAsync()
         {
-
             var authState = await TokenProvider.GetAuthenticationStateAsync();
             UserName = authState.User.Claims.Single(c => c.Type == "nickName").Value;
-
         }
 
         private async Task LogOut()
