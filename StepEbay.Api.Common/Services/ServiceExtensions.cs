@@ -1,8 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using StepEbay.Data.Common.Services.AuthDbServices;
 using StepEbay.Data.Common.Services.UserDbServices;
 using StepEbay.Main.Api.Common.Services.AuthServices;
+using StepEbay.Main.Api.Common.Services.DataValidationServices;
 using StepEbay.Main.Api.Common.Services.EmailSenderServices;
+using StepEbay.Main.Common.Models.Auth;
 
 namespace StepEbay.Main.Api.Common.Services
 {
@@ -14,7 +17,7 @@ namespace StepEbay.Main.Api.Common.Services
         {
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IEmailSenderService, EmailSenderService>();
-
+            services.AddTransient<IValidator<SignUpRequestDto>, AuthValidator>();
             return services;
         }
 
