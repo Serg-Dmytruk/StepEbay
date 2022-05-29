@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Refit;
+﻿using Refit;
+using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Common.Models.Auth;
 
 namespace StepEbay.Main.Client.Common.RestServices
@@ -18,6 +14,9 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Post("/auth/refresh")]
         Task<ApiResponse<RefreshTokenResponseDto>> RefreshToken(RefreshTokenRequestDto request);
+
+        [Post("/bet/place/{lotId}")]
+        Task<ApiResponse<BoolResult>> PlaceBet(int lotId);
     }
 }
 

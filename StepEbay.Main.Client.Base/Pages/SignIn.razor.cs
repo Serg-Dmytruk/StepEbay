@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Client.Base.Layout;
+using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Auth;
 using System.Net;
@@ -12,12 +13,13 @@ namespace StepEbay.Main.Client.Base.Pages
     [Layout(typeof(EmptyLayout))]
     public partial class SignIn
     {
-        [Inject] NavigationManager _navigationManager { get; set; }
-        [Inject] IApiService _apiService { get; set; }
-        private SignInRequestDto _signInRequestDto { get; set; } = new();
-        private bool _showPreloader { get; set; } = true;      
-        private bool _rememberMe { get; set; }
-        public bool _showModal { get; set; } = false;
+        [Inject] private ITokenProvider TokenProvider { get; set; }
+        [Inject] NavigationManager NavigationManager { get; set; }
+        [Inject] IApiService ApiService { get; set; }
+        private SignInRequestDto SignInRequestDto { get; set; } = new();
+        private bool ShowPreloader { get; set; } = true;      
+        private bool RememberMe { get; set; }
+        public bool ShowModal { get; set; } = false;
 
         private Dictionary<string, List<string>> _errors = new();
 
@@ -25,35 +27,43 @@ namespace StepEbay.Main.Client.Base.Pages
         {
             if (firstRender)
             {
-                _showPreloader = false;
+                ShowPreloader = false;
                 StateHasChanged();
             }           
         }
 
         private async Task SignInRequest()
         {
-            _showPreloader = true;
+            ShowPreloader = true;
 
             _errors = new();
-            ResponseData<SignInResponseDto> response = await _apiService.ExecuteRequest(()=> _apiService.ApiMethods.SignIn(_signInRequestDto));
+            ResponseData<SignInResponseDto> response = await ApiService.ExecuteRequest(()=> ApiService.ApiMethods.SignIn(SignInRequestDto));
 
             if (response.StatusCode == HttpStatusCode.OK)
-                _navigationManager.NavigateTo("/main");
+            {
+                if (RememberMe)
+                    await TokenProvider.SetToken(response.Data.AccessToken, response.Data.RefreshToken, response.Data.Expires);
+                else
+                    await TokenProvider.SetSessionToken(response.Data.AccessToken, response.Data.RefreshToken, response.Data.Expires);
+
+                await TokenProvider.CheckAuthentication(true);
+
+                NavigationManager.NavigateTo("/main");
+            }
 
             _errors = response.Errors;
 
             if (_errors.Count > 0)
-                _showModal = true;
+                ShowModal = true;
 
-            _showPreloader = false;
+            ShowPreloader = false;
             StateHasChanged();
         }
 
         private void CloseModal(bool show)
         {
-            _showModal = show;
+            ShowModal = show;
             StateHasChanged();
         }
-
     }
 }

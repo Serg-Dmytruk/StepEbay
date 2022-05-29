@@ -22,7 +22,7 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
         private readonly IRefreshTokenDbService _refreshTokenDbService;
         private readonly IRoleDbService _roleDbService;
 
-        private readonly TimeSpan _expires = new(0, 3, 0);
+        private readonly TimeSpan _expires = new(0, 20, 0);
         public AuthService(IConfiguration config,
             IUserDbService userDbService,
             IRefreshTokenDbService refreshTokenDbService,
@@ -77,7 +77,7 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
             if (await _userDbService.AnyByEmail(request.Email))
                 return ResponseData<SignInResponseDto>.Fail("Registration", "Вказаний емейл вже використовуєтсья!");
 
-            User newUser = await _userDbService.Add(new User
+            var newUser = await _userDbService.Add(new User
             {
                 NickName = request.NickName,
                 FullName = request.FullName,

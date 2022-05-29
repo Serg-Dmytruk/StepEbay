@@ -12,20 +12,20 @@ namespace StepEbay.Main.Client.Base.Pages
     public partial class SignUp
     {
         [Inject] private NavigationManager NavigationManager { get; set; }
-        [Inject] IApiService _apiService { get; set; }
+        [Inject] IApiService ApiService { get; set; }
 
-        private SignUpRequestDto _signUpRequestDto { get; set; } = new();
-        private bool _showPreloader { get; set; } = true;
+        private SignUpRequestDto SignUpRequestDto { get; set; } = new();
+        private bool ShowPreloader { get; set; } = true;
 
         private Dictionary<string, List<string>> _errors = new();
 
-        private bool _showModal { get; set; } = false;
+        private bool ShowModal { get; set; } = false;
 
         protected override void OnAfterRender(bool firstRender)
         {
             if (firstRender)
             {
-                _showPreloader = false;
+                ShowPreloader = false;
                 StateHasChanged();
             }
         }
@@ -34,10 +34,10 @@ namespace StepEbay.Main.Client.Base.Pages
         {
             //Вова зробити тут валідацію моделькі також (перед відправкою на апі)
 
-            _showPreloader = true;
+            ShowPreloader = true;
             _errors = null;
 
-            ResponseData<SignInResponseDto> response =  await _apiService.ExecuteRequest(() => _apiService.ApiMethods.SignUp(_signUpRequestDto));
+            ResponseData<SignInResponseDto> response =  await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
 
             if (response.StatusCode == HttpStatusCode.OK)
                 NavigationManager.NavigateTo("/main");
@@ -45,15 +45,15 @@ namespace StepEbay.Main.Client.Base.Pages
             _errors = response.Errors;
 
             if (_errors.Count > 0)
-                _showModal = true;
+                ShowModal = true;
 
-            _showPreloader = false;
+            ShowPreloader = false;
             StateHasChanged();
         }
 
         private void CloseModal(bool show)
         {
-            _showModal = show;
+            ShowModal = show;
             StateHasChanged();
         }
     }
