@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using StepEbay.Data;
 using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
 using StepEbay.Main.Api.Common.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
