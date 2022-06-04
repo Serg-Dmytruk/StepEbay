@@ -9,61 +9,64 @@ namespace StepEbay.Admin.Api.Controllers
     public class TelegramController : Controller
     {
         private readonly ITelegramService _serviceTg;
-        private readonly IDeveloperGroupDbService _groups;
-        public TelegramController(ITelegramService serviceTg, IDeveloperGroupDbService groups)
+
+        public TelegramController(ITelegramService serviceTg)
         {
             _serviceTg = serviceTg;
-            _groups = groups;
         }
+
         /// <summary>
-        /// Use it for registrate groups where bot will send messages
+        /// Додає токен телеграм групи у базу данних
         /// </summary>
-        [HttpPost("group/add")]
+        [HttpPut("group/add/{groupTg}")]
         public async Task AddGroup(string groupTg)
         {
-            await _serviceTg.SaveGroup(groupTg, _groups);
+            await _serviceTg.SaveGroup(groupTg);
         }
+
         /// <summary>
-        /// Remove group by id
+        /// Видаляє телеграм групу за ID
         /// </summary>
-        [HttpPost("group/removeid")]
+        [HttpDelete("group/removeid/{groupTgId}")]
         public async Task RemoveGroup(int groupTgId)
         {
-            await _serviceTg.RemoveGroup(groupTgId,_groups);
+            await _serviceTg.RemoveGroup(groupTgId);
         }
+
         /// <summary>
-        /// Remove group by token
+        /// Видаляє телеграм групу за токену
         /// </summary>
-        [HttpPost("group/removetoken")]
+        [HttpDelete("group/removetoken/{groupTg}")]
         public async Task RemoveGroupToken(string groupTg)
         {
-            await _serviceTg.RemoveGroup(groupTg, _groups);
+            await _serviceTg.RemoveGroup(groupTg);
         }
 
         /// <summary>
-        /// Update group by id
+        /// Редагує телеграм групу за ID
         /// </summary>
-        [HttpPost("group/updateid")]
+        [HttpPatch("group/updateid/{groupTgId}/{newToken}")]
         public async Task UpdateGroup(int groupTgId, string newToken)
         {
-            await _serviceTg.UpdateGroup(groupTgId, newToken, _groups);
-        }
-        /// <summary>
-        /// Update group by token
-        /// </summary>
-        [HttpPost("group/updatetoken")]
-        public async Task UpdateGroupToken(string oldToken,string newToken)
-        {
-            await _serviceTg.UpdateGroup(oldToken, newToken, _groups);
+            await _serviceTg.UpdateGroup(groupTgId, newToken);
         }
 
         /// <summary>
-        /// Return all groups
+        /// Редагує телеграм групу за токену
+        /// </summary>
+        [HttpPatch("group/updatetoken/{oldToken}/{newToken}")]
+        public async Task UpdateGroupToken(string oldToken,string newToken)
+        {
+            await _serviceTg.UpdateGroup(oldToken, newToken);
+        }
+
+        /// <summary>
+        /// Повертає усі телеграм групи
         /// </summary>
         [HttpPost("group/all")]
         public async Task<List<DeveloperGroup>> GetAllGroup()
         {
-            return await _groups.GetAll();
+            return await _serviceTg.GetAllGroups();
         }
     }
 }

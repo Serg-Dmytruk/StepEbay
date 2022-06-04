@@ -8,11 +8,10 @@ namespace StepEbay.Admin.Api.Controllers
     public class ExceptionController : ControllerBase
     {
         private readonly ITelegramService _serviceTg;
-        private readonly IDeveloperGroupDbService _groups;
-        public ExceptionController(ITelegramService serviceTg, IDeveloperGroupDbService groups)
+
+        public ExceptionController(ITelegramService serviceTg)
         {
             _serviceTg = serviceTg;
-            _groups = groups;
         }
 
         /// <summary>
@@ -23,13 +22,14 @@ namespace StepEbay.Admin.Api.Controllers
         {
 
         }
+
         /// <summary>
          /// This will send error message through telegram bot
          /// </summary>
         [HttpPost("log/tg")]
         public async Task TgSendExeptionError(string exeptionMessage)
         {
-            await _serviceTg.SendErrorMessage(exeptionMessage, _groups);
+            await _serviceTg.SendErrorMessage(exeptionMessage);
         }
     }
 }

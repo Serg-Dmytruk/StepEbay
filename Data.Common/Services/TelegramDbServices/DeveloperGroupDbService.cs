@@ -8,6 +8,7 @@ namespace StepEbay.Data.Common.Services.TelegramDbServices
     {
 
         private readonly ApplicationDbContext _context;
+
         public DeveloperGroupDbService(ApplicationDbContext context)
             : base(context)
         {
@@ -18,6 +19,7 @@ namespace StepEbay.Data.Common.Services.TelegramDbServices
         {
             return await _context.DeveloperGroups.ToListAsync();
         }
+
         async Task<DeveloperGroup> IDeveloperGroupDbService.GetByToken(string token)
         {
             return await _context.DeveloperGroups.Where(p=>p.Group==token).FirstOrDefaultAsync();

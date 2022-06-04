@@ -9,36 +9,51 @@ namespace StepEbay.Admin.Api.Services.Telegram
     public class TelegramService : ITelegramService
     {
         private readonly TelegramBotClient _botClient;
-        public TelegramService(IConfiguration configuration)
+        private readonly IDeveloperGroupDbService _groups;
+
+        public TelegramService(IConfiguration configuration, IDeveloperGroupDbService group)
         {
             _botClient = new TelegramBotClient(configuration.GetSection("TelegramBotToken").Value);
+            _groups = group;
         }
-        public async Task SendErrorMessage(string message, IDeveloperGroupDbService groups)
+
+        public async Task SendErrorMessage(string message)
         {
-            await SendMessage(message, groups);
+            await SendMessage(message, _groups);
         }
-        public async Task SaveGroup(string group, IDeveloperGroupDbService groups)
+
+        public async Task SaveGroup(string group)
         {
-            await groups.Add(new DeveloperGroup() { Group = group });
+            await _groups.Add(new DeveloperGroup() { Group = group });
         }
-        public async Task RemoveGroup(string token, IDeveloperGroupDbService groups)
+
+        public async Task RemoveGroup(string token)
         {
-            await groups.Remove(groups.GetByToken(token).Result);
+            await _groups.Remove(_groups.GetByToken(token).Result);
         }
-        public async Task RemoveGroup(int id, IDeveloperGroupDbService groups)
+
+        public async Task RemoveGroup(int id)
         {
-            await groups.Remove(groups.Get(id).Result);
+            await _groups.Remove(_groups.Get(id).Result);
         }
-        public async Task UpdateGroup(int id, string newToken, IDeveloperGroupDbService groups)
+
+        public async Task UpdateGroup(int id, string newToken)
         {
-            await groups.Update(new DeveloperGroup() { Id=id,Group=newToken});
+            await _groups.Update(new DeveloperGroup() { Id=id,Group=newToken});
         }
-        public async Task UpdateGroup(string oldToken, string newToken, IDeveloperGroupDbService groups)
+
+        public async Task UpdateGroup(string oldToken, string newToken)
         {
-            DeveloperGroup _onEditiDeveloperGroup= groups.GetByToken(oldToken).Result;
+            DeveloperGroup _onEditiDeveloperGroup= _groups.GetByToken(oldToken).Result;
             _onEditiDeveloperGroup.Group = newToken;
-            await groups.Update(_onEditiDeveloperGroup);
+            await _groups.Update(_onEditiDeveloperGroup);
         }
+
+        public async Task<List<DeveloperGroup>> GetAllGroups()
+        {
+            return await _groups.GetAll();
+        }
+
         private async Task SendMessage(string message, IDeveloperGroupDbService groups)
         {
             await Task.Run(() =>
