@@ -34,7 +34,7 @@ namespace StepEbay.Admin.Api.Controllers
         /// <summary>
         /// Remove group by token
         /// </summary>
-        [HttpPost("group/removetoken")]
+        [HttpDelete("group/removetoken")]
         public async Task RemoveGroupToken(string groupTg)
         {
             await _serviceTg.RemoveGroup(groupTg, _groups);
@@ -43,7 +43,7 @@ namespace StepEbay.Admin.Api.Controllers
         /// <summary>
         /// Update group by id
         /// </summary>
-        [HttpPost("group/updateid")]
+        [HttpPatch("group/updateid")]
         public async Task UpdateGroup(int groupTgId, string newToken)
         {
             await _serviceTg.UpdateGroup(groupTgId, newToken, _groups);
