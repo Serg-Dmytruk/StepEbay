@@ -52,7 +52,7 @@ namespace StepEbay.Admin.Api.Controllers
         }
 
         /// <summary>
-        /// Редагує телеграм групу за токену
+        /// Редагує телеграм групу за токеном
         /// </summary>
         [HttpPatch("group/updatetoken/{oldToken}/{newToken}")]
         public async Task UpdateGroupToken(string oldToken,string newToken)
