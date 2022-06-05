@@ -15,6 +15,15 @@ namespace StepEbay.Main.Client.Base.Pages
     {
         [Inject] IApiService ApiService { get; set; }
 
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (firstRender)
+            {
+               
+                
+            }
+        }
+
         private async Task PlaceBet()
         {
             await ApiService.ExecuteRequest(() => ApiService.ApiMethods.PlaceBet(1));

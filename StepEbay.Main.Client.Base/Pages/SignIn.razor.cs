@@ -49,6 +49,8 @@ namespace StepEbay.Main.Client.Base.Pages
                 await TokenProvider.CheckAuthentication(true);
 
                 NavigationManager.NavigateTo("/main");
+
+                return;
             }
 
             _errors = response.Errors;

@@ -40,7 +40,10 @@ namespace StepEbay.Main.Client.Base.Pages
             ResponseData<SignInResponseDto> response =  await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
 
             if (response.StatusCode == HttpStatusCode.OK)
+            {
                 NavigationManager.NavigateTo("/main");
+                return;
+            }
 
             _errors = response.Errors;
 
