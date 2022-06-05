@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using StepEbay.Admin.Api.Services.Telegram;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using StepEbay.Data.Common.Services.AuthDbServices;
-using StepEbay.Data.Common.Services.TelegramDbServices;
 using StepEbay.Data.Common.Services.UserDbServices;
 using StepEbay.Main.Api.Common.Services.AuthServices;
 using StepEbay.Main.Api.Common.Services.DataValidationServices;
