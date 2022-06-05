@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StepEbay.Data.Models.Auth;
 using StepEbay.Data.Models.Products;
+using StepEbay.Data.Models.Telegram;
 using StepEbay.Data.Models.Users;
 
 namespace StepEbay.Data
@@ -9,6 +10,11 @@ namespace StepEbay.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
+        {
+
+        }
+        public ApplicationDbContext()
+            : base()
         {
 
         }
@@ -25,10 +31,12 @@ namespace StepEbay.Data
         #endregion
         #region Products
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductState> ProductStates { get; set; }
         #endregion
-
+        #region Telegram
+        public virtual DbSet<DeveloperGroup> DeveloperGroups { get; set; }
+        #endregion
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -55,6 +63,7 @@ namespace StepEbay.Data
             builder.Entity<Product>().ToTable("Products");
             builder.Entity<ProductState>().ToTable("ProductStates");
             builder.Entity<Category>().ToTable("Categories");
+            builder.Entity<DeveloperGroup>().ToTable("DeveloperGroups");
         }
     }
 }
