@@ -33,25 +33,28 @@ namespace StepEbay.Main.Client.Base.Pages
 
         private async Task SignUpRequest()
         {
-            //Вова зробити тут валідацію моделькі також (перед відправкою на апі)
+            
             ShowPreloader = true;
-            _errors = null;
-
+            //_errors = null;
+            //Вова зробити тут валідацію моделькі також (перед відправкою на апі)
             var validator = new AuthValidator();
             var result = await validator.ValidateAsync(SignUpRequestDto);
+
             if (!result.IsValid)
             {
                 var list = new List<string>();
                 result.Errors.ForEach(error => list.Add(error.ToString()));
                 _errors.Add("Registration", list);
             }
+            else
+            {
+                ResponseData<SignInResponseDto> response = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
 
-            ResponseData<SignInResponseDto> response =  await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
+                if (response.StatusCode == HttpStatusCode.OK)
+                    NavigationManager.NavigateTo("/main");
 
-            if (response.StatusCode == HttpStatusCode.OK)
-                NavigationManager.NavigateTo("/main");
-
-            _errors = response.Errors;
+                _errors = response.Errors;
+            }
 
             if (_errors.Count > 0)
                 ShowModal = true;
