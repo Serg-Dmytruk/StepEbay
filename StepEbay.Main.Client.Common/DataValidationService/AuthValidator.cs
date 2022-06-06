@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using StepEbay.Main.Common.Models.Auth;
 
-namespace StepEbay.Main.Api.Common.Services.DataValidationServices
+namespace StepEbay.Main.Client.Common.DataValidationServices
 {
-    class AuthValidator : AbstractValidator<SignUpRequestDto>, IAuthValidator
+    public class AuthValidator : AbstractValidator<SignUpRequestDto>, IAuthValidator
     {
         public AuthValidator()
         {
