@@ -8,11 +8,20 @@ namespace StepEbay.Main.Client.Common.DataValidationServices
         public AuthValidator()
         {
             RuleFor(data => data.Id).NotNull();
-            RuleFor(data => data.FullName).NotEmpty().WithMessage("Обов'язкове поле: Повне ім'я");
-            RuleFor(data => data.NickName).Length(5, 16).WithMessage("Нікнейм повинен складатись з 5 - 16 символів");
-            RuleFor(data => data.Password).MinimumLength(8).Matches("[A-Z]").Matches("[a-z]").Matches("[0-9]").WithMessage("Пароль повинен мати мінімум 8 символів (мінімум 1 велика, 1 маленька літера і 1 цифра)");
-            RuleFor(data => data.Email).EmailAddress().WithMessage("Невірний електронний адрес");
-            RuleFor(data => data.CopyPassword).Equal(data => data.Password).WithMessage("Паролі не співпадають");
+            //Обов'язкові поля
+            RuleFor(data => data.FullName).NotEmpty().WithMessage("EmptyFullName");
+            RuleFor(data => data.NickName).NotEmpty().WithMessage("EmptyNickName");
+            RuleFor(data => data.Password).NotEmpty().WithMessage("EmptyPassword");
+            RuleFor(data => data.Email).NotEmpty().WithMessage("EmptyMail");
+            //Довжина поля
+            RuleFor(data => data.FullName).Length(3, 30).WithMessage("LengthFullName");
+            RuleFor(data => data.NickName).Length(5, 30).WithMessage("LengthNickName");
+            RuleFor(data => data.Password).MinimumLength(8).WithMessage("LengthPassword");
+            //Ключові символи
+            RuleFor(data => data.Password).Matches("[A-Z]").Matches("[a-z]").Matches("[0-9]").WithMessage("AgreementsPassword");
+            RuleFor(data => data.Email).EmailAddress().WithMessage("AgreementsMail");
+            //Копія
+            RuleFor(data => data.CopyPassword).Equal(data => data.Password).WithMessage("CopyPassword");
         }
     }
 }
