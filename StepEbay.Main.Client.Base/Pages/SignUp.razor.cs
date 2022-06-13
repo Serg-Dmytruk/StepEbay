@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Client.Base.Layout;
+using StepEbay.Main.Client.Common.DataValidationServices;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Auth;
 using System.Net;
@@ -32,12 +33,20 @@ namespace StepEbay.Main.Client.Base.Pages
 
         private async Task SignUpRequest()
         {
-            //Вова зробити тут валідацію моделькі також (перед відправкою на апі)
-
             ShowPreloader = true;
-            _errors = null;
+            //Вова зробити тут валідацію моделькі також (перед відправкою на апі)
+            var validator = new AuthValidator();
+            var result = await validator.ValidateAsync(SignUpRequestDto);
 
-            ResponseData<SignInResponseDto> response =  await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
+            if (!result.IsValid)
+            {
+                var list = new List<string>();
+                result.Errors.ForEach(error => list.Add(error.ToString()));
+                _errors.Add("Registration", list);
+            }
+            else
+            {
+                ResponseData<SignInResponseDto> response = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
@@ -45,7 +54,8 @@ namespace StepEbay.Main.Client.Base.Pages
                 return;
             }
 
-            _errors = response.Errors;
+                _errors = response.Errors;
+            }
 
             if (_errors.Count > 0)
                 ShowModal = true;

@@ -4,14 +4,69 @@
     {
         @if (ShowModal)
         {
-            <ModalDialog Title="@_errors.FirstOrDefault().Key" Text="@_errors.FirstOrDefault().Value" OnClose='@CloseModal' />
+            //<ModalDialog Title="@_errors.FirstOrDefault().Key" Text="@_errors.FirstOrDefault().Value" OnClose='@CloseModal' />
+            //Нікнейм
+            <input class="myInput" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
+            if (@_errors.Any(e => e.Value.Contains("EmptyNickName")))
+            {
+                <p>Обов'язкове поле!</p>
+            }
+            else if (@_errors.Any(e => e.Value.Contains("LengthNickName")))
+            {
+                <p>5 - 30 символів!</p>
+            }
+
+            //Повне ім'я
+            <input class="myInput" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
+            if (@_errors.Any(e => e.Value.Contains("EmptyFullName")))
+            {
+                <p>Обов'язкове поле!</p>
+            }
+            else if (@_errors.Any(e => e.Value.Contains("LengthFullName")))
+            {
+                <p>3 - 30 символів!</p>
+            }
+
+            //Електронна пошта
+            <input class="myInput" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
+            if (@_errors.Any(e => e.Value.Contains("AgreementsMail")))
+            {
+                <p>Невірний формат електронного адресу</p>
+            }
+
+            //Пароль
+            <input class="myInput" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
+            if (@_errors.Any(e => e.Value.Contains("EmptyPassword")))
+            {
+                <p>Обов'язкове поле!</p>
+            }
+            else if(@_errors.Any(e => e.Value.Contains("LengthPassword")))
+            {
+                <p>Мінімум 3 символи!</p>
+            }
+            else if (@_errors.Any(e => e.Value.Contains("AgreementsPassword")))
+            {
+                <p>Пароль повинен мати мінімум 8 символів (мінімум 1 велика, 1 маленька літера і 1 цифра)</p>
+            }
+
+            //Копія паролю
+            <input class="myInput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
+            if (@_errors.Any(e => e.Value.Contains("CopyPassword")))
+            {
+                <p>Паролі не співпадають</p>
+            }
+            <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignUpRequest">Зареєструватися</button>
         }
-        <input class="myInput" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
-        <input class="myInput" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
-        <input class="myInput" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
-        <input class="myInput" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
-        <input class="myInput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
-        <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignUpRequest">Зареєструватися</button>
+        else
+        {
+            <input class="myInput" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
+            <input class="myInput" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
+            <input class="myInput" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
+            <input class="myInput" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
+            <input class="myInput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
+            <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignUpRequest">Зареєструватися</button>
+        }
+
     }
     else
     {
