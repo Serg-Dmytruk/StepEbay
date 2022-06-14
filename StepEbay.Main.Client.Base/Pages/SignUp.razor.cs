@@ -35,7 +35,6 @@ namespace StepEbay.Main.Client.Base.Pages
         {
             _errors.Clear();
             ShowPreloader = true;
-            //Вова зробити тут валідацію моделькі також (перед відправкою на апі)
             var validator = new AuthValidator();
             var result = await validator.ValidateAsync(SignUpRequestDto);
 
