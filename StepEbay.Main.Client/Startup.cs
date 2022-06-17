@@ -27,7 +27,6 @@ namespace StepEbay.Main.Client
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddHttpContextAccessor();
@@ -47,7 +46,6 @@ namespace StepEbay.Main.Client
 
             services.AddScoped<AuthenticationStateProvider>(p => (TokenProvider)p.GetService<ITokenProvider>());
             services.AddScoped<SemaphoreManager>();
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
