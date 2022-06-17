@@ -32,8 +32,6 @@ namespace StepEbay.Main.Client.Base.Pages
 
         private async Task SignUpRequest()
         {
-            //Вова зробити тут валідацію моделькі також (перед відправкою на апі)
-
             ShowPreloader = true;
             _errors = null;
 
@@ -41,7 +39,7 @@ namespace StepEbay.Main.Client.Base.Pages
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                NavigationManager.NavigateTo("/main");
+                NavigationManager.NavigateTo("/signin");
                 return;
             }
 

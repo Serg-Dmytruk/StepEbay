@@ -2,12 +2,9 @@
 
 <CookieContainer>
 <CascadingAuthenticationState>
-<Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="@(new[] { typeof(StepEbay.Main.Client.Base.Pages.SignIn).Assembly })" PreferExactMatches="@true">
+<Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="@(new[] { typeof(StepEbay.Main.Client.Base.Pages.SignIn).Assembly })">
     <Found Context="routeData">
           <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
-                    @*<Authorizing>
-                        Preloader...
-                    </Authorizing>*@
                     <NotAuthorized>
                         <Redirect Url="/signin"/>
                     </NotAuthorized>

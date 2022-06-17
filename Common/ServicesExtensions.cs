@@ -11,6 +11,7 @@ namespace StepEbay.Common
         {
             services.AddScoped<StorageQueue>();
             services.AddScoped(p => new CookieLocker(1));
+            services.AddScoped<LocalStorage>();
             services.AddTransient<CookieStorage>();
 
             return services;

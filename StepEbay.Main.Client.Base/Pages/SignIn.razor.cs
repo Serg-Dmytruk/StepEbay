@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Common.Models.RefitModels;
+using StepEbay.Common.Storages;
 using StepEbay.Main.Client.Base.Layout;
 using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Auth;
 using System.Net;
+using Microsoft.Extensions.Options;
+using StepEbay.Main.Client.Common.Options;
 
 namespace StepEbay.Main.Client.Base.Pages
 {
@@ -14,8 +17,10 @@ namespace StepEbay.Main.Client.Base.Pages
     public partial class SignIn
     {
         [Inject] private ITokenProvider TokenProvider { get; set; }
-        [Inject] NavigationManager NavigationManager { get; set; }
         [Inject] IApiService ApiService { get; set; }
+        [Inject] private IOptions<DomainOptions> DomainOptions { get; set; }
+        [Inject] private LocalStorage LocalStorage { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
         private SignInRequestDto SignInRequestDto { get; set; } = new();
         private bool ShowPreloader { get; set; } = true;      
         private bool RememberMe { get; set; }
@@ -45,6 +50,8 @@ namespace StepEbay.Main.Client.Base.Pages
                     await TokenProvider.SetToken(response.Data.AccessToken, response.Data.RefreshToken, response.Data.Expires);
                 else
                     await TokenProvider.SetSessionToken(response.Data.AccessToken, response.Data.RefreshToken, response.Data.Expires);
+
+                await LocalStorage.SetLocal("username", SignInRequestDto.NickName);
 
                 await TokenProvider.CheckAuthentication(true);
 

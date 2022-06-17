@@ -77,14 +77,14 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
             if (await _userDbService.AnyByEmail(request.Email))
                 return ResponseData<SignInResponseDto>.Fail("Registration", "Вказаний емейл вже використовуєтсья!");
 
-            var newUser = await _userDbService.Add(new User
-            {
-                NickName = request.NickName,
-                FullName = request.FullName,
-                Email = request.Email,
-                Created = DateTime.UtcNow,
-                Password = BC.HashPassword(request.Password)
-            });
+             await _userDbService.Add(new User
+             {
+                 NickName = request.NickName,
+                 FullName = request.FullName,
+                 Email = request.Email,
+                 Created = DateTime.UtcNow,
+                 Password = BC.HashPassword(request.Password)
+             });
 
             return new ResponseData<SignInResponseDto>
             {

@@ -1,27 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace StepEbay.Main.Client.Base.Pages
 {
-    [Authorize]
     [Route("/main")]
+    [Authorize]
     public partial class Main
     {
+        [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] IApiService ApiService { get; set; }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnInitializedAsync()
         {
-            if (firstRender)
-            {
-               
-                
-            }
+            var authState = await TokenProvider.GetAuthenticationStateAsync();
         }
 
         private async Task PlaceBet()

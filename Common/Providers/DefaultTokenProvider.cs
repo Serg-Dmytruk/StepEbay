@@ -3,20 +3,18 @@ using StepEbay.Common.Helpers;
 using StepEbay.Common.Storages;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Principal;
 
 namespace StepEbay.Common.Providers
 {
-    public class DefaultTokenProvider : AuthenticationStateProvider
+    public class DefaultTokenProvider : AuthenticationStateProvider, IDefaultTokenProvider
     {
-        private readonly CookieStorage _cookieStorage;
-
         private readonly string _accessTokenName;
-        private readonly string _refreshTokenName;
-        private readonly string _expiresName;
         private readonly string _cookieDomain;
+        private readonly CookieStorage _cookieStorage;
+        private readonly string _expiresName;
+        private readonly string _refreshTokenName;
 
-        public DefaultTokenProvider(CookieStorage cookieStorage,
+        protected DefaultTokenProvider(CookieStorage cookieStorage,
             string accessTokenName = "accessToken", string refreshTokenName = "refreshToken",
             string expiresName = "expires", string cookieDomain = "")
         {
@@ -32,22 +30,32 @@ namespace StepEbay.Common.Providers
         {
             await _cookieStorage.SetCookie(_accessTokenName, token, maxAge, _cookieDomain);
             await _cookieStorage.SetCookie(_refreshTokenName, refreshToken, refreshMaxAge, _cookieDomain);
-            await _cookieStorage.SetCookie(_expiresName, expires.AddSeconds(-expiresCheck).ToUnix().ToString(), expiresMaxAge, _cookieDomain);
+            await _cookieStorage.SetCookie(_expiresName, expires.AddSeconds(-expiresCheck).ToUnix().ToString(),
+                expiresMaxAge, _cookieDomain);
         }
 
-        public virtual async Task SetSessionToken(string token, string refreshToken, DateTime expires, int expiresCheck = 60)
+        public virtual async Task SetSessionToken(string token, string refreshToken, DateTime expires,
+            int expiresCheck = 60)
         {
             await _cookieStorage.SetSessionCookie(_accessTokenName, token, _cookieDomain);
             await _cookieStorage.SetSessionCookie(_refreshTokenName, refreshToken, _cookieDomain);
-            await _cookieStorage.SetSessionCookie(_expiresName, expires.AddSeconds(-expiresCheck).ToUnix().ToString(), _cookieDomain);
+            await _cookieStorage.SetSessionCookie(_expiresName, expires.AddSeconds(-expiresCheck).ToUnix().ToString(),
+                _cookieDomain);
         }
 
-        public virtual async Task<string> GetToken() => await _cookieStorage.GetCookie(_accessTokenName);
-        public virtual async Task<string> GetRefreshToken() => await _cookieStorage.GetCookie(_refreshTokenName);
+        public virtual async Task<string> GetToken()
+        {
+            return await _cookieStorage.GetCookie(_accessTokenName);
+        }
+
+        public virtual async Task<string> GetRefreshToken()
+        {
+            return await _cookieStorage.GetCookie(_refreshTokenName);
+        }
 
         public virtual async Task<bool> GetRememberMe()
         {
-            if (bool.TryParse(await _cookieStorage.GetCookie("rememberme"), out bool rememberMe))
+            if (bool.TryParse(await _cookieStorage.GetCookie("rememberme"), out var rememberMe))
                 return rememberMe;
 
             return false;
@@ -55,7 +63,7 @@ namespace StepEbay.Common.Providers
 
         public virtual async Task<long> GetExpires()
         {
-            if (long.TryParse(await _cookieStorage.GetCookie(_expiresName), out long expires))
+            if (long.TryParse(await _cookieStorage.GetCookie(_expiresName), out var expires))
                 return expires;
 
             return 0;
@@ -68,19 +76,17 @@ namespace StepEbay.Common.Providers
 
         public virtual async Task CheckAuthentication(bool auth)
         {
-            AuthenticationState state = await GetAuthenticationStateAsync();
+            var state = await GetAuthenticationStateAsync();
 
-            if (auth && state.User.Identity.IsAuthenticated
-                || !auth && !state.User.Identity.IsAuthenticated)
-            {
+            if ((auth && state.User.Identity.IsAuthenticated)
+                || (!auth && !state.User.Identity.IsAuthenticated))
                 NotifyAuthenticationStateChanged(Task.FromResult(state));
-            }
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string token = await GetToken();
-            IIdentity identity = string.IsNullOrEmpty(token)
+            var token = await GetToken();
+            var identity = string.IsNullOrEmpty(token)
                 ? new ClaimsIdentity()
                 : GetClaimsPrincipal(token).Identity;
             return new AuthenticationState(new ClaimsPrincipal(identity));

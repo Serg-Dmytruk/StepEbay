@@ -1,5 +1,11 @@
 ﻿<h3 class="TitleText">SIGN IN</h3>
 
+<AuthorizeView>
+    <Authorized>
+        <Redirect Url="@($"https://{DomainOptions.Value.Main}")" />
+    </Authorized>
+    <NotAuthorized>
+
 <div class="divCenter">
     @if (!ShowPreloader)
     {
@@ -22,3 +28,5 @@
         </div>
     }
 </div>
+    </NotAuthorized>
+</AuthorizeView>
