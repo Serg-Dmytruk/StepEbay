@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Client.Base.Layout;
+using StepEbay.Main.Client.Common.DataValidationServices;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Auth;
 using System.Net;
@@ -32,18 +33,20 @@ namespace StepEbay.Main.Client.Base.Pages
 
         private async Task SignUpRequest()
         {
-            ShowPreloader = true;
+            _errors.Clear();
+
             _errors = null;
-
+            var result = await validator.ValidateAsync(SignUpRequestDto);
             ResponseData<SignInResponseDto> response =  await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
-
+                ResponseData<SignInResponseDto> response = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 NavigationManager.NavigateTo("/signin");
                 return;
             }
-
+            }
             _errors = response.Errors;
+            }
 
             if (_errors.Count > 0)
                 ShowModal = true;
