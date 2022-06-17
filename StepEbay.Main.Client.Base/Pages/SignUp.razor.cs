@@ -34,18 +34,27 @@ namespace StepEbay.Main.Client.Base.Pages
         private async Task SignUpRequest()
         {
             _errors.Clear();
-
-            _errors = null;
+            ShowPreloader = true;
+            var validator = new AuthValidator();
             var result = await validator.ValidateAsync(SignUpRequestDto);
-            ResponseData<SignInResponseDto> response =  await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
-                ResponseData<SignInResponseDto> response = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
-            if (response.StatusCode == HttpStatusCode.OK)
+
+            if (!result.IsValid)
             {
-                NavigationManager.NavigateTo("/signin");
-                return;
+                var list = new List<string>();
+                result.Errors.ForEach(error => list.Add(error.ToString()));
+                _errors.Add("Registration", list);
             }
-            }
-            _errors = response.Errors;
+            else
+            {
+                ResponseData<SignInResponseDto> response = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    NavigationManager.NavigateTo("/signin");
+                    return;
+                }
+
+                _errors = response.Errors;
             }
 
             if (_errors.Count > 0)
