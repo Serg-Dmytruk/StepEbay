@@ -24,6 +24,7 @@
 	  <ProjectReference Include="..\Admin.Common\StepEbay.Admin.Common.csproj" />
 	  <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
     <ProjectReference Include="..\Data\StepEbay.Data.csproj" />
+    <ProjectReference Include="..\Serilog.HttpLoging\Serilog.HttpLoging.csproj" />
 	</ItemGroup>
 
 </Project>
