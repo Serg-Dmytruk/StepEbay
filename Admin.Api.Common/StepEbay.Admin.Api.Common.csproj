@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Telegram.Bot" Version="17.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Admin.Common\StepEbay.Admin.Common.csproj" />
     <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
     <ProjectReference Include="..\Data.Common\StepEbay.Data.Common.csproj" />
   </ItemGroup>

@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Admin.Common\StepEbay.Admin.Common.csproj" />
     <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
-    <ProjectReference Include="..\StepEbay.Common\StepEbay.Main.Common.csproj" />
   </ItemGroup>
 
 </Project>

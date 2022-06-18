@@ -2,10 +2,10 @@
 using Refit;
 using StepEbay.Admin.Client.Common.Providers;
 using StepEbay.Admin.Client.Common.RestServices;
+using StepEbay.Admin.Common.Models.Auth;
 using StepEbay.Common.ApiServices;
 using StepEbay.Common.Lockers;
 using StepEbay.Common.Models.Auth;
-using StepEbay.Main.Common.Models.Auth;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
