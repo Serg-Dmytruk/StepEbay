@@ -15,7 +15,7 @@ namespace StepEbay.Main.Client.Base.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            var authState = await TokenProvider.GetAuthenticationStateAsync();
+            
         }
 
         private async Task PlaceBet()

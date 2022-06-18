@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StepEbay.Admin.Api.Services.Telegram;
-using StepEbay.Common.Models.RefitModels;
-using StepEbay.Data.Common.Services.TelegramDbServices;
 using StepEbay.Data.Models.Telegram;
+
 namespace StepEbay.Admin.Api.Controllers
 {
     [Route("error")]
-    public class TelegramController : Controller
+    public class TelegramController : ControllerBase
     {
         private readonly ITelegramService _serviceTg;
 
