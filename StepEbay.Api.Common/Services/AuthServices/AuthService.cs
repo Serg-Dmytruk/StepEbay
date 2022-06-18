@@ -126,7 +126,10 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
                 new Claim(ClaimTypes.Name, user.Id.ToString()),
                 new Claim("nickName", user.NickName),
                 new Claim("userEmail", user.Email)
+                
             };
+
+            claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
 
             JwtSecurityToken token = new JwtSecurityToken(
                 _config["Jwt:Issuer"],

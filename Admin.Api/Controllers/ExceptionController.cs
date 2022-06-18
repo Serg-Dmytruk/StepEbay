@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StepEbay.Admin.Api.Common.Models;
 using StepEbay.Admin.Api.Services.Telegram;
-using StepEbay.Data.Common.Services.TelegramDbServices;
+using System.Text.Json;
 
 namespace StepEbay.Admin.Api.Controllers
 {
@@ -17,19 +18,15 @@ namespace StepEbay.Admin.Api.Controllers
         /// <summary>
         /// Глобальний обробник помилок
         /// </summary>
-        [HttpGet("log")]
+        [HttpPost("log")]
         public async Task LogException()
         {
-
-        }
-
-        /// <summary>
-         /// This will send error message through telegram bot
-         /// </summary>
-        [HttpPost("log/tg")]
-        public async Task TgSendExeptionError(string exeptionMessage)
-        {
-            await _serviceTg.SendErrorMessage(exeptionMessage);
+            string projectName = HttpContext.Request?.Headers["name"];
+            var reader = new StreamReader(HttpContext.Request.Body);
+            var body = await reader.ReadToEndAsync();
+            reader.Close();
+            var exceptionInfo = JsonSerializer.Deserialize<List<Event>>(body);
+            await _serviceTg.SendErrorMessage(exceptionInfo, projectName);
         }
     }
 }

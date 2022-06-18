@@ -6,7 +6,6 @@ namespace StepEbay.Admin.Api.Common.Services
 {
     public static class ServiceExtensions
     {
-
         //usually use AddTransient
         public static IServiceCollection AddService(this IServiceCollection services)
         {
