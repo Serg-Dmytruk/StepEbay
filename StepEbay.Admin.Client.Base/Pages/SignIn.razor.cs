@@ -3,7 +3,8 @@ using StepEbay.Admin.Client.Base.Layout;
 
 namespace StepEbay.Admin.Client.Base.Pages
 {
-    [Route("signin")]
+    [Route("/")]
+    [Route("/signin")]
     [Layout(typeof(EmptyLayout))]
     public partial class SignIn
     {

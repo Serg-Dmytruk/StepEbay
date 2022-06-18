@@ -1,8 +1,18 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StepEbay.Admin.Client.Base.Providers;
+using StepEbay.Admin.Client.Common.Options;
+using StepEbay.Admin.Client.Common.Providers;
+using StepEbay.Admin.Client.Common.RestServices;
+using StepEbay.Admin.Client.Services;
+using StepEbay.Common;
+using StepEbay.Common.Lockers;
+using StepEbay.Common.Storages;
+using System.Net.Http;
 
 namespace StepEbay.Admin.Client
 {
@@ -19,9 +29,25 @@ namespace StepEbay.Admin.Client
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddHttpContextAccessor();
+            services.AddTransient<HttpClient>();
+            services.AddScoped<IApiService, ApiService>();
+
+            services.AddStorages();
+
+            services.Configure<DomainOptions>(Configuration.GetSection("DomainOptions"));
+
+            CookieOptions cookieOptions = Configuration.GetSection("CookieOptions").Get<CookieOptions>();
+            DomainOptions domainOptions = Configuration.GetSection("DomainOptions").Get<DomainOptions>();
+
+            services.AddAuthorization();
+            services.AddScoped<ITokenProvider, TokenProvider>(p => new TokenProvider(p.GetService<CookieStorage>(),
+                cookieOptions.AccessToken, cookieOptions.RefreshToken, cookieOptions.Expires, domainOptions.Cookie));
+
+            services.AddScoped<AuthenticationStateProvider>(p => (TokenProvider)p.GetService<ITokenProvider>());
+            services.AddScoped<SemaphoreManager>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -31,7 +57,6 @@ namespace StepEbay.Admin.Client
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

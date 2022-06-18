@@ -14,7 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
+    <ProjectReference Include="..\Serilog.HttpLoging\Serilog.HttpLoging.csproj" />
     <ProjectReference Include="..\StepEbay.Admin.Client.Base\StepEbay.Admin.Client.Base.csproj" />
     <ProjectReference Include="..\StepEbay.Admin.Client.Common\StepEbay.Admin.Client.Common.csproj" />
     <ProjectReference Include="..\StepEbay.Components.Common\StepEbay.Components.Common.csproj" />

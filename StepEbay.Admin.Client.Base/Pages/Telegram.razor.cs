@@ -2,7 +2,7 @@
 
 namespace StepEbay.Admin.Client.Base.Pages
 {
-    [Route("telegram")]
+    [Route("/telegram")]
     public partial class Telegram
     {
     }
