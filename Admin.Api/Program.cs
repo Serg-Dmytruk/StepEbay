@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using StepEbay.Admin.Api.Common.Services;
+using StepEbay.Admin.Api.Common.Services.DbSeeder;
 using StepEbay.Data;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -28,6 +28,13 @@ builder.Services.AddService();
 builder.Services.AddDbService();
 
 var app = builder.Build();
+using (var seederService = app.Services.CreateScope())
+{
+    var seeder = seederService.ServiceProvider.GetRequiredService<ISeeder>();
+    await seeder.SeedApplication();
+}
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using StepEbay.Data.Common.Services.TelegramDbServices;
+using StepEbay.Admin.Api.Common.Services.DbSeeder;
 using StepEbay.Admin.Api.Services.Telegram;
+using StepEbay.Data.Common.Services.ProductDbServices;
+using StepEbay.Data.Common.Services.TelegramDbServices;
 
 namespace StepEbay.Admin.Api.Common.Services
 {
@@ -10,6 +12,7 @@ namespace StepEbay.Admin.Api.Common.Services
         public static IServiceCollection AddService(this IServiceCollection services)
         {
             services.AddTransient<ITelegramService, TelegramService>();
+
             return services;
         }
 
@@ -17,6 +20,11 @@ namespace StepEbay.Admin.Api.Common.Services
         public static IServiceCollection AddDbService(this IServiceCollection services)
         {
             services.AddScoped<IDeveloperGroupDbService, DeveloperGroupDbService>();
+            services.AddScoped<IProductDbService, ProductDbService>();
+            services.AddScoped<IProductStateDbService, ProductStateDbService>();    
+            services.AddScoped<ICategoryDbService, CategoryDbService>();
+            services.AddScoped<ISeeder, Seeder>();
+
             return services;
         }
 
