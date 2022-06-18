@@ -5,7 +5,7 @@ using StepEbay.Data.Models.Telegram;
 
 namespace StepEbay.Admin.Api.Controllers
 {
-    [Route("error")]
+    [Route("telegram")]
     public class TelegramController : ControllerBase
     {
         private readonly ITelegramService _serviceTg;

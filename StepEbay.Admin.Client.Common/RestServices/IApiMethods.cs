@@ -7,7 +7,7 @@ namespace StepEbay.Admin.Client.Common.RestServices
     public interface IApiMethods
     {
         #region telegram
-        [Put("/error/group/add/{groupTg}")]
+        [Put("/telegram/group/add/{groupTg}")]
         Task<ApiResponse<BoolResult>> AddGroup(string groupTg);
 
         #endregion

@@ -6,8 +6,13 @@
     </div>
 
     <div class="main">
+
         <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+            @if (!string.IsNullOrEmpty(@UserName))
+            {
+                <p>@UserName</p>
+            }
+            <button class="btn btn-outline-danger centerOnParrentHorizontal" @onclick="Logout">Вийти</button>
         </div>
 
         <div class="content px-4">
