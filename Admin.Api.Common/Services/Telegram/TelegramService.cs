@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using StepEbay.Admin.Api.Common.Models;
+using StepEbay.Common.Models.RefitModels;
 using StepEbay.Data.Common.Services.TelegramDbServices;
 using StepEbay.Data.Models.Telegram;
 using System.Text;
@@ -19,36 +20,42 @@ namespace StepEbay.Admin.Api.Services.Telegram
             _groups = group;
         }
 
-        public async Task SendErrorMessage(List<Event> exceptionInfo, string projectName)
+        public async Task<BoolResult> SendErrorMessage(List<Event> exceptionInfo, string projectName)
         {
             await SendMessage(exceptionInfo, projectName, _groups);
+            return new BoolResult(true);
         }
 
-        public async Task SaveGroup(string group)
+        public async Task<BoolResult> AddGroup(string group)
         {
             await _groups.Add(new DeveloperGroup() { Group = group });
+            return new BoolResult(true);
         }
 
-        public async Task RemoveGroup(string token)
+        public async Task<BoolResult> RemoveGroup(string token)
         {
             await _groups.Remove(_groups.GetByToken(token).Result);
+            return new BoolResult(true);
         }
 
-        public async Task RemoveGroup(int id)
+        public async Task<BoolResult> RemoveGroup(int id)
         {
             await _groups.Remove(_groups.Get(id).Result);
+            return new BoolResult(true);
         }
 
-        public async Task UpdateGroup(int id, string newToken)
+        public async Task<BoolResult> UpdateGroup(int id, string newToken)
         {
             await _groups.Update(new DeveloperGroup() { Id = id, Group = newToken });
+            return new BoolResult(true);
         }
 
-        public async Task UpdateGroup(string oldToken, string newToken)
+        public async Task<BoolResult> UpdateGroup(string oldToken, string newToken)
         {
             DeveloperGroup _onEditiDeveloperGroup = _groups.GetByToken(oldToken).Result;
             _onEditiDeveloperGroup.Group = newToken;
             await _groups.Update(_onEditiDeveloperGroup);
+            return new BoolResult(true);
         }
 
         public async Task<List<DeveloperGroup>> GetAllGroups()

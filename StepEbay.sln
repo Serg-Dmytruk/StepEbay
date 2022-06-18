@@ -51,7 +51,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Main.Client", "Ste
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Main.Client.Common", "StepEbay.Main.Client.Common\StepEbay.Main.Client.Common.csproj", "{8C7F3D41-137B-4B1A-94E4-9AB702D9A83B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.HttpLoging", "Serilog.HttpLoging\Serilog.HttpLoging.csproj", "{1B7825D3-29DC-4D4D-8E3A-BB073BBA2DDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.HttpLoging", "Serilog.HttpLoging\Serilog.HttpLoging.csproj", "{1B7825D3-29DC-4D4D-8E3A-BB073BBA2DDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Admin.Client.Base", "StepEbay.Admin.Client.Base\StepEbay.Admin.Client.Base.csproj", "{858AEDFD-15E1-4295-B9A5-A1C004150B4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Admin.Client.Common", "StepEbay.Admin.Client.Common\StepEbay.Admin.Client.Common.csproj", "{9F3F200A-1C96-4E58-9B7F-978BFE69C765}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Admin.Client", "StepEbay.Admin.Client\StepEbay.Admin.Client.csproj", "{D8ACCCB3-F386-42FE-9E22-7B9E720A810B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +121,18 @@ Global
 		{1B7825D3-29DC-4D4D-8E3A-BB073BBA2DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B7825D3-29DC-4D4D-8E3A-BB073BBA2DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B7825D3-29DC-4D4D-8E3A-BB073BBA2DDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858AEDFD-15E1-4295-B9A5-A1C004150B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858AEDFD-15E1-4295-B9A5-A1C004150B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858AEDFD-15E1-4295-B9A5-A1C004150B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858AEDFD-15E1-4295-B9A5-A1C004150B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F3F200A-1C96-4E58-9B7F-978BFE69C765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F3F200A-1C96-4E58-9B7F-978BFE69C765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F3F200A-1C96-4E58-9B7F-978BFE69C765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F3F200A-1C96-4E58-9B7F-978BFE69C765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8ACCCB3-F386-42FE-9E22-7B9E720A810B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8ACCCB3-F386-42FE-9E22-7B9E720A810B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8ACCCB3-F386-42FE-9E22-7B9E720A810B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8ACCCB3-F386-42FE-9E22-7B9E720A810B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +158,9 @@ Global
 		{B2BECA81-8205-4F56-8B7E-4098206D9CFD} = {D2D4F82B-94DE-4F98-9411-1C02D0D5281B}
 		{8C7F3D41-137B-4B1A-94E4-9AB702D9A83B} = {D2D4F82B-94DE-4F98-9411-1C02D0D5281B}
 		{1B7825D3-29DC-4D4D-8E3A-BB073BBA2DDA} = {4944E4B1-88EA-4AD8-9B01-8C4D74243ED5}
+		{858AEDFD-15E1-4295-B9A5-A1C004150B4A} = {53A84642-9683-47CD-BA3F-D3D4AC065D14}
+		{9F3F200A-1C96-4E58-9B7F-978BFE69C765} = {53A84642-9683-47CD-BA3F-D3D4AC065D14}
+		{D8ACCCB3-F386-42FE-9E22-7B9E720A810B} = {53A84642-9683-47CD-BA3F-D3D4AC065D14}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F2FAC1D-2C2A-4C98-A235-7382D5F68578}

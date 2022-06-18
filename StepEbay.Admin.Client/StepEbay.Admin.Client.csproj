@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
+    <ProjectReference Include="..\StepEbay.Admin.Client.Base\StepEbay.Admin.Client.Base.csproj" />
+    <ProjectReference Include="..\StepEbay.Admin.Client.Common\StepEbay.Admin.Client.Common.csproj" />
+  </ItemGroup>
+
+</Project>
