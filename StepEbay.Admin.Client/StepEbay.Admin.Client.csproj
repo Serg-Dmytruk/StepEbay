@@ -6,9 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\cookie-storage.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\cookie-storage.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
     <ProjectReference Include="..\StepEbay.Admin.Client.Base\StepEbay.Admin.Client.Base.csproj" />
     <ProjectReference Include="..\StepEbay.Admin.Client.Common\StepEbay.Admin.Client.Common.csproj" />
+    <ProjectReference Include="..\StepEbay.Components.Common\StepEbay.Components.Common.csproj" />
   </ItemGroup>
 
 </Project>
