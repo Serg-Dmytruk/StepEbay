@@ -28,11 +28,16 @@ builder.Services.AddService();
 builder.Services.AddDbService();
 
 var app = builder.Build();
-using (var seederService = app.Services.CreateScope())
+
+if (app.Configuration.GetSection("UseSeed").Get<bool>())
 {
-    var seeder = seederService.ServiceProvider.GetRequiredService<ISeeder>();
-    await seeder.SeedApplication();
+    using (var seederService = app.Services.CreateScope())
+    {
+        var seeder = seederService.ServiceProvider.GetRequiredService<ISeeder>();
+        await seeder.SeedApplication();
+    }
 }
+
 
 
 

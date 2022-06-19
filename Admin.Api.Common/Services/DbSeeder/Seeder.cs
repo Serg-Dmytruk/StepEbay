@@ -44,17 +44,11 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddProductStates()
         {
-            if(!await _productStateDbService.AnyStateByName("прямо з заводу"))
-                await _productStateDbService.Add(new ProductState() { Name = "прямо з заводу" });
+            if(!await _productStateDbService.AnyStateByName("Б/У"))
+                await _productStateDbService.Add(new ProductState() { Id = 1, Name = "Б/У" });
 
-            if (!await _productStateDbService.AnyStateByName("поношений"))
-                await _productStateDbService.Add(new ProductState() { Name = "поношений" });
-
-            if (!await _productStateDbService.AnyStateByName("після польових випробувань"))
-                await _productStateDbService.Add(new ProductState() { Name = "після польових випробувань" });
-
-            if (!await _productStateDbService.AnyStateByName("втф"))
-                await _productStateDbService.Add(new ProductState() { Name = "втф" });
+            if (!await _productStateDbService.AnyStateByName("Новий"))
+                await _productStateDbService.Add(new ProductState() { Id = 2, Name = "Новий" });
 
             await _context.SaveChangesAsync();
         }
@@ -67,8 +61,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Кіндер Сюрприз",
                     Image = "none",
                     Price = 25,
-                    CategoryId = 0,
-                    ProductStateId = 0,
+                    CategoryId = 1,
+                    ProductStateId = 1,
                     Count = 200,
                     ByNow = true,
                     Description = "опис відсутній" 
@@ -80,7 +74,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Шоколад Мілка",
                     Image = "none",
                     Price = 40,
-                    CategoryId = 0,
+                    CategoryId = 1,
                     ProductStateId = 1,
                     Count = 200,
                     ByNow = true,
@@ -93,8 +87,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Морські камінці",
                     Image = "none",
                     Price = 20,
-                    CategoryId = 0,
-                    ProductStateId = 0,
+                    CategoryId = 1,
+                    ProductStateId = 1,
                     Count = 200,
                     ByNow = true,
                     Description = "ціна за 100г" 
@@ -106,8 +100,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Пістолет",
                     Image = "none",
                     Price = 250,
-                    CategoryId = 1,
-                    ProductStateId = 0,
+                    CategoryId = 2,
+                    ProductStateId = 1,
                     Count = 100,
                     ByNow = true,
                     Description = "револьвер, пістони" 
@@ -119,8 +113,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Лазерний меч",
                     Image = "none",
                     Price = 800,
-                    CategoryId = 1,
-                    ProductStateId = 1,
+                    CategoryId = 2,
+                    ProductStateId = 2,
                     Count = 50,
                     ByNow = true,
                     Description = "меч з зоряних війн" 
@@ -132,8 +126,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Набір: маленький лікар",
                     Image = "none",
                     Price = 500,
-                    CategoryId = 1,
-                    ProductStateId = 3,
+                    CategoryId = 2,
+                    ProductStateId = 1,
                     Count = 30,
                     ByNow = true,
                     Description = "опис відсутній" 
@@ -145,8 +139,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Witcher 3",
                     Image = "none",
                     Price = 500,
-                    CategoryId = 2,
-                    ProductStateId = 2,
+                    CategoryId = 3,
+                    ProductStateId = 1,
                     Count = 20,
                     ByNow = true,
                     Description = "гра witcher 3, steam" 
@@ -158,7 +152,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Підписка Netflix",
                     Image = "none",
                     Price = 100,
-                    CategoryId = 2,
+                    CategoryId = 3,
                     ProductStateId = 1,
                     Count = 50,
                     ByNow = true,
@@ -171,8 +165,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Steam картка - 25$",
                     Image = "none",
                     Price = 1000,
-                    CategoryId = 2,
-                    ProductStateId = 3,
+                    CategoryId = 3,
+                    ProductStateId = 1,
                     Count = 70,
                     ByNow = true,
                     Description = "опис відсутній" 
