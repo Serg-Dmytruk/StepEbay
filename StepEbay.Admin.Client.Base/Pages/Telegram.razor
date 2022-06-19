@@ -1,7 +1,33 @@
 ﻿<h3>Telegram</h3>
-
-<input @bind="_inputValue" /> 
-<button @onclick="UpdateToken">
-        Submit
+<p>Add</p>
+<input @bind-value="_tokenToAdd" placeholder="token"/> 
+<button @onclick="AddGroup">
+        Add
     </button>
- 
+ <hr/>
+ <p>Remove by id</p>
+ <input @bind-value="_idToRemove" type="number" placeholder="id"/> 
+<button @onclick="RemoveGroupById">
+        Remove
+    </button>
+ <hr/>
+ <p>Remove by token</p>
+  <input @bind-value="_tokenToRemove" placeholder="token"/> 
+<button @onclick="RemoveGroupByToken">
+        Remove
+    </button>
+ <hr/>
+   <p>update by id</p>
+  <input @bind-value="_idToUpdate" type="number" placeholder="id"/> 
+  <input @bind-value="_valueToUpdate1" placeholder="value"/> 
+<button @onclick="UpdateGroupById">
+        Update
+    </button>
+ <hr/>
+   <p>update by token</p>
+  <input @bind-value="_tokenToUpdate" placeholder="token"/> 
+  <input @bind-value="_valueToUpdate2" placeholder="value"/> 
+<button @onclick="UpdateGroupByToken">
+        Update
+    </button>
+ <hr/>

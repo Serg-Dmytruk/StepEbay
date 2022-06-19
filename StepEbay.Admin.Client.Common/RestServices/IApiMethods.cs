@@ -10,6 +10,17 @@ namespace StepEbay.Admin.Client.Common.RestServices
         [Put("/telegram/group/add/{groupTg}")]
         Task<ApiResponse<BoolResult>> AddGroup(string groupTg);
 
+        [Delete("/telegram/group/removeid/{groupTgId}")]
+        Task<ApiResponse<BoolResult>> RemoveGroupById(int groupTgId);
+
+        [Delete("/telegram/group/removetoken/{groupTg}")]
+        Task<ApiResponse<BoolResult>> RemoveGroupByToken(string groupTg);
+
+        [Delete("/telegram/group/updateid/{groupTgId}/{newToken}")]
+        Task<ApiResponse<BoolResult>> UpdateGroupById(int groupTgId, string newToken);
+
+        [Delete("/telegram/group/updatetoken/{oldToken}/{newToken}")]
+        Task<ApiResponse<BoolResult>> UpdateGroupByToken(string oldToken,string newToken);
         #endregion
 
         [Post("/auth/signin")]
