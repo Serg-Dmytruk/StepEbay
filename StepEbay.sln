@@ -53,13 +53,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Main.Client.Common
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.HttpLoging", "Serilog.HttpLoging\Serilog.HttpLoging.csproj", "{1B7825D3-29DC-4D4D-8E3A-BB073BBA2DDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Admin.Client.Base", "StepEbay.Admin.Client.Base\StepEbay.Admin.Client.Base.csproj", "{858AEDFD-15E1-4295-B9A5-A1C004150B4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Admin.Client.Base", "StepEbay.Admin.Client.Base\StepEbay.Admin.Client.Base.csproj", "{858AEDFD-15E1-4295-B9A5-A1C004150B4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Admin.Client.Common", "StepEbay.Admin.Client.Common\StepEbay.Admin.Client.Common.csproj", "{9F3F200A-1C96-4E58-9B7F-978BFE69C765}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Admin.Client.Common", "StepEbay.Admin.Client.Common\StepEbay.Admin.Client.Common.csproj", "{9F3F200A-1C96-4E58-9B7F-978BFE69C765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Admin.Client", "StepEbay.Admin.Client\StepEbay.Admin.Client.csproj", "{D8ACCCB3-F386-42FE-9E22-7B9E720A810B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Admin.Client", "StepEbay.Admin.Client\StepEbay.Admin.Client.csproj", "{D8ACCCB3-F386-42FE-9E22-7B9E720A810B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepEbay.Components.Common", "StepEbay.Components.Common\StepEbay.Components.Common.csproj", "{17E86DD0-746E-42EF-9714-00410FDED9DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Components.Common", "StepEbay.Components.Common\StepEbay.Components.Common.csproj", "{17E86DD0-746E-42EF-9714-00410FDED9DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
