@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using StepEbay.Admin.Api.Common.Models;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Data.Common.Services.TelegramDbServices;
@@ -13,11 +14,13 @@ namespace StepEbay.Admin.Api.Services.Telegram
     {
         private readonly TelegramBotClient _botClient;
         private readonly IDeveloperGroupDbService _groups;
+        private readonly ILogger<TelegramService> _logger;
 
-        public TelegramService(IConfiguration configuration, IDeveloperGroupDbService group)
+        public TelegramService(IConfiguration configuration, IDeveloperGroupDbService group, ILogger<TelegramService> logger)
         {
             _botClient = new TelegramBotClient(configuration.GetSection("TelegramBotToken").Value);
             _groups = group;
+            _logger = logger;
         }
 
         public async Task<BoolResult> SendErrorMessage(List<Event> exceptionInfo, string projectName)
@@ -65,14 +68,18 @@ namespace StepEbay.Admin.Api.Services.Telegram
 
         private async Task SendMessage(List<Event> exceptionInfo, string projectName, IDeveloperGroupDbService groups)
         {
-            await Task.Run(() =>
+            try
             {
                 List<DeveloperGroup> list = groups.List().Result;
                 foreach (DeveloperGroup group in list)
                 {
-                    _botClient.SendTextMessageAsync(new ChatId(group.Group), CreateErrorMessage(exceptionInfo, projectName));
+                    await _botClient.SendTextMessageAsync(new ChatId(group.Group), CreateErrorMessage(exceptionInfo, projectName));
                 }
-            });
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
         }
 
         private string CreateErrorMessage(List<Event> exceptionInfo, string projectName)

@@ -2,16 +2,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Serilog;
-using Serilog.HttpLoging.Helpers;
 using StepEbay.Admin.Api.Common.Services;
 using StepEbay.Data;
 using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-Log.Logger = SerilogHelper.Configure($"{builder.Configuration.GetConnectionString("ControlPanel")}/exception/log");
-builder.WebHost.UseSerilog();
+
 
 //JWT configuration
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
