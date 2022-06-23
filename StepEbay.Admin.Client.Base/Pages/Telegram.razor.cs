@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using StepEbay.Admin.Client.Common.RestServices;
+using StepEbay.Data.Models.Telegram;
 
 namespace StepEbay.Admin.Client.Base.Pages
 {
     [Route("/telegram")]
-    //[Authorize(Roles = "admin, manager")]
+    [Authorize(Roles = "admin, manager")]
     public partial class Telegram
     {
         private string _tokenToAdd;
@@ -16,11 +17,17 @@ namespace StepEbay.Admin.Client.Base.Pages
         private string _tokenToUpdate;
         private string _valueToUpdate1;
         private string _valueToUpdate2;
+
+        private List<DeveloperGroup> _list;
+
         [Inject] IApiService _service { get; set; }
-        
+        public Telegram()
+        {
+            _list = new List<DeveloperGroup>();
+        }
         public async Task AddGroup()
         {
-            await _service.ExecuteRequest(()=>_service.ApiMethods.AddGroup(_tokenToAdd));
+            await _service.ExecuteRequest(() => _service.ApiMethods.AddGroup(_tokenToAdd));
             _tokenToAdd = null;
             this.StateHasChanged();
         }
@@ -38,9 +45,9 @@ namespace StepEbay.Admin.Client.Base.Pages
         }
         public async Task UpdateGroupById()
         {
-            await _service.ExecuteRequest(() => _service.ApiMethods.UpdateGroupById(_idToUpdate.Value,_valueToUpdate1));
+            await _service.ExecuteRequest(() => _service.ApiMethods.UpdateGroupById(_idToUpdate.Value, _valueToUpdate1));
             _idToUpdate = null;
-            _valueToUpdate1=null;
+            _valueToUpdate1 = null;
             this.StateHasChanged();
         }
         public async Task UpdateGroupByToken()
@@ -48,6 +55,11 @@ namespace StepEbay.Admin.Client.Base.Pages
             await _service.ExecuteRequest(() => _service.ApiMethods.UpdateGroupByToken(_tokenToUpdate, _valueToUpdate2));
             _tokenToUpdate = null;
             _valueToUpdate2 = null;
+            this.StateHasChanged();
+        }
+        public async Task Update()
+        {
+            _list = (await _service.ExecuteRequest(() => _service.ApiMethods.GetAllGroupList())).Data;
             this.StateHasChanged();
         }
     }

@@ -1,6 +1,8 @@
 ﻿using Refit;
 using StepEbay.Admin.Common.Models.Auth;
+using StepEbay.Admin.Common.Models.Telegram;
 using StepEbay.Common.Models.RefitModels;
+using StepEbay.Data.Models.Telegram;
 
 namespace StepEbay.Admin.Client.Common.RestServices
 {
@@ -16,11 +18,16 @@ namespace StepEbay.Admin.Client.Common.RestServices
         [Delete("/telegram/group/removetoken/{groupTg}")]
         Task<ApiResponse<BoolResult>> RemoveGroupByToken(string groupTg);
 
-        [Delete("/telegram/group/updateid/{groupTgId}/{newToken}")]
+        [Patch("/telegram/group/updateid/{groupTgId}/{newToken}")]
         Task<ApiResponse<BoolResult>> UpdateGroupById(int groupTgId, string newToken);
 
-        [Delete("/telegram/group/updatetoken/{oldToken}/{newToken}")]
-        Task<ApiResponse<BoolResult>> UpdateGroupByToken(string oldToken,string newToken);
+        [Patch("/telegram/group/updatetoken/{oldToken}/{newToken}")]
+        Task<ApiResponse<BoolResult>> UpdateGroupByToken(string oldToken, string newToken);
+
+        [Post("/telegram/group/all")]
+        Task<ApiResponse<GroupsResponseDto>> GetAllGroup();
+        [Post("/telegram/group/all/list")]
+        Task<ApiResponse<List<DeveloperGroup>>> GetAllGroupList();
         #endregion
 
         [Post("/auth/signin")]

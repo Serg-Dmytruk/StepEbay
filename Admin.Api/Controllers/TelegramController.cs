@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StepEbay.Admin.Api.Services.Telegram;
+using StepEbay.Admin.Common.Models.Telegram;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Data.Models.Telegram;
 
@@ -21,7 +22,7 @@ namespace StepEbay.Admin.Api.Controllers
         [HttpPut("group/add/{groupTg}")]
         public async Task<BoolResult> AddGroup(string groupTg)
         {
-             return await _serviceTg.AddGroup(groupTg);
+            return await _serviceTg.AddGroup(groupTg);
         }
 
         /// <summary>
@@ -55,18 +56,28 @@ namespace StepEbay.Admin.Api.Controllers
         /// Редагує телеграм групу за токеном
         /// </summary>
         [HttpPatch("group/updatetoken/{oldToken}/{newToken}")]
-        public async Task<BoolResult> UpdateGroupToken(string oldToken,string newToken)
+        public async Task<BoolResult> UpdateGroupToken(string oldToken, string newToken)
         {
             return await _serviceTg.UpdateGroup(oldToken, newToken);
         }
 
         /// <summary>
-        /// Повертає усі телеграм групи
+        /// Повертає усі телеграм групи у вигляді list
         /// </summary>
-        [HttpPost("group/all")]
+        [HttpPost("group/all/list")]
         public async Task<List<DeveloperGroup>> GetAllGroup()
         {
             return await _serviceTg.GetAllGroups();
+        }
+        /// <summary>
+        /// Повертає усі телеграм групи у вигляді DTO (Чомусь не працює)
+        /// </summary>
+        [HttpPost("group/all")]
+        public async Task<GroupsResponseDto> GetAllGroupDto()
+        {
+            List<DeveloperGroup> l = (await _serviceTg.GetAllGroups());
+            GroupsResponseDto result = new GroupsResponseDto() { list = l };
+            return result;
         }
     }
 }
