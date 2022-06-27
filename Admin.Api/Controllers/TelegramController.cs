@@ -62,21 +62,17 @@ namespace StepEbay.Admin.Api.Controllers
         }
 
         /// <summary>
-        /// Повертає усі телеграм групи у вигляді list
-        /// </summary>
-        [HttpPost("group/all/list")]
-        public async Task<List<DeveloperGroup>> GetAllGroup()
-        {
-            return await _serviceTg.GetAllGroups();
-        }
-        /// <summary>
-        /// Повертає усі телеграм групи у вигляді DTO (Чомусь не працює)
+        /// Повертає усі телеграм групи(DTO)
         /// </summary>
         [HttpPost("group/all")]
-        public async Task<GroupsResponseDto> GetAllGroupDto()
+        public async Task<List<GroupResponseDto>> GetAllGroupDto()
         {
             List<DeveloperGroup> l = (await _serviceTg.GetAllGroups());
-            GroupsResponseDto result = new GroupsResponseDto() { list = l };
+            List<GroupResponseDto> result = new List<GroupResponseDto>();
+            foreach (DeveloperGroup group in l) 
+            {
+                result.Add(new GroupResponseDto() { Id=group.Id,Group=group.Group});
+            }
             return result;
         }
     }

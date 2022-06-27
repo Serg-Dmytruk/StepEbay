@@ -2,7 +2,6 @@
 using StepEbay.Admin.Common.Models.Auth;
 using StepEbay.Admin.Common.Models.Telegram;
 using StepEbay.Common.Models.RefitModels;
-using StepEbay.Data.Models.Telegram;
 
 namespace StepEbay.Admin.Client.Common.RestServices
 {
@@ -25,9 +24,7 @@ namespace StepEbay.Admin.Client.Common.RestServices
         Task<ApiResponse<BoolResult>> UpdateGroupByToken(string oldToken, string newToken);
 
         [Post("/telegram/group/all")]
-        Task<ApiResponse<GroupsResponseDto>> GetAllGroup();
-        [Post("/telegram/group/all/list")]
-        Task<ApiResponse<List<DeveloperGroup>>> GetAllGroupList();
+        Task<ApiResponse<List<GroupResponseDto>>> GetAllGroup();
         #endregion
 
         [Post("/auth/signin")]

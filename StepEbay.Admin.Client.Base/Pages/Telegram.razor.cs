@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Admin.Client.Common.RestServices;
-using StepEbay.Data.Models.Telegram;
+using StepEbay.Admin.Common.Models.Telegram;
 
 namespace StepEbay.Admin.Client.Base.Pages
 {
     [Route("/telegram")]
-    [Authorize(Roles = "admin, manager")]
+    //[Authorize(Roles = "admin, manager")]
     public partial class Telegram
     {
         private string _tokenToAdd;
@@ -18,12 +17,12 @@ namespace StepEbay.Admin.Client.Base.Pages
         private string _valueToUpdate1;
         private string _valueToUpdate2;
 
-        private List<DeveloperGroup> _list;
+        private List<GroupResponseDto> _list;
 
         [Inject] IApiService _service { get; set; }
         public Telegram()
         {
-            _list = new List<DeveloperGroup>();
+            _list=new List<GroupResponseDto>();
         }
         public async Task AddGroup()
         {
@@ -59,7 +58,7 @@ namespace StepEbay.Admin.Client.Base.Pages
         }
         public async Task Update()
         {
-            _list = (await _service.ExecuteRequest(() => _service.ApiMethods.GetAllGroupList())).Data;
+            _list = (await _service.ExecuteRequest(() => _service.ApiMethods.GetAllGroup())).Data;
             this.StateHasChanged();
         }
     }
