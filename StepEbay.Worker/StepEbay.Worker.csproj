@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Admin.Api\StepEbay.Admin.Api.csproj" />
     <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
     <ProjectReference Include="..\Data.Common\StepEbay.Data.Common.csproj" />
     <ProjectReference Include="..\Data\StepEbay.Data.csproj" />

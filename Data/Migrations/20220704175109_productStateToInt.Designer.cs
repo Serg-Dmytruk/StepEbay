@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StepEbay.Data;
 
@@ -11,9 +12,10 @@ using StepEbay.Data;
 namespace StepEbay.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220704175109_productStateToInt")]
+    partial class productStateToInt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,17 +138,12 @@ namespace StepEbay.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductStateId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("ProductStateId");
 
                     b.HasIndex("Title");
 
@@ -155,16 +152,8 @@ namespace StepEbay.Data.Migrations
 
             modelBuilder.Entity("StepEbay.Data.Models.Products.ProductState", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
 
                     b.HasIndex("Name");
 
@@ -289,15 +278,7 @@ namespace StepEbay.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StepEbay.Data.Models.Products.ProductState", "ProductState")
-                        .WithMany()
-                        .HasForeignKey("ProductStateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
-
-                    b.Navigation("ProductState");
                 });
 
             modelBuilder.Entity("StepEbay.Data.Models.Users.Favorite", b =>

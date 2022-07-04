@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StepEbay.Data.Models.Products
 {
-    public class ProductState : IDbServiceEntity<byte>
+    public class ProductState : IDbServiceEntity<int>
     {
         [Key]
-        public byte Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using StepEbay.Data.Models.Products;
 
 namespace StepEbay.Data.Common.Services.ProductDbServices
 {
-    public class ProductStateDbService : DefaultDbService<byte, ProductState>, IProductStateDbService
+    public class ProductStateDbService : DefaultDbService<int, ProductState>, IProductStateDbService
     {
         private readonly ApplicationDbContext _context;
         public ProductStateDbService(ApplicationDbContext context)

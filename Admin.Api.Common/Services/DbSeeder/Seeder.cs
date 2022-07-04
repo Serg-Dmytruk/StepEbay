@@ -23,9 +23,10 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
         {
             await _context.Database.MigrateAsync();
 
-            await AddCategories();
+            //await AddCategories();
             await AddProductStates();
-            await AddProducts();
+            //await AddProducts();
+
         }
 
         public async Task AddCategories()
@@ -33,7 +34,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             if(!await _categoryDbService.AnyByName("Солодощі"))
                 await _categoryDbService.Add(new Category() { Name = "Солодощі" });
 
-            if(!await _categoryDbService.AnyByName("Іграшки"))
+            if (!await _categoryDbService.AnyByName("Іграшки"))
                 await _categoryDbService.Add(new Category() { Name = "Іграшки" });
 
             if (!await _categoryDbService.AnyByName("Цифрові товари"))
@@ -44,11 +45,11 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddProductStates()
         {
-            if(!await _productStateDbService.AnyStateByName("Б/У"))
-                await _productStateDbService.Add(new ProductState() { Id = 1, Name = "Б/У" });
+            if (!await _productStateDbService.AnyStateByName("Б/У"))
+                await _productStateDbService.Add(new ProductState() { Name = "Б/У" });
 
             if (!await _productStateDbService.AnyStateByName("Новий"))
-                await _productStateDbService.Add(new ProductState() { Id = 2, Name = "Новий" });
+                await _productStateDbService.Add(new ProductState() { Name = "Новий" });
 
             await _context.SaveChangesAsync();
         }
