@@ -23,9 +23,9 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
         {
             await _context.Database.MigrateAsync();
 
-            //await AddCategories();
+            await AddCategories();
             await AddProductStates();
-            //await AddProducts();
+            await AddProducts();
 
         }
 

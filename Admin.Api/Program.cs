@@ -38,9 +38,6 @@ if (app.Configuration.GetSection("UseSeed").Get<bool>())
     }
 }
 
-
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
