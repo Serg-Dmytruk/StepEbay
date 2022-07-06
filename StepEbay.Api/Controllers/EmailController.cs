@@ -36,9 +36,9 @@ namespace StepEbay.Main.Api.Controllers
         /// </summary>
 
         [HttpPost("registration")]
-        public async Task SendRegistrationConfirm()
+        public async Task SendRegistrationConfirm(string email, Guid guid)
         {
-            await _emailSenderService.SendRegistrationConfirm(User.Claims.First(c => c.Type == "userEmail").Value);
+            await _emailSenderService.SendRegistrationConfirm(email, guid);
         }
 
         ///// <summary>

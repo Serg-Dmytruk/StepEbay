@@ -6,6 +6,7 @@ using StepEbay.Data.Common.Services.UserDbServices;
 using StepEbay.Data.Models.Auth;
 using StepEbay.Data.Models.Users;
 using StepEbay.Main.Api.Common.Services.DataValidationServices;
+using StepEbay.Main.Api.Common.Services.EmailSenderServices;
 using StepEbay.Main.Common.Models.Auth;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -21,17 +22,20 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
         private readonly IUserDbService _userDbService;
         private readonly IRefreshTokenDbService _refreshTokenDbService;
         private readonly IRoleDbService _roleDbService;
+        private readonly IEmailSenderService _emailSenderService;
 
         private readonly TimeSpan _expires = new(0, 20, 0);
         public AuthService(IConfiguration config,
             IUserDbService userDbService,
             IRefreshTokenDbService refreshTokenDbService,
-            IRoleDbService roleDbService)
+            IRoleDbService roleDbService,
+            IEmailSenderService emailSenderService)
         {
             _config = config;
             _userDbService = userDbService;
             _refreshTokenDbService = refreshTokenDbService;
             _roleDbService = roleDbService;
+            _emailSenderService= emailSenderService;
         }
 
         public async Task<ResponseData<SignInResponseDto>> SignIn(SignInRequestDto request)
@@ -50,7 +54,7 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
                 UpdateTime =  DateTime.UtcNow.Add(_expires), 
                 UserId =  user.Id 
             });
-
+            
             return new ResponseData<SignInResponseDto>()
             {
                 Data = new SignInResponseDto()
@@ -77,14 +81,18 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
             if (await _userDbService.AnyByEmail(request.Email))
                 return ResponseData<SignInResponseDto>.Fail("Registration", "Вказаний емейл вже використовуєтсья!");
 
-             await _userDbService.Add(new User
-             {
-                 NickName = request.NickName,
-                 FullName = request.FullName,
-                 Email = request.Email,
-                 Created = DateTime.UtcNow,
-                 Password = BC.HashPassword(request.Password)
-             });
+            Guid guid=Guid.NewGuid();
+            await _userDbService.Add(new User
+            {
+                NickName = request.NickName,
+                FullName = request.FullName,
+                Email = request.Email,
+                Created = DateTime.UtcNow,
+                Password = BC.HashPassword(request.Password),
+                IsEmailConfirmed = false,
+                Guid = guid,
+            });
+            await _emailSenderService.SendRegistrationConfirm(request.Email, guid);
 
             return new ResponseData<SignInResponseDto>
             {
