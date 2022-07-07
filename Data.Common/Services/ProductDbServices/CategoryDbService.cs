@@ -16,5 +16,10 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
         {
             return await _context.Categories.AnyAsync(c => c.Name == name);
         }
+
+        public async Task<List<Category>> GetAllCategories()
+        {
+            return await _context.Categories.ToListAsync();
+        }
     }
 }

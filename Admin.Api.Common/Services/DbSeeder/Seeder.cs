@@ -26,7 +26,6 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             await AddCategories();
             await AddProductStates();
             await AddProducts();
-
         }
 
         public async Task AddCategories()
@@ -56,14 +55,19 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddProducts()
         {
-            if(!await _productDbService.AnyProductsByTitle("Кіндер Сюрприз"))
+            var states = await _productStateDbService.GetAllProducts();
+            var categories = await _categoryDbService.GetAllCategories();
+            var rand = new Random();
+
+            if (!await _productDbService.AnyProductsByTitle("Кіндер Сюрприз"))
+                
                 await _productDbService.Add(new Product() {
                     DateCreated = DateTime.Now,
                     Title = "Кіндер Сюрприз",
                     Image = "none",
                     Price = 25,
-                    CategoryId = 1,
-                    ProductStateId = 1,
+                    CategoryId = states[rand.Next(0, states.Count())].Id,
+                    ProductStateId = categories[rand.Next(0, categories.Count())].Id,
                     Count = 200,
                     ByNow = true,
                     Description = "опис відсутній" 
@@ -75,8 +79,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Шоколад Мілка",
                     Image = "none",
                     Price = 40,
-                    CategoryId = 1,
-                    ProductStateId = 1,
+                    CategoryId = states[rand.Next(0, states.Count())].Id,
+                    ProductStateId = categories[rand.Next(0, categories.Count())].Id,
                     Count = 200,
                     ByNow = true,
                     Description = "з арахісовим маслом" 
@@ -88,8 +92,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Морські камінці",
                     Image = "none",
                     Price = 20,
-                    CategoryId = 1,
-                    ProductStateId = 1,
+                    CategoryId = states[rand.Next(0, states.Count())].Id,
+                    ProductStateId = categories[rand.Next(0, categories.Count())].Id,
                     Count = 200,
                     ByNow = true,
                     Description = "ціна за 100г" 
@@ -101,8 +105,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Пістолет",
                     Image = "none",
                     Price = 250,
-                    CategoryId = 2,
-                    ProductStateId = 1,
+                    CategoryId = states[rand.Next(0, states.Count())].Id,
+                    ProductStateId = categories[rand.Next(0, categories.Count())].Id,
                     Count = 100,
                     ByNow = true,
                     Description = "револьвер, пістони" 
@@ -114,8 +118,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Лазерний меч",
                     Image = "none",
                     Price = 800,
-                    CategoryId = 2,
-                    ProductStateId = 2,
+                    CategoryId = states[rand.Next(0, states.Count())].Id,
+                    ProductStateId = categories[rand.Next(0, categories.Count())].Id,
                     Count = 50,
                     ByNow = true,
                     Description = "меч з зоряних війн" 
@@ -127,8 +131,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Набір: маленький лікар",
                     Image = "none",
                     Price = 500,
-                    CategoryId = 2,
-                    ProductStateId = 1,
+                    CategoryId = states[rand.Next(0, states.Count())].Id,
+                    ProductStateId = categories[rand.Next(0, categories.Count())].Id,
                     Count = 30,
                     ByNow = true,
                     Description = "опис відсутній" 
@@ -140,8 +144,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Witcher 3",
                     Image = "none",
                     Price = 500,
-                    CategoryId = 3,
-                    ProductStateId = 1,
+                    CategoryId = states[rand.Next(0, states.Count())].Id,
+                    ProductStateId = categories[rand.Next(0, categories.Count())].Id,
                     Count = 20,
                     ByNow = true,
                     Description = "гра witcher 3, steam" 
@@ -153,8 +157,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Підписка Netflix",
                     Image = "none",
                     Price = 100,
-                    CategoryId = 3,
-                    ProductStateId = 1,
+                    CategoryId = states[rand.Next(0, states.Count())].Id,
+                    ProductStateId = categories[rand.Next(0, categories.Count())].Id,
                     Count = 50,
                     ByNow = true,
                     Description = "термін підписки: 2 місяці" 
@@ -166,8 +170,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = "Steam картка - 25$",
                     Image = "none",
                     Price = 1000,
-                    CategoryId = 3,
-                    ProductStateId = 1,
+                    CategoryId = states[rand.Next(0, states.Count())].Id,
+                    ProductStateId = categories[rand.Next(0, categories.Count())].Id,
                     Count = 70,
                     ByNow = true,
                     Description = "опис відсутній" 
