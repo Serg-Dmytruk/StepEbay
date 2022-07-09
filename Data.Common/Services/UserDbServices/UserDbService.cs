@@ -28,5 +28,19 @@ namespace StepEbay.Data.Common.Services.UserDbServices
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.NickName == nickName);
         }
+
+        public async Task<bool> ConfirmEmail(int id, string key)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.Id == id && x.EmailKey == key);
+
+            if (user != null && !user.IsEmailConfirmed)
+            {
+                user.IsEmailConfirmed = true;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+            }
+
+           return user != null;
+        }
     }
 }

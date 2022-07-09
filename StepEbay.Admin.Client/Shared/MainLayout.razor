@@ -1,0 +1,22 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <div class="main">
+
+        <div class="top-row px-4">
+            @if (!string.IsNullOrEmpty(@UserName))
+            {
+                <p>@UserName</p>
+            }
+            <button class="btn btn-outline-danger centerOnParrentHorizontal" @onclick="Logout">Вийти</button>
+        </div>
+
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
+</div>

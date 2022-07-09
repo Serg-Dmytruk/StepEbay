@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using StepEbay.Admin.Api.Common.Models;
+using StepEbay.Common.Models.RefitModels;
 using StepEbay.Data.Common.Services.TelegramDbServices;
 using StepEbay.Data.Models.Telegram;
 using System.Text;
@@ -12,43 +14,51 @@ namespace StepEbay.Admin.Api.Services.Telegram
     {
         private readonly TelegramBotClient _botClient;
         private readonly IDeveloperGroupDbService _groups;
+        private readonly ILogger<TelegramService> _logger;
 
-        public TelegramService(IConfiguration configuration, IDeveloperGroupDbService group)
+        public TelegramService(IConfiguration configuration, IDeveloperGroupDbService group, ILogger<TelegramService> logger)
         {
             _botClient = new TelegramBotClient(configuration.GetSection("TelegramBotToken").Value);
             _groups = group;
+            _logger = logger;
         }
 
-        public async Task SendErrorMessage(List<Event> exceptionInfo, string projectName)
+        public async Task<BoolResult> SendErrorMessage(List<Event> exceptionInfo, string projectName)
         {
             await SendMessage(exceptionInfo, projectName, _groups);
+            return new BoolResult(true);
         }
 
-        public async Task SaveGroup(string group)
+        public async Task<BoolResult> AddGroup(string group)
         {
             await _groups.Add(new DeveloperGroup() { Group = group });
+            return new BoolResult(true);
         }
 
-        public async Task RemoveGroup(string token)
+        public async Task<BoolResult> RemoveGroup(string token)
         {
             await _groups.Remove(_groups.GetByToken(token).Result);
+            return new BoolResult(true);
         }
 
-        public async Task RemoveGroup(int id)
+        public async Task<BoolResult> RemoveGroup(int id)
         {
             await _groups.Remove(_groups.Get(id).Result);
+            return new BoolResult(true);
         }
 
-        public async Task UpdateGroup(int id, string newToken)
+        public async Task<BoolResult> UpdateGroup(int id, string newToken)
         {
             await _groups.Update(new DeveloperGroup() { Id = id, Group = newToken });
+            return new BoolResult(true);
         }
 
-        public async Task UpdateGroup(string oldToken, string newToken)
+        public async Task<BoolResult> UpdateGroup(string oldToken, string newToken)
         {
             DeveloperGroup _onEditiDeveloperGroup = _groups.GetByToken(oldToken).Result;
             _onEditiDeveloperGroup.Group = newToken;
             await _groups.Update(_onEditiDeveloperGroup);
+            return new BoolResult(true);
         }
 
         public async Task<List<DeveloperGroup>> GetAllGroups()
@@ -58,14 +68,18 @@ namespace StepEbay.Admin.Api.Services.Telegram
 
         private async Task SendMessage(List<Event> exceptionInfo, string projectName, IDeveloperGroupDbService groups)
         {
-            await Task.Run(() =>
+            try
             {
                 List<DeveloperGroup> list = groups.List().Result;
                 foreach (DeveloperGroup group in list)
                 {
-                    _botClient.SendTextMessageAsync(new ChatId(group.Group), CreateErrorMessage(exceptionInfo, projectName));
+                    await _botClient.SendTextMessageAsync(new ChatId(group.Group), CreateErrorMessage(exceptionInfo, projectName));
                 }
-            });
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
         }
 
         private string CreateErrorMessage(List<Event> exceptionInfo, string projectName)

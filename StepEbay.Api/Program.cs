@@ -32,7 +32,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 string applicationDbContext = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(applicationDbContext));
 
-//Services
+
 builder.Services.AddService();
 builder.Services.AddDbService();
 

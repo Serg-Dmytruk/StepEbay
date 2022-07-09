@@ -3,6 +3,9 @@ using StepEbay.Admin.Api.Common.Services.DbSeeder;
 using StepEbay.Admin.Api.Services.Telegram;
 using StepEbay.Data.Common.Services.ProductDbServices;
 using StepEbay.Data.Common.Services.TelegramDbServices;
+using StepEbay.Admin.Api.Common.Services.AuthServices;
+using StepEbay.Data.Common.Services.UserDbServices;
+using StepEbay.Data.Common.Services.AuthDbServices;
 
 namespace StepEbay.Admin.Api.Common.Services
 {
@@ -12,6 +15,7 @@ namespace StepEbay.Admin.Api.Common.Services
         public static IServiceCollection AddService(this IServiceCollection services)
         {
             services.AddTransient<ITelegramService, TelegramService>();
+            services.AddTransient<IAuthService, AuthService>();
 
             return services;
         }
@@ -25,6 +29,10 @@ namespace StepEbay.Admin.Api.Common.Services
             services.AddScoped<ICategoryDbService, CategoryDbService>();
             services.AddScoped<ISeeder, Seeder>();
 
+            services.AddScoped<IUserDbService, UserDbService>();
+            services.AddScoped<IRefreshTokenDbService,RefreshTokenDbService>();
+            services.AddScoped<IRoleDbService, RoleDbService>();
+             
             return services;
         }
 

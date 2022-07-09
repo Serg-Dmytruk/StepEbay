@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\js\cookie-storage.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\cookie-storage.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
+    <ProjectReference Include="..\Serilog.HttpLoging\Serilog.HttpLoging.csproj" />
+    <ProjectReference Include="..\StepEbay.Admin.Client.Base\StepEbay.Admin.Client.Base.csproj" />
+    <ProjectReference Include="..\StepEbay.Admin.Client.Common\StepEbay.Admin.Client.Common.csproj" />
+    <ProjectReference Include="..\StepEbay.Components.Common\StepEbay.Components.Common.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,2 +1,26 @@
 ﻿<h3>Main</h3>
- <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PlaceBet">Поставити ставку</button>
+
+@if (!ShowPreloader)
+{
+    @if (ShowModal)
+    {
+        <ModalDialog Title="@MessageConfirmReg.FirstOrDefault().Key" Text="@MessageConfirmReg.FirstOrDefault().Value" OnClose='@CloseModal' />
+    }
+
+    <AuthorizeView>
+
+        <Authorized>
+            <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PlaceBet">Поставити ставку</button>  @*тест*@
+        </Authorized>
+
+        <NotAuthorized>
+            <SignIn></SignIn>
+        </NotAuthorized>
+    </AuthorizeView>
+}
+else
+{
+    <div class="spinner-border centerOnParrentHorizontal" role="status">
+        <span class="sr-only">Завантаження...</span>
+    </div>
+}

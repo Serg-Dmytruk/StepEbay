@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Common.Lockers;
 using StepEbay.Common.Storages;
-using System.Threading.Tasks;
 
-namespace StepEbay.Main.Client.Shared
+namespace StepEbay.Components.Common.Components
 {
     public partial class CookieContainer
     {

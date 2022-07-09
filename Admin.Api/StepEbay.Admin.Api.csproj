@@ -14,6 +14,7 @@
 	
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
+		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.2.3" />
 	</ItemGroup>
@@ -23,6 +24,7 @@
 	  <ProjectReference Include="..\Admin.Common\StepEbay.Admin.Common.csproj" />
 	  <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
     <ProjectReference Include="..\Data\StepEbay.Data.csproj" />
+    <ProjectReference Include="..\Serilog.HttpLoging\Serilog.HttpLoging.csproj" />
 	</ItemGroup>
 
 </Project>

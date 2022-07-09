@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
     <ProjectReference Include="..\Serilog.HttpLoging\Serilog.HttpLoging.csproj" />
+    <ProjectReference Include="..\StepEbay.Components.Common\StepEbay.Components.Common.csproj" />
     <ProjectReference Include="..\StepEbay.Main.Client.Base\StepEbay.Main.Client.Base.csproj" />
     <ProjectReference Include="..\StepEbay.Main.Client.Common\StepEbay.Main.Client.Common.csproj" />
   </ItemGroup>

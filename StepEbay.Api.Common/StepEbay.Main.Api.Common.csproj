@@ -1,23 +1,30 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
-    <PackageReference Include="FluentValidation" Version="10.3.6" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
+		<PackageReference Include="FluentValidation" Version="10.3.6" />
+		<PackageReference Include="Mailjet.Api" Version="2.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Admin.Api.Common\StepEbay.Admin.Api.Common.csproj" />
-    <ProjectReference Include="..\Admin.Api\StepEbay.Admin.Api.csproj" />
-    <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
-    <ProjectReference Include="..\StepEbay.Common\StepEbay.Main.Common.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Common\StepEbay.Common.csproj" />
+		<ProjectReference Include="..\Data.Common\StepEbay.Data.Common.csproj" />
+		<ProjectReference Include="..\Data\StepEbay.Data.csproj" />
+		<ProjectReference Include="..\StepEbay.Common\StepEbay.Main.Common.csproj" />
+
+	</ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
 </Project>

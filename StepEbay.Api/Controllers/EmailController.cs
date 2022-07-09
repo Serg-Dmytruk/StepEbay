@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Api.Common.Services.EmailSenderServices;
 
 namespace StepEbay.Main.Api.Controllers
@@ -6,8 +7,8 @@ namespace StepEbay.Main.Api.Controllers
     [Route("email")]
     public class EmailController : ControllerBase
     {
-        private IEmailSenderService _emailSenderService;
-        public EmailController(IEmailSenderService emailSenderService)
+        private IEmailService _emailSenderService;
+        public EmailController(IEmailService emailSenderService)
         {
             _emailSenderService = emailSenderService;
         }
@@ -31,16 +32,13 @@ namespace StepEbay.Main.Api.Controllers
             await _emailSenderService.SendBetPlace(User.Claims.First(c => c.Type == "userEmail").Value);
         }
 
-        /// <summary>
-        /// Відправлення "підтвердження реєстрації" з стандартного адресу
-        /// </summary>
-
-        [HttpPost("registration")]
-        public async Task SendRegistrationConfirm()
+        [HttpGet("confirm/{id}/{key}")]
+        public async Task<ResponseData<BoolResult>> ConfirmEmail(string id, string key)
         {
-            await _emailSenderService.SendRegistrationConfirm(User.Claims.First(c => c.Type == "userEmail").Value);
+            return await _emailSenderService.ConfirmRegistration(int.Parse(id), key);
         }
 
+       
         ///// <summary>
         ///// Відправлення інформації про ставку з стандартного адресу
         ///// </summary>

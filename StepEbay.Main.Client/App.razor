@@ -1,8 +1,6 @@
-﻿@using StepEbay.Common.Components
-
-<CookieContainer>
+﻿<CookieContainer>
 <CascadingAuthenticationState>
-<Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="@(new[] { typeof(StepEbay.Main.Client.Base.Pages.SignIn).Assembly })">
+<Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="@(new[] { typeof(StepEbay.Main.Client.Base.Pages.Main).Assembly })">
     <Found Context="routeData">
           <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                     <NotAuthorized>

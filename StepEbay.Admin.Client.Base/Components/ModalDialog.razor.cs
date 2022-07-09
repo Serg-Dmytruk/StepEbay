@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace StepEbay.Main.Client.Base.Components
+namespace StepEbay.Admin.Client.Base.Components
 {
     public partial class ModalDialog
     {

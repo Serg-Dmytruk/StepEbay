@@ -1,0 +1,43 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">StepEbay.Admin.Client</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <AuthorizeView Roles="admin, manager">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="main">
+                    <span class="oi oi-home" aria-hidden="true"></span> Головна
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="admin, manager">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="telegram">
+                    <span class="oi oi-plus" aria-hidden="true"></span> Телеграм
+                </NavLink>
+            </li>
+        </AuthorizeView>
+        <AuthorizeView Roles="admin">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="exception">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Тестова Помилка
+                </NavLink>
+            </li>
+        </AuthorizeView>
+    </ul>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

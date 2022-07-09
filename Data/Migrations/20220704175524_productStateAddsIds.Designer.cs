@@ -12,8 +12,13 @@ using StepEbay.Data;
 namespace StepEbay.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+<<<<<<<< HEAD:Data/Migrations/20220704175524_productStateAddsIds.Designer.cs
     [Migration("20220704175524_productStateAddsIds")]
     partial class productStateAddsIds
+========
+    [Migration("20220630180611_user_isemailconfirmed")]
+    partial class user_isemailconfirmed
+>>>>>>>> admin_client:Data/Migrations/20220630180611_user_isemailconfirmed.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -231,6 +236,9 @@ namespace StepEbay.Data.Migrations
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsEmailConfirmed")
+                        .HasColumnType("bit");
 
                     b.Property<string>("NickName")
                         .HasColumnType("nvarchar(450)");

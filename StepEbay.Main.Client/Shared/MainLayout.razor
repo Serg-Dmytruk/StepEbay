@@ -6,13 +6,22 @@
     </div>
 
     <div class="main">
- 
+
         <div class="top-row px-4">
             @if (!string.IsNullOrEmpty(@UserName))
             {
                 <p>@UserName</p>
             }
-            <button class="btn btn-outline-danger centerOnParrentHorizontal" @onclick="Logout">Вийти</button>
+            <AuthorizeView>
+                <Authorized>
+                    <button class="btn btn-outline-danger centerOnParrentHorizontal" @onclick="Logout">Вийти</button>
+                </Authorized>
+
+                <NotAuthorized>
+                    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="LogIn">Увійти</button>
+                </NotAuthorized>
+            </AuthorizeView>
+
         </div>
 
         <div class="content px-4">

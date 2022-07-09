@@ -1,0 +1,18 @@
+﻿<CookieContainer>
+<CascadingAuthenticationState>
+<Router AppAssembly="@typeof(Program).Assembly" AdditionalAssemblies="@(new[] { typeof(StepEbay.Admin.Client.Base.Pages.SignIn).Assembly })">
+    <Found Context="routeData">
+          <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                    <NotAuthorized>
+                        <Redirect Url="/signin"/>
+                    </NotAuthorized>
+                </AuthorizeRouteView>
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p>Ой. нічогосінько не знайшлося</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+</CascadingAuthenticationState>
+</CookieContainer>
