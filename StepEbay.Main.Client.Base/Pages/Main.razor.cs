@@ -6,6 +6,7 @@ using StepEbay.Main.Client.Common.RestServices;
 
 namespace StepEbay.Main.Client.Base.Pages
 {
+    [Route("/")]
     [Route("main")]
     [Route("main/confirm/{id}/{key}")]
     public partial class Main
@@ -19,6 +20,16 @@ namespace StepEbay.Main.Client.Base.Pages
         protected override async Task OnInitializedAsync()
         {
             
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if(string.IsNullOrEmpty(Id) && string.IsNullOrEmpty(Key))
+            {
+
+            }
+
+          
         }
 
         private async Task PlaceBet()

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace StepEbay.Main.Client.Base.Components
+namespace StepEbay.Main.Client.Base.Components.Modals
 {
     public partial class ModalDialog
     {

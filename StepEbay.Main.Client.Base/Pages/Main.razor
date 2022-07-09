@@ -1,2 +1,12 @@
-﻿<h3>Main</h3>
- <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PlaceBet">Поставити ставку</button>
+﻿<h3>Main</h3> 
+
+<AuthorizeView>
+     
+ <Authorized>
+      <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PlaceBet">Поставити ставку</button>  @*тест*@
+ </Authorized>
+
+     <NotAuthorized>
+         <SignIn></SignIn>
+     </NotAuthorized>
+ </AuthorizeView>

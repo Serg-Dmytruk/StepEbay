@@ -9,10 +9,9 @@ using System.Net;
 using Microsoft.Extensions.Options;
 using StepEbay.Main.Client.Common.Options;
 
-namespace StepEbay.Main.Client.Base.Pages
+namespace StepEbay.Main.Client.Base.Components.Auth
 {
-    [Route("/")]
-    [Route("/signin")]
+
     [Layout(typeof(EmptyLayout))]
     public partial class SignIn
     {
@@ -22,7 +21,7 @@ namespace StepEbay.Main.Client.Base.Pages
         [Inject] private LocalStorage LocalStorage { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
         private SignInRequestDto SignInRequestDto { get; set; } = new();
-        private bool ShowPreloader { get; set; } = true;      
+        private bool ShowPreloader { get; set; } = true;
         private bool RememberMe { get; set; }
         public bool ShowModal { get; set; } = false;
 
@@ -34,7 +33,7 @@ namespace StepEbay.Main.Client.Base.Pages
             {
                 ShowPreloader = false;
                 StateHasChanged();
-            }           
+            }
         }
 
         private async Task SignInRequest()
@@ -42,7 +41,7 @@ namespace StepEbay.Main.Client.Base.Pages
             ShowPreloader = true;
 
             _errors = new();
-            ResponseData<SignInResponseDto> response = await ApiService.ExecuteRequest(()=> ApiService.ApiMethods.SignIn(SignInRequestDto));
+            ResponseData<SignInResponseDto> response = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignIn(SignInRequestDto));
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
