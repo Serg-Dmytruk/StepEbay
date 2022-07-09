@@ -8,7 +8,7 @@ using StepEbay.Worker.HostedService;
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
-        //option configure
+        //option configure dev
         IConfiguration configuration = hostContext.Configuration;
 
         //TODO ADD JSON APP SETTINGS
