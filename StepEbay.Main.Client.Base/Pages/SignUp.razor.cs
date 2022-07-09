@@ -18,9 +18,11 @@ namespace StepEbay.Main.Client.Base.Pages
         private SignUpRequestDto SignUpRequestDto { get; set; } = new();
         private bool ShowPreloader { get; set; } = true;
 
-        private Dictionary<string, List<string>> _errors = new();
+        private Dictionary<string, List<string>> Errors = new();
 
         private bool ShowModal { get; set; } = false;
+
+        private readonly List<string> RegMess = new() { "Вам надіслано лист для підтвердження реєстрації!" };
 
         protected override void OnAfterRender(bool firstRender)
         {
@@ -33,7 +35,7 @@ namespace StepEbay.Main.Client.Base.Pages
 
         private async Task SignUpRequest()
         {
-            _errors.Clear();
+            Errors.Clear();
             ShowPreloader = true;
             var validator = new AuthValidator();
             var result = await validator.ValidateAsync(SignUpRequestDto);
@@ -42,7 +44,7 @@ namespace StepEbay.Main.Client.Base.Pages
             {
                 var list = new List<string>();
                 result.Errors.ForEach(error => list.Add(error.ToString()));
-                _errors.Add("Registration", list);
+                Errors.Add("Registration", list);
             }
             else
             {
@@ -50,14 +52,16 @@ namespace StepEbay.Main.Client.Base.Pages
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    NavigationManager.NavigateTo("/signin");
+                    ShowModal = true;
+                    ShowPreloader = false;
+                    StateHasChanged();
                     return;
                 }
 
-                _errors = response.Errors;
+                Errors = response.Errors;
             }
 
-            if (_errors.Count > 0)
+            if (Errors.Count > 0)
                 ShowModal = true;
 
             ShowPreloader = false;

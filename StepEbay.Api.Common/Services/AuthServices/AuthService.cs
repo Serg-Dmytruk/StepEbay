@@ -22,14 +22,14 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
         private readonly IUserDbService _userDbService;
         private readonly IRefreshTokenDbService _refreshTokenDbService;
         private readonly IRoleDbService _roleDbService;
-        private readonly IEmailSenderService _emailSenderService;
+        private readonly IEmailService _emailSenderService;
 
         private readonly TimeSpan _expires = new(0, 20, 0);
         public AuthService(IConfiguration config,
             IUserDbService userDbService,
             IRefreshTokenDbService refreshTokenDbService,
             IRoleDbService roleDbService,
-            IEmailSenderService emailSenderService)
+            IEmailService emailSenderService)
         {
             _config = config;
             _userDbService = userDbService;
@@ -42,10 +42,13 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
         {
             User user = await _userDbService.GetUserByNickName(request.NickName);
             if (user == null)
-                return ResponseData<SignInResponseDto>.Fail("Authorization", "Нікнейм не знайдено");
+                return ResponseData<SignInResponseDto>.Fail("Авторизація", "Нікнейм не знайдено!");
 
             if(!BC.Verify(request.Password, user.Password))
-                return ResponseData<SignInResponseDto>.Fail("Authorization", "Невірний нікнейм або пароль");
+                return ResponseData<SignInResponseDto>.Fail("Авторизація", "Невірний нікнейм або пароль!");
+
+            if(!user.IsEmailConfirmed)
+                return ResponseData<SignInResponseDto>.Fail("Авторизація", "Емейл не підтверджено!");
 
             string refreshToken = GenerateRefreshToken();
             await _refreshTokenDbService.Add(new RefreshToken 

@@ -3,18 +3,23 @@ using Mailjet.Client.Resources;
 using Mailjet.Client.TransactionalEmails;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-
+using StepEbay.Common.Models.RefitModels;
+using StepEbay.Data.Common.Services.UserDbServices;
 
 namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 {
-    public class EmailSenderService : IEmailSenderService
+    public class EmailService : IEmailService
     {
+        private readonly IUserDbService _userDbService;
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public EmailSenderService(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
+        public EmailService(IConfiguration configuration,
+            IWebHostEnvironment webHostEnvironment,
+            IUserDbService userDbService)
         {
             _configuration = configuration;
             _webHostEnvironment = webHostEnvironment;
+            _userDbService = userDbService;
         }
 
         public async Task SendRegistrationConfirm(string email, string nickname, int id, string emailKey)
@@ -39,6 +44,21 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
         //{
         //    //await SendEmail();
         //}
+
+        public async Task<ResponseData<BoolResult>> ConfirmRegistration(int id, string key)
+        {
+            try
+            {
+                return new ResponseData<BoolResult>()
+                {
+                    Data = new BoolResult(await _userDbService.ConfirmEmail(id, key))
+                };
+            }
+            catch
+            {
+                return ResponseData<BoolResult>.Fail("Помилка активації", "Спробуйте пізніше");
+            }
+        }
 
         private async Task SendEmail(string mail, string title, string description)
         {

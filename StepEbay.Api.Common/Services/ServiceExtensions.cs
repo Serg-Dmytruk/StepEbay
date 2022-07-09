@@ -16,7 +16,7 @@ namespace StepEbay.Main.Api.Common.Services
         public static IServiceCollection AddService(this IServiceCollection services)
         {
             services.AddTransient<IAuthService, AuthService>();
-            services.AddTransient<IEmailSenderService, EmailSenderService>();
+            services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IValidator<SignUpRequestDto>, AuthValidator>();
             return services;
         }

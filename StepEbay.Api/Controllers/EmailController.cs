@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Api.Common.Services.EmailSenderServices;
 
 namespace StepEbay.Main.Api.Controllers
@@ -6,8 +7,8 @@ namespace StepEbay.Main.Api.Controllers
     [Route("email")]
     public class EmailController : ControllerBase
     {
-        private IEmailSenderService _emailSenderService;
-        public EmailController(IEmailSenderService emailSenderService)
+        private IEmailService _emailSenderService;
+        public EmailController(IEmailService emailSenderService)
         {
             _emailSenderService = emailSenderService;
         }
@@ -29,6 +30,12 @@ namespace StepEbay.Main.Api.Controllers
         public async Task SendBetMessage()
         {
             await _emailSenderService.SendBetPlace(User.Claims.First(c => c.Type == "userEmail").Value);
+        }
+
+        [HttpGet("confirm/{id}/{key}")]
+        public async Task<ResponseData<BoolResult>> ConfirmEmail(string id, string key)
+        {
+            return await _emailSenderService.ConfirmRegistration(int.Parse(id), key);
         }
 
        

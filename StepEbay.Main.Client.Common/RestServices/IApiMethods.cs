@@ -17,6 +17,9 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Post("/bet/place/{lotId}")]
         Task<ApiResponse<BoolResult>> PlaceBet(int lotId);
+
+        [Get("/email/confirm/{id}/{key}")]
+        Task<ApiResponse<BoolResult>> ConfirmRegistration(string id, string key);
     }
 }
 
