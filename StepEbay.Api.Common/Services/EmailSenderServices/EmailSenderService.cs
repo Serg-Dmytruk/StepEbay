@@ -1,25 +1,28 @@
 ﻿using Mailjet.Client;
 using Mailjet.Client.Resources;
 using Mailjet.Client.TransactionalEmails;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
-using System.Net;
-using System.Net.Mail;
+
 
 namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 {
     public class EmailSenderService : IEmailSenderService
     {
         private readonly IConfiguration _configuration;
-        public EmailSenderService(IConfiguration configuration)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public EmailSenderService(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             _configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-        //TODO IMPLEMENTATION
-        public async Task SendRegistrationConfirm(string email, Guid guid)
+        public async Task SendRegistrationConfirm(string email, string nickname, int id, string emailKey)
         {
-            await SendEmail(email, "Confirm your account", "Complete registration <a href=\"~/\">here</a>"+guid.ToString());
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, @"templates\_letter-signup.html");
+            
+            await SendEmail(email, "SmileShop", await GetMailTemplate(path, ("Nickname", nickname), ("ConfirmAddress", _configuration.GetSection("ConfirmAddress").Value),
+                ("Id", id.ToString()), ("EmailKey", emailKey)));
         }
 
         public async Task SendBetPlace(string email)
@@ -41,15 +44,13 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
         {
             await Task.Run(async () =>
             { 
-                MailjetClient client = new MailjetClient(_configuration.GetSection("ApiKey").Value, _configuration.GetSection("SecretKey").Value) {
-                    //Version = ApiVersion.V3_1, 
-                };
+                MailjetClient client = new MailjetClient(_configuration.GetSection("ApiKey").Value, _configuration.GetSection("SecretKey").Value);
+
                 MailjetRequest request = new MailjetRequest
                 {
                     Resource = Send.Resource
                 };
 
-                // construct your email with builder
                 var email = new TransactionalEmailBuilder()
                        .WithFrom(new SendContact("udhdj055@gmail.com"))
                        .WithSubject(title)
@@ -57,10 +58,15 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
                        .WithTo(new SendContact(mail))
                        .Build();
 
-                // invoke API to send email
-                var response = await client.SendTransactionalEmailAsync(email);
-                
+                var response = await client.SendTransactionalEmailAsync(email);              
             });
+        }
+
+        private static async Task<string> GetMailTemplate(string templatePath, params (string, string)[] parameters)
+        {
+            return ((IEnumerable<(string, string)>)parameters).Aggregate<(string, string), string>
+                (await File.ReadAllTextAsync(templatePath), (Func<string, (string, string), string>)
+                ((current, param) => current.Replace("{" + param.Item1 + "}", param.Item2)));
         }
     }
 }

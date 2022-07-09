@@ -31,16 +31,7 @@ namespace StepEbay.Main.Api.Controllers
             await _emailSenderService.SendBetPlace(User.Claims.First(c => c.Type == "userEmail").Value);
         }
 
-        /// <summary>
-        /// Відправлення "підтвердження реєстрації" з стандартного адресу
-        /// </summary>
-
-        [HttpPost("registration")]
-        public async Task SendRegistrationConfirm(string email, Guid guid)
-        {
-            await _emailSenderService.SendRegistrationConfirm(email, guid);
-        }
-
+       
         ///// <summary>
         ///// Відправлення інформації про ставку з стандартного адресу
         ///// </summary>

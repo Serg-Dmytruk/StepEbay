@@ -2,7 +2,7 @@
 {
     public interface IEmailSenderService
     {
-        Task SendRegistrationConfirm(string emeil, Guid guid);
+        Task SendRegistrationConfirm(string email, string nickname, int id, string emailKey);
 
         Task SendBetPlace(string emeil);
 

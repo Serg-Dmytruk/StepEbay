@@ -15,6 +15,6 @@ namespace StepEbay.Data.Models.Users
 		
 		public string Adress { get; set; }
 		public bool IsEmailConfirmed { get; set; }
-		public Guid Guid { get; set; }
+		public string EmailKey { get; set; }
 	}
 }
