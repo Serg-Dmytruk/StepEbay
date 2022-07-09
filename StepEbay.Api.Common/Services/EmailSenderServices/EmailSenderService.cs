@@ -10,7 +10,7 @@ namespace StepEbay.Main.Api.Common.Services.EmailSenderServices
 {
     public class EmailSenderService : IEmailSenderService
     {
-        IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
         public EmailSenderService(IConfiguration configuration)
         {
             _configuration = configuration;

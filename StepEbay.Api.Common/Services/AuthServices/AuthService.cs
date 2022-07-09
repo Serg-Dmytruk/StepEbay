@@ -81,7 +81,8 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
             if (await _userDbService.AnyByEmail(request.Email))
                 return ResponseData<SignInResponseDto>.Fail("Registration", "Вказаний емейл вже використовуєтсья!");
 
-            Guid guid=Guid.NewGuid();
+            Guid guid = Guid.NewGuid();
+            
             await _userDbService.Add(new User
             {
                 NickName = request.NickName,
@@ -92,6 +93,7 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
                 IsEmailConfirmed = false,
                 Guid = guid,
             });
+            
             await _emailSenderService.SendRegistrationConfirm(request.Email, guid);
 
             return new ResponseData<SignInResponseDto>
