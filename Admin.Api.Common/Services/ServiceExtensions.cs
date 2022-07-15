@@ -6,6 +6,7 @@ using StepEbay.Data.Common.Services.TelegramDbServices;
 using StepEbay.Admin.Api.Common.Services.AuthServices;
 using StepEbay.Data.Common.Services.UserDbServices;
 using StepEbay.Data.Common.Services.AuthDbServices;
+using StepEbay.Admin.Api.Common.Services.Products;
 
 namespace StepEbay.Admin.Api.Common.Services
 {
@@ -16,6 +17,7 @@ namespace StepEbay.Admin.Api.Common.Services
         {
             services.AddTransient<ITelegramService, TelegramService>();
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<ICategoryService, CategoryService>();
 
             return services;
         }

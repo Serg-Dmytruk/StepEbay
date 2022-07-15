@@ -7,5 +7,6 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
     {
         public Task<bool> AnyByName(string name);
         public Task<List<Category>> GetAllCategories();
+        public Task<Category> GetByName(string categoryName);
     }
 }
