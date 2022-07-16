@@ -36,6 +36,7 @@ namespace StepEbay.Main.Client
             services.AddStorages();
 
             services.Configure<DomainOptions>(Configuration.GetSection("DomainOptions"));
+            services.Configure<AccountOptions>(Configuration.GetSection("AccountOptions"));
 
             CookieOptions cookieOptions = Configuration.GetSection("CookieOptions").Get<CookieOptions>();
             DomainOptions domainOptions = Configuration.GetSection("DomainOptions").Get<DomainOptions>();

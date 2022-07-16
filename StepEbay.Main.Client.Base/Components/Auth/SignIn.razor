@@ -16,7 +16,8 @@
                 <span><input type="checkbox" style="cursor: pointer" class="myInput" @bind="RememberMe" /> Запам'ятати</span>
 
                 <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignInRequest">Увійти</button>
-
+                <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignInRequestAdmin">Увійти як Адміністратор</button>
+                <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignInRequestUser">Увійти як Користувач</button>
                 <a href="/signup">Реєстрація</a>
             }
             else
