@@ -37,7 +37,7 @@ namespace StepEbay.Admin.Api.Controllers
         /// Видаляє категорію за ім'ям
         /// </summary>
         [HttpDelete("category/removename/{categoryName}")]
-        public async Task<BoolResult> RemoveGroupToken(string categoryName)
+        public async Task<BoolResult> RemoveCategoryName(string categoryName)
         {
             return await _categoryService.RemoveCategory(categoryName);
         }
@@ -55,7 +55,7 @@ namespace StepEbay.Admin.Api.Controllers
         /// Обновляє категорію за ім'ям
         /// </summary>
         [HttpPatch("category/updatename/{oldCategoryName}/{newCategoryName}")]
-        public async Task<BoolResult> UpdateGroupToken(string oldCategoryName, string newCategoryName)
+        public async Task<BoolResult> UpdateGroupName(string oldCategoryName, string newCategoryName)
         {
             return await _categoryService.UpdateCategory(oldCategoryName, newCategoryName);
         }
@@ -64,7 +64,7 @@ namespace StepEbay.Admin.Api.Controllers
         /// Повертає усі категорії(DTO)
         /// </summary>
         [HttpPost("category/all")]
-        public async Task<List<CategoryResponseDto>> GetAllGroupDto()
+        public async Task<List<CategoryResponseDto>> GetAllCategoryDto()
         {
             List<Category> l = (await _categoryService.GetAllCategotys());
             List<CategoryResponseDto> result = new List<CategoryResponseDto>();
