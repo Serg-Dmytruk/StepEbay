@@ -12,8 +12,8 @@ namespace StepEbay.Main.Api.Controllers
 
         public async Task PlaceBet(int lotId)
         {
-            var t = User.Claims.Single(c => c.Type == "nickName").Value;
-            
+            var t = User.Claims.Single(c => c.Type == "nickName").Value; //claimType
+            //User.Identity.Name Id 
         }
     }
 }
