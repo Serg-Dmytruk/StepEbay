@@ -6,7 +6,7 @@ using StepEbay.Admin.Common.Models.Telegram;
 namespace StepEbay.Admin.Client.Base.Pages
 {
     [Route("/telegram")]
-    //[Authorize(Roles = "admin, manager")]
+    [Authorize(Roles = "admin, manager")]
     public partial class Telegram
     {
         private string _tokenToAdd;

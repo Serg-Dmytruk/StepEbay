@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace StepEbay.Admin.Client.Base.Pages
 {
     [Route("/category")]
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     public partial class Category
     {
         private string _nameToAdd;
