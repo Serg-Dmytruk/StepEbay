@@ -7,7 +7,7 @@ using Serilog.HttpLoging.Helpers;
 using StepEbay.Data;
 using StepEbay.Worker.Services;
 
-var environment = args.Length == 0 ? "Development" : args[0];
+var environment = /*args.Length == 0 ?*/ "Development" /*: args[0]*/;
 Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 Environment.SetEnvironmentVariable("STEP_EBAY_ENVIRONMENT", environment);
 var configuration = ConfigurationHelper.Get(environment);
