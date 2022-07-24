@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Data\StepEbay.Data.csproj" />
+    <ProjectReference Include="..\StepEbay.Common\StepEbay.Main.Common.csproj" />
   </ItemGroup>
 
 </Project>
