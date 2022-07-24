@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Serilog;
 using Serilog.HttpLoging.Helpers;
+using StepEbay.Main.Api.Common.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 Log.Logger = SerilogHelper.Configure($"{builder.Configuration.GetConnectionString("ControlPanel")}/exception/log");
@@ -37,6 +38,7 @@ builder.Services.AddService();
 builder.Services.AddDbService();
 
 //Default
+builder.Services.AddSignalR(o => { o.EnableDetailedErrors = true; });
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => 
@@ -63,5 +65,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<BetHub>("/bet");
 
 app.Run();
