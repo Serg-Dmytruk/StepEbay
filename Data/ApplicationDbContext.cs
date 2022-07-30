@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StepEbay.Data.Models.Auth;
+using StepEbay.Data.Models.Bets;
 using StepEbay.Data.Models.Products;
 using StepEbay.Data.Models.Telegram;
 using StepEbay.Data.Models.Users;
@@ -23,6 +24,11 @@ namespace StepEbay.Data
         public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
         public virtual DbSet<Role> Roles {get; set;}
         public virtual DbSet<UserRole> UserRoles { get; set;}
+        #endregion
+
+        #region Bet
+        public virtual Purchase Purchases { get; set; }
+        public virtual PurchaseType PurchaseTypes { get; set; }
         #endregion
 
         #region Users
