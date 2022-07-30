@@ -1,6 +1,8 @@
 ﻿using Refit;
+using StepEbay.Common.Models.Pagination;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Common.Models.Auth;
+using StepEbay.Main.Common.Models.Product;
 
 namespace StepEbay.Main.Client.Common.RestServices
 {
@@ -20,6 +22,13 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Get("/email/confirm/{id}/{key}")]
         Task<ApiResponse<BoolResult>> ConfirmRegistration(string id, string key);
+
+        [Post("/product/list")]
+        Task<ApiResponse<PaginatedList<ProductDto>>> Getproducts();
+
+        [Post("/product/categories")]
+        Task<ApiResponse<List<CategoryDto>>> GetCategories();
+
     }
 }
 
