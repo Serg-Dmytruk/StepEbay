@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using StepEbay.Data.Models.Default;
+using System.ComponentModel.DataAnnotations;
 
 namespace StepEbay.Data.Models.Bets
 {
-    public class PurchaseType
+    public class PurchaseType : IDbServiceEntity<int>
     {
         [Key]
         public int Id { get; set; }

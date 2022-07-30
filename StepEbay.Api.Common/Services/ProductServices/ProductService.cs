@@ -27,7 +27,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
         public async Task<List<CategoryDto>> GetCategoryList()
         {
-            var categories = await _categoryDb.GetAllCategories();
+            var categories = await _categoryDb.GetAll();
             var listCategories = new List<CategoryDto>();
             
             foreach (var category in categories)

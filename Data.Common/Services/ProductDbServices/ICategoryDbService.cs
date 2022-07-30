@@ -6,6 +6,6 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
     public interface ICategoryDbService : IDefaultDbService<int, Category>
     {
         public Task<bool> AnyByName(string name);
-        public Task<List<Category>> GetAllCategories();
+        public Task<List<Category>> GetAll();
     }
 }

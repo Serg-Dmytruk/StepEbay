@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StepEbay.Data;
+using StepEbay.Data.Common.Services.BetsDbServices;
 using StepEbay.Data.Common.Services.ProductDbServices;
 using StepEbay.Data.Models.Products;
+using StepEbay.Data.Models.Bets;
 
 namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 {
@@ -11,21 +13,36 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
         private readonly IProductDbService _productDbService;
         private readonly IProductStateDbService _productStateDbService;
         private readonly ICategoryDbService _categoryDbService;
-        public Seeder(ApplicationDbContext context, IProductDbService product, ICategoryDbService category, IProductStateDbService productState)
+        private readonly IPurchaseTypeDbService _purchesTypeDbService;
+        public Seeder(ApplicationDbContext context, IProductDbService product,
+            ICategoryDbService category, IProductStateDbService productState, IPurchaseTypeDbService purchaseType)
         {
             _context = context;
             _productDbService = product;
             _categoryDbService = category;
             _productStateDbService = productState;
+            _purchesTypeDbService = purchaseType;
         }
 
         public async Task SeedApplication()
         {
             await _context.Database.MigrateAsync();
 
+            await AddPurchesType();
             await AddCategories();
             await AddProductStates();
             await AddProducts();
+        }
+
+        public async Task AddPurchesType()
+        {
+            if (!await _purchesTypeDbService.AnyByName("Продаж"))
+                await _purchesTypeDbService.Add(new PurchaseType() { Type = "Продаж" });
+
+            if (!await _purchesTypeDbService.AnyByName("Аукціон"))
+                await _purchesTypeDbService.Add(new PurchaseType() { Type = "Аукціон" });
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddCategories()
@@ -55,8 +72,9 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddProducts()
         {
-            var states = await _productStateDbService.GetAllProducts();
-            var categories = await _categoryDbService.GetAllCategories();
+            var states = await _productStateDbService.GetAll();
+            var categories = await _categoryDbService.GetAll();
+            var purchaseTypes = await _purchesTypeDbService.GetAll();
             var rand = new Random();
 
             if (!await _productDbService.AnyProductsByTitle("Кіндер Сюрприз"))
@@ -72,7 +90,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Count = 200,
                     ByNow = true,
-                    Description = "опис відсутній" 
+                    Description = "опис відсутній" ,
+                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                 });
             
             if (!await _productDbService.AnyProductsByTitle("Шоколад Мілка"))
@@ -87,7 +106,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Count = 200,
                     ByNow = true,
-                    Description = "з арахісовим маслом" 
+                    Description = "з арахісовим маслом",
+                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                 });
             
             if (!await _productDbService.AnyProductsByTitle("Морські камінці"))
@@ -102,7 +122,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Count = 200,
                     ByNow = true,
-                    Description = "ціна за 100г" 
+                    Description = "ціна за 100г",
+                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                 });
             
             if (!await _productDbService.AnyProductsByTitle("Пістолет"))
@@ -117,7 +138,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Count = 100,
                     ByNow = true,
-                    Description = "револьвер, пістони" 
+                    Description = "револьвер, пістони",
+                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                 });
             
             if (!await _productDbService.AnyProductsByTitle("Лазерний меч"))
@@ -132,7 +154,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Count = 50,
                     ByNow = true,
-                    Description = "меч з зоряних війн" 
+                    Description = "меч з зоряних війн",
+                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                 });
             
             if (!await _productDbService.AnyProductsByTitle("Набір: маленький лікар"))
@@ -147,7 +170,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Count = 30,
                     ByNow = true,
-                    Description = "опис відсутній" 
+                    Description = "опис відсутній",
+                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                 });
             
             if (!await _productDbService.AnyProductsByTitle("Witcher 3"))
@@ -162,7 +186,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Count = 20,
                     ByNow = true,
-                    Description = "гра witcher 3, steam" 
+                    Description = "гра witcher 3, steam",
+                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                 });
             
             if (!await _productDbService.AnyProductsByTitle("Підписка Netflix"))
@@ -177,7 +202,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Count = 50,
                     ByNow = true,
-                    Description = "термін підписки: 2 місяці" 
+                    Description = "термін підписки: 2 місяці",
+                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                 });
             
             if (!await _productDbService.AnyProductsByTitle("Steam картка - 25$"))
@@ -192,7 +218,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Count = 70,
                     ByNow = true,
-                    Description = "опис відсутній" 
+                    Description = "опис відсутній",
+                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                 });
 
             await _context.SaveChangesAsync();

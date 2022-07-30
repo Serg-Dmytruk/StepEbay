@@ -27,8 +27,8 @@ namespace StepEbay.Data
         #endregion
 
         #region Bet
-        public virtual Purchase Purchases { get; set; }
-        public virtual PurchaseType PurchaseTypes { get; set; }
+        public virtual DbSet<Purchase> Purchases { get; set; }
+        public virtual DbSet<PurchaseType> PurchaseTypes { get; set; }
         #endregion
 
         #region Users

@@ -7,6 +7,6 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
     {
         public Task<bool> AnyStateByName(string name);
 
-        public Task<List<ProductState>> GetAllProducts();
+        public Task<List<ProductState>> GetAll();
     }
 }
