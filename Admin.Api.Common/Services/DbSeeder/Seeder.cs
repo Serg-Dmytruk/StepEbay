@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StepEbay.Data;
+using StepEbay.Data.Models.Users;
 using StepEbay.Data.Common.Services.BetsDbServices;
 using StepEbay.Data.Common.Services.ProductDbServices;
 using StepEbay.Data.Models.Products;
 using StepEbay.Data.Models.Bets;
+using StepEbay.Data.Common.Services.UserDbServices;
+using BC = BCrypt.Net.BCrypt;
 
 namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 {
@@ -14,7 +17,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
         private readonly IProductStateDbService _productStateDbService;
         private readonly ICategoryDbService _categoryDbService;
         private readonly IPurchaseTypeDbService _purchesTypeDbService;
-        public Seeder(ApplicationDbContext context, IProductDbService product,
+        private readonly IUserDbService _userDbService;
+        public Seeder(ApplicationDbContext context, IUserDbService user, IProductDbService product,
             ICategoryDbService category, IProductStateDbService productState, IPurchaseTypeDbService purchaseType)
         {
             _context = context;
@@ -22,16 +26,51 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             _categoryDbService = category;
             _productStateDbService = productState;
             _purchesTypeDbService = purchaseType;
+            _userDbService = user;
         }
 
         public async Task SeedApplication()
         {
             await _context.Database.MigrateAsync();
 
+            await AddUser();
             await AddPurchesType();
             await AddCategories();
             await AddProductStates();
             await AddProducts();
+        }
+
+        public async Task AddUser()
+        {
+            if(!await _userDbService.AnyByNickName("admin"))
+            {
+                var pass = BC.HashPassword("123456qQ");
+                _context.Users.Add(new User()
+                {
+                    NickName = "admin",
+                    Password = pass,
+                    FullName = "Admin Admin",
+                    Email = "adminmail@gmail.com",
+                    Created = DateTime.UtcNow,
+                    IsEmailConfirmed = true,
+                });
+            }
+
+            if (!await _userDbService.AnyByNickName("user_user"))
+            {
+                var pass = BC.HashPassword("123456qQ");
+                _context.Users.Add(new User()
+                {
+                    NickName = "user_user",
+                    Password = pass,
+                    FullName = "User User",
+                    Email = "usermail@gmail.com",
+                    Created = DateTime.UtcNow,
+                    IsEmailConfirmed = true,
+                });
+            }
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddPurchesType()
