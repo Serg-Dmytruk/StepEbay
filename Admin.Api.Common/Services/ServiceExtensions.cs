@@ -34,6 +34,7 @@ namespace StepEbay.Admin.Api.Common.Services
             services.AddScoped<IUserDbService, UserDbService>();
             services.AddScoped<IRefreshTokenDbService,RefreshTokenDbService>();
             services.AddScoped<IRoleDbService, RoleDbService>();
+            services.AddScoped<IUserRoleDbService, UserRoleDbService>();
              
             return services;
         }

@@ -7,6 +7,8 @@ using StepEbay.Data.Models.Products;
 using StepEbay.Data.Models.Bets;
 using StepEbay.Data.Common.Services.UserDbServices;
 using BC = BCrypt.Net.BCrypt;
+using StepEbay.Data.Common.Services.AuthDbServices;
+using StepEbay.Data.Models.Auth;
 
 namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 {
@@ -18,8 +20,10 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
         private readonly ICategoryDbService _categoryDbService;
         private readonly IPurchaseTypeDbService _purchesTypeDbService;
         private readonly IUserDbService _userDbService;
-        public Seeder(ApplicationDbContext context, IUserDbService user, IProductDbService product,
-            ICategoryDbService category, IProductStateDbService productState, IPurchaseTypeDbService purchaseType)
+        private readonly IRoleDbService _roleDbService;
+        private readonly IUserRoleDbService _userRoleDbService;
+        public Seeder(ApplicationDbContext context, IUserDbService user, IProductDbService product, IRoleDbService role,
+            ICategoryDbService category, IProductStateDbService productState, IPurchaseTypeDbService purchaseType, IUserRoleDbService userRoles)
         {
             _context = context;
             _productDbService = product;
@@ -27,50 +31,35 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             _productStateDbService = productState;
             _purchesTypeDbService = purchaseType;
             _userDbService = user;
+            _roleDbService = role;
+            _userRoleDbService = userRoles;
         }
 
         public async Task SeedApplication()
         {
             await _context.Database.MigrateAsync();
 
-            await AddUser();
+            await AddRoles();
+            await AddUsers();
             await AddPurchesType();
             await AddCategories();
             await AddProductStates();
             await AddProducts();
         }
 
-        public async Task AddUser()
+        public async Task AddRoles()
         {
-            if(!await _userDbService.AnyByNickName("admin"))
-            {
-                var pass = BC.HashPassword("123456qQ");
-                _context.Users.Add(new User()
-                {
-                    NickName = "admin",
-                    Password = pass,
-                    FullName = "Admin Admin",
-                    Email = "adminmail@gmail.com",
-                    Created = DateTime.UtcNow,
-                    IsEmailConfirmed = true,
-                });
-            }
+            if (!await _roleDbService.AnyByName("admin"))
+                await _roleDbService.Add(new Role() { Name = "admin" });
 
-            if (!await _userDbService.AnyByNickName("user_user"))
-            {
-                var pass = BC.HashPassword("123456qQ");
-                _context.Users.Add(new User()
-                {
-                    NickName = "user_user",
-                    Password = pass,
-                    FullName = "User User",
-                    Email = "usermail@gmail.com",
-                    Created = DateTime.UtcNow,
-                    IsEmailConfirmed = true,
-                });
-            }
+            if (!await _roleDbService.AnyByName("manager"))
+                await _roleDbService.Add(new Role() { Name = "manager" });
+        }
 
-            await _context.SaveChangesAsync();
+        public async Task AddUsers()
+        {
+            await AddUser("admin", "123456qQ", "admin_admin", "adminmail@gmail.com", "manager");
+            await AddUser("user_user", "123456qQ", "user_user", "usermail@gmail.com", "admin");
         }
 
         public async Task AddPurchesType()
@@ -109,159 +98,70 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddProducts()
+        private async Task AddProduct(string title, string image, decimal price, int count, bool byNow, string desc )
         {
             var states = await _productStateDbService.GetAll();
             var categories = await _categoryDbService.GetAll();
             var purchaseTypes = await _purchesTypeDbService.GetAll();
             var rand = new Random();
 
-            if (!await _productDbService.AnyProductsByTitle("Кіндер Сюрприз"))
-                
-                await _productDbService.Add(new Product() {
+            if (!await _productDbService.AnyProductsByTitle(title))
+
+                await _productDbService.Add(new Product()
+                {
                     DateCreated = DateTime.Now,
-                    Title = "Кіндер Сюрприз",
-                    Image = "none",
-                    Price = 25,
-                    //CategoryId = categories[rand.Next(0, categories.Count())].Id,
-                    //ProductStateId = states[rand.Next(0, states.Count())].Id,
+                    Title = title,
+                    Image = image,
+                    Price = price,
                     Category = categories[rand.Next(0, categories.Count())],
                     ProductState = states[rand.Next(0, states.Count())],
-                    Count = 200,
-                    ByNow = true,
-                    Description = "опис відсутній" ,
-                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
-                });
-            
-            if (!await _productDbService.AnyProductsByTitle("Шоколад Мілка"))
-                await _productDbService.Add(new Product() {
-                    DateCreated = DateTime.Now,
-                    Title = "Шоколад Мілка",
-                    Image = "none",
-                    Price = 40,
-                    //CategoryId = categories[rand.Next(0, categories.Count())].Id,
-                    //ProductStateId = states[rand.Next(0, states.Count())].Id,
-                    Category = categories[rand.Next(0, categories.Count())],
-                    ProductState = states[rand.Next(0, states.Count())],
-                    Count = 200,
-                    ByNow = true,
-                    Description = "з арахісовим маслом",
-                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
-                });
-            
-            if (!await _productDbService.AnyProductsByTitle("Морські камінці"))
-                await _productDbService.Add(new Product() {
-                    DateCreated = DateTime.Now,
-                    Title = "Морські камінці",
-                    Image = "none",
-                    Price = 20,
-                    //CategoryId = categories[rand.Next(0, categories.Count())].Id,
-                    //ProductStateId = states[rand.Next(0, states.Count())].Id,
-                    Category = categories[rand.Next(0, categories.Count())],
-                    ProductState = states[rand.Next(0, states.Count())],
-                    Count = 200,
-                    ByNow = true,
-                    Description = "ціна за 100г",
-                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
-                });
-            
-            if (!await _productDbService.AnyProductsByTitle("Пістолет"))
-                await _productDbService.Add(new Product() {
-                    DateCreated = DateTime.Now,
-                    Title = "Пістолет",
-                    Image = "none",
-                    Price = 250,
-                    //CategoryId = categories[rand.Next(0, categories.Count())].Id,
-                    //ProductStateId = states[rand.Next(0, states.Count())].Id,
-                    Category = categories[rand.Next(0, categories.Count())],
-                    ProductState = states[rand.Next(0, states.Count())],
-                    Count = 100,
-                    ByNow = true,
-                    Description = "револьвер, пістони",
-                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
-                });
-            
-            if (!await _productDbService.AnyProductsByTitle("Лазерний меч"))
-                await _productDbService.Add(new Product() {
-                    DateCreated = DateTime.Now,
-                    Title = "Лазерний меч",
-                    Image = "none",
-                    Price = 800,
-                    //CategoryId = categories[rand.Next(0, categories.Count())].Id,
-                    //ProductStateId = states[rand.Next(0, states.Count())].Id,
-                    Category = categories[rand.Next(0, categories.Count())],
-                    ProductState = states[rand.Next(0, states.Count())],
-                    Count = 50,
-                    ByNow = true,
-                    Description = "меч з зоряних війн",
-                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
-                });
-            
-            if (!await _productDbService.AnyProductsByTitle("Набір: маленький лікар"))
-                await _productDbService.Add(new Product() {
-                    DateCreated = DateTime.Now,
-                    Title = "Набір: маленький лікар",
-                    Image = "none",
-                    Price = 500,
-                    //CategoryId = categories[rand.Next(0, categories.Count())].Id,
-                    //ProductStateId = states[rand.Next(0, states.Count())].Id,
-                    Category = categories[rand.Next(0, categories.Count())],
-                    ProductState = states[rand.Next(0, states.Count())],
-                    Count = 30,
-                    ByNow = true,
-                    Description = "опис відсутній",
-                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
-                });
-            
-            if (!await _productDbService.AnyProductsByTitle("Witcher 3"))
-                await _productDbService.Add(new Product() {
-                    DateCreated = DateTime.Now,
-                    Title = "Witcher 3",
-                    Image = "none",
-                    Price = 500,
-                    //CategoryId = categories[rand.Next(0, categories.Count())].Id,
-                    //ProductStateId = states[rand.Next(0, states.Count())].Id,
-                    Category = categories[rand.Next(0, categories.Count())],
-                    ProductState = states[rand.Next(0, states.Count())],
-                    Count = 20,
-                    ByNow = true,
-                    Description = "гра witcher 3, steam",
-                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
-                });
-            
-            if (!await _productDbService.AnyProductsByTitle("Підписка Netflix"))
-                await _productDbService.Add(new Product() {
-                    DateCreated = DateTime.Now,
-                    Title = "Підписка Netflix",
-                    Image = "none",
-                    Price = 100,
-                    //CategoryId = categories[rand.Next(0, categories.Count())].Id,
-                    //ProductStateId = states[rand.Next(0, states.Count())].Id,
-                    Category = categories[rand.Next(0, categories.Count())],
-                    ProductState = states[rand.Next(0, states.Count())],
-                    Count = 50,
-                    ByNow = true,
-                    Description = "термін підписки: 2 місяці",
-                    PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
-                });
-            
-            if (!await _productDbService.AnyProductsByTitle("Steam картка - 25$"))
-                await _productDbService.Add(new Product() {
-                    DateCreated = DateTime.Now,
-                    Title = "Steam картка - 25$",
-                    Image = "none",
-                    Price = 1000,
-                    //CategoryId = categories[rand.Next(0, categories.Count())].Id,
-                    //ProductStateId = states[rand.Next(0, states.Count())].Id,
-                    Category = categories[rand.Next(0, categories.Count())],
-                    ProductState = states[rand.Next(0, states.Count())],
-                    Count = 70,
-                    ByNow = true,
-                    Description = "опис відсутній",
+                    Count = count,
+                    ByNow = byNow,
+                    Description = desc,
                     PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                 });
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task AddProducts()
+        {
+            await AddProduct("Кіндер Сюрприз", "none", 25, 200, true, "опис відсутній");
+            await AddProduct("Шоколад Мілка", "none", 40, 200, true, "з арахісовим маслом");
+            await AddProduct("Морські камінці", "none", 20, 200, true, "ціна за 100г");
+            await AddProduct("Пістолет", "none", 250, 100, true, "револьвер, пістони");
+            await AddProduct("Лазерний меч", "none", 800, 50, true, "меч з зоряних війн");
+            await AddProduct("Набір: маленький лікар", "none", 500, 15, true, "опис відсутній");
+            await AddProduct("Witcher 3", "none", 500, 15, true, "гра witcher 3, steam");
+            await AddProduct("Підписка Netflix", "none", 100, 15, true, "термін підписки: 2 місяці");
+            await AddProduct("Steam картка - 25$", "none", 1000, 70, true, "опис відсутній");
+        }
+
+        private async Task AddUser(string userName, string pass, string fullName, string email, string _role)
+        {
+            if (!await _userDbService.AnyByNickName(userName))
+            {
+                var role = await _roleDbService.GetByName(_role);
+
+                if (role is not null)
+                {
+                    var hashPass = BC.HashPassword(pass);
+                    await _userDbService.Add(new User()
+                    {
+                        NickName = userName,
+                        Password = hashPass,
+                        FullName = fullName,
+                        Email = email,
+                        Created = DateTime.UtcNow,
+                        IsEmailConfirmed = true,
+                    });
+
+                    var user = await _userDbService.GetUserByNickName(userName);
+                    await _userRoleDbService.Add(new UserRole() { Role = role, User = user });
+
+                    await _context.SaveChangesAsync();
+                }
+            }
         }
     }
 }
