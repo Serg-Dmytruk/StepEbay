@@ -18,6 +18,7 @@ namespace StepEbay.Main.Client.Base.Components.Auth
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] IApiService ApiService { get; set; }
         [Inject] private IOptions<DomainOptions> DomainOptions { get; set; }
+        [Inject] private IOptions<AccountOptions> AccountOptions { get; set; }
         [Inject] private LocalStorage LocalStorage { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
         private SignInRequestDto SignInRequestDto { get; set; } = new();
@@ -26,7 +27,6 @@ namespace StepEbay.Main.Client.Base.Components.Auth
         public bool ShowModal { get; set; } = false;
 
         private Dictionary<string, List<string>> _errors = new();
-
         protected override void OnAfterRender(bool firstRender)
         {
             if (firstRender)
@@ -66,6 +66,27 @@ namespace StepEbay.Main.Client.Base.Components.Auth
 
             ShowPreloader = false;
             StateHasChanged();
+        }
+        private async Task SignInRequestAdmin()
+        {
+            SignInRequestDto = new()
+            {
+                NickName = AccountOptions.Value.AdminLogin,
+                Password = AccountOptions.Value.AdminPassword
+            };
+
+            await SignInRequest();
+        }
+
+        private async Task SignInRequestUser()
+        {
+            SignInRequestDto = new()
+            {
+                NickName = AccountOptions.Value.UserLogin,
+                Password = AccountOptions.Value.UserPassword
+            };
+
+            await SignInRequest();
         }
 
         private void CloseModal(bool show)

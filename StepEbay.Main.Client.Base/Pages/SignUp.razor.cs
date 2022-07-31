@@ -9,7 +9,7 @@ using System.Net;
 namespace StepEbay.Main.Client.Base.Pages
 {
     [Route("/signup")]
-    [Layout(typeof(EmptyLayout))]
+    [Layout(typeof(Main))]
     public partial class SignUp
     {
         [Inject] private NavigationManager NavigationManager { get; set; }

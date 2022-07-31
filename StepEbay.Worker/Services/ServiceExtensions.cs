@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using StepEbay.Worker.ClientHubs;
+using StepEbay.Worker.HostedService;
 
 namespace StepEbay.Worker.Services
 {
@@ -22,6 +24,21 @@ namespace StepEbay.Worker.Services
         //usually use AddTransient
         public static IServiceCollection AddRestService(this IServiceCollection services)
         {
+            return services;
+        }
+
+        public static IServiceCollection AddHubClients(this IServiceCollection services)
+        {
+            services.AddSingleton<BetHubClient>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddHosdedServices(this IServiceCollection services)
+        {
+            services.AddHostedService<BetService>();
+            services.AddHostedService<ImageCleanerService>();
+
             return services;
         }
     }

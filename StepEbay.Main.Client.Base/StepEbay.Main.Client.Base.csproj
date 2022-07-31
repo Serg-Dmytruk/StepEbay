@@ -18,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Data.Common\StepEbay.Data.Common.csproj" />
+    <ProjectReference Include="..\StepEbay.Api.Common\StepEbay.Main.Api.Common.csproj" />
     <ProjectReference Include="..\StepEbay.Common\StepEbay.Main.Common.csproj" />
     <ProjectReference Include="..\StepEbay.Main.Client.Common\StepEbay.Main.Client.Common.csproj" />
   </ItemGroup>

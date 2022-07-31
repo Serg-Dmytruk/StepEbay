@@ -17,7 +17,7 @@ namespace StepEbay.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -89,6 +89,71 @@ namespace StepEbay.Data.Migrations
                     b.ToTable("UserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("StepEbay.Data.Models.Bets.Purchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("PoductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PurchasePrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("PurchaseStateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PoductId");
+
+                    b.HasIndex("PurchaseStateId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Purchases", (string)null);
+                });
+
+            modelBuilder.Entity("StepEbay.Data.Models.Bets.PurchaseState", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PurchaseStates", (string)null);
+                });
+
+            modelBuilder.Entity("StepEbay.Data.Models.Bets.PurchaseType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PurchaseTypes", (string)null);
+                });
+
             modelBuilder.Entity("StepEbay.Data.Models.Products.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -124,6 +189,9 @@ namespace StepEbay.Data.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("DateClose")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -133,10 +201,18 @@ namespace StepEbay.Data.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ProductStateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PurchaseTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -147,6 +223,8 @@ namespace StepEbay.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("ProductStateId");
+
+                    b.HasIndex("PurchaseTypeId");
 
                     b.HasIndex("Title");
 
@@ -287,6 +365,33 @@ namespace StepEbay.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StepEbay.Data.Models.Bets.Purchase", b =>
+                {
+                    b.HasOne("StepEbay.Data.Models.Products.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("PoductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StepEbay.Data.Models.Bets.PurchaseState", "PurchaseState")
+                        .WithMany()
+                        .HasForeignKey("PurchaseStateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StepEbay.Data.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("PurchaseState");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("StepEbay.Data.Models.Products.Product", b =>
                 {
                     b.HasOne("StepEbay.Data.Models.Products.Category", "Category")
@@ -301,9 +406,17 @@ namespace StepEbay.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("StepEbay.Data.Models.Bets.PurchaseType", "PurchaseType")
+                        .WithMany()
+                        .HasForeignKey("PurchaseTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
 
                     b.Navigation("ProductState");
+
+                    b.Navigation("PurchaseType");
                 });
 
             modelBuilder.Entity("StepEbay.Data.Models.Users.Favorite", b =>

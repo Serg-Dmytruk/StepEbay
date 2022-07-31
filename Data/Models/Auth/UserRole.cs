@@ -1,10 +1,11 @@
-﻿using StepEbay.Data.Models.Users;
+﻿using StepEbay.Data.Models.Default;
+using StepEbay.Data.Models.Users;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StepEbay.Data.Models.Auth
 {
-    public class UserRole
+    public class UserRole : IDbServiceEntity<int>
     {
         [Key]
         public int Id { get; set; }
