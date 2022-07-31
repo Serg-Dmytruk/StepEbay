@@ -17,6 +17,7 @@ namespace StepEbay.Data.Models.Products
         public bool ByNow { get; set; }
         public int Count { get; set; }
         public DateTime? DateClose { get; set; }
+        public bool IsActive { get; set; }
 
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
