@@ -1,6 +1,7 @@
 ﻿using Refit;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Common.Models.Auth;
+using StepEbay.Main.Common.Models.Person;
 
 namespace StepEbay.Main.Client.Common.RestServices
 {
@@ -20,6 +21,12 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Get("/email/confirm/{id}/{key}")]
         Task<ApiResponse<BoolResult>> ConfirmRegistration(string id, string key);
+
+        [Post("/person/update/{passwordconfirm}/{nick}/{email}/{password}/{repassword}/{name}/{adress}")]
+        Task<ApiResponse<BoolResult>> TryUpdatePerson(string passwordconfirm, string nick, string email, string password, string repassword, string name, string adress);
+
+        [Get("/person/get")]
+        Task<ResponseData<PersonResponseDto>> GetPersonToUpdateInCabinet();
     }
 }
 

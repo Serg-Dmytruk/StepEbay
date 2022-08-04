@@ -1,8 +1,10 @@
 ﻿namespace StepEbay.Main.Common.Models.Person
 {
-    public class PersonUpdateResponseDto
+    public class PersonResponseDto
     {
-        public bool IsSuccess { get; set; }
-        public List<string> FailuresList { get; set; }
+        public string NickName { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public string Adress { get; set; }
     }
 }
