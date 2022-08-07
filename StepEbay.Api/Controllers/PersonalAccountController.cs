@@ -12,10 +12,14 @@ namespace StepEbay.Main.Api.Controllers
         {
             _personService = personService;
         }
+
+        //TODO
         [HttpGet("setble/{nik}")]
         public async Task<ResponseData<BoolResult>> ifSeatebleNukname(string nik)
         {
-            return new BoolResult() { Value= await _personService.ifValidNikname(nik) };
+            //    return new BoolResult(true); /*{ Value = false /*await _personService.ifValidNikname(nik) }*/
+            //}
+            return null;
         }
     }
 }
