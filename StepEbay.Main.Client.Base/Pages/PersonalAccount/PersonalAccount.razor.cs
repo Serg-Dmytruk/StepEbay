@@ -18,7 +18,7 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
         private string _passwordConfirmValue { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetPersonToUpdateInCabinet());
+            await _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetPersonToUpdateInCabinet());
         }
         public async Task UpdatePerson()
         {
