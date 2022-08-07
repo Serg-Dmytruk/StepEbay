@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
-using StepEbay.Common.Models.RefitModels;
+﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Main.Client.Common.RestServices;
-using StepEbay.Main.Common.Models.Person;
 
 namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
 {
@@ -10,7 +7,7 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
     //[Authorize]
     public partial class PersonalAccount
     {
-        [Inject] IApiService ApiService { get; set; }
+        [Inject] IApiService _apiService { get; set; }
         private string _message { get; set; }
         private string _niknameValue{get; set;}
         private string _emailValue { get; set; }
@@ -21,12 +18,12 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
         private string _passwordConfirmValue { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            
+            _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetPersonToUpdateInCabinet());
         }
-        public async Task Update()
+        public async Task UpdatePerson()
         {
             _message = "Message: ";
-            var result=await ApiService.ExecuteRequest(() => ApiService.ApiMethods.TryUpdatePerson(_passwordConfirmValue, _niknameValue,_emailValue,_passwordValue,_passwordRepeatValue,_nameValue,_adressValue));
+            var result=await _apiService.ExecuteRequest(() => _apiService.ApiMethods.TryUpdatePerson(_passwordConfirmValue, _niknameValue,_emailValue,_passwordValue,_passwordRepeatValue,_nameValue,_adressValue));
             if (result.Data.Value)
             {
                 _message += "Updated";

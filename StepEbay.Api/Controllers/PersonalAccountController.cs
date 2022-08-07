@@ -32,7 +32,7 @@ namespace StepEbay.Main.Api.Controllers
         [HttpPost("update/{id}/{passwordconfirm}/{nick}/{email}/{password}/{repassword}/{name}/{adress}")]
         public async Task<ResponseData<BoolResult>> TryUpdateHC(int id, string nick, string email, string password, string repassword, string name, string adress)
         {
-            return await _personService.TryUpdate(id, nick, email, password, repassword, name, adress, passwordconfirm);
+            return await _personService.TryUpdate(id, nick, email, password, repassword, name, adress, repassword);
         }
         [HttpPost("get/all")]
         public ResponseData<List<User>> GetAllHC()
