@@ -10,6 +10,6 @@ namespace StepEbay.Admin.Api.Common.Services.Products
         public Task<BoolResult> RemoveCategory(string categoryName);
         public Task<BoolResult> UpdateCategory(int id, string newName);
         public Task<BoolResult> UpdateCategory(string oldToken, string newName);
-        public Task<List<Category>> GetAllCategotys();
+        public Task<List<Category>> GetAllCategories();
     }
 }

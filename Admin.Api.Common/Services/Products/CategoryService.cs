@@ -6,14 +6,14 @@ namespace StepEbay.Admin.Api.Common.Services.Products
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryDbService _categorys;
+        private readonly ICategoryDbService _categories;
         public CategoryService(ICategoryDbService categorys)
         {
-            _categorys = categorys;
+            _categories = categorys;
         }
         public async Task<BoolResult> AddCategory(string categoryName)
         {
-            await _categorys.Add(new Category()
+            await _categories.Add(new Category()
             {
                 Name = categoryName
             });
@@ -21,29 +21,29 @@ namespace StepEbay.Admin.Api.Common.Services.Products
         }
         public async Task<BoolResult> RemoveCategory(int id)
         {
-            await _categorys.Remove(_categorys.Get(id).Result);
+            await _categories.Remove(_categories.Get(id).Result);
             return new BoolResult(true);
         }
         public async Task<BoolResult> RemoveCategory(string categoryName)
         {
-            await _categorys.Remove(_categorys.GetByName(categoryName).Result);
+            await _categories.Remove(_categories.GetByName(categoryName).Result);
             return new BoolResult(true);
         }
         public async Task<BoolResult> UpdateCategory(int id, string newName)
         {
-            await _categorys.Update(new Category() { Id = id, Name = newName });
+            await _categories.Update(new Category() { Id = id, Name = newName });
             return new BoolResult(true);
         }
         public async Task<BoolResult> UpdateCategory(string oldToken, string newName)
         {
-            Category _onEditiDeveloperGroup = _categorys.GetByName(oldToken).Result;
+            Category _onEditiDeveloperGroup = _categories.GetByName(oldToken).Result;
             _onEditiDeveloperGroup.Name = newName;
-            await _categorys.Update(_onEditiDeveloperGroup);
+            await _categories.Update(_onEditiDeveloperGroup);
             return new BoolResult(true);
         }
-        public async Task<List<Category>> GetAllCategotys()
+        public async Task<List<Category>> GetAllCategories()
         {
-            return await _categorys.GetAll();
+            return await _categories.GetAll();
         }
     }
 }
