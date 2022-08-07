@@ -22,11 +22,12 @@ namespace StepEbay.Main.Client.Base.Pages
         private PaginatedList<ProductDto> _products = new PaginatedList<ProductDto>();
         private bool ShowPreloader { get; set; } = true;
 
-        protected override async Task OnInitializedAsync()
-        {
-            await GetCategories();
-            await GetProducts();
-        }
+             
+        //protected override async Task OnInitializedAsync()
+        //{
+        //    await GetCategories();
+        //    await GetProducts();
+        //}
 
         protected async Task GetCategories()
         {
@@ -42,12 +43,22 @@ namespace StepEbay.Main.Client.Base.Pages
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            ShowPreloader = true;
+
+            if (firstRender)
+            {
+                await GetCategories();
+                await GetProducts();
+            }
+       
+
             if (!string.IsNullOrEmpty(Id) && !string.IsNullOrEmpty(Key))
             {
-                ShowPreloader = true;
+               
 
                 var response = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.ConfirmRegistration(Id, Key));
 
+            
                 MessageConfirmReg = response.Errors;
 
                 if (!response.Data.Value)
