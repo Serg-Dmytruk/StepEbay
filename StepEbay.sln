@@ -61,6 +61,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Admin.Client", "St
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StepEbay.Components.Common", "StepEbay.Components.Common\StepEbay.Components.Common.csproj", "{17E86DD0-746E-42EF-9714-00410FDED9DE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Front", "Front", "{795A03FE-6E9F-4E05-9A66-C6ADF609C028}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
