@@ -16,9 +16,15 @@ namespace StepEbay.Main.Api.Controllers
         }
 
         [HttpPost("list")]
-        public async Task<PaginatedList<ProductDto>> GetProducts([FromBody] ProductFilters filter)
+        public async Task<PaginatedList<ProductDto>> GetFilteredProducts([FromBody] ProductFilters filter)
         {
             return await _productService.GetProductList(filter);
+        }
+
+        [HttpPost("all")]
+        public async Task<PaginatedList<ProductDto>> GetProducts()
+        {
+            return await _productService.GetProducts();
         }
 
         [HttpPost("categories")]

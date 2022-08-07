@@ -15,6 +15,16 @@
             {
                 <li>@category.Name</li>
             }
+            <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="GetProducts">Загрузить продукты</button>
+            @foreach(var product in _products.List)
+            {
+                <li>
+                    <div>
+                        <p>@product.Title</p>
+                    </div>
+                </li>
+            }
+
 
         </Authorized>
 

@@ -6,7 +6,7 @@ using StepEbay.Data.Models.Products;
 
 namespace StepEbay.Admin.Api.Controllers
 {
-    [Route("product")]
+    [Route("category")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -18,7 +18,7 @@ namespace StepEbay.Admin.Api.Controllers
         /// <summary>
         /// Додає нову категорію
         /// </summary>
-        [HttpPut("category/add/{categoryName}")]
+        [HttpPut("add/{categoryName}")]
         public async Task<BoolResult> AddCategory(string categoryName)
         {
             return await _categoryService.AddCategory(categoryName);
@@ -27,7 +27,7 @@ namespace StepEbay.Admin.Api.Controllers
         /// <summary>
         /// Видаляє категорію за ІД
         /// </summary>
-        [HttpDelete("category/removeid/{categoryId}")]
+        [HttpDelete("removeid/{categoryId}")]
         public async Task<BoolResult> RemoveGroup(int categoryId)
         {
             return await _categoryService.RemoveCategory(categoryId);
@@ -36,7 +36,7 @@ namespace StepEbay.Admin.Api.Controllers
         /// <summary>
         /// Видаляє категорію за ім'ям
         /// </summary>
-        [HttpDelete("category/removename/{categoryName}")]
+        [HttpDelete("removename/{categoryName}")]
         public async Task<BoolResult> RemoveCategoryName(string categoryName)
         {
             return await _categoryService.RemoveCategory(categoryName);
@@ -45,7 +45,7 @@ namespace StepEbay.Admin.Api.Controllers
         /// <summary>
         /// Обновляє категорію за ІД
         /// </summary>
-        [HttpPatch("category/updateid/{categoryId}/{newCategoryName}")]
+        [HttpPatch("updateid/{categoryId}/{newCategoryName}")]
         public async Task<BoolResult> UpdateGroup(int categoryId, string newCategoryName)
         {
             return await _categoryService.UpdateCategory(categoryId, newCategoryName);
@@ -54,7 +54,7 @@ namespace StepEbay.Admin.Api.Controllers
         /// <summary>
         /// Обновляє категорію за ім'ям
         /// </summary>
-        [HttpPatch("category/updatename/{oldCategoryName}/{newCategoryName}")]
+        [HttpPatch("updatename/{oldCategoryName}/{newCategoryName}")]
         public async Task<BoolResult> UpdateGroupName(string oldCategoryName, string newCategoryName)
         {
             return await _categoryService.UpdateCategory(oldCategoryName, newCategoryName);
@@ -63,10 +63,10 @@ namespace StepEbay.Admin.Api.Controllers
         /// <summary>
         /// Повертає усі категорії(DTO)
         /// </summary>
-        [HttpPost("category/all")]
+        [HttpPost("all")]
         public async Task<List<CategoryResponseDto>> GetAllCategoryDto()
         {
-            List<Category> l = (await _categoryService.GetAllCategotys());
+            List<Category> l = (await _categoryService.GetAllCategories());
             List<CategoryResponseDto> result = new List<CategoryResponseDto>();
             foreach (Category category in l)
             {

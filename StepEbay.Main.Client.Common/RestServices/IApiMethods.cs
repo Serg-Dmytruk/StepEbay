@@ -29,6 +29,9 @@ namespace StepEbay.Main.Client.Common.RestServices
         [Post("/product/categories")]
         Task<ApiResponse<List<CategoryDto>>> GetCategories();
 
+        [Post("/product/all")]
+        Task<ApiResponse<PaginatedList<ProductDto>>> GetProducts();
+
     }
 }
 
