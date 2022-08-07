@@ -43,7 +43,7 @@ namespace StepEbay.Admin.Api.Common.Services.Products
         }
         public async Task<List<Category>> GetAllCategotys()
         {
-            return await _categorys.GetAllCategories();
+            return await _categorys.GetAll();
         }
     }
 }
