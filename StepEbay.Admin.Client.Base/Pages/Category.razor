@@ -1,0 +1,48 @@
+﻿<h3>Category</h3>
+
+<p>Add</p>
+<input @bind-value="_nameToAdd" placeholder="name"/> 
+<button @onclick="AddCategory">
+        Add
+    </button>
+ <hr/>
+
+ <p>Remove by id</p>
+ <input @bind-value="_idToRemove" type="number" placeholder="id"/> 
+<button @onclick="RemoveCategoryById">
+        Remove
+    </button>
+ <hr/>
+
+ <p>Remove by name</p>
+  <input @bind-value="_nameToRemove" placeholder="name"/> 
+<button @onclick="RemoveCategoryByName">
+        Remove
+    </button>
+ <hr/>
+
+   <p>update by id</p>
+  <input @bind-value="_idToUpdate" type="number" placeholder="id"/> 
+  <input @bind-value="_nameToUpdate1" placeholder="value"/> 
+<button @onclick="UpdateCategoryById">
+        Update
+    </button>
+ <hr/>
+
+   <p>update by name</p>
+  <input @bind-value="_nameToUpdate" placeholder="name"/> 
+  <input @bind-value="_nameToUpdate2" placeholder="name"/> 
+<button @onclick="UpdateCategoryByName">
+        Update
+    </button>
+ <hr/>
+
+
+ <button @onclick="Update">
+        Refresh
+ </button>
+ <table style="border:solid">
+@foreach (var item in _list){
+    <tr style="border:solid"><td style="border:solid">@item.Id</td><td style="border:solid">@item.Name</td></tr>
+ }
+ </table>

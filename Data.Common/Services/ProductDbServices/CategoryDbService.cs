@@ -8,7 +8,7 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
     {
         private readonly ApplicationDbContext _context;
         public CategoryDbService(ApplicationDbContext context)
-            :base(context)
+            : base(context)
         {
             _context = context;
         }
@@ -20,6 +20,11 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
         public async Task<List<Category>> GetAll()
         {
             return await _context.Categories.ToListAsync();
+        }
+
+        public async Task<Category> GetByName(string categoryName)
+        {
+            return await _context.Categories.Where(p => p.Name == categoryName).FirstOrDefaultAsync();
         }
     }
 }
