@@ -15,5 +15,6 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
         public Task<ResponseData<PersonResponseDto>> GetPersonToUpdateInCabinet(int id);
         //Hardcode next
         public ResponseData<List<User>> GetAllHC();
+        public Task<ResponseData<BoolResult>> Update(int id, string nick, string email, string password, string name, string adress, bool emailConfirm, DateTime dateCreated);
     }
 }

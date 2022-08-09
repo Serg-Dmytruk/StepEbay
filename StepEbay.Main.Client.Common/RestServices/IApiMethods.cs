@@ -23,9 +23,9 @@ namespace StepEbay.Main.Client.Common.RestServices
         Task<ApiResponse<BoolResult>> ConfirmRegistration(string id, string key);
 
         [Post("/person/update/{passwordconfirm}/{nick}/{email}/{password}/{repassword}/{name}/{adress}")]
-        Task<ApiResponse<BoolResult>> TryUpdatePerson(string passwordconfirm, string nick, string email, string password, string repassword, string name, string adress);
+        Task<ApiResponse<BoolResult>> TryUpdate(string passwordconfirm, string nick, string email, string password, string repassword, string name, string adress);
 
-        [Get("/person/get")]
+        [Post("/person/get")]
         Task<ApiResponse<PersonResponseDto>> GetPersonToUpdateInCabinet();
     }
 }

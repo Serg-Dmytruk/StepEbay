@@ -52,14 +52,28 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
         }
         public async Task<ResponseData<PersonResponseDto>> GetPersonToUpdateInCabinet(int id)
         {
-            var tmpUser=await _userDbService.Get(id);
-            return new ResponseData<PersonResponseDto>() { Data = new PersonResponseDto() { Adress=tmpUser.Adress, Email=tmpUser.Email, Name=tmpUser.FullName, NickName=tmpUser.NickName} };
+            var middlProcessUser=await _userDbService.Get(id);
+            return new ResponseData<PersonResponseDto>() { Data = new PersonResponseDto() { Adress= middlProcessUser.Adress, Email= middlProcessUser.Email, Name= middlProcessUser.FullName, NickName= middlProcessUser.NickName} };
         }
         
         //Hardcode next
         public ResponseData<List<User>> GetAllHC()
         {
             return new ResponseData<List<User>> { Data= _userDbService.List().Result } ;
+        }
+        public async Task<ResponseData<BoolResult>> Update(int id, string nick, string email, string password, string name, string adress, bool emailConfirm, DateTime dateCreated)
+        {
+            User updateEntity=new User();
+            updateEntity.Id = id;
+            updateEntity.NickName = nick;
+            updateEntity.Email = email;
+            updateEntity.Password = BC.HashPassword(password);
+            updateEntity.FullName = name;
+            updateEntity.Adress = adress;
+            updateEntity.IsEmailConfirmed = emailConfirm;
+            updateEntity.Created= dateCreated;
+            await _userDbService.Update(updateEntity);
+            return new ResponseData<BoolResult>() { Data = new BoolResult(true) };
         }
     }
 }

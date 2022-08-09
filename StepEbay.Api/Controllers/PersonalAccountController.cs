@@ -21,7 +21,7 @@ namespace StepEbay.Main.Api.Controllers
             int id = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
             return await _personService.TryUpdate(id,nick, email, password, repassword, name, adress, passwordconfirm);
         }
-        [HttpGet("get")]
+        [HttpPost("get")]
         public async Task<ResponseData<PersonResponseDto>> GetPersonToUpdateInCabinet()
         {
             int id = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
@@ -29,10 +29,10 @@ namespace StepEbay.Main.Api.Controllers
         }
 
         //hardcode next door
-        [HttpPost("update/{id}/{passwordconfirm}/{nick}/{email}/{password}/{repassword}/{name}/{adress}")]
-        public async Task<ResponseData<BoolResult>> TryUpdateHC(int id, string nick, string email, string password, string repassword, string name, string adress)
+        [HttpPost("update/{id}/{passwordconfirm}/{nick}/{email}/{password}/{repassword}/{name}/{adress}/{emailConf}/{date}")]
+        public async Task<ResponseData<BoolResult>> TryUpdateHC(int id, string nick, string email, string password, string name, string adress, bool emailConf, DateTime date)
         {
-            return await _personService.TryUpdate(id, nick, email, password, repassword, name, adress, repassword);
+            return await _personService.Update(id, nick, email, password, name, adress, emailConf, date);
         }
         [HttpPost("get/all")]
         public ResponseData<List<User>> GetAllHC()
