@@ -26,14 +26,17 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
             _emailValue = person.Email;
             _nameValue = person.Name;
             _adressValue = person.Adress;
+
             this.StateHasChanged();
         }
 
         protected async Task UpdatePerson()
         {
             _message = "Message: ";
+
             PersonUpdateRequestDto request = new PersonUpdateRequestDto() { NickName = _niknameValue, Email = _emailValue, Password = _passwordValue, PasswordRepeat = _passwordRepeatValue, FullName = _nameValue, Adress = _adressValue, OldPasswordForConfirm = _passwordConfirmValue };
             var result = await _apiService.ExecuteRequest(() => _apiService.ApiMethods.TryUpdate(request));
+
             if (result.Data.Value)
             {
                 _message += "Updated";
@@ -42,6 +45,7 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
             {
                 _message += result.Data.ErrorMessage;
             }
+
             this.StateHasChanged();
         }
     }
