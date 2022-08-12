@@ -18,18 +18,17 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
         private string _nameValue { get; set; }
         private string _adressValue { get; set; }
         private string _passwordConfirmValue { get; set; }
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+
+        protected override async Task OnInitializedAsync()
         {
-            if (firstRender)
-            {
-                PersonResponseDto person = (await _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetPersonToUpdateInCabinet())).Data;
-                _niknameValue = person.NickName;
-                _emailValue = person.Email;
-                _nameValue = person.Name;
-                _adressValue = person.Adress;
-                this.StateHasChanged();
-            }
+            PersonResponseDto person = (await _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetPersonToUpdateInCabinet())).Data;
+            _niknameValue = person.NickName;
+            _emailValue = person.Email;
+            _nameValue = person.Name;
+            _adressValue = person.Adress;
+            this.StateHasChanged();
         }
+
         protected async Task UpdatePerson()
         {
             _message = "Message: ";
