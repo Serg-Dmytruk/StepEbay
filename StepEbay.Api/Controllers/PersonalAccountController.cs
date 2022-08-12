@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StepEbay.Common.Models.RefitModels;
-using StepEbay.Data.Models.Users;
 using StepEbay.Main.Api.Common.Services.PersonalAccountServices;
 using StepEbay.Main.Common.Models.Person;
 using System.Security.Claims;
@@ -15,29 +14,18 @@ namespace StepEbay.Main.Api.Controllers
         {
             _personService = personService;
         }
-        [HttpPost("update/{passwordconfirm}/{nick}/{email}/{password}/{repassword}/{name}/{adress}")]
-        public async Task<ResponseData<BoolResult>> TryUpdate(string passwordconfirm, string nick, string email, string password, string repassword, string name, string adress)
+        [HttpPost("update/{person}")]
+        public async Task<BoolResult> TryUpdate([FromBody] PersonUpdateRequestDto person)
         {
             int id = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
-            return await _personService.TryUpdate(id,nick, email, password, repassword, name, adress, passwordconfirm);
+            var result = await _personService.TryUpdate(id, person);
+            return result;
         }
         [HttpPost("get")]
         public async Task<ResponseData<PersonResponseDto>> GetPersonToUpdateInCabinet()
         {
             int id = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
             return await _personService.GetPersonToUpdateInCabinet(id);
-        }
-
-        //hardcode next door
-        [HttpPost("update/{id}/{passwordconfirm}/{nick}/{email}/{password}/{repassword}/{name}/{adress}/{emailConf}/{date}")]
-        public async Task<ResponseData<BoolResult>> TryUpdateHC(int id, string nick, string email, string password, string name, string adress, bool emailConf, DateTime date)
-        {
-            return await _personService.Update(id, nick, email, password, name, adress, emailConf, date);
-        }
-        [HttpPost("get/all")]
-        public ResponseData<List<User>> GetAllHC()
-        {
-            return _personService.GetAllHC();
         }
     }
 }

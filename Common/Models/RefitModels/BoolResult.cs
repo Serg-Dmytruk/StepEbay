@@ -10,10 +10,5 @@ namespace StepEbay.Common.Models.RefitModels
         {
             Value = value;
         }
-        public BoolResult(bool value, string errorMessage)
-        {
-            Value = value;
-            ErrorMessage = errorMessage;
-        }
     }
 }

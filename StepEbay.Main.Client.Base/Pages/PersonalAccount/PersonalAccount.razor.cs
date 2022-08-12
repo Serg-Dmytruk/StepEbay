@@ -11,7 +11,7 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
     {
         [Inject] IApiService _apiService { get; set; }
         private string _message { get; set; }
-        private string _niknameValue{get; set;}
+        private string _niknameValue { get; set; }
         private string _emailValue { get; set; }
         private string _passwordValue { get; set; }
         private string _passwordRepeatValue { get; set; }
@@ -33,7 +33,8 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
         protected async Task UpdatePerson()
         {
             _message = "Message: ";
-            var result=await _apiService.ExecuteRequest(() => _apiService.ApiMethods.TryUpdate(_passwordConfirmValue, _niknameValue,_emailValue,_passwordValue,_passwordRepeatValue,_nameValue,_adressValue));
+            PersonUpdateRequestDto request = new PersonUpdateRequestDto() { NickName = _niknameValue, Email = _emailValue, Password = _passwordValue, PasswordRepeat = _passwordRepeatValue, FullName = _nameValue, Adress = _adressValue, OldPasswordForConfirm = _passwordConfirmValue };
+            var result = await _apiService.ExecuteRequest(() => _apiService.ApiMethods.TryUpdate(request));
             if (result.Data.Value)
             {
                 _message += "Updated";
