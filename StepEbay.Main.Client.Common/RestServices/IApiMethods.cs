@@ -30,7 +30,7 @@ namespace StepEbay.Main.Client.Common.RestServices
         Task<ApiResponse<List<CategoryDto>>> GetCategories();
 
         [Post("/product/all")]
-        Task<ApiResponse<PaginatedList<ProductDto>>> GetProducts();
+        Task<ApiResponse<PaginatedList<ProductDto>>> GetProducts(int page);
 
     }
 }

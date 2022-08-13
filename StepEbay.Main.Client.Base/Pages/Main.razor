@@ -11,27 +11,18 @@
 
         <Authorized>
             <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PlaceBet">Поставити ставку</button>  @*тест*@
-           @* @foreach(var category in _categories)
-            {
-                <li>@category.Name</li>
-            }*@
-           @* <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="GetProducts">Загрузить продукты</button>
-            @foreach(var product in _products.List)
-            {
-                <li>
-                    <div>
-                        <p>@product.Title</p>
-                    </div>
-                </li>
-            }*@
-
-
         </Authorized>
 
         <NotAuthorized>
             <SignIn></SignIn>
         </NotAuthorized>
     </AuthorizeView>
+
+    <li><a href="productList">Всі</a></li>
+    @foreach (var category in _categories)
+    {
+        <li><a href="productList/@category.Id">@category.Name</a></li>
+    }
 }
 else
 {

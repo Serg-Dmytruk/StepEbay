@@ -57,9 +57,9 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
             return await GetFilteredProducts(filter).Skip(1).Take(1).ToListAsync();
         }
 
-        public async Task<List<Product>> GetProducts()
+        public async Task<List<Product>> GetProducts(int page)
         {
-            return await _context.Products.Skip(0).Take(3).ToListAsync();
+            return await _context.Products.Skip(page * 3).Take(3).ToListAsync();
         }
 
         public async Task<int> GetCount()

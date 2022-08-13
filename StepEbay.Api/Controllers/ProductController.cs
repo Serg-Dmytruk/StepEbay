@@ -22,9 +22,9 @@ namespace StepEbay.Main.Api.Controllers
         }
 
         [HttpPost("all")]
-        public async Task<PaginatedList<ProductDto>> GetProducts()
+        public async Task<PaginatedList<ProductDto>> GetProducts(int page)
         {
-            return await _productService.GetProducts();
+            return await _productService.GetProducts(page);
         }
 
         [HttpPost("categories")]

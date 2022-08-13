@@ -1,5 +1,25 @@
 ﻿<h3>Product</h3>
+@if (!ShowPreloader)
+{
+    @foreach (var category in _categories)
+    {
+        <li><a href="/productList/category.Name">@category.Name</a></li>
+    }
 
-@code {
+    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PrevProductPage">prev @(ProductPageNumber + 1) of @MaxProductPageNumber</button>
+    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="NextProductPage">next</button>
+
+    @if (_products is not null && _products.List is not null)
+    {
+        foreach (var product in _products.List)
+        {
+            <li>
+                <div>
+                    <p>@product.Title</p>
+                </div>
+            </li>
+        }
+    }
 
 }
+
