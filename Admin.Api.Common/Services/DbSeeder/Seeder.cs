@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StepEbay.Common.Constans;
 using StepEbay.Data;
 using StepEbay.Data.Common.Services.AuthDbServices;
 using StepEbay.Data.Common.Services.BetsDbServices;
@@ -72,17 +73,17 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddPurchesState()
         {
-            if (!await _purchesStateDbService.AnyByState("open"))
-                await _purchesStateDbService.Add(new PurchaseState { State = "open" });
+            if (!await _purchesStateDbService.AnyByState(PurchaseStatesConstant.OPEN))
+                await _purchesStateDbService.Add(new PurchaseState { State = PurchaseStatesConstant.OPEN });
 
-            if (!await _purchesStateDbService.AnyByState("close"))
-                await _purchesStateDbService.Add(new PurchaseState { State = "close" });
+            if (!await _purchesStateDbService.AnyByState(PurchaseStatesConstant.CLOSE))
+                await _purchesStateDbService.Add(new PurchaseState { State = PurchaseStatesConstant.CLOSE });
         }
 
         public async Task AddPurchase()
         {
             var user = await _userDbService.GetUserByNickName("admin");
-            var product = await _context.Products.Include(x => x.PurchaseType).FirstOrDefaultAsync(x => x.PurchaseType.Type == "auction");
+            var product = await _context.Products.Include(x => x.PurchaseType).FirstOrDefaultAsync(x => x.PurchaseType.Type == PurchaseTypesConstant.AUCTION);
 
             await _purchesDbService.Add(new Purchase
             {
@@ -96,11 +97,11 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddPurchesType()
         {
-            if (!await _purchesTypeDbService.AnyByName("sale"))
-                await _purchesTypeDbService.Add(new PurchaseType() { Type = "sale" });
+            if (!await _purchesTypeDbService.AnyByName(PurchaseTypesConstant.SALE))
+                await _purchesTypeDbService.Add(new PurchaseType() { Type = PurchaseTypesConstant.SALE });
 
-            if (!await _purchesTypeDbService.AnyByName("auction"))
-                await _purchesTypeDbService.Add(new PurchaseType() { Type = "auction" });
+            if (!await _purchesTypeDbService.AnyByName(PurchaseTypesConstant.AUCTION))
+                await _purchesTypeDbService.Add(new PurchaseType() { Type = PurchaseTypesConstant.AUCTION });
 
             await _context.SaveChangesAsync();
         }

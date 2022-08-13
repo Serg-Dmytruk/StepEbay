@@ -1,22 +1,23 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StepEbay.Main.Api.Common.Models.HubContainers;
 
 namespace StepEbay.Main.Api.Common.Hubs
 {
     public class BetHub : Hub
     {
-        public BetHub()
-        {
+        private readonly IHubContext<BetHub> _hubContext;
+        private readonly HubUserContainer _hubUserContainer;
 
+        public BetHub(IHubContext<BetHub> hubContext, HubUserContainer hubUserContainer)
+        {
+            _hubContext = hubContext;
+            _hubUserContainer = hubUserContainer;
         }
 
         public async Task MyBetClosed(List<int> users)
         {
-            //implent logic
+            await _hubContext.Clients.Clients(
+                _hubUserContainer.Users.Where(x => users.Contains(x.Value)).Select(x => x.Key)).SendAsync("MyBetClosed");
         }
     }
 }

@@ -9,6 +9,7 @@ using StepEbay.Main.Api.Common.Services.EmailSenderServices;
 using StepEbay.Main.Api.Common.Services.ProductServices;
 using StepEbay.Main.Api.Common.Services.PersonalAccountServices;
 using StepEbay.Main.Common.Models.Auth;
+using StepEbay.Main.Api.Common.Models.HubContainers;
 
 namespace StepEbay.Main.Api.Common.Services
 {
@@ -23,6 +24,7 @@ namespace StepEbay.Main.Api.Common.Services
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IValidator<SignUpRequestDto>, AuthValidator>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddSingleton<HubUserContainer>();
             return services;
         }
 

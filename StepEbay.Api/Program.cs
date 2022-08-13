@@ -13,6 +13,7 @@ using StepEbay.Main.Api.Common.Hubs;
 var builder = WebApplication.CreateBuilder(args);
 Log.Logger = SerilogHelper.Configure($"{builder.Configuration.GetConnectionString("ControlPanel")}/exception/log");
 builder.WebHost.UseSerilog();
+
 //JWT configuration
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -66,6 +67,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHub<BetHub>("/bet");
+app.MapHub<BetHub>("/bet/hub");
+app.MapHub<MainHub>("/main/hub");
 
 app.Run();

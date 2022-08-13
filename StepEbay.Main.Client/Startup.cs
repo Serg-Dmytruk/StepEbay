@@ -8,6 +8,7 @@ using StepEbay.Common;
 using StepEbay.Common.Lockers;
 using StepEbay.Common.Storages;
 using StepEbay.Main.Client.Base.Providers;
+using StepEbay.Main.Client.Common.ClientsHub;
 using StepEbay.Main.Client.Common.Options;
 using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
@@ -47,6 +48,7 @@ namespace StepEbay.Main.Client
 
             services.AddScoped<AuthenticationStateProvider>(p => (TokenProvider)p.GetService<ITokenProvider>());
             services.AddScoped<SemaphoreManager>();
+            services.AddScoped<HubClient>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

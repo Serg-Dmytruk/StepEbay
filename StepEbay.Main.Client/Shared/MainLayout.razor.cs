@@ -3,6 +3,7 @@ using StepEbay.Common.Storages;
 using StepEbay.Main.Client.Common.Providers;
 using System.Threading.Tasks;
 using System.Linq;
+using StepEbay.Main.Client.Common.ClientsHub;
 
 namespace StepEbay.Main.Client.Shared
 {

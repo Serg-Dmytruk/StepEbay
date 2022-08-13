@@ -54,8 +54,7 @@ namespace StepEbay.Main.Client.Base.Pages
 
             if (!string.IsNullOrEmpty(Id) && !string.IsNullOrEmpty(Key))
             {
-               
-
+              
                 var response = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.ConfirmRegistration(Id, Key));
 
             
@@ -66,9 +65,6 @@ namespace StepEbay.Main.Client.Base.Pages
 
                 if(MessageConfirmReg.Count == 0)
                     MessageConfirmReg.Add("Успішно", new List<string> { "Акаунт активовано!" });
-
-                Id = null;
-                Key = null;
 
                 ShowModal = true;
             }
