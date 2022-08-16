@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Common.Models.Pagination;
+using StepEbay.Main.Client.Common.ClientsHub;
 using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Product;
@@ -15,19 +16,13 @@ namespace StepEbay.Main.Client.Base.Pages
         [Parameter] public string Key { get; set; }
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] IApiService ApiService { get; set; }
+        [Inject] HubClient HubClient { get; set; }
         public bool ShowModal { get; set; } = false;
 
         private Dictionary<string, List<string>> MessageConfirmReg = new();
         private List<CategoryDto> _categories = new List<CategoryDto>();
         private PaginatedList<ProductDto> _products = new PaginatedList<ProductDto>();
         private bool ShowPreloader { get; set; } = true;
-
-             
-        //protected override async Task OnInitializedAsync()
-        //{
-        //    await GetCategories();
-        //    await GetProducts();
-        //}
 
         protected async Task GetCategories()
         {
