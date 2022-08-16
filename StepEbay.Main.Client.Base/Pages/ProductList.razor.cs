@@ -14,10 +14,10 @@ namespace StepEbay.Main.Client.Base.Pages
         [Parameter] public string filter { get; set; }
         [Inject] IApiService ApiService { get; set; }
 
-        private ProductFilters _productFilters { get; set; } = new ProductFilters();
         private bool ShowPreloader { get; set; } = false;
         private List<CategoryDto> _categories = new List<CategoryDto>();
         private PaginatedList<ProductDto> _products = new PaginatedList<ProductDto>();
+        private ProductFilters _productFilters { get; set; } = new ProductFilters();
 
         public int ProductPageNumber = 0;
         public int MaxProductPageNumber = 0;
@@ -63,10 +63,10 @@ namespace StepEbay.Main.Client.Base.Pages
 
         protected void OnFilterMouseDown(int a)
         {
-            var category = _productFilters.categories.SingleOrDefault(c => c.id == a);
+            var category = _productFilters.Categories.SingleOrDefault(c => c.Id == a);
             if (category is not null)
             {
-                category.selected = !category.selected;
+                category.Selected = !category.Selected;
             }
             StateHasChanged();
         }
@@ -80,7 +80,7 @@ namespace StepEbay.Main.Client.Base.Pages
         {
             foreach (var category in categories)
             {
-                _productFilters.categories.Add(new Category { id = category.Id, name = category.Name, selected = false });
+                _productFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = false });
             }
         }
 

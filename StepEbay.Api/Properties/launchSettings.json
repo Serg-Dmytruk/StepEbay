@@ -1,23 +1,23 @@
-﻿{
+{
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:13759",
-      "sslPort": 44319
+      "applicationUrl": "http://localhost:62303/",
+      "sslPort": 44365
     }
   },
   "profiles": {
     "StepEbay.Api": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:5002",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:5002",
+      "dotnetRunMessages": true
     },
     "IIS Express": {
       "commandName": "IISExpress",

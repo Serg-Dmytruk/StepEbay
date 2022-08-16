@@ -1,20 +1,20 @@
 ﻿<h3>Product</h3>
 @if (!ShowPreloader)
 {
-    @foreach (var category in _productFilters.categories)
+    @foreach (var category in _productFilters.Categories)
     {
-        if (category.selected is true)
+        if (category.Selected is true)
         {
             <div>
-                <input type="checkbox" @onmousedown="@(e => OnFilterMouseDown(category.id))" checked/>
-                <label>@category.name</label>
+                <input type="checkbox" @onmousedown="@(e => OnFilterMouseDown(category.Id))" checked/>
+                <label>@category.Name</label>
             </div>
         }
-        if (category.selected is false)
+        if (category.Selected is false)
         {
             <div>
-                <input type="checkbox" @onmousedown="@(e => OnFilterMouseDown(category.id))"/>
-                <label>@category.name</label>
+                <input type="checkbox" @onmousedown="@(e => OnFilterMouseDown(category.Id))"/>
+                <label>@category.Name</label>
             </div>
         }
     }

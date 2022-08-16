@@ -2,16 +2,16 @@
 {
     public class ProductFilters
     {
-        public int state { get; set; }
-        public List<Category> categories { get; set; } = new List<Category>();
-        public int priceStart { get; set; }
-        public int priceEnd { get; set; }
+        public int State { get; set; }
+        public List<Category> Categories { get; set; } = new List<Category>();
+        public int PriceStart { get; set; }
+        public int PriceEnd { get; set; }
     }
 
     public class Category
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public bool selected { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool Selected { get; set; }
     }
 }

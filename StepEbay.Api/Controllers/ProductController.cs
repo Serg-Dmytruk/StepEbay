@@ -32,5 +32,11 @@ namespace StepEbay.Main.Api.Controllers
         {
             return await _productService.GetCategoryList();
         }
+
+/*        [HttpPost("filtered")]
+        public async Task<PaginatedList<ProductDto>> GetProducts(int[] categoryIds, int minSum, int maxSum, int stateId)
+        {
+            
+        }*/
     }
 }
