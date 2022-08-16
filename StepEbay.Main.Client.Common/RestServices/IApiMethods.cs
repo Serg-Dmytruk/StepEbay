@@ -32,6 +32,9 @@ namespace StepEbay.Main.Client.Common.RestServices
         [Post("/product/all")]
         Task<ApiResponse<PaginatedList<ProductDto>>> GetProducts(int page);
 
+        [Post("/product/filtered")]
+        Task<ApiResponse<PaginatedList<ProductDto>>> GetProductsWithFilters(int[] categoryIds, int minSum, int maxSum, int stateId);
+
     }
 }
 
