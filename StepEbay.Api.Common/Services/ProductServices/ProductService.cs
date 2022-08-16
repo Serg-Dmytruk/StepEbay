@@ -25,9 +25,9 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             };
         }
 
-        public async Task<PaginatedList<ProductDto>> GetProducts()
+        public async Task<PaginatedList<ProductDto>> GetProducts(int page)
         {
-            var products = await _productDb.GetProducts();
+            var products = await _productDb.GetProducts(page);
 
             var p = new PaginatedList<ProductDto>
             {

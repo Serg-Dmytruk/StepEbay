@@ -6,7 +6,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
     public interface IProductService
     {
         Task<PaginatedList<ProductDto>> GetProductList(ProductFilters filters);
-        Task<PaginatedList<ProductDto>> GetProducts();
+        Task<PaginatedList<ProductDto>> GetProducts(int page);
         Task<List<CategoryDto>> GetCategoryList();
     }
 }

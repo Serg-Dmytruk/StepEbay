@@ -16,7 +16,7 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
 
         Task<List<Product>> GetProductList(ProductFilters filter);
 
-        Task<List<Product>> GetProducts();
+        Task<List<Product>> GetProducts(int page);
 
         Task<int> GetCount();
 

@@ -37,7 +37,7 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
         {
             IQueryable<Product> query = _context.Products;
 
-            if (filter.category != 0)
+/*            if (filter.category != 0)
                 query = query.Where(p => p.CategoryId == filter.category);
 
             if (filter.state != 0)
@@ -47,7 +47,7 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
                 query = query.Where(p => p.Price >= filter.priceStart);
 
             if (filter.priceEnd != 0)
-                query = query.Where(p => p.Price <= filter.priceEnd);
+                query = query.Where(p => p.Price <= filter.priceEnd);*/
 
             return query;
         }
@@ -57,9 +57,9 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
             return await GetFilteredProducts(filter).Skip(1).Take(1).ToListAsync();
         }
 
-        public async Task<List<Product>> GetProducts()
+        public async Task<List<Product>> GetProducts(int page)
         {
-            return await _context.Products.Skip(0).Take(3).ToListAsync();
+            return await _context.Products.Skip(page * 3).Take(3).ToListAsync();
         }
 
         public async Task<int> GetCount()

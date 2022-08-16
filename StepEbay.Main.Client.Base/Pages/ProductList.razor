@@ -1,5 +1,40 @@
 ﻿<h3>Product</h3>
+@if (!ShowPreloader)
+{
+    @foreach (var category in _productFilters.categories)
+    {
+        if (category.selected is true)
+        {
+            <div>
+                <input type="checkbox" @onmousedown="@(e => OnFilterMouseDown(category.id))" checked/>
+                <label>@category.name</label>
+            </div>
+        }
+        if (category.selected is false)
+        {
+            <div>
+                <input type="checkbox" @onmousedown="@(e => OnFilterMouseDown(category.id))"/>
+                <label>@category.name</label>
+            </div>
+        }
+    }
+    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SubmitFilters">submit</button>
+    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PrevProductPage">prev @(ProductPageNumber + 1) of @MaxProductPageNumber</button>
+    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="NextProductPage">next</button>
 
-@code {
+    @if (_products is not null && _products.List is not null)
+    {
+        @foreach (var product in _products.List)
+        {
+            <li>@product.Title</li>
+        }
+    }
 
 }
+else
+{
+    <div class="spinner-border centerOnParrentHorizontal" role="status">
+        <span class="sr-only">Завантаження...</span>
+    </div>
+}
+

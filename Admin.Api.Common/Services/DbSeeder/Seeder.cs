@@ -58,17 +58,17 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddRoles()
         {
-            if (!await _roleDbService.AnyByName("admin"))
-                await _roleDbService.Add(new Role() { Name = "admin" });
+            if (!await _roleDbService.AnyByName(AccountRolesConstant.ADMIN))
+                await _roleDbService.Add(new Role() { Name = AccountRolesConstant.ADMIN });
 
-            if (!await _roleDbService.AnyByName("manager"))
-                await _roleDbService.Add(new Role() { Name = "manager" });
+            if (!await _roleDbService.AnyByName(AccountRolesConstant.MANAGER))
+                await _roleDbService.Add(new Role() { Name = AccountRolesConstant.MANAGER });
         }
 
         public async Task AddUsers()
         {
-            await AddUser("admin", "123456qQ", "admin_admin", "adminmail@gmail.com", "manager");
-            await AddUser("user_user", "123456qQ", "user_user", "usermail@gmail.com", "admin");
+            await AddUser("admin", "123456qQ", "admin_admin", "adminmail@gmail.com", AccountRolesConstant.ADMIN);
+            await AddUser("user_user", "123456qQ", "user_user", "usermail@gmail.com", AccountRolesConstant.MANAGER);
         }
 
         public async Task AddPurchesState()
@@ -108,25 +108,49 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddCategories()
         {
-            if (!await _categoryDbService.AnyByName("Солодощі"))
-                await _categoryDbService.Add(new Category() { Name = "Солодощі" });
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.FOOD))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.FOOD });
 
-            if (!await _categoryDbService.AnyByName("Іграшки"))
-                await _categoryDbService.Add(new Category() { Name = "Іграшки" });
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.FORKIDS))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.FORKIDS });
 
-            if (!await _categoryDbService.AnyByName("Цифрові товари"))
-                await _categoryDbService.Add(new Category() { Name = "Цифрові товари" });
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.FORGAMERS))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.FORGAMERS });
+
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.INDUSTRIAL))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.INDUSTRIAL });
+
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.FASHION))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.FASHION });
+
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.HEALTHANDBUATY))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.HEALTHANDBUATY });
+
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.HOMEANDGARDEN))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.HOMEANDGARDEN });
+
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.SPORT))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.SPORT });
+
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.AUTOANDPARTS))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.AUTOANDPARTS });
+
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.COLLECTIBLE))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.COLLECTIBLE });
+
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.ELECTRONIC))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.ELECTRONIC });
 
             await _context.SaveChangesAsync();
         }
 
         public async Task AddProductStates()
         {
-            if (!await _productStateDbService.AnyStateByName("old"))
-                await _productStateDbService.Add(new ProductState() { Name = "old" });
+            if (!await _productStateDbService.AnyStateByName(ProductStateConstant.USED))
+                await _productStateDbService.Add(new ProductState() { Name = ProductStateConstant.USED });
 
-            if (!await _productStateDbService.AnyStateByName("new"))
-                await _productStateDbService.Add(new ProductState() { Name = "new" });
+            if (!await _productStateDbService.AnyStateByName(ProductStateConstant.NEW))
+                await _productStateDbService.Add(new ProductState() { Name = ProductStateConstant.NEW });
 
             await _context.SaveChangesAsync();
         }
