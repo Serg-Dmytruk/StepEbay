@@ -8,6 +8,7 @@ using StepEbay.Main.Common.Models.Auth;
 using System.Net;
 using Microsoft.Extensions.Options;
 using StepEbay.Main.Client.Common.Options;
+using StepEbay.Main.Client.Common.ClientsHub;
 
 namespace StepEbay.Main.Client.Base.Components.Auth
 {
@@ -21,6 +22,7 @@ namespace StepEbay.Main.Client.Base.Components.Auth
         [Inject] private IOptions<AccountOptions> AccountOptions { get; set; }
         [Inject] private LocalStorage LocalStorage { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
+        [Inject] private HubClient HubClient { get; set; }
         private SignInRequestDto SignInRequestDto { get; set; } = new();
         private bool ShowPreloader { get; set; } = true;
         private bool RememberMe { get; set; }
@@ -55,7 +57,7 @@ namespace StepEbay.Main.Client.Base.Components.Auth
                 await TokenProvider.CheckAuthentication(true);
 
                 NavigationManager.NavigateTo("/main");
-
+               
                 return;
             }
 

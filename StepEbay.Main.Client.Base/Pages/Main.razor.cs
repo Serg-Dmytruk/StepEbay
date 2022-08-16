@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
+using StepEbay.Common.Models.Pagination;
+using StepEbay.Main.Client.Common.ClientsHub;
 using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Product;
@@ -14,6 +16,7 @@ namespace StepEbay.Main.Client.Base.Pages
         [Parameter] public string Key { get; set; }
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] IApiService ApiService { get; set; }
+        [Inject] HubClient HubClient { get; set; }
         public bool ShowModal { get; set; } = false;
 
 
@@ -21,11 +24,6 @@ namespace StepEbay.Main.Client.Base.Pages
         private List<CategoryDto> _categories = new List<CategoryDto>();
 
         private bool ShowPreloader { get; set; } = true;
-
-        protected override async Task OnInitializedAsync()
-        {
-
-        }
 
         protected async Task GetCategories()
         {
