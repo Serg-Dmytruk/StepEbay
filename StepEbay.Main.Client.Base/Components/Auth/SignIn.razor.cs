@@ -22,7 +22,7 @@ namespace StepEbay.Main.Client.Base.Components.Auth
         [Inject] private IOptions<AccountOptions> AccountOptions { get; set; }
         [Inject] private LocalStorage LocalStorage { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
-        [Inject] private HubClient HubClient { get; set; }
+
         private SignInRequestDto SignInRequestDto { get; set; } = new();
         private bool ShowPreloader { get; set; } = true;
         private bool RememberMe { get; set; }
