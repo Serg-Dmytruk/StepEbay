@@ -2,6 +2,7 @@
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Common.Models.Auth;
 using StepEbay.Main.Common.Models.Person;
+using StepEbay.Main.Common.Models.Product;
 
 namespace StepEbay.Main.Client.Common.RestServices
 {
@@ -27,6 +28,15 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Post("/person/get")]
         Task<ApiResponse<PersonResponseDto>> GetPersonToUpdateInCabinet();
+
+        [Post("/product/add/{product}")]
+        Task<ApiResponse<BoolResult>> AddProduct(ProductRequestDto product);
+
+        [Get("/product/category")]
+        Task<ApiResponse<List<CategoryResponseDto>>> GetAllCategorys();
+
+        [Get("/product/state")]
+        Task<ApiResponse<List<ProductStateResponseDto>>> GetAllStates();
     }
 }
 

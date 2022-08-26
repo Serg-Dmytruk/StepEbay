@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Api.Common.Services.PersonalAccountServices;
 using StepEbay.Main.Common.Models.Person;
@@ -6,10 +7,11 @@ using System.Security.Claims;
 
 namespace StepEbay.Main.Api.Controllers
 {
+    [Authorize]
     [Route("person")]
     public class PersonalAccountController : ControllerBase
     {
-        IPersonService _personService { get; set; }
+        private readonly IPersonService _personService;
         public PersonalAccountController(IPersonService personService)
         {
             _personService = personService;
