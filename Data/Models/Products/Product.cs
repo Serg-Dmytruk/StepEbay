@@ -23,12 +23,8 @@ namespace StepEbay.Data.Models.Products
         [ForeignKey("ProductState")]
         public int ProductStateId { get; set; }
 
-        [ForeignKey("User")]
-        public int UserId { get; set; }
-
 
         public virtual ProductState ProductState { get; set; }
         public virtual Category Category { get; set; }
-        public virtual User User { get; set; }
     }
 }

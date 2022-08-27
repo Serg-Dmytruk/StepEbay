@@ -306,17 +306,9 @@ namespace StepEbay.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StepEbay.Data.Models.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
 
                     b.Navigation("ProductState");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StepEbay.Data.Models.Users.Favorite", b =>
