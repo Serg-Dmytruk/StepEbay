@@ -41,9 +41,7 @@ namespace StepEbay.Main.Client.Base.Pages
 
             if (!string.IsNullOrEmpty(Id) && !string.IsNullOrEmpty(Key))
             {
-
                 var response = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.ConfirmRegistration(Id, Key));
-
 
                 MessageConfirmReg = response.Errors;
 

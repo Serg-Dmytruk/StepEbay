@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Main.Client.Common.ClientsHub;
 using StepEbay.Main.Client.Common.Providers;
+using StepEbay.PushMessage.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace StepEbay.Main.Client.Shared
         [Inject] private HubClient HubClient { get; set; }
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
+        [Inject] private IMessageService MessageService { get; set; }
         private string UserName { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -52,7 +54,7 @@ namespace StepEbay.Main.Client.Shared
 
         private async Task MyBetClosed()
         {
-            Console.WriteLine("Hub test");
+            MessageService.ShowInfo("АУКЦІОН ЗАВЕРШЕНО", "НАЗВА ТОВАРУ програв чи виграв");
         }
     }
 }
