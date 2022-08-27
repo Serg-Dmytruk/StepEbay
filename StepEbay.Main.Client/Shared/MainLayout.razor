@@ -1,6 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
+
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -25,7 +26,8 @@
         </div>
 
         <div class="content px-4">
-            @Body
-        </div>
+            @Body 
+            <PushMessageContainer Position="MessagePosition.BottomRight" TimeOut="5" />    
+        </div> 
     </div>
 </div>

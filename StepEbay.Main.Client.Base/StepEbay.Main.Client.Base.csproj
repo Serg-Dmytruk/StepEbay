@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -12,13 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Data.Common\StepEbay.Data.Common.csproj" />
+    <ProjectReference Include="..\Step.Ebay.PushMessage\StepEbay.PushMessage.csproj" />
     <ProjectReference Include="..\StepEbay.Api.Common\StepEbay.Main.Api.Common.csproj" />
     <ProjectReference Include="..\StepEbay.Common\StepEbay.Main.Common.csproj" />
     <ProjectReference Include="..\StepEbay.Main.Client.Common\StepEbay.Main.Client.Common.csproj" />

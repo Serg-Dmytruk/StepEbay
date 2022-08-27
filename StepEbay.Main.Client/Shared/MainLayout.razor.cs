@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
-using StepEbay.Main.Client.Common.Providers;
-using System.Threading.Tasks;
-using System.Linq;
 using StepEbay.Main.Client.Common.ClientsHub;
+using StepEbay.Main.Client.Common.Providers;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StepEbay.Main.Client.Shared
 {

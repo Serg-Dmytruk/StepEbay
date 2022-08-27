@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
-using StepEbay.Common.Models.Pagination;
-using StepEbay.Main.Client.Common.ClientsHub;
 using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Product;
+using StepEbay.PushMessage.Services;
 
 namespace StepEbay.Main.Client.Base.Pages
 {
@@ -16,6 +15,7 @@ namespace StepEbay.Main.Client.Base.Pages
         [Parameter] public string Key { get; set; }
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] IApiService ApiService { get; set; }
+        [Inject] IMessageService MessageService { get; set; }
    
         public bool ShowModal { get; set; } = false;
 
@@ -63,6 +63,14 @@ namespace StepEbay.Main.Client.Base.Pages
         private async Task PlaceBet()
         {
             await ApiService.ExecuteRequest(() => ApiService.ApiMethods.PlaceBet(1));
+        }
+
+        private void Show()
+        {
+            MessageService.ShowSuccsess("Успішно", "робіть");
+            MessageService.ShowWarning("Увага", "робіть");
+            MessageService.ShowError("Помилка", "робіть");
+            MessageService.ShowInfo("Інфо", "робіть");
         }
 
         private void CloseModal(bool show)

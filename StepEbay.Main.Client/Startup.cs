@@ -13,6 +13,7 @@ using StepEbay.Main.Client.Common.Options;
 using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Client.Services;
+using StepEbay.PushMessage.Services;
 using System.Net.Http;
 
 namespace StepEbay.Main.Client
@@ -46,6 +47,7 @@ namespace StepEbay.Main.Client
             services.AddScoped<ITokenProvider, TokenProvider>(p => new TokenProvider(p.GetService<CookieStorage>(),
                 cookieOptions.AccessToken, cookieOptions.RefreshToken, cookieOptions.Expires, domainOptions.Cookie));
 
+            services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<AuthenticationStateProvider>(p => (TokenProvider)p.GetService<ITokenProvider>());
             services.AddScoped<SemaphoreManager>();
             services.AddScoped<HubClient>();
