@@ -37,7 +37,7 @@ namespace StepEbay.Worker.Services
         public static IServiceCollection AddHosdedServices(this IServiceCollection services)
         {
             services.AddHostedService<BetService>();
-            services.AddHostedService<ImageCleanerService>();
+            //services.AddHostedService<ImageCleanerService>();
 
             return services;
         }

@@ -16,7 +16,7 @@ namespace StepEbay.Main.Client.Base.Pages
         [Parameter] public string Key { get; set; }
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] IApiService ApiService { get; set; }
-        [Inject] HubClient HubClient { get; set; }
+   
         public bool ShowModal { get; set; } = false;
 
 

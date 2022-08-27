@@ -11,7 +11,6 @@ namespace StepEbay.Worker.ClientHubs
         public BetHubClient(IConfiguration configuration, ILogger<BetHubClient> logger)
         {
             _logger = logger;
-
             _connection = new HubConnectionBuilder()
             .WithUrl(new Uri(configuration.GetConnectionString("Bet")))
             .WithAutomaticReconnect()

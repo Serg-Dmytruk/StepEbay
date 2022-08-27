@@ -24,6 +24,7 @@ namespace StepEbay.Worker.HostedService
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            await _betHubClient.Start();
             await StartScanningBets(stoppingToken);
         }
 

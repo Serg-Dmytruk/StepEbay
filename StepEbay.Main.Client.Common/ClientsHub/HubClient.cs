@@ -33,7 +33,8 @@ namespace StepEbay.Main.Client.Common.ClientsHub
         {
             try
             {
-                await _connection.StartAsync();
+                if(_connection.State != HubConnectionState.Connected)
+                    await _connection.StartAsync();
             }
             catch
             {
@@ -44,7 +45,8 @@ namespace StepEbay.Main.Client.Common.ClientsHub
         {
             try
             {
-                await _connection.StopAsync();
+                if (_connection.State != HubConnectionState.Disconnected)
+                    await _connection.StopAsync();
             }
             catch
             {

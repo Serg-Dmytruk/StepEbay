@@ -1,12 +1,12 @@
-﻿@*<h3>Product</h3>
+﻿<h3>Product</h3>
 @if (!ShowPreloader)
 {
     @foreach (var category in _productFilters.Categories)
     {
         
             <div>
-                <input type="checkbox" @bind-value="category.selected"/>
-                <label>@category.name</label>
+                <input type="checkbox" @bind-value="category.Selected"/>
+                <label>@category.Name</label>
             </div>
      
                 
@@ -31,4 +31,3 @@ else
     </div>
 }
 
-*@

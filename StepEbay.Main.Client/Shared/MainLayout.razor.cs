@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
-using StepEbay.Common.Storages;
 using StepEbay.Main.Client.Common.Providers;
 using System.Threading.Tasks;
 using System.Linq;
 using StepEbay.Main.Client.Common.ClientsHub;
+using System;
 
 namespace StepEbay.Main.Client.Shared
 {
@@ -17,29 +17,42 @@ namespace StepEbay.Main.Client.Shared
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
+            if (firstRender)
+            {
+                HubClient.MyBetClosed += MyBetClosed;
+            }
+
             //UserName = await LocalStorage.GetLocal("username");
             var authState = await TokenProvider.GetAuthenticationStateAsync();  //приклад витягування клаймів не ремувити)
             UserName = authState.User.Claims.FirstOrDefault(c => c.Type == "nickName")?.Value;
 
-            if(!string.IsNullOrEmpty(UserName))
+            if (!string.IsNullOrEmpty(UserName))
             {
                 await HubClient.Start();
             }
-            
+
             StateHasChanged();
+
         }
 
         private async Task Logout()
         {
             await TokenProvider.RemoveToken();
             await TokenProvider.CheckAuthentication(false);
-            
+
+            await HubClient.Stop();
+
             NavigationManager.NavigateTo("/");
         }
 
         private async Task LogIn()
         {
 
+        }
+
+        private async Task MyBetClosed()
+        {
+            Console.WriteLine("Hub test");
         }
     }
 }
