@@ -1,4 +1,5 @@
-﻿using StepEbay.Data.Models.Default;
+﻿
+using StepEbay.Data.Models.Default;
 using StepEbay.Data.Models.Products;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

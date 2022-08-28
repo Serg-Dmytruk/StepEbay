@@ -1,4 +1,5 @@
-﻿using StepEbay.Data.Models.Default;
+﻿using StepEbay.Data.Models.Bets;
+using StepEbay.Data.Models.Default;
 using System.ComponentModel.DataAnnotations;
 
 namespace StepEbay.Data.Models.Users
@@ -16,5 +17,8 @@ namespace StepEbay.Data.Models.Users
 		public string Adress { get; set; }
 		public bool IsEmailConfirmed { get; set; }
 		public string EmailKey { get; set; }
+
+		public virtual List<Favorite> Favorites { get; set; }
+		public virtual List<Purchase> Purchases { get; set; }
 	}
 }

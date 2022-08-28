@@ -49,6 +49,32 @@ namespace StepEbay.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PurchaseStates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseStates", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PurchaseTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -94,8 +120,12 @@ namespace StepEbay.Data.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ByNow = table.Column<bool>(type: "bit", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
+                    DateClose = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    OwnerId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    ProductStateId = table.Column<int>(type: "int", nullable: false)
+                    ProductStateId = table.Column<int>(type: "int", nullable: false),
+                    PurchaseTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,6 +140,18 @@ namespace StepEbay.Data.Migrations
                         name: "FK_Products_ProductStates_ProductStateId",
                         column: x => x.ProductStateId,
                         principalTable: "ProductStates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_PurchaseTypes_PurchaseTypeId",
+                        column: x => x.PurchaseTypeId,
+                        principalTable: "PurchaseTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_Users_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -177,10 +219,42 @@ namespace StepEbay.Data.Migrations
                         name: "FK_Favorites_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Favorites_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Purchases",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PurchasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    PoductId = table.Column<int>(type: "int", nullable: false),
+                    PurchaseStateId = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Purchases", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Purchases_Products_PoductId",
+                        column: x => x.PoductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Purchases_PurchaseStates_PurchaseStateId",
+                        column: x => x.PurchaseStateId,
+                        principalTable: "PurchaseStates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Favorites_Users_UserId",
+                        name: "FK_Purchases_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -208,9 +282,19 @@ namespace StepEbay.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_OwnerId",
+                table: "Products",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductStateId",
                 table: "Products",
                 column: "ProductStateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_PurchaseTypeId",
+                table: "Products",
+                column: "PurchaseTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_Title",
@@ -221,6 +305,21 @@ namespace StepEbay.Data.Migrations
                 name: "IX_ProductStates_Name",
                 table: "ProductStates",
                 column: "Name");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Purchases_PoductId",
+                table: "Purchases",
+                column: "PoductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Purchases_PurchaseStateId",
+                table: "Purchases",
+                column: "PurchaseStateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Purchases_UserId",
+                table: "Purchases",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RefreshTokens_UpdateTime",
@@ -276,6 +375,9 @@ namespace StepEbay.Data.Migrations
                 name: "Favorites");
 
             migrationBuilder.DropTable(
+                name: "Purchases");
+
+            migrationBuilder.DropTable(
                 name: "RefreshTokens");
 
             migrationBuilder.DropTable(
@@ -285,16 +387,22 @@ namespace StepEbay.Data.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "PurchaseStates");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "ProductStates");
+
+            migrationBuilder.DropTable(
+                name: "PurchaseTypes");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }
