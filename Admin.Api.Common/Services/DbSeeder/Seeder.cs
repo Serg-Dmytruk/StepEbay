@@ -167,6 +167,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                 await _productDbService.Add(new Product()
                 {
                     DateCreated = DateTime.Now,
+                    OwnerId = (await _userDbService.GetUserByNickName("admin")).Id,
                     Title = title,
                     Image = image,
                     Price = price,
@@ -177,7 +178,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Description = desc,
                     PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                     DateClose = DateTime.UtcNow.AddDays(1)
-                });
+                }) ;
 
             await _context.SaveChangesAsync();
         }

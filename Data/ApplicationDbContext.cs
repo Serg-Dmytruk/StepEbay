@@ -87,6 +87,18 @@ namespace StepEbay.Data
             builder.Entity<Category>().ToTable("Categories");
 
             builder.Entity<DeveloperGroup>().ToTable("DeveloperGroups");
+
+            //builder.Entity<Favorite>().HasOne(x => x.User).WithMany(x => x.Favorites).OnDelete(DeleteBehavior.NoAction);
+            
+            builder.Entity<Favorite>().HasOne(x => x.Product).WithMany(x => x.Favorites).OnDelete(DeleteBehavior.NoAction);
+            //builder.Entity<Purchase>().HasOne(x => x.User).WithMany(x => x.Purchases).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Purchase>().HasOne(x => x.Product).WithMany(x => x.Purchases).OnDelete(DeleteBehavior.NoAction);
+
+            //builder.Entity<User>().HasMany(x => x.Purchases).WithOne(x => x.User).OnDelete(DeleteBehavior.Cascade);
+            //builder.Entity<User>().HasMany(x => x.Favorites).WithOne(x => x.User).OnDelete(DeleteBehavior.Cascade);
+
+            //builder.Entity<Product>().HasMany(x => x.Purchases).WithOne(x => x.Product).OnDelete(DeleteBehavior.Cascade);
+            //builder.Entity<Product>().HasMany(x => x.Purchases).WithOne(x => x.Product).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
