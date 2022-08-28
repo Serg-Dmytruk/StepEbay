@@ -1,2 +1,19 @@
 ﻿<h3>PersonalAccount</h3>
-<input type="text" placeholder="username" @bind-value="niknameVal"/><button disabled="@IsDisabled">Change</button>
+<input type="text" placeholder="username" @bind-value="_niknameValue" />
+<br />
+<input type="email" placeholder="email" @bind-value="_emailValue" />
+<br />
+<input type="password" placeholder="password" @bind-value="_passwordValue" />
+<br />
+<input type="password" placeholder="passwordRepeat" @bind-value="_passwordRepeatValue" />
+<br />
+<input type="text" placeholder="full name" @bind-value="_nameValue" />
+<br />
+<input type="text" placeholder="adress" @bind-value="_adressValue" />
+<br />
+<hr />
+<input type="password" placeholder="old password for confirm" @bind-value="_passwordConfirmValue" />
+<br />
+<hr />
+<p>@_message</p>
+<button @onclick="UpdatePerson">Change</button>
