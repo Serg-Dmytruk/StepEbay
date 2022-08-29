@@ -1,5 +1,4 @@
 ﻿using Refit;
-using StepEbay.Admin.Common.Models.Products;
 using StepEbay.Common.Models.Pagination;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Common.Models.Auth;
@@ -29,7 +28,7 @@ namespace StepEbay.Main.Client.Common.RestServices
         Task<ApiResponse<List<CategoryDto>>> GetCategories();
 
         [Post("/product/all")]
-        Task<ApiResponse<PaginatedList<ProductDto>>> GetProducts(int page, string categoryId);
+        Task<ApiResponse<PaginatedList<ProductDto>>> GetProducts(int page, string categoryId = "0");
 
         [Post("/product/filtered")]
         Task<ApiResponse<PaginatedList<ProductDto>>> GetProductsWithFilters(ProductFilterInfo info, int page);

@@ -50,11 +50,5 @@ namespace StepEbay.Main.Api.Controllers
         {
             return await _productService.GetAllPurchaseTypes();
         }
-
-        [HttpGet("all")]
-        public async Task<PaginatedList<ProductDto>> GetProducts(int page)
-        {
-            return await _productService.GetProducts(page);
-        }
     }
 }

@@ -29,26 +29,32 @@ namespace StepEbay.Main.Client.Base.Pages
             //ShowPreloader = true;
             if (firstRender)
             {
-                await GetProducts();
                 await GetCategories();
                 await GetProductStates();
                 SetDefaultFilters(_categories);
+                await SubmitFilters();
             }
 
             StateHasChanged();
             //ShowPreloader = false;
         }
 
-        protected void PrevProductPage()
+        protected async void PrevProductPage()
         {
             if (ProductPageNumber != 0)
+            {
                 ProductPageNumber -= 1;
+                await SubmitFilters();
+            }
         }
 
-        protected void NextProductPage()
+        protected async void NextProductPage()
         {
             if (ProductPageNumber != (MaxProductPageNumber - 1))
+            {
                 ProductPageNumber += 1;
+                await SubmitFilters();
+            }
         }
 
         protected async Task GetCategories()
@@ -60,9 +66,9 @@ namespace StepEbay.Main.Client.Base.Pages
         protected async Task SubmitFilters()
         {
             List<int> categories = new();
-            foreach(var category in _productFilters.Categories)
+            foreach (var category in _productFilters.Categories)
             {
-                if(category.Selected is true)
+                if (category.Selected is true)
                     categories.Add(category.Id);
             }
 
@@ -73,8 +79,8 @@ namespace StepEbay.Main.Client.Base.Pages
                     states.Add(state.Id);
             }
 
-            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductsWithFilters( new ProductFilterInfo 
-                { Categories = categories, States = states, PriceStart = _productFilters.PriceStart, PriceEnd = _productFilters.PriceEnd}, ProductPageNumber));
+            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductsWithFilters(new ProductFilterInfo
+            { Categories = categories, States = states, PriceStart = _productFilters.PriceStart, PriceEnd = _productFilters.PriceEnd }, ProductPageNumber));
             _products = responce.Data;
 
             if (_products is not null)
@@ -83,28 +89,27 @@ namespace StepEbay.Main.Client.Base.Pages
 
         protected void SetDefaultFilters(List<CategoryDto> categories)
         {
-            foreach (var category in categories)
+            if (filter == "0")
             {
-                if (!string.IsNullOrEmpty(filter) && category.Id.ToString() == filter)
-                    _productFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = true });
-                else
-                    _productFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = false });
+                categories.ForEach(category => _productFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = true }));
             }
-        }
+            else
+            {
+                foreach (var category in categories)
+                {
+                    if (!string.IsNullOrEmpty(filter) && category.Id.ToString() == filter)
+                        _productFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = true });
+                    else
+                        _productFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = false });
+                }
+            }
 
-        protected async Task GetProducts()
-        {
-            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProducts(ProductPageNumber, filter));
-            _products = responce.Data;
-
-            if (_products is not null)
-                MaxProductPageNumber = (_products.CountAll / _productOnPageNumber);
         }
 
         protected async Task GetProductStates()
         {
             var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductStates());
-            _productFilters.States = responce.Data.Select(r => new State { Id = r.Id, Name = r.Name, Selected = true}).ToList();
+            _productFilters.States = responce.Data.Select(r => new State { Id = r.Id, Name = r.Name, Selected = true }).ToList();
         }
     }
 }

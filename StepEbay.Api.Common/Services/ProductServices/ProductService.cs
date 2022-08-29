@@ -22,28 +22,6 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             _productStateDb = productStateDb;
             _purchaseTypeDb = purchaseTypeDb;
         }
-         
-        public async Task<PaginatedList<ProductDto>> GetProducts(int page, string categoryId = "0")
-        {
-            var products = await _productDb.GetProducts();
-
-            if(categoryId == "0")
-            {
-                return new PaginatedList<ProductDto>
-                {
-                    List = products.Select(x => new ProductDto { Id = x.Id, Title = x.Title }).Skip(page * 3).Take(3).ToList(),
-                    CountAll = await _productDb.GetCount()
-                };
-            }
-            else
-            {
-                return new PaginatedList<ProductDto>
-                {
-                    List = products.Where(p => p.CategoryId.ToString() == categoryId).ToList().Select(x => new ProductDto { Id = x.Id, Title = x.Title }).Skip(page * 3).Take(3).ToList(),
-                    CountAll = await _productDb.GetCount()
-                };
-            }
-        }
 
         public async Task<PaginatedList<ProductDto>> GetFilteredProducts(ProductFilterInfo info, int page)
         {
