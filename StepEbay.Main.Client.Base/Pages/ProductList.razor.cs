@@ -104,7 +104,7 @@ namespace StepEbay.Main.Client.Base.Pages
         protected async Task GetProductStates()
         {
             var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductStates());
-            _productFilters.States = responce.Data;
+            _productFilters.States = responce.Data.Select(r => new State { Id = r.Id, Name = r.Name, Selected = true}).ToList();
         }
     }
 }

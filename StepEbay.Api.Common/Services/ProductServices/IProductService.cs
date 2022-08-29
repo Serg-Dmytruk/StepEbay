@@ -6,15 +6,11 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 {
     public interface IProductService
     {
-        Task<PaginatedList<ProductDto>> GetProducts(int page, string categoryId);
-        Task<List<CategoryDto>> GetCategoryList();
-        Task<PaginatedList<ProductDto>> GetFilteredProducts(ProductFilterInfo info, int page);
-        Task<List<ProductStateDto>> GetProductStates();
-        public Task<PaginatedList<ProductDto>> GetProductList(ProductFilters filters);
-        public Task<PaginatedList<ProductDto>> GetProducts(int page);
+        public Task<PaginatedList<ProductDto>> GetProducts(int page, string categoryId = "0");
+        public Task<PaginatedList<ProductDto>> GetFilteredProducts(ProductFilterInfo info, int page);
+        public Task<List<ProductStateDto>> GetProductStates();
         public Task<List<CategoryDto>> GetCategoryList();
         public Task<BoolResult> AddProduct(ProductDto productRequest);
-        public Task<ResponseData<List<StateDto>>> GetAllStates();
         public Task<ResponseData<List<PurchaseTypeResponseDto>>> GetAllPurchaseTypes();
     }
 }

@@ -11,7 +11,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
     {
         [Inject] IApiService _apiService { get; set; }
         List<CategoryDto> _categories { get; set; }
-        List<StateDto> _states { get; set; }
+        List<ProductStateDto> _states { get; set; }
         List<PurchaseTypeResponseDto> _types { get; set; }
 
         private string _image;
@@ -29,14 +29,14 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         public AddProduct()
         {
             _categories = new List<CategoryDto>();
-            _states = new List<StateDto>();
+            _states = new List<ProductStateDto>();
             _types = new List<PurchaseTypeResponseDto>();
         }
 
         protected override async Task OnInitializedAsync()
         {
             _categories = (await _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetCategories())).Data;
-            _states = (await _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetAllStates())).Data;
+            _states = (await _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetProductStates())).Data;
             _types = (await _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetAllPurchaseTypes())).Data;
 
             this.StateHasChanged();

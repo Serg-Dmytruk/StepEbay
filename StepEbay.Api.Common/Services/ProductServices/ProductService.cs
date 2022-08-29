@@ -23,7 +23,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             _purchaseTypeDb = purchaseTypeDb;
         }
          
-        public async Task<PaginatedList<ProductDto>> GetProducts(int page, string categoryId)
+        public async Task<PaginatedList<ProductDto>> GetProducts(int page, string categoryId = "0")
         {
             var products = await _productDb.GetProducts();
 
@@ -51,10 +51,8 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
             var p = new PaginatedList<ProductDto>
             {
-                List = products.Select(x => new ProductDto { Id = x.Id, Title = x.Title }).Skip(page * 3).Take(3).ToList(),
+                List = products.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, ByNow = x.ByNow, Count = x.Count, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated }).Skip(page * 3).Take(3).ToList(),
                 CountAll = products.Count()
-                List = products.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, ByNow = x.ByNow, Count = x.Count, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated }).ToList(),
-                CountAll = await _productDb.GetCount()
             };
 
             return p;
@@ -96,16 +94,6 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             return new BoolResult(true);
         }
 
-        public async Task<ResponseData<List<StateDto>>> GetAllStates()
-        {
-            List<StateDto> converted = new List<StateDto>();
-            List<ProductState> list = await _productStateDb.GetAll();
-            foreach (ProductState state in list)
-                converted.Add(new StateDto() { Id = state.Id, Name = state.Name });
-
-            return new ResponseData<List<StateDto>>() { Data = converted };
-        }
-
         public async Task<ResponseData<List<PurchaseTypeResponseDto>>> GetAllPurchaseTypes()
         {
             List<PurchaseTypeResponseDto> converted = new List<PurchaseTypeResponseDto>();
@@ -119,7 +107,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
         public async Task<List<ProductStateDto>> GetProductStates()
         {
             var productStates = await _productStateDb.GetAll();
-            return productStates.Select(x => new ProductStateDto { Id = x.Id, Name = x.Name, Selected = true }).ToList();
+            return productStates.Select(x => new ProductStateDto { Id = x.Id, Name = x.Name }).ToList();
         }
     }
 }

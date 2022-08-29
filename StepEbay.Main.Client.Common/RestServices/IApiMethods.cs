@@ -46,9 +46,6 @@ namespace StepEbay.Main.Client.Common.RestServices
         [Post("/product/add/{product}")]
         Task<ApiResponse<BoolResult>> AddProduct(ProductDto product);
 
-        [Get("/product/state")]
-        Task<ApiResponse<List<StateDto>>> GetAllStates();
-
         [Get("/product/type")]
         Task<ApiResponse<List<PurchaseTypeResponseDto>>> GetAllPurchaseTypes();
     }
