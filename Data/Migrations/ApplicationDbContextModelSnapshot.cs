@@ -17,7 +17,7 @@ namespace StepEbay.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -206,6 +206,9 @@ namespace StepEbay.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -221,6 +224,8 @@ namespace StepEbay.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("ProductStateId");
 
@@ -368,9 +373,9 @@ namespace StepEbay.Data.Migrations
             modelBuilder.Entity("StepEbay.Data.Models.Bets.Purchase", b =>
                 {
                     b.HasOne("StepEbay.Data.Models.Products.Product", "Product")
-                        .WithMany()
+                        .WithMany("Purchases")
                         .HasForeignKey("PoductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("StepEbay.Data.Models.Bets.PurchaseState", "PurchaseState")
@@ -380,7 +385,7 @@ namespace StepEbay.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("StepEbay.Data.Models.Users.User", "User")
-                        .WithMany()
+                        .WithMany("Purchases")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -400,6 +405,12 @@ namespace StepEbay.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("StepEbay.Data.Models.Users.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StepEbay.Data.Models.Products.ProductState", "ProductState")
                         .WithMany()
                         .HasForeignKey("ProductStateId")
@@ -414,6 +425,8 @@ namespace StepEbay.Data.Migrations
 
                     b.Navigation("Category");
 
+                    b.Navigation("Owner");
+
                     b.Navigation("ProductState");
 
                     b.Navigation("PurchaseType");
@@ -422,13 +435,13 @@ namespace StepEbay.Data.Migrations
             modelBuilder.Entity("StepEbay.Data.Models.Users.Favorite", b =>
                 {
                     b.HasOne("StepEbay.Data.Models.Products.Product", "Product")
-                        .WithMany()
+                        .WithMany("Favorites")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("StepEbay.Data.Models.Users.User", "User")
-                        .WithMany()
+                        .WithMany("Favorites")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -436,6 +449,20 @@ namespace StepEbay.Data.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("StepEbay.Data.Models.Products.Product", b =>
+                {
+                    b.Navigation("Favorites");
+
+                    b.Navigation("Purchases");
+                });
+
+            modelBuilder.Entity("StepEbay.Data.Models.Users.User", b =>
+                {
+                    b.Navigation("Favorites");
+
+                    b.Navigation("Purchases");
                 });
 #pragma warning restore 612, 618
         }

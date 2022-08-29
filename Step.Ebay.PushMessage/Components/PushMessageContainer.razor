@@ -1,0 +1,11 @@
+﻿@if(Messages.Any())
+{
+    <div class="blazored-toast-container @PositionClass">
+        <CascadingValue Value="this">
+                @foreach(var message in Messages.OrderBy(x => x.TimeStamp))
+                {
+                   <PushMessage Settings="message.MessageSettings" MessageId="message.Id"></PushMessage>
+                }
+        </CascadingValue>
+    </div>
+}

@@ -1,0 +1,40 @@
+﻿<h3>Add announcement</h3>
+<span>Image:</span><input type="image" @bind="_image"/><br/>
+<span>Title:</span><input @bind="_title" /><br />
+<span>Description:</span><input @bind="_description" /><br />
+<span>Price:</span><input type="number" @bind="_price" /><br />
+<span>Count:</span><input type="number" @bind="_count" /><br />
+<span>By now:</span><input type="checkbox" @bind="_byNow"/><br />
+<span>Category</span>
+<select @bind="_categoryId">
+    @foreach (var item in _categories)
+    {
+        <option value="@item.Id">
+            @item.Name
+        </option>
+    }
+</select>
+<br />
+<span>State</span>
+<select @bind="_stateId">
+    @foreach (var item in _states)
+    {
+        <option value="@item.Id">
+            @item.Name
+        </option>
+    }
+</select>
+<br />
+<span>Type</span>
+<select @bind="_typeId">
+    @foreach (var item in _types)
+    {
+        <option value="@item.Id">
+            @item.Name
+        </option>
+    }
+</select>
+<button @onclick="Submith">
+    Submith
+</button>
+<h3>@message</h3>

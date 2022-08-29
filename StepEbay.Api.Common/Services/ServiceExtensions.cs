@@ -10,6 +10,7 @@ using StepEbay.Main.Api.Common.Services.ProductServices;
 using StepEbay.Main.Api.Common.Services.PersonalAccountServices;
 using StepEbay.Main.Common.Models.Auth;
 using StepEbay.Main.Api.Common.Models.HubContainers;
+using StepEbay.Data.Common.Services.BetsDbServices;
 
 namespace StepEbay.Main.Api.Common.Services
 {
@@ -32,9 +33,10 @@ namespace StepEbay.Main.Api.Common.Services
         public static IServiceCollection AddDbService(this IServiceCollection services)
         {
             services.AddScoped<IUserDbService, UserDbService>();
+            services.AddScoped<IProductDbService, ProductDbService>();
             services.AddScoped<ICategoryDbService, CategoryDbService>();
             services.AddScoped<IProductStateDbService, ProductStateDbService>();
-            services.AddScoped<IProductDbService, ProductDbService>();
+            services.AddScoped<IPurchaseTypeDbService, PurchaseTypeDbService>();
             services.AddScoped<IRefreshTokenDbService, RefreshTokenDbService>();
             services.AddScoped<IRoleDbService, RoleDbService>();
 

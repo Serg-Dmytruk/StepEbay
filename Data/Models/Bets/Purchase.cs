@@ -11,6 +11,8 @@ namespace StepEbay.Data.Models.Bets
         [Key]
         public int Id { get; set; }
 
+        public decimal PurchasePrice { get; set; }
+
         [ForeignKey("User")]
         public int UserId { get; set; }
        
@@ -20,11 +22,8 @@ namespace StepEbay.Data.Models.Bets
         [ForeignKey("PurchaseState")]
         public int PurchaseStateId { get; set; }
 
-        public decimal PurchasePrice { get; set; }
-
         public virtual Product Product { get; set; }
         public virtual User User { get; set; }
-
         public virtual PurchaseState PurchaseState { get; set; }
     }
 }

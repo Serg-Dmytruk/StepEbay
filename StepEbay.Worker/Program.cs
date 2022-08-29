@@ -28,3 +28,12 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddHosdedServices();
 
     }).Build();
+
+try
+{
+    await host.RunAsync();
+}
+catch(Exception ex)
+{
+    Log.Error(ex, "Host terminated unexpectedly");
+}

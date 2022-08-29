@@ -5,10 +5,10 @@ namespace StepEbay.Main.Api.Common.Hubs
 {
     public class BetHub : Hub
     {
-        private readonly IHubContext<BetHub> _hubContext;
+        private readonly IHubContext<MainHub> _hubContext;
         private readonly HubUserContainer _hubUserContainer;
 
-        public BetHub(IHubContext<BetHub> hubContext, HubUserContainer hubUserContainer)
+        public BetHub(IHubContext<MainHub> hubContext, HubUserContainer hubUserContainer)
         {
             _hubContext = hubContext;
             _hubUserContainer = hubUserContainer;

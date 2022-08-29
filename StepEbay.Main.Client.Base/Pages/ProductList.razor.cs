@@ -23,10 +23,6 @@ namespace StepEbay.Main.Client.Base.Pages
         public int MaxProductPageNumber = 0;
         private readonly int _productOnPageNumber = 3;
 
-        protected override async Task OnInitializedAsync()
-        {
-
-        }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
