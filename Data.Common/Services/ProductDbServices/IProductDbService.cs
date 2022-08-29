@@ -14,12 +14,10 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
 
         Task<bool> AnyProductsByTitle(string productTitle);
 
-        Task<List<Product>> GetProductList(ProductFilters filter);
-
-        Task<List<Product>> GetProducts(int page);
+        Task<List<Product>> GetProducts();
 
         Task<int> GetCount();
 
-        Task<int> GetProductCount(ProductFilters filter);
+        Task<List<Product>> GetFilteredProducts(ProductFilterInfo info);
     }
 }

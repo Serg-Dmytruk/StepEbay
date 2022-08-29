@@ -23,17 +23,17 @@ namespace StepEbay.Main.Client.Common.RestServices
         [Get("/email/confirm/{id}/{key}")]
         Task<ApiResponse<BoolResult>> ConfirmRegistration(string id, string key);
 
-        [Post("/product/list")]
-        Task<ApiResponse<PaginatedList<ProductDto>>> Getproducts();
-
-        [Post("/product/categories")]
+        [Get("/product/categories")]
         Task<ApiResponse<List<CategoryDto>>> GetCategories();
 
         [Post("/product/all")]
-        Task<ApiResponse<PaginatedList<ProductDto>>> GetProducts(int page);
+        Task<ApiResponse<PaginatedList<ProductDto>>> GetProducts(int page, string categoryId);
 
         [Post("/product/filtered")]
-        Task<ApiResponse<PaginatedList<ProductDto>>> GetProductsWithFilters(int[] categoryIds, int minSum, int maxSum, int stateId);
+        Task<ApiResponse<PaginatedList<ProductDto>>> GetProductsWithFilters(ProductFilterInfo info, int page);
+
+        [Get("/product/states")]
+        Task<ApiResponse<List<ProductStateDto>>> GetProductStates();
 
     }
 }

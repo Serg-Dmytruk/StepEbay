@@ -8,31 +8,44 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
     {
         private IProductDbService _productDb;
         private ICategoryDbService _categoryDb;
-        public ProductService(IProductDbService productDb, ICategoryDbService categoryDb)
+        private IProductStateDbService _productStateDb;
+        public ProductService(IProductDbService productDb, ICategoryDbService categoryDb, IProductStateDbService productStateDb)
         {
             _productDb = productDb;
             _categoryDb = categoryDb;
+            _productStateDb = productStateDb;
         }
          
-        public async Task<PaginatedList<ProductDto>> GetProductList(ProductFilters filters)
+        public async Task<PaginatedList<ProductDto>> GetProducts(int page, string categoryId)
         {
-            var products = await _productDb.GetProductList(filters);
+            var products = await _productDb.GetProducts();
 
-            return new PaginatedList<ProductDto>
+            if(categoryId == "0")
             {
-                List = products.Select(x => new ProductDto { Id = x.Id, Title = x.Title }).ToList(),
-                CountAll = await _productDb.GetProductCount(filters)
-            };
+                return new PaginatedList<ProductDto>
+                {
+                    List = products.Select(x => new ProductDto { Id = x.Id, Title = x.Title }).Skip(page * 3).Take(3).ToList(),
+                    CountAll = await _productDb.GetCount()
+                };
+            }
+            else
+            {
+                return new PaginatedList<ProductDto>
+                {
+                    List = products.Where(p => p.CategoryId.ToString() == categoryId).ToList().Select(x => new ProductDto { Id = x.Id, Title = x.Title }).Skip(page * 3).Take(3).ToList(),
+                    CountAll = await _productDb.GetCount()
+                };
+            }
         }
 
-        public async Task<PaginatedList<ProductDto>> GetProducts(int page)
+        public async Task<PaginatedList<ProductDto>> GetFilteredProducts(ProductFilterInfo info, int page)
         {
-            var products = await _productDb.GetProducts(page);
+            var products = await _productDb.GetFilteredProducts(info);
 
             var p = new PaginatedList<ProductDto>
             {
-                List = products.Select(x => new ProductDto { Id = x.Id, Title = x.Title }).ToList(),
-                CountAll = await _productDb.GetCount()
+                List = products.Select(x => new ProductDto { Id = x.Id, Title = x.Title }).Skip(page * 3).Take(3).ToList(),
+                CountAll = products.Count()
             };
 
             return p;
@@ -49,6 +62,12 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             }
 
             return listCategories;
+        }
+
+        public async Task<List<ProductStateDto>> GetProductStates()
+        {
+            var productStates = await _productStateDb.GetAll();
+            return productStates.Select(x => new ProductStateDto { Id = x.Id, Name = x.Name, Selected = true }).ToList();
         }
     }
 }

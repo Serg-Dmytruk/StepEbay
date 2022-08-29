@@ -2,10 +2,10 @@
 {
     public class ProductFilters
     {
-        public int State { get; set; }
+        public List<ProductStateDto> States { get; set; } = new List<ProductStateDto>();
         public List<Category> Categories { get; set; } = new List<Category>();
-        public int PriceStart { get; set; }
-        public int PriceEnd { get; set; }
+        public decimal PriceStart { get; set; } = 0;
+        public decimal PriceEnd { get; set; } = 100000;
     }
 
     public class Category

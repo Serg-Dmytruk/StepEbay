@@ -33,43 +33,23 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
         {
             return await _context.Products.Where(p => p.CategoryId == categoryId).ToListAsync();
         }
-        private IQueryable<Product> GetFilteredProducts(ProductFilters filter)
+
+        public async Task<List<Product>> GetFilteredProducts(ProductFilterInfo info)
         {
-            IQueryable<Product> query = _context.Products;
+            var filteredList = await _context.Products.Where(product => info.Categories.Any(cId => cId == product.CategoryId) 
+            && info.States.Any(s => product.ProductStateId == s) && info.PriceStart <= product.Price && info.PriceEnd >= product.Price).ToListAsync();
 
-/*            if (filter.category != 0)
-                query = query.Where(p => p.CategoryId == filter.category);
-
-            if (filter.state != 0)
-                query = query.Where(p => p.ProductStateId == filter.state);
-
-            if (filter.priceStart != 0)
-                query = query.Where(p => p.Price >= filter.priceStart);
-
-            if (filter.priceEnd != 0)
-                query = query.Where(p => p.Price <= filter.priceEnd);*/
-
-            return query;
+            return filteredList;
         }
 
-        public async Task<List<Product>> GetProductList(ProductFilters filter)
+        public async Task<List<Product>> GetProducts()
         {
-            return await GetFilteredProducts(filter).Skip(1).Take(1).ToListAsync();
-        }
-
-        public async Task<List<Product>> GetProducts(int page)
-        {
-            return await _context.Products.Skip(page * 3).Take(3).ToListAsync();
+            return await _context.Products.ToListAsync();
         }
 
         public async Task<int> GetCount()
         {
             return await _context.Products.CountAsync();
-        }
-
-        public async Task<int> GetProductCount(ProductFilters filter)
-        {
-            return await GetFilteredProducts(filter).CountAsync();
         }
     }
 }

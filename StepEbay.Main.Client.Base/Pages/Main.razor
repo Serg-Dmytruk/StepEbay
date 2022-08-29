@@ -18,10 +18,10 @@
         </NotAuthorized>
     </AuthorizeView>
 
-    <li><a href="productList">Всі</a></li>
+    <li><a href="products/0">Всі</a></li>
     @foreach (var category in _categories)
     {
-        <li><a href="productList/@category.Id">@category.Name</a></li>
+        <li><a href="products/@category.Id">@category.Name</a></li>
     }
 }
 else

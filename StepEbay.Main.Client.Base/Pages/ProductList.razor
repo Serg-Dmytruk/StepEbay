@@ -3,14 +3,42 @@
 {
     @foreach (var category in _productFilters.Categories)
     {
-        
-            <div>
-                <input type="checkbox" @bind-value="category.selected"/>
-                <label>@category.name</label>
-            </div>
-     
-                
+        <div>
+            @if (category.Selected is true)
+            {
+                <input type="checkbox" @bind-value="category.Selected" checked />
+                <label>@category.Name</label>
+            }
+            else
+            {
+                <input type="checkbox" @bind-value="category.Selected" />
+                <label>@category.Name</label>
+            }
+        </div>
     }
+
+    <div>
+        <p>Ціна від:</p>
+        <input type="number" @bind-value="_productFilters.PriceStart">
+        <p>Ціна до:</p>
+        <input type="number" @bind-value="_productFilters.PriceEnd">
+    </div>
+
+    <div>
+        @foreach(var state in _productFilters.States)
+        {
+            if(state.Selected is true){
+                <input type="checkbox" @bind-value="state.Selected" checked />
+                <label>@state.Name</label>
+            }
+            else
+            {
+                <input type="checkbox" @bind-value="state.Selected" />
+                <label>@state.Name</label>
+            }
+        }
+    </div>
+
     <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SubmitFilters">submit</button>
     <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PrevProductPage">prev @(ProductPageNumber + 1) of @MaxProductPageNumber</button>
     <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="NextProductPage">next</button>

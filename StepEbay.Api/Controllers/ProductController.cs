@@ -15,28 +15,28 @@ namespace StepEbay.Main.Api.Controllers
             _productService = productService;
         }
 
-        [HttpPost("list")]
-        public async Task<PaginatedList<ProductDto>> GetFilteredProducts([FromBody] ProductFilters filter)
-        {
-            return await _productService.GetProductList(filter);
-        }
-
         [HttpPost("all")]
-        public async Task<PaginatedList<ProductDto>> GetProducts(int page)
+        public async Task<PaginatedList<ProductDto>> GetProducts(int page, string categoryId)
         {
-            return await _productService.GetProducts(page);
+            return await _productService.GetProducts(page, categoryId);
         }
 
-        [HttpPost("categories")]
+        [HttpGet("categories")]
         public async Task<List<CategoryDto>> GetCategories()
         {
             return await _productService.GetCategoryList();
         }
 
-/*        [HttpPost("filtered")]
-        public async Task<PaginatedList<ProductDto>> GetProducts(int[] categoryIds, int minSum, int maxSum, int stateId)
+        [HttpPost("filtered")]
+        public async Task<PaginatedList<ProductDto>> GetFilteredProducts([FromBody] ProductFilterInfo info, int page)
         {
-            
-        }*/
+            return await _productService.GetFilteredProducts(info, page);
+        }
+
+        [HttpGet("states")]
+        public async Task<List<ProductStateDto>> GetProductStates()
+        {
+            return await _productService.GetProductStates();
+        }
     }
 }

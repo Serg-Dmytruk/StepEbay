@@ -6,8 +6,8 @@ using StepEbay.Main.Common.Models.Product;
 
 namespace StepEbay.Main.Client.Base.Pages
 {
-    [Route("productList")]
-    [Route("productList/{filter}")]
+    [Route("products")]
+    [Route("products/{filter}")]
     [Layout(typeof(EmptyLayout))]
     public partial class ProductList
     {
@@ -31,11 +31,11 @@ namespace StepEbay.Main.Client.Base.Pages
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             //ShowPreloader = true;
-            await GetProducts();
-            await GetCategories();
-
             if (firstRender)
             {
+                await GetProducts();
+                await GetCategories();
+                await GetProductStates();
                 SetDefaultFilters(_categories);
             }
 
@@ -61,36 +61,54 @@ namespace StepEbay.Main.Client.Base.Pages
             _categories = responce.Data;
         }
 
-        protected void OnFilterMouseDown(int a)
-        {
-            var category = _productFilters.Categories.SingleOrDefault(c => c.Id == a);
-            if (category is not null)
-            {
-                category.Selected = !category.Selected;
-            }
-            StateHasChanged();
-        }
-
         protected async Task SubmitFilters()
         {
+            List<int> categories = new();
+            foreach(var category in _productFilters.Categories)
+            {
+                if(category.Selected is true)
+                    categories.Add(category.Id);
+            }
 
+            List<int> states = new();
+            foreach (var state in _productFilters.States)
+            {
+                if (state.Selected is true)
+                    states.Add(state.Id);
+            }
+
+            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductsWithFilters( new ProductFilterInfo 
+                { Categories = categories, States = states, PriceStart = _productFilters.PriceStart, PriceEnd = _productFilters.PriceEnd}, ProductPageNumber));
+            _products = responce.Data;
+
+            if (_products is not null)
+                MaxProductPageNumber = (_products.CountAll / _productOnPageNumber);
         }
 
         protected void SetDefaultFilters(List<CategoryDto> categories)
         {
             foreach (var category in categories)
             {
-                _productFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = false });
+                if (!string.IsNullOrEmpty(filter) && category.Id.ToString() == filter)
+                    _productFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = true });
+                else
+                    _productFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = false });
             }
         }
 
         protected async Task GetProducts()
         {
-            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProducts(ProductPageNumber));
+            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProducts(ProductPageNumber, filter));
             _products = responce.Data;
 
             if (_products is not null)
                 MaxProductPageNumber = (_products.CountAll / _productOnPageNumber);
+        }
+
+        protected async Task GetProductStates()
+        {
+            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductStates());
+            _productFilters.States = responce.Data;
         }
     }
 }
