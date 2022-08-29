@@ -16,12 +16,12 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
             _userDbService = userDbService;
         }
 
-        public async Task<BoolResult> TryUpdate(int id, PersonUpdateRequestDto personUpdateRequest)
+        public async Task<ResponseData> TryUpdate(int id, PersonUpdateRequestDto personUpdateRequest)
         {
             User updateEntity = await _userDbService.Get(id);
 
             if (!BC.Verify(personUpdateRequest.OldPasswordForConfirm, updateEntity.Password))
-                return new BoolResult(false) { ErrorMessage = "Wrong confirmation password" };
+                return ResponseData.Fail("password", "Wrong confirmation password");
 
             if (personUpdateRequest.Password == null)
             {
@@ -30,9 +30,11 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
             }
 
             AuthValidator validator = new AuthValidator();
+
             var result = await validator.ValidateAsync(new SignUpRequestDto() { Id = id, NickName = personUpdateRequest.NickName, Email = personUpdateRequest.Email, Password = personUpdateRequest.Password, CopyPassword = personUpdateRequest.PasswordRepeat, FullName = personUpdateRequest.FullName });
+
             if (!result.IsValid)
-                return new BoolResult(false) { ErrorMessage = result.Errors.FirstOrDefault().ToString() };
+                return ResponseData.Fail("password", result.Errors.FirstOrDefault().ToString());
 
             bool emailConfirm = true;
             if (personUpdateRequest.Email == updateEntity.Email)
@@ -47,7 +49,7 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
 
             await _userDbService.Update(updateEntity);
 
-            return new BoolResult(true);
+            return ResponseData.Ok();
         }
 
         public async Task<ResponseData<PersonResponseDto>> GetPersonToUpdateInCabinet(int id)

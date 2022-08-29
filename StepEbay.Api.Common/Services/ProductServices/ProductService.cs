@@ -10,12 +10,15 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 {
     public class ProductService : IProductService
     {
-        private IProductDbService _productDb;
-        private ICategoryDbService _categoryDb;
-        private IProductStateDbService _productStateDb;
-        private IPurchaseTypeDbService _purchaseTypeDb;
+        private readonly IProductDbService _productDb;
+        private readonly ICategoryDbService _categoryDb;
+        private readonly IProductStateDbService _productStateDb;
+        private readonly IPurchaseTypeDbService _purchaseTypeDb;
 
-        public ProductService(IProductDbService productDb, ICategoryDbService categoryDb, IProductStateDbService productStateDb, IPurchaseTypeDbService purchaseTypeDb)
+        public ProductService(IProductDbService productDb,
+            ICategoryDbService categoryDb,
+            IProductStateDbService productStateDb,
+            IPurchaseTypeDbService purchaseTypeDb)
         {
             _productDb = productDb;
             _categoryDb = categoryDb;
@@ -27,31 +30,21 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
         {
             var products = await _productDb.GetFilteredProducts(info);
 
-            var p = new PaginatedList<ProductDto>
+            return  new PaginatedList<ProductDto>
             {
                 List = products.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, ByNow = x.ByNow, Count = x.Count, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated }).Skip(page * 3).Take(3).ToList(),
                 CountAll = products.Count()
             };
-
-            return p;
         }
 
         public async Task<List<CategoryDto>> GetCategoryList()
         {
-            var categories = await _categoryDb.GetAll();
-            var listCategories = new List<CategoryDto>();
-
-            foreach (var category in categories)
-            {
-                listCategories.Add(new CategoryDto { Id = category.Id, Name = category.Name });
-            }
-
-            return listCategories;
+            return (await _categoryDb.GetAll()).Select(x => new CategoryDto { Id = x.Id, Name = x.Name}).ToList();
         }
 
-        public async Task<BoolResult> AddProduct(ProductDto productRequest)
+        public async Task<BoolResult> AddProduct(int ownerId, ProductDto productRequest)
         {
-            Product product = new Product()
+            var product = new Product()
             {
                 DateCreated = DateTime.Now,
                 DateClose = DateTime.Now.AddDays(2),
@@ -72,14 +65,9 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             return new BoolResult(true);
         }
 
-        public async Task<ResponseData<List<PurchaseTypeResponseDto>>> GetAllPurchaseTypes()
+        public async Task<List<PurchaseTypeResponseDto>> GetAllPurchaseTypes()
         {
-            List<PurchaseTypeResponseDto> converted = new List<PurchaseTypeResponseDto>();
-            List<PurchaseType> list = await _purchaseTypeDb.GetAll();
-            foreach (PurchaseType type in list)
-                converted.Add(new PurchaseTypeResponseDto() { Id = type.Id, Name = type.Type });
-
-            return new ResponseData<List<PurchaseTypeResponseDto>>() { Data = converted };
+            return (await _purchaseTypeDb.GetAll()).Select(x => new PurchaseTypeResponseDto { Id = x.Id, Name = x.Type }).ToList(); 
         }
 
         public async Task<List<ProductStateDto>> GetProductStates()

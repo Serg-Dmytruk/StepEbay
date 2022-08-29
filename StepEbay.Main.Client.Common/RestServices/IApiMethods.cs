@@ -37,12 +37,12 @@ namespace StepEbay.Main.Client.Common.RestServices
         Task<ApiResponse<List<ProductStateDto>>> GetProductStates();
 
         [Post("/person/update/{person}")]
-        Task<ApiResponse<BoolResult>> TryUpdate(PersonUpdateRequestDto person);
+        Task<ApiResponse<ResponseData>> TryUpdate(PersonUpdateRequestDto person);
 
         [Post("/person/get")]
         Task<ApiResponse<PersonResponseDto>> GetPersonToUpdateInCabinet();
 
-        [Post("/product/add/{product}")]
+        [Post("/product/add")]
         Task<ApiResponse<BoolResult>> AddProduct(ProductDto product);
 
         [Get("/product/type")]

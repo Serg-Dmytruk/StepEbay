@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Person;
+using System.Net;
 
 namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
 {
@@ -30,23 +31,18 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
             this.StateHasChanged();
         }
 
+        //TODO перобити на бінди
         protected async Task UpdatePerson()
         {
-            _message = "Message: ";
-
-            PersonUpdateRequestDto request = new PersonUpdateRequestDto() { NickName = _niknameValue, Email = _emailValue, Password = _passwordValue, PasswordRepeat = _passwordRepeatValue, FullName = _nameValue, Adress = _adressValue, OldPasswordForConfirm = _passwordConfirmValue };
+            var request = new PersonUpdateRequestDto() { NickName = _niknameValue, Email = _emailValue, Password = _passwordValue, PasswordRepeat = _passwordRepeatValue, FullName = _nameValue, Adress = _adressValue, OldPasswordForConfirm = _passwordConfirmValue };
             var result = await _apiService.ExecuteRequest(() => _apiService.ApiMethods.TryUpdate(request));
 
-            if (result.Data.Value)
-            {
-                _message += "Updated";
-            }
-            else
-            {
-                _message += result.Data.ErrorMessage;
-            }
+            if (result.StatusCode != HttpStatusCode.OK)
+                _message = result.Errors.First().Value.First();
 
-            this.StateHasChanged();
+            _message = "Updated";
+
+            StateHasChanged();
         }
     }
 }

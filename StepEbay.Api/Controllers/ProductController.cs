@@ -17,14 +17,10 @@ namespace StepEbay.Main.Api.Controllers
             _productService = productService;
         }
 
-        [HttpPost("add/{product}")]
+        [HttpPost("add")]
         public async Task<BoolResult> AddProduct([FromBody] ProductDto product)
         {
-            product.OwnerId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
-            if (product.Image == null)
-                product.Image = "none";
-
-            return await _productService.AddProduct(product);
+            return await _productService.AddProduct(int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value), product);
         }
 
         [HttpGet("categories")]
@@ -46,7 +42,7 @@ namespace StepEbay.Main.Api.Controllers
         }
 
         [HttpGet("type")]
-        public async Task<ResponseData<List<PurchaseTypeResponseDto>>> GetAllPurchaseTypes()
+        public async Task<List<PurchaseTypeResponseDto>> GetAllPurchaseTypes()
         {
             return await _productService.GetAllPurchaseTypes();
         }
