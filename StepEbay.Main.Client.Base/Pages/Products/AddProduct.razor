@@ -1,12 +1,12 @@
 ﻿<h3>Add announcement</h3>
-<span>Image:</span><input type="image" @bind="_image"/><br/>
-<span>Title:</span><input @bind="_title" /><br />
-<span>Description:</span><input @bind="_description" /><br />
-<span>Price:</span><input type="number" @bind="_price" /><br />
-<span>Count:</span><input type="number" @bind="_count" /><br />
-<span>By now:</span><input type="checkbox" @bind="_byNow"/><br />
+<span>Image:</span><input type="image" @bind="request.Image"/><br/>
+<span>Title:</span><input @bind="request.Title" /><br />
+<span>Description:</span><input @bind="request.Description" /><br />
+<span>Price:</span><input type="number" @bind="request.Price" /><br />
+<span>Count:</span><input type="number" @bind="request.Count" /><br />
+<span>By now:</span><input type="checkbox" @bind="request.ByNow"/><br />
 <span>Category</span>
-<select @bind="_categoryId">
+<select @bind="request.CategoryId">
     @foreach (var item in _categories)
     {
         <option value="@item.Id">
@@ -16,7 +16,7 @@
 </select>
 <br />
 <span>State</span>
-<select @bind="_stateId">
+<select @bind="request.StateId">
     @foreach (var item in _states)
     {
         <option value="@item.Id">
@@ -26,7 +26,7 @@
 </select>
 <br />
 <span>Type</span>
-<select @bind="_typeId">
+<select @bind="request.PurchaseTypeId">
     @foreach (var item in _types)
     {
         <option value="@item.Id">

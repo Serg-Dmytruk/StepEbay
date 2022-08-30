@@ -43,7 +43,7 @@ namespace StepEbay.Main.Client.Common.RestServices
         Task<ApiResponse<PersonResponseDto>> GetPersonToUpdateInCabinet();
 
         [Post("/product/add")]
-        Task<ApiResponse<BoolResult>> AddProduct(ProductDto product);
+        Task<ApiResponse<ResponseData>> AddProduct(ProductDto product);
 
         [Get("/product/type")]
         Task<ApiResponse<List<PurchaseTypeResponseDto>>> GetAllPurchaseTypes();

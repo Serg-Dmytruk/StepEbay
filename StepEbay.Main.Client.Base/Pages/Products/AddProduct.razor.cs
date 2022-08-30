@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Product;
+using System.Net;
 
 namespace StepEbay.Main.Client.Base.Pages.Products
 {
@@ -9,21 +10,13 @@ namespace StepEbay.Main.Client.Base.Pages.Products
     [Authorize]
     public partial class AddProduct
     {
-        [Inject] IApiService _apiService { get; set; }
-        List<CategoryDto> _categories { get; set; }
-        List<ProductStateDto> _states { get; set; }
-        List<PurchaseTypeResponseDto> _types { get; set; }
+        [Inject] private IApiService _apiService { get; set; }
+        private List<CategoryDto> _categories { get; set; }
+        private List<ProductStateDto> _states { get; set; }
+        private List<PurchaseTypeResponseDto> _types { get; set; }
 
-        private string _image;
-        private string _title;
-        private string _description;
-        private decimal _price;
-        private bool _byNow;
-        private int _count;
-        private int _categoryId;
-        private int _stateId;
-        private int _typeId;
-
+        private ProductDto request = new ProductDto();
+   
         private string message;
 
         public AddProduct()
@@ -44,42 +37,17 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
         private async void Submith()
         {
-            ProductDto request = new ProductDto()
-            {
-                Image = _image,
-                Title = _title,
-                Description = _description,
-                Price = _price,
-                ByNow = _byNow,
-                Count = _count,
-                CategoryId = _categoryId,
-                StateId = _stateId,
-                PurchaseTypeId = _typeId
-            };
-
             var result = await _apiService.ExecuteRequest(() => _apiService.ApiMethods.AddProduct(request));
 
-            if (result.Data.Value)
-            {
+            if (result.StatusCode != HttpStatusCode.OK)
+                message = result.Errors.First().Value.First();
+
                 message = "Advierment added";
-                ClearFields();
-            }
-            else
-            {
-                message = result.Data.ErrorMessage;
-            }
         }
         private void ClearFields()
         {
-            _image = "";
-            _title = "";
-            _description = "";
-            _price = 0;
-            _byNow = false;
-            _count = 0;
-            _categoryId = 0;
-            _stateId = 0;
-            this.StateHasChanged();
+            request = new();
+            StateHasChanged();
         }
     }
 }

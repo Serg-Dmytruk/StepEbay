@@ -17,12 +17,10 @@ namespace StepEbay.Main.Api.Controllers
             _personService = personService;
         }
 
-        [HttpPost("update/{person}")]
-        public async Task<BoolResult> TryUpdate([FromBody] PersonUpdateRequestDto person)
+        [HttpPost("update")]
+        public async Task<ResponseData> TryUpdate([FromBody] PersonUpdateRequestDto person)
         {
-            int id = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
-
-            return await _personService.TryUpdate(id, person);
+            return await _personService.TryUpdate(int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value), person);
         }
 
         [HttpPost("get")]
