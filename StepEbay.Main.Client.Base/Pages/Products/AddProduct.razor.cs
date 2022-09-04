@@ -46,7 +46,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             if (result.StatusCode != HttpStatusCode.OK)
                 message = result.Errors.First().Value.First();
             else
-                message = "Advierment added";
+                message = "Товар додано";
         }
         private void ClearFields()
         {

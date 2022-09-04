@@ -33,7 +33,7 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
             if (result.StatusCode != HttpStatusCode.OK)
                 _message = result.Errors.First().Value.First();
             else
-                _message = "Updated";
+                _message = "Обновлено";
 
             StateHasChanged();
         }
