@@ -1,18 +1,18 @@
 ﻿<h3>PersonalAccount</h3>
-<input type="text" placeholder="username" @bind-value="_niknameValue" />
+<input type="text" placeholder="username" @bind-value="_request.NickName" />
 <br />
-<input type="email" placeholder="email" @bind-value="_emailValue" />
+<input type="email" placeholder="email" @bind-value="_request.Email" />
 <br />
-<input type="password" placeholder="password" @bind-value="_passwordValue" />
+<input type="password" placeholder="password" @bind-value="_request.Password" />
 <br />
-<input type="password" placeholder="passwordRepeat" @bind-value="_passwordRepeatValue" />
+<input type="password" placeholder="passwordRepeat" @bind-value="_request.PasswordRepeat" />
 <br />
-<input type="text" placeholder="full name" @bind-value="_nameValue" />
+<input type="text" placeholder="full name" @bind-value="_request.FullName" />
 <br />
-<input type="text" placeholder="adress" @bind-value="_adressValue" />
+<input type="text" placeholder="adress" @bind-value="_request.Adress" />
 <br />
 <hr />
-<input type="password" placeholder="old password for confirm" @bind-value="_passwordConfirmValue" />
+<input type="password" placeholder="old password for confirm" @bind-value="_request.OldPasswordForConfirm" />
 <br />
 <hr />
 <p>@_message</p>

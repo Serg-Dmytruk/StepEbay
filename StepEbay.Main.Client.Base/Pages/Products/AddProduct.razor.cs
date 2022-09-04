@@ -32,7 +32,11 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             _states = (await _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetProductStates())).Data;
             _types = (await _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetAllPurchaseTypes())).Data;
 
-            this.StateHasChanged();
+            request.CategoryId = _categories.FirstOrDefault().Id;
+            request.StateId = _states.FirstOrDefault().Id;
+            request.PurchaseTypeId = _types.FirstOrDefault().Id;
+
+            StateHasChanged();
         }
 
         private async void Submith()
@@ -41,7 +45,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
             if (result.StatusCode != HttpStatusCode.OK)
                 message = result.Errors.First().Value.First();
-
+            
                 message = "Advierment added";
         }
         private void ClearFields()
