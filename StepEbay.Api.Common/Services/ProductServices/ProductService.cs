@@ -32,7 +32,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
             return  new PaginatedList<ProductDto>
             {
-                List = products.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, ByNow = x.ByNow, Count = x.Count, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated }).Skip(page * 3).Take(3).ToList(),
+                List = products.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated }).Skip(page * 3).Take(3).ToList(),
                 CountAll = products.Count()
             };
         }
@@ -42,7 +42,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             return (await _categoryDb.GetAll()).Select(x => new CategoryDto { Id = x.Id, Name = x.Name}).ToList();
         }
 
-        public async Task<BoolResult> AddProduct(int ownerId, ProductDto productRequest)
+        public async Task<ResponseData> AddProduct(int ownerId, ProductDto productRequest)
         {
             var product = new Product()
             {
@@ -52,17 +52,15 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                 Title = productRequest.Title,
                 Description = productRequest.Description,
                 Price = productRequest.Price,
-                ByNow = productRequest.ByNow,
-                Count = productRequest.Count,
                 CategoryId = productRequest.CategoryId,
                 ProductStateId = productRequest.StateId,
                 PurchaseTypeId = productRequest.PurchaseTypeId,
-                OwnerId = productRequest.OwnerId
+                OwnerId = ownerId
             };
 
             await _productDb.Add(product);
 
-            return new BoolResult(true);
+            return ResponseData.Ok();
         }
 
         public async Task<List<PurchaseTypeResponseDto>> GetAllPurchaseTypes()

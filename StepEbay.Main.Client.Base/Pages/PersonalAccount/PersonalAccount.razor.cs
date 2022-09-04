@@ -22,7 +22,7 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
             _request.FullName = person.Name;
             _request.Adress = person.Adress;
 
-            this.StateHasChanged();
+            StateHasChanged();
         }
 
         //TODO перобити на бінди
@@ -32,8 +32,8 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
 
             if (result.StatusCode != HttpStatusCode.OK)
                 _message = result.Errors.First().Value.First();
-
-            _message = "Updated";
+            else
+                _message = "Updated";
 
             StateHasChanged();
         }

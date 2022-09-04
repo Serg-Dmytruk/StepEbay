@@ -20,43 +20,54 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
         {
             User updateEntity = await _userDbService.Get(id);
 
-            if (!BC.Verify(personUpdateRequest.OldPasswordForConfirm, updateEntity.Password))
+            if (string.IsNullOrEmpty(personUpdateRequest.OldPasswordForConfirm) || !BC.Verify(personUpdateRequest.OldPasswordForConfirm, updateEntity.Password))
                 return ResponseData.Fail("password", "Wrong confirmation password");
 
-            if (personUpdateRequest.Password == null)
+            if (string.IsNullOrEmpty(personUpdateRequest.Password))
             {
                 personUpdateRequest.Password = updateEntity.Password;
                 personUpdateRequest.PasswordRepeat = updateEntity.Password;
             }
 
-            AuthValidator validator = new AuthValidator();
+            var validator = new AuthValidator();
 
-            var result = await validator.ValidateAsync(new SignUpRequestDto() { Id = id, NickName = personUpdateRequest.NickName, Email = personUpdateRequest.Email, Password = personUpdateRequest.Password, CopyPassword = personUpdateRequest.PasswordRepeat, FullName = personUpdateRequest.FullName });
+            var result = await validator.ValidateAsync(new SignUpRequestDto()
+            {
+                Id = id,
+                NickName = personUpdateRequest.NickName,
+                Email = personUpdateRequest.Email,
+                Password = personUpdateRequest.Password,
+                CopyPassword = personUpdateRequest.PasswordRepeat,
+                FullName = personUpdateRequest.FullName
+            });
 
             if (!result.IsValid)
-                return ResponseData.Fail("password", result.Errors.FirstOrDefault().ToString());
-
-            bool emailConfirm = true;
-            if (personUpdateRequest.Email == updateEntity.Email)
-                emailConfirm = false;
+                return ResponseData.Fail("password", result.Errors.First().ToString());
 
             updateEntity.NickName = personUpdateRequest.NickName;
             updateEntity.Email = personUpdateRequest.Email;
             updateEntity.Password = BC.HashPassword(personUpdateRequest.Password);
             updateEntity.FullName = personUpdateRequest.FullName;
             updateEntity.Adress = personUpdateRequest.Adress;
-            updateEntity.IsEmailConfirmed = emailConfirm;
 
-            await _userDbService.Update(updateEntity);
+            if (personUpdateRequest.Email != updateEntity.Email)
+                updateEntity.IsEmailConfirmed = false;
+
+            //await _userDbService.Update(updateEntity);
 
             return ResponseData.Ok();
         }
 
-        public async Task<ResponseData<PersonResponseDto>> GetPersonToUpdateInCabinet(int id)
+        public async Task<PersonResponseDto> GetPersonToUpdateInCabinet(int id)
         {
-            var middlProcessUser = await _userDbService.Get(id);
-
-            return new ResponseData<PersonResponseDto>() { Data = new PersonResponseDto() { Adress = middlProcessUser.Adress, Email = middlProcessUser.Email, Name = middlProcessUser.FullName, NickName = middlProcessUser.NickName } };
+            var user = await _userDbService.Get(id);
+            return new PersonResponseDto()
+            {
+                Adress = user.Adress,
+                Email = user.Email,
+                Name = user.FullName,
+                NickName = user.NickName
+            };
         }
     }
 }

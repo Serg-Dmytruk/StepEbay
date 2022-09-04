@@ -16,7 +16,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         private List<PurchaseTypeResponseDto> _types { get; set; }
 
         private ProductDto request = new ProductDto();
-   
+
         private string message;
 
         public AddProduct()
@@ -45,7 +45,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
             if (result.StatusCode != HttpStatusCode.OK)
                 message = result.Errors.First().Value.First();
-            
+            else
                 message = "Advierment added";
         }
         private void ClearFields()

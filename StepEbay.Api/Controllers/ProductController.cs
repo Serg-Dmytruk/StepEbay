@@ -18,7 +18,7 @@ namespace StepEbay.Main.Api.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<BoolResult> AddProduct([FromBody] ProductDto product)
+        public async Task<ResponseData> AddProduct([FromBody] ProductDto product)
         {
             return await _productService.AddProduct(int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value), product);
         }
