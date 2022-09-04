@@ -23,21 +23,10 @@ namespace StepEbay.Main.Api.Controllers
             return await _personService.TryUpdate(int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value), person);
         }
 
-        [HttpPost("get")]
-        public async Task<ResponseData<PersonResponseDto>> GetPersonToUpdateInCabinet()
+        [HttpGet("get")]
+        public async Task<PersonResponseDto> GetPersonToUpdateInCabinet()
         {
-            int id = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
-
-            return await _personService.GetPersonToUpdateInCabinet(id);
-        }
-
-        //TODO
-        [HttpGet("setble/{nik}")]
-        public async Task<ResponseData<BoolResult>> ifSeatebleNukname(string nik)
-        {
-            //    return new BoolResult(true); /*{ Value = false /*await _personService.ifValidNikname(nik) }*/
-            //}
-            return null;
+            return await _personService.GetPersonToUpdateInCabinet(int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value));
         }
     }
 }

@@ -15,8 +15,6 @@ namespace StepEbay.Data.Models.Products
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public bool ByNow { get; set; }
-        public int Count { get; set; }
         public DateTime? DateClose { get; set; }
         public bool IsActive { get; set; }
 

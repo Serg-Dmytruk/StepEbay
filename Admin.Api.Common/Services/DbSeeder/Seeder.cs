@@ -155,7 +155,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             await _context.SaveChangesAsync();
         }
 
-        private async Task AddProduct(string title, string image, decimal price, int count, bool byNow, string desc)
+        private async Task AddProduct(string title, string image, decimal price, string desc)
         {
             var states = await _productStateDbService.GetAll();
             var categories = await _categoryDbService.GetAll();
@@ -173,8 +173,6 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Price = price,
                     Category = categories[rand.Next(0, categories.Count())],
                     ProductState = states[rand.Next(0, states.Count())],
-                    Count = count,
-                    ByNow = byNow,
                     Description = desc,
                     PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                     DateClose = DateTime.UtcNow.AddDays(1)
@@ -185,15 +183,15 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddProducts()
         {
-            await AddProduct("Кіндер Сюрприз", "none", 25, 200, true, "опис відсутній");
-            await AddProduct("Шоколад Мілка", "none", 40, 200, true, "з арахісовим маслом");
-            await AddProduct("Морські камінці", "none", 20, 200, true, "ціна за 100г");
-            await AddProduct("Пістолет", "none", 250, 100, true, "револьвер, пістони");
-            await AddProduct("Лазерний меч", "none", 800, 50, true, "меч з зоряних війн");
-            await AddProduct("Набір: маленький лікар", "none", 500, 15, true, "опис відсутній");
-            await AddProduct("Witcher 3", "none", 500, 15, true, "гра witcher 3, steam");
-            await AddProduct("Підписка Netflix", "none", 100, 15, true, "термін підписки: 2 місяці");
-            await AddProduct("Steam картка - 25$", "none", 1000, 70, true, "опис відсутній");
+            await AddProduct("Кіндер Сюрприз", "none", 25, "опис відсутній");
+            await AddProduct("Шоколад Мілка", "none", 40, "з арахісовим маслом");
+            await AddProduct("Морські камінці", "none", 20, "ціна за 100г");
+            await AddProduct("Пістолет", "none", 250, "револьвер, пістони");
+            await AddProduct("Лазерний меч", "none", 800, "меч з зоряних війн");
+            await AddProduct("Набір: маленький лікар", "none", 500, "опис відсутній");
+            await AddProduct("Witcher 3", "none", 500, "гра witcher 3, steam");
+            await AddProduct("Підписка Netflix", "none", 100, "термін підписки: 2 місяці");
+            await AddProduct("Steam картка - 25$", "none", 1000, "опис відсутній");
         }
 
         private async Task AddUser(string userName, string pass, string fullName, string email, string _role)

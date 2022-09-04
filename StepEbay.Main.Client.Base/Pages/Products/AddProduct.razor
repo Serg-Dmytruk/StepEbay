@@ -3,8 +3,6 @@
 <span>Title:</span><input @bind="request.Title" /><br />
 <span>Description:</span><input @bind="request.Description" /><br />
 <span>Price:</span><input type="number" @bind="request.Price" /><br />
-<span>Count:</span><input type="number" @bind="request.Count" /><br />
-<span>By now:</span><input type="checkbox" @bind="request.ByNow"/><br />
 <span>Category</span>
 <select @bind="request.CategoryId">
     @foreach (var item in _categories)
