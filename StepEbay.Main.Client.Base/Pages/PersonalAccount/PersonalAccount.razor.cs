@@ -34,7 +34,7 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
                 _messageService.ShowError("Помилка", result.Errors.First().Value.First());
             else
             {
-                _messageService.ShowSuccsess("Успіх!", "Товар додано");
+                _messageService.ShowSuccsess("Успіх!", "Акаунт оновлено");
                 _request = new();
                 StateHasChanged();
             }
