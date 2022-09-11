@@ -69,6 +69,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
         {
             await AddUser("admin", "123456qQ", "admin_admin", "adminmail@gmail.com", AccountRolesConstant.ADMIN);
             await AddUser("user_user", "123456qQ", "user_user", "usermail@gmail.com", AccountRolesConstant.MANAGER);
+            await AddUser("new_user", "123456qQ", "new_user", "new_user@gmail.com", AccountRolesConstant.MANAGER);
         }
 
         public async Task AddPurchesState()

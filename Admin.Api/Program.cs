@@ -49,14 +49,14 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-/*if (app.Configuration.GetSection("UseSeed").Get<bool>())
+if (app.Configuration.GetSection("UseSeed").Get<bool>())
 {
     using (var seederService = app.Services.CreateScope())
     {
         var seeder = seederService.ServiceProvider.GetRequiredService<ISeeder>();
         await seeder.SeedApplication();
     }
-}*/
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
