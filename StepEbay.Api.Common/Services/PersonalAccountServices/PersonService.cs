@@ -19,6 +19,7 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
         public async Task<ResponseData> TryUpdate(int id, PersonUpdateRequestDto personUpdateRequest)
         {
             User updateEntity = await _userDbService.Get(id);
+            bool hashed = false;
 
             if (string.IsNullOrEmpty(personUpdateRequest.OldPasswordForConfirm) || !BC.Verify(personUpdateRequest.OldPasswordForConfirm, updateEntity.Password))
                 return ResponseData.Fail("password", "Wrong confirmation password");
@@ -27,6 +28,7 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
             {
                 personUpdateRequest.Password = updateEntity.Password;
                 personUpdateRequest.PasswordRepeat = updateEntity.Password;
+                hashed = true;
             }
 
             var validator = new AuthValidator();
@@ -46,14 +48,17 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
 
             updateEntity.NickName = personUpdateRequest.NickName;
             updateEntity.Email = personUpdateRequest.Email;
-            updateEntity.Password = BC.HashPassword(personUpdateRequest.Password);
+            if (hashed)
+                updateEntity.Password = personUpdateRequest.Password;
+            else
+                updateEntity.Password = BC.HashPassword(personUpdateRequest.Password);
             updateEntity.FullName = personUpdateRequest.FullName;
             updateEntity.Adress = personUpdateRequest.Adress;
 
             if (personUpdateRequest.Email != updateEntity.Email)
                 updateEntity.IsEmailConfirmed = false;
 
-            //await _userDbService.Update(updateEntity);
+            await _userDbService.Update(updateEntity);
 
             return ResponseData.Ok();
         }

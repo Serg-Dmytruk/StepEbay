@@ -33,9 +33,12 @@ namespace StepEbay.Worker.HostedService
             await Task.WhenAll(Task.Run(() => CloseBets(), stoppingToken));
         }
 
-        private async Task InvopkeBetIvent(List<int> users)
+        private async Task InvopkeBetIvent(List<int> users, List<int> owners)
         {
-            await _betHubClient.SendBetInfo(users.Distinct().ToList());
+            if(users.Any())
+                await _betHubClient.SendBetInfo(users.Distinct().ToList());
+            if (owners.Any())
+                await _betHubClient.SendOwnerInfo(owners.Distinct().ToList());
         }
 
         private async Task CloseBets()
@@ -70,15 +73,16 @@ namespace StepEbay.Worker.HostedService
                         await dbTransaction.CommitAsync();
 
                         var users = bets.Select(x => x.UserId).ToList();
+                        var owners = bets.Select(x => x.Product.OwnerId).ToList();
 
-                        if (users.Any())
-                            await InvopkeBetIvent(users);
+                        await InvopkeBetIvent(users, owners);
 
                         await Task.Delay(500);
                     }
                     catch (Exception e)
                     {
                         _logger.LogError(e.Message);
+                        await dbTransaction.RollbackAsync();
                         await Task.Delay(1000);
                     }
                 }

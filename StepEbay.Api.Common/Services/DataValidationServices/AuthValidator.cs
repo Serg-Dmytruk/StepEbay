@@ -9,19 +9,19 @@ namespace StepEbay.Main.Api.Common.Services.DataValidationServices
         {
             RuleFor(data => data.Id).NotNull();
             //Обов'язкові поля
-            RuleFor(data => data.FullName).NotEmpty().WithMessage("EmptyFullName");
-            RuleFor(data => data.NickName).NotEmpty().WithMessage("EmptyNickName");
-            RuleFor(data => data.Password).NotEmpty().WithMessage("EmptyPassword");
-            RuleFor(data => data.Email).NotEmpty().WithMessage("EmptyMail");
+            RuleFor(data => data.FullName).NotEmpty().WithMessage("Ім'я пусте");
+            RuleFor(data => data.NickName).NotEmpty().WithMessage("Nick name пусте");
+            RuleFor(data => data.Password).NotEmpty().WithMessage("Пароль пусте");
+            RuleFor(data => data.Email).NotEmpty().WithMessage("Пошта пуста");
             //Довжина поля
-            RuleFor(data => data.FullName).Length(3, 30).WithMessage("LengthFullName");
-            RuleFor(data => data.NickName).Length(5, 30).WithMessage("LengthNickName");
-            RuleFor(data => data.Password).MinimumLength(8).WithMessage("LengthPassword");
+            RuleFor(data => data.FullName).Length(3, 30).WithMessage("Довжина ім'я неправильна");
+            RuleFor(data => data.NickName).Length(5, 30).WithMessage("Довжина nick name неправильне");
+            RuleFor(data => data.Password).MinimumLength(8).WithMessage("Довжина пароль неправильне");
             //Ключові символи
-            RuleFor(data => data.Password).Matches("[A-Z]").Matches("[a-z]").Matches("[0-9]").WithMessage("AgreementsPassword");
-            RuleFor(data => data.Email).EmailAddress().WithMessage("AgreementsMail");
+            RuleFor(data => data.Password).Matches("[A-Z]").Matches("[a-z]").Matches("[0-9]").WithMessage("Пароль не має буков верхньго, нижнього регістра, або чисел");
+            RuleFor(data => data.Email).EmailAddress().WithMessage("Пошта не правельна");
             //Копія
-            RuleFor(data => data.CopyPassword).Equal(data => data.Password).WithMessage("CopyPassword");
+            RuleFor(data => data.CopyPassword).Equal(data => data.Password).WithMessage("Паролі не співпадають");
         }
     }
 }

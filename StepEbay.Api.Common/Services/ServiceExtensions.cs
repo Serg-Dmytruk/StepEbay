@@ -11,6 +11,7 @@ using StepEbay.Main.Api.Common.Services.PersonalAccountServices;
 using StepEbay.Main.Common.Models.Auth;
 using StepEbay.Main.Api.Common.Models.HubContainers;
 using StepEbay.Data.Common.Services.BetsDbServices;
+using StepEbay.Main.Common.Models.Product;
 
 namespace StepEbay.Main.Api.Common.Services
 {
@@ -25,6 +26,7 @@ namespace StepEbay.Main.Api.Common.Services
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IValidator<SignUpRequestDto>, AuthValidator>();
+            services.AddTransient<IValidator<ProductDto>, ProductValidator>();
             services.AddSingleton<HubUserContainer>();
             return services;
         }

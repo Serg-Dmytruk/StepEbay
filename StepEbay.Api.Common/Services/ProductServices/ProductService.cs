@@ -4,6 +4,7 @@ using StepEbay.Data.Common.Services.BetsDbServices;
 using StepEbay.Data.Common.Services.ProductDbServices;
 using StepEbay.Data.Models.Bets;
 using StepEbay.Data.Models.Products;
+using StepEbay.Main.Api.Common.Services.DataValidationServices;
 using StepEbay.Main.Common.Models.Product;
 
 namespace StepEbay.Main.Api.Common.Services.ProductServices
@@ -30,7 +31,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
         {
             var products = await _productDb.GetFilteredProducts(info);
 
-            return  new PaginatedList<ProductDto>
+            return new PaginatedList<ProductDto>
             {
                 List = products.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated }).Skip(page * 3).Take(3).ToList(),
                 CountAll = products.Count()
@@ -39,11 +40,19 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
         public async Task<List<CategoryDto>> GetCategoryList()
         {
-            return (await _categoryDb.GetAll()).Select(x => new CategoryDto { Id = x.Id, Name = x.Name}).ToList();
+            return (await _categoryDb.GetAll()).Select(x => new CategoryDto { Id = x.Id, Name = x.Name }).ToList();
         }
 
         public async Task<ResponseData> AddProduct(int ownerId, ProductDto productRequest)
         {
+            productRequest.OwnerId = ownerId;
+
+            ProductValidator validator = new();
+            validator.Validate(productRequest);
+            var result = validator.Validate(productRequest);
+            if (!result.IsValid)
+                return ResponseData.Fail("Product", result.Errors.First().ErrorMessage);
+
             var product = new Product()
             {
                 DateCreated = DateTime.Now,
@@ -55,7 +64,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                 CategoryId = productRequest.CategoryId,
                 ProductStateId = productRequest.StateId,
                 PurchaseTypeId = productRequest.PurchaseTypeId,
-                OwnerId = ownerId
+                OwnerId = productRequest.OwnerId
             };
 
             await _productDb.Add(product);
@@ -65,7 +74,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
         public async Task<List<PurchaseTypeResponseDto>> GetAllPurchaseTypes()
         {
-            return (await _purchaseTypeDb.GetAll()).Select(x => new PurchaseTypeResponseDto { Id = x.Id, Name = x.Type }).ToList(); 
+            return (await _purchaseTypeDb.GetAll()).Select(x => new PurchaseTypeResponseDto { Id = x.Id, Name = x.Type }).ToList();
         }
 
         public async Task<List<ProductStateDto>> GetProductStates()

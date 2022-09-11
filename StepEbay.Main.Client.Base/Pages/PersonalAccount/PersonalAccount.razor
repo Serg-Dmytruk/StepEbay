@@ -1,19 +1,18 @@
-﻿<h3>PersonalAccount</h3>
-<input type="text" placeholder="username" @bind-value="_niknameValue" />
+﻿<h3>Акаунт</h3>
+<input type="text" placeholder="nick name" @bind-value="_request.NickName" />
 <br />
-<input type="email" placeholder="email" @bind-value="_emailValue" />
+<input type="email" placeholder="Пошта" @bind-value="_request.Email" />
 <br />
-<input type="password" placeholder="password" @bind-value="_passwordValue" />
+<input type="password" placeholder="Пароль" @bind-value="_request.Password" />
 <br />
-<input type="password" placeholder="passwordRepeat" @bind-value="_passwordRepeatValue" />
+<input type="password" placeholder="Повторіть пароль" @bind-value="_request.PasswordRepeat" />
 <br />
-<input type="text" placeholder="full name" @bind-value="_nameValue" />
+<input type="text" placeholder="Повне Ім'я" @bind-value="_request.FullName" />
 <br />
-<input type="text" placeholder="adress" @bind-value="_adressValue" />
-<br />
-<hr />
-<input type="password" placeholder="old password for confirm" @bind-value="_passwordConfirmValue" />
+<input type="text" placeholder="Адреса" @bind-value="_request.Adress" />
 <br />
 <hr />
-<p>@_message</p>
-<button @onclick="UpdatePerson">Change</button>
+<input type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
+<br />
+<hr />
+<button @onclick="UpdatePerson">Змінити</button>

@@ -19,5 +19,11 @@ namespace StepEbay.Main.Api.Common.Hubs
             await _hubContext.Clients.Clients(
                 _hubUserContainer.Users.Where(x => users.Contains(x.Value)).Select(x => x.Key)).SendAsync("MyBetClosed");
         }
+
+        public async Task OwnerClosed(List<int> owners)
+        {
+            await _hubContext.Clients.Clients(
+                _hubUserContainer.Users.Where(x => owners.Contains(x.Value)).Select(x => x.Key)).SendAsync("OwnerClosed");
+        }
     }
 }

@@ -1,9 +1,9 @@
-﻿<h3>Add announcement</h3>
-<span>Image:</span><input type="image" @bind="request.Image"/><br/>
-<span>Title:</span><input @bind="request.Title" /><br />
-<span>Description:</span><input @bind="request.Description" /><br />
-<span>Price:</span><input type="number" @bind="request.Price" /><br />
-<span>Category</span>
+﻿<h3>Додати продукт</h3>
+<span>Картинка:</span><input type="image" @bind="request.Image"/><br/>
+<span>Заголовок:</span><input @bind="request.Title" /><br />
+<span>Опис:</span><input @bind="request.Description" /><br />
+<span>Ціна:</span><input type="number" @bind="request.Price" /><br />
+<span>Категорія:</span>
 <select @bind="request.CategoryId">
     @foreach (var item in _categories)
     {
@@ -13,7 +13,7 @@
     }
 </select>
 <br />
-<span>State</span>
+<span>Статус:</span>
 <select @bind="request.StateId">
     @foreach (var item in _states)
     {
@@ -23,7 +23,7 @@
     }
 </select>
 <br />
-<span>Type</span>
+<span>Тип:</span>
 <select @bind="request.PurchaseTypeId">
     @foreach (var item in _types)
     {
@@ -33,6 +33,5 @@
     }
 </select>
 <button @onclick="Submith">
-    Submith
+    Додати
 </button>
-<h3>@message</h3>

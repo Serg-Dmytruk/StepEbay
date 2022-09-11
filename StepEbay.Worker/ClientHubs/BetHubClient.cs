@@ -48,5 +48,13 @@ namespace StepEbay.Worker.ClientHubs
         {
             await _connection.InvokeAsync("MyBetClosed", users);
         }
+
+        /// <summary>
+        /// Повідомлення власнику товара що аукціон чи купівля завершена
+        /// </summary>
+        public async Task SendOwnerInfo(List<int> owners)
+        {
+            await _connection.InvokeAsync("OwnerClosed", owners);
+        }
     }
 }
