@@ -49,9 +49,9 @@ namespace StepEbay.Main.Api.Controllers
         }
 
         [HttpGet("personal/products")]
-        public async Task<PaginatedList<ProductDto>> GetPersonalProducts(int page)
+        public async Task<PaginatedList<ProductDto>> GetPersonalProducts(int page, bool active, bool closed)
         {
-            return await _productService.GetPersonalProductList(int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value), page);
+            return await _productService.GetPersonalProductList(int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value), page, active, closed);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace StepEbay.Main.Client.Common.RestServices
         Task<ApiResponse<List<PurchaseTypeResponseDto>>> GetAllPurchaseTypes();
 
         [Get("/product/personal/products")]
-        Task<ApiResponse<PaginatedList<ProductDto>>> GetPersonalProduct(int page);
+        Task<ApiResponse<PaginatedList<ProductDto>>> GetPersonalProduct(int page, bool active, bool closed);
     }
 }
 

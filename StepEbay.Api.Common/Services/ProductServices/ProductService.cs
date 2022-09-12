@@ -85,11 +85,17 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             return productStates.Select(x => new ProductStateDto { Id = x.Id, Name = x.Name }).ToList();
         }
 
-        public async Task<PaginatedList<ProductDto>> GetPersonalProductList(int id, int page)
+        public async Task<PaginatedList<ProductDto>> GetPersonalProductList(int id, int page, bool active, bool closed)
         {
             var purchases = await _purchaseDb.GetPurchaseByUserId(id);
             var products = await _productDb.GetProducts();
             var productList = products.Where(p => purchases.Any(purch => purch.PoductId == p.Id)).ToList();
+
+            if (active is true && closed is false)
+                productList = productList.Where(p => p.DateClose > DateTime.UtcNow).ToList();
+            if (active is false && closed is true)
+                productList = productList.Where(p => p.DateClose < DateTime.UtcNow).ToList();
+
 
             return new PaginatedList<ProductDto>
             {

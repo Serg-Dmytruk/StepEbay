@@ -12,6 +12,6 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
         public Task<List<CategoryDto>> GetCategoryList();
         public Task<ResponseData> AddProduct(int ownerId, ProductDto productRequest);
         public Task<List<PurchaseTypeResponseDto>> GetAllPurchaseTypes();
-        public Task<PaginatedList<ProductDto>> GetPersonalProductList(int id, int page);
+        public Task<PaginatedList<ProductDto>> GetPersonalProductList(int id, int page, bool active, bool closed);
     }
 }
