@@ -48,13 +48,11 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
 
             updateEntity.NickName = personUpdateRequest.NickName;
             updateEntity.Email = personUpdateRequest.Email;
+            updateEntity.Password = personUpdateRequest.Password;
             if (hashed)
-                updateEntity.Password = personUpdateRequest.Password;
-            else
-                updateEntity.Password = BC.HashPassword(personUpdateRequest.Password);
+                updateEntity.Password = BC.HashPassword(updateEntity.Password);
             updateEntity.FullName = personUpdateRequest.FullName;
             updateEntity.Adress = personUpdateRequest.Adress;
-
             if (personUpdateRequest.Email != updateEntity.Email)
                 updateEntity.IsEmailConfirmed = false;
 
