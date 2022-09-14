@@ -1,0 +1,80 @@
+﻿input, button {
+  all: unset;
+}
+
+.modalWindow {
+  position: relative;
+  width: 400px;
+  height: 425px;
+}
+
+.mborder {
+  border: 3px solid #2EB4AB;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+}
+
+.minput {
+  border: 2px solid #39DDD3;
+  width: 100%;
+  height: 32px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+}
+.minput:hover {
+  border-color: #A3D27F;
+}
+.minput:focus {
+  border-color: #AFC75D;
+}
+
+.mbutton {
+  background: #2EB4AB;
+  position: absolute;
+  bottom: 3%;
+  left: 115px;
+  width: 170px;
+  height: 46px;
+  border: 0px;
+  color: white;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+}
+.mbutton:hover {
+  background: #8BC65D;
+}
+.mbutton:active {
+  background: #AFC75D;
+}
+
+.mMainHeader {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+}
+
+.errorP {
+  margin-bottom: 2px;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1px;
+  text-align: center;
+  color: #E41B1B;
+}
