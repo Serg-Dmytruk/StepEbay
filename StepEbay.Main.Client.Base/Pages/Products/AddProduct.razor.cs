@@ -48,13 +48,9 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             else
             {
                 _messageService.ShowSuccsess("Успіх!", "Товар додано");
-                ClearFields();
+                request = new();
+                StateHasChanged();
             }
-        }
-        private void ClearFields()
-        {
-            request = new();
-            StateHasChanged();
         }
     }
 }
