@@ -18,6 +18,7 @@ namespace StepEbay.Main.Client.Common.ClientsHub
             _connection.KeepAliveInterval = new TimeSpan(0, 0, 1);
 
             _connection.On("MyBetClosed", () => MyBetClosed.Invoke());
+            _connection.On("OwnerClosed", () => OwnerClosed.Invoke());
 
             _connection.Closed += async error =>
             {
@@ -26,8 +27,8 @@ namespace StepEbay.Main.Client.Common.ClientsHub
             };
         }
 
-
         public event Func<Task> MyBetClosed;
+        public event Func<Task> OwnerClosed;
 
         public async Task Start()
         {

@@ -22,6 +22,7 @@ namespace StepEbay.Main.Client.Shared
             if (firstRender)
             {
                 HubClient.MyBetClosed += MyBetClosed;
+                HubClient.OwnerClosed += OwnerClosed;
             }
 
             //UserName = await LocalStorage.GetLocal("username");
@@ -50,6 +51,11 @@ namespace StepEbay.Main.Client.Shared
         private async Task LogIn()
         {
 
+        }
+
+        private async Task OwnerClosed()
+        {
+            MessageService.ShowInfo("ТОВАР КУПЛУНО", "НАЗВА ТОВАРУ коли купили");
         }
 
         private async Task MyBetClosed()

@@ -12,5 +12,6 @@
         public int OwnerId { get; set; }
         public int PurchaseTypeId { get; set; }
         public DateTime DateCreated { get; set; }
+        public DateTime DateClosed { get; set; }
     }
 }

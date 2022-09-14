@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StepEbay.Common.Models.Pagination;
 using StepEbay.Common.Models.RefitModels;
+using StepEbay.Data.Models.Users;
 using StepEbay.Main.Api.Common.Services.ProductServices;
 using StepEbay.Main.Common.Models.Product;
 using System.Security.Claims;
@@ -45,6 +46,12 @@ namespace StepEbay.Main.Api.Controllers
         public async Task<List<PurchaseTypeResponseDto>> GetAllPurchaseTypes()
         {
             return await _productService.GetAllPurchaseTypes();
+        }
+
+        [HttpGet("personal/products")]
+        public async Task<PaginatedList<ProductDto>> GetPersonalProducts(int page, bool active, bool closed)
+        {
+            return await _productService.GetPersonalProductList(int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value), page, active, closed);
         }
     }
 }
