@@ -3,3 +3,10 @@
 <p>@product.Description</p>
 <p>Дата публікації: @product.Price</p>
 <p>Ціна: @product.Price</p>
+@if (product.PurchaseTypeId == 1)
+{
+	<button>Купити зараз</button>
+}
+else if(product.PurchaseTypeId==2){
+	<button>Поставити ставку</button>
+}
