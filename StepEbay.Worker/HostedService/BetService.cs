@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using StepEbay.Common.Constans;
+using StepEbay.Common.Models.ProductInfo;
 using StepEbay.Data;
 using StepEbay.Worker.ClientHubs;
-
 
 namespace StepEbay.Worker.HostedService
 {
@@ -30,18 +30,18 @@ namespace StepEbay.Worker.HostedService
 
         private async Task StartScanningBets(CancellationToken stoppingToken)
         {
-            await Task.WhenAll(Task.Run(() => CloseBets(), stoppingToken));
+            await Task.WhenAll(Task.Run(() => CloseBuying(), stoppingToken));
         }
 
-        private async Task InvopkeBetIvent(List<int> users, List<int> owners)
+        private async Task InvopkeBetIvent(List<ProductInfo> users, List<ProductInfo> owners)
         {
-            if(users.Any())
-                await _betHubClient.SendBetInfo(users.Distinct().ToList());
+            if (users.Any())
+                await _betHubClient.SendBetInfo(users);
             if (owners.Any())
-                await _betHubClient.SendOwnerInfo(owners.Distinct().ToList());
+                await _betHubClient.SendOwnerInfo(owners);
         }
 
-        private async Task CloseBets()
+        private async Task CloseBuying()
         {
             while (true)
             {
@@ -54,26 +54,20 @@ namespace StepEbay.Worker.HostedService
 
                     try
                     {
-                        var products = await db.Products.Include(x => x.PurchaseType).Include(x => x.ProductState)
-                            .Where(x => x.PurchaseType.Type == PurchaseTypesConstant.AUCTION
-                            && x.IsActive
-                            && x.DateClose <= DateTime.UtcNow.AddMinutes(-1)).ToListAsync();
+                        var purchases = await db.Purchases.Include(x => x.Product)
+                            .Where(x => x.Product.IsActive
+                            && x.Product.DateClose <= DateTime.UtcNow.AddMinutes(-1)
+                            && x.PurchaseStateId != closeId).ToListAsync();
 
-                        products.ForEach(x => x.IsActive = false);
+                        purchases.ForEach(x => { x.Product.IsActive = false; x.PurchaseStateId = closeId; });
 
-                        var bets = await db.Purchases.Include(x => x.PurchaseState)
-                            .Where(x => products.Select(p => p.Id).Contains(x.PoductId)).ToListAsync();
-
-                        bets.ForEach(x => x.PurchaseStateId = closeId);
-
-                        db.Products.UpdateRange(products);
-                        db.Purchases.UpdateRange(bets);
+                        db.Purchases.UpdateRange(purchases);
 
                         await db.SaveChangesAsync();
                         await dbTransaction.CommitAsync();
 
-                        var users = bets.Select(x => x.UserId).ToList();
-                        var owners = bets.Select(x => x.Product.OwnerId).ToList();
+                        var users = purchases.Select(x => new ProductInfo { UserId = x.UserId, ProductId = x.PoductId }).ToList();
+                        var owners = purchases.Select(x => new ProductInfo { UserId = x.Product.OwnerId, ProductId = x.PoductId }).ToList();
 
                         await InvopkeBetIvent(users, owners);
 

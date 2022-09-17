@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using StepEbay.Common.Models.ProductInfo;
 using StepEbay.Main.Api.Common.Models.HubContainers;
 
 namespace StepEbay.Main.Api.Common.Hubs
@@ -14,16 +15,24 @@ namespace StepEbay.Main.Api.Common.Hubs
             _hubUserContainer = hubUserContainer;
         }
 
-        public async Task MyBetClosed(List<int> users)
+        public async Task MyBetClosed(List<ProductInfo> users)
         {
-            await _hubContext.Clients.Clients(
-                _hubUserContainer.Users.Where(x => users.Contains(x.Value)).Select(x => x.Key)).SendAsync("MyBetClosed");
+            var connectedUsers = _hubUserContainer.Users.Where(x => users.Select(x => x.UserId).Contains(x.Value)).Select(x => x.Key);
+
+            foreach (var user in connectedUsers)
+            {
+                await _hubContext.Clients.Clients(user).SendAsync("MyBetClosed", users.Where(x => x.UserId == _hubUserContainer.Users[user]).Select(x => x.ProductId).ToList());
+            }    
         }
 
-        public async Task OwnerClosed(List<int> owners)
+        public async Task OwnerClosed(List<ProductInfo> owners)
         {
-            await _hubContext.Clients.Clients(
-                _hubUserContainer.Users.Where(x => owners.Contains(x.Value)).Select(x => x.Key)).SendAsync("OwnerClosed");
+            var connectedUsers = _hubUserContainer.Users.Where(x => owners.Select(x => x.UserId).Contains(x.Value)).Select(x => x.Key);
+
+            foreach (var user in connectedUsers)
+            {
+                await _hubContext.Clients.Clients(user).SendAsync("OwnerClosed", owners.Where(x => x.UserId == _hubUserContainer.Users[user]).Select(x => x.ProductId).ToList());
+            }
         }
     }
 }

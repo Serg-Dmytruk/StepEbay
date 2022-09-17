@@ -51,5 +51,10 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
         {
             return await _context.Products.CountAsync();
         }
+
+        public async Task<List<Product>> GetProductForInfo(List<int> products)
+        {
+            return await _context.Products.Where(x => products.Contains(x.Id)).ToListAsync();
+        }
     }
 }
