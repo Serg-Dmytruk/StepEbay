@@ -25,4 +25,8 @@
     <ProjectReference Include="..\StepEbay.Common\StepEbay.Main.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

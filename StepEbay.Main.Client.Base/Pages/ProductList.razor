@@ -1,7 +1,7 @@
 ﻿<h3>Product</h3>
 @if (!ShowPreloader)
 {
-    @foreach (var category in _productFilters.Categories)
+    @foreach (var category in ProductFilters.Categories)
     {
         <div>
             @if (category.Selected is true)
@@ -19,13 +19,13 @@
 
     <div>
         <p>Ціна від:</p>
-        <input type="number" @bind-value="_productFilters.PriceStart">
+        <input type="number" @bind-value="ProductFilters.PriceStart">
         <p>Ціна до:</p>
-        <input type="number" @bind-value="_productFilters.PriceEnd">
+        <input type="number" @bind-value="ProductFilters.PriceEnd">
     </div>
 
     <div>
-        @foreach(var state in _productFilters.States)
+        @foreach(var state in ProductFilters.States)
         {
             if(state.Selected is true){
                 <input type="checkbox" @bind-value="state.Selected" checked />
@@ -48,6 +48,9 @@
         @foreach (var product in _products.List)
         {
             <li>@product.Title</li>
+            <li>
+                <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="">
+            </li>
         }
     }
 
