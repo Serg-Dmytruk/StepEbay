@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/modale/StyleSheet.css",
+    "inputFile": "wwwroot/css/modale/StyleSheet.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/modale/modalStyle.css",
+    "inputFile": "wwwroot/css/modale/modalStyle.scss"
+  }
+]

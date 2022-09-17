@@ -28,9 +28,6 @@ namespace StepEbay.Main.Client.Common.RestServices
         [Get("/product/categories")]
         Task<ApiResponse<List<CategoryDto>>> GetCategories();
 
-        [Post("/product/all")]
-        Task<ApiResponse<PaginatedList<ProductDto>>> GetProducts(int page, string categoryId = "0");
-
         [Post("/product/filtered")]
         Task<ApiResponse<PaginatedList<ProductDto>>> GetProductsWithFilters(ProductFilterInfo info, int page);
 
@@ -48,6 +45,12 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Get("/product/type")]
         Task<ApiResponse<List<PurchaseTypeResponseDto>>> GetAllPurchaseTypes();
+
+        [Get("/product/personal/products")]
+        Task<ApiResponse<PaginatedList<ProductDto>>> GetPersonalProduct(int page, bool active, bool closed);
+
+        [Get("/product/{id}")]
+        Task<ApiResponse<ProductDto>> GetProduct(int id);
 
         [Multipart]
         [Post("/image/upload")]

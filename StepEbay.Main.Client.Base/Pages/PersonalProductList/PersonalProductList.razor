@@ -1,0 +1,33 @@
+﻿<h3>PersonalProductList</h3>
+
+<div>
+    @if (_filters.Active is true)
+    {
+        <input type="checkbox" @bind-value="_filters.Active" checked />
+    }
+    else
+    {
+        <input type="checkbox" @bind-value="_filters.Active" />
+    }
+    <label>Активні</label>
+    
+    @if (_filters.Closed is true)
+    {
+        <input type="checkbox" @bind-value="_filters.Closed" checked />
+    }
+    else
+    {
+        <input type="checkbox" @bind-value="_filters.Closed" />
+    }
+    <label>Закінчені</label>
+    <button @onclick="GetAllUserProducts">Прийняти</button>
+</div>
+
+<div>
+    @foreach(var product in _products.List)
+    {
+        <li>@product.Title</li>
+        <li>@product.DateClosed</li>
+    }
+</div>
+
