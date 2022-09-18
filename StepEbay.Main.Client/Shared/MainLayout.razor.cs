@@ -4,7 +4,6 @@ using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Bet;
 using StepEbay.PushMessage.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,6 +26,7 @@ namespace StepEbay.Main.Client.Shared
             {
                 HubClient.MyBetClosed += MyBetClosed;
                 HubClient.OwnerClosed += OwnerClosed;
+                HubClient.OwnerDeactivate += OwnerDeactivate;
             }
 
             //UserName = await LocalStorage.GetLocal("username");
@@ -77,5 +77,18 @@ namespace StepEbay.Main.Client.Shared
                     MessageService.ShowInfo($"ТОВАР ПРИДБАНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
             }
         }
+
+        private async void OwnerDeactivate(List<int> ownerDeactivate)
+        {
+            var products = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductInfo(new ProductInfoDto { ProductIds = ownerDeactivate }))).Data;
+
+            foreach (var product in products)
+            {
+                if (product.PurchaseTypeId == 2)
+                    MessageService.ShowWarning($"ТОВАР ДЕАКТИВОВАНО ЗАВЕРШЕНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
+              
+            }
+        }
+        
     }
 }

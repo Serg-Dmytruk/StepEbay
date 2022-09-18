@@ -47,7 +47,8 @@ namespace StepEbay.Worker.ClientHubs
         /// </summary>
         public async  Task SendBetInfo(List<ProductInfo> users)
         {
-            await _connection.InvokeAsync("MyBetClosed", users);
+           if(_connection.State == HubConnectionState.Connected)
+                await _connection.InvokeAsync("MyBetClosed", users);
         }
 
         /// <summary>
@@ -55,7 +56,17 @@ namespace StepEbay.Worker.ClientHubs
         /// </summary>
         public async Task SendOwnerInfo(List<ProductInfo> owners)
         {
-            await _connection.InvokeAsync("OwnerClosed", owners);
+            if (_connection.State == HubConnectionState.Connected)
+                await _connection.InvokeAsync("OwnerClosed", owners);
+        }
+
+        /// <summary>
+        /// Повідомлення власнику товара що аукціон чи купівля деактивована
+        /// </summary>
+        public async Task SendOwnerClose(List<ProductInfo> owners)
+        {
+            if (_connection.State == HubConnectionState.Connected)
+                await _connection.InvokeAsync("OwnerDeactivate", owners);
         }
     }
 }

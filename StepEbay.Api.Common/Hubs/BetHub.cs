@@ -34,5 +34,15 @@ namespace StepEbay.Main.Api.Common.Hubs
                 await _hubContext.Clients.Clients(user).SendAsync("OwnerClosed", owners.Where(x => x.UserId == _hubUserContainer.Users[user]).Select(x => x.ProductId).ToList());
             }
         }
+
+        public async Task OwnerDeactivate(List<ProductInfo> owners)
+        {
+            var connectedUsers = _hubUserContainer.Users.Where(x => owners.Select(x => x.UserId).Contains(x.Value)).Select(x => x.Key);
+
+            foreach (var user in connectedUsers)
+            {
+                await _hubContext.Clients.Clients(user).SendAsync("OwnerDeactivate", owners.Where(x => x.UserId == _hubUserContainer.Users[user]).Select(x => x.ProductId).ToList());
+            }
+        }
     }
 }
