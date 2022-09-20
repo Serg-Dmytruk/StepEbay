@@ -1,8 +1,4 @@
-﻿input, button {
-  all: unset;
-}
-
-.modalWindow {
+﻿.modalWindow {
   position: relative;
   width: 400px;
   height: 425px;

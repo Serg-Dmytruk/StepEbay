@@ -19,9 +19,9 @@
 
     <div>
         <p>Ціна від:</p>
-        <input type="number" @bind-value="ProductFilters.PriceStart">
+        <input type="number" @bind-value="ProductFilters.PriceStart"/>
         <p>Ціна до:</p>
-        <input type="number" @bind-value="ProductFilters.PriceEnd">
+        <input type="number" @bind-value="ProductFilters.PriceEnd"/>
     </div>
 
     <div>
@@ -47,13 +47,12 @@
     {
         @foreach (var product in _products.List)
         {
-            <li>@product.Title</li>
             <li>
-                <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="">
+                @product.Title
+                <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt=""/>
             </li>
         }
     }
-
 }
 else
 {
