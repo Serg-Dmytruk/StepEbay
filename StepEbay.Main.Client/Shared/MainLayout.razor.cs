@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Main.Client.Common.ClientsHub;
 using StepEbay.Main.Client.Common.Providers;
+using StepEbay.Main.Client.Common.RestServices;
+using StepEbay.Main.Common.Models.Bet;
 using StepEbay.PushMessage.Services;
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +17,7 @@ namespace StepEbay.Main.Client.Shared
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
         [Inject] private IMessageService MessageService { get; set; }
+        [Inject] private IApiService ApiService { get; set; }
         private string UserName { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -23,6 +26,7 @@ namespace StepEbay.Main.Client.Shared
             {
                 HubClient.MyBetClosed += MyBetClosed;
                 HubClient.OwnerClosed += OwnerClosed;
+                HubClient.OwnerDeactivate += OwnerDeactivate;
             }
 
             //UserName = await LocalStorage.GetLocal("username");
@@ -53,14 +57,38 @@ namespace StepEbay.Main.Client.Shared
 
         }
 
-        private async Task OwnerClosed()
+        private async void OwnerClosed(List<int> productInfo)
         {
-            MessageService.ShowInfo("ТОВАР КУПЛУНО", "НАЗВА ТОВАРУ коли купили");
+            var products = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductInfo(new ProductInfoDto { ProductIds = productInfo }))).Data;
+
+            foreach(var product in products) 
+                MessageService.ShowInfo($"ВАШ ТОВАР КУПЛЕНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
         }
 
-        private async Task MyBetClosed()
+        private async void MyBetClosed(List<int> productInfo)
         {
-            MessageService.ShowInfo("АУКЦІОН ЗАВЕРШЕНО", "НАЗВА ТОВАРУ програв чи виграв");
+            var products = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductInfo(new ProductInfoDto { ProductIds = productInfo }))).Data;
+
+            foreach (var product in products)
+            {
+                if(product.PurchaseTypeId == 2)
+                    MessageService.ShowInfo($"АУКЦІОН ЗАВЕРШЕНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
+                if (product.PurchaseTypeId == 1)
+                    MessageService.ShowInfo($"ТОВАР ПРИДБАНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
+            }
         }
+
+        private async void OwnerDeactivate(List<int> ownerDeactivate)
+        {
+            var products = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductInfo(new ProductInfoDto { ProductIds = ownerDeactivate }))).Data;
+
+            foreach (var product in products)
+            {
+                if (product.PurchaseTypeId == 2)
+                    MessageService.ShowWarning($"ТОВАР ДЕАКТИВОВАНО ЗАВЕРШЕНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
+              
+            }
+        }
+        
     }
 }

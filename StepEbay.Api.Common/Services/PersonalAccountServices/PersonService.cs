@@ -1,9 +1,12 @@
 ﻿using StepEbay.Common.Models.RefitModels;
+using StepEbay.Data.Common.Services.ProductDbServices;
 using StepEbay.Data.Common.Services.UserDbServices;
 using StepEbay.Data.Models.Users;
 using StepEbay.Main.Api.Common.Services.DataValidationServices;
 using StepEbay.Main.Common.Models.Auth;
+using StepEbay.Main.Common.Models.Bet;
 using StepEbay.Main.Common.Models.Person;
+using StepEbay.Main.Common.Models.Product;
 using BC = BCrypt.Net.BCrypt;
 
 namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
@@ -11,9 +14,11 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
     public class PersonService : IPersonService
     {
         IUserDbService _userDbService;
-        public PersonService(IUserDbService userDbService)
+        IProductDbService _productDbService;
+        public PersonService(IUserDbService userDbService, IProductDbService productDbService)
         {
             _userDbService = userDbService;
+            _productDbService = productDbService;
         }
 
         public async Task<ResponseData> TryUpdate(int id, PersonUpdateRequestDto personUpdateRequest)
@@ -71,6 +76,24 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
                 Name = user.FullName,
                 NickName = user.NickName
             };
+        }
+
+        public async Task<List<ProductDto>> GetProductsInfo(ProductInfoDto productInfos)
+        {
+            return (await _productDbService.GetProductForInfo(productInfos.ProductIds)).Select(x => new ProductDto
+            {
+                Id = x.Id,
+                Image = x.Image,
+                Title = x.Title,
+                Description = x.Description,
+                Price = x.Price,
+                CategoryId = x.CategoryId,
+                StateId = x.ProductStateId,
+                OwnerId = x.OwnerId,
+                PurchaseTypeId = x.PurchaseTypeId,
+                DateCreated = x.DateCreated,
+                DateClosed = x.DateClose.Value
+            }).ToList();
         }
     }
 }

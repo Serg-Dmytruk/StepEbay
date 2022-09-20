@@ -2,6 +2,8 @@
 using StepEbay.Common.Models.Pagination;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Common.Models.Auth;
+using StepEbay.Main.Common.Models.Bet;
+using StepEbay.Main.Common.Models.Image;
 using StepEbay.Main.Common.Models.Person;
 using StepEbay.Main.Common.Models.Product;
 
@@ -47,6 +49,16 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Get("/product/personal/products")]
         Task<ApiResponse<PaginatedList<ProductDto>>> GetPersonalProduct(int page, bool active, bool closed);
+
+        [Get("/product/{id}")]
+        Task<ApiResponse<ProductDto>> GetProduct(int id);
+
+        [Multipart]
+        [Post("/image/upload")]
+        Task<ApiResponse<ImageResponseDto>> UploadImage(StreamPart file);
+
+        [Post("/person/info")]
+        Task<ApiResponse<List<ProductDto>>> GetProductInfo(ProductInfoDto productInfos);
     }
 }
 

@@ -9,7 +9,7 @@ namespace StepEbay.PushMessage.Components
     {
         [Inject] IMessageService MessageService { get; set; }
         [Parameter] public MessagePosition Position { get; set; } = MessagePosition.BottomRight;
-        [Parameter] public int TimeOut { get; set; } = 5;
+        [Parameter] public int TimeOut { get; set; } = 100;
 
         private string PositionClass { get; set; } = string.Empty;
 

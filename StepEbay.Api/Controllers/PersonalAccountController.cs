@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Main.Api.Common.Services.PersonalAccountServices;
+using StepEbay.Main.Common.Models.Bet;
 using StepEbay.Main.Common.Models.Person;
+using StepEbay.Main.Common.Models.Product;
 using System.Security.Claims;
 
 namespace StepEbay.Main.Api.Controllers
@@ -27,6 +29,12 @@ namespace StepEbay.Main.Api.Controllers
         public async Task<PersonResponseDto> GetPersonToUpdateInCabinet()
         {
             return await _personService.GetPersonToUpdateInCabinet(int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value));
+        }
+
+        [HttpPost("info")]
+        public async Task<List<ProductDto>> GetProductsInfo([FromBody] ProductInfoDto productInfos)
+        {
+            return await _personService.GetProductsInfo(productInfos);
         }
     }
 }

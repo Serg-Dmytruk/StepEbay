@@ -1,11 +1,19 @@
-﻿<h3>Додати продукт</h3>
-<span>Картинка:</span><input type="image" @bind="request.Image"/><br/>
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+<h3>Додати продукт</h3>
+<InputFile AdditionalAttributes="LogoAttributes" OnChange="UploadImage"/>
+<div>
+    <p></p>
+    <div>
+        <img src="@(string.IsNullOrEmpty(request.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{request.Image}")" alt="">
+    </div>
+</div>
 <span>Заголовок:</span><input @bind="request.Title" /><br />
 <span>Опис:</span><input @bind="request.Description" /><br />
 <span>Ціна:</span><input type="number" @bind="request.Price" /><br />
 <span>Категорія:</span>
 <select @bind="request.CategoryId">
-    @foreach (var item in _categories)
+    @foreach (var item in Categories)
     {
         <option value="@item.Id">
             @item.Name
@@ -15,7 +23,7 @@
 <br />
 <span>Статус:</span>
 <select @bind="request.StateId">
-    @foreach (var item in _states)
+    @foreach (var item in States)
     {
         <option value="@item.Id">
             @item.Name
@@ -25,7 +33,7 @@
 <br />
 <span>Тип:</span>
 <select @bind="request.PurchaseTypeId">
-    @foreach (var item in _types)
+    @foreach (var item in Types)
     {
         <option value="@item.Id">
             @item.Name

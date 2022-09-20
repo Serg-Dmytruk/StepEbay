@@ -53,5 +53,11 @@ namespace StepEbay.Main.Api.Controllers
         {
             return await _productService.GetPersonalProductList(int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value), page, active, closed);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ResponseData<ProductDto>> GetProduct(int id)
+        {
+            return await _productService.GetProduct(id);
+        }
     }
 }

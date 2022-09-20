@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using StepEbay.Common.Models.ProductInfo;
 
 namespace StepEbay.Worker.ClientHubs
 {
@@ -44,17 +45,28 @@ namespace StepEbay.Worker.ClientHubs
         /// <summary>
         /// Повідомлення про подію завершення аукціону
         /// </summary>
-        public async  Task SendBetInfo(List<int> users)
+        public async  Task SendBetInfo(List<ProductInfo> users)
         {
-            await _connection.InvokeAsync("MyBetClosed", users);
+           if(_connection.State == HubConnectionState.Connected)
+                await _connection.InvokeAsync("MyBetClosed", users);
         }
 
         /// <summary>
         /// Повідомлення власнику товара що аукціон чи купівля завершена
         /// </summary>
-        public async Task SendOwnerInfo(List<int> owners)
+        public async Task SendOwnerInfo(List<ProductInfo> owners)
         {
-            await _connection.InvokeAsync("OwnerClosed", owners);
+            if (_connection.State == HubConnectionState.Connected)
+                await _connection.InvokeAsync("OwnerClosed", owners);
+        }
+
+        /// <summary>
+        /// Повідомлення власнику товара що аукціон чи купівля деактивована
+        /// </summary>
+        public async Task SendOwnerClose(List<ProductInfo> owners)
+        {
+            if (_connection.State == HubConnectionState.Connected)
+                await _connection.InvokeAsync("OwnerDeactivate", owners);
         }
     }
 }
