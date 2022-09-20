@@ -6,6 +6,8 @@
     <NotAuthorized>
         <div class="modalLogWindow">
             <div class="mborder">
+                 <p class="mMainHeader">З поверненням!</p>
+                 <p class="mMainHeader2">Для входу заповни тут:</p>
                 @if (!ShowPreloader)
                 {
                     @if (ShowModal)
@@ -20,8 +22,6 @@
                     </div>
                     <div><input type="checkbox" style="cursor: pointer" @bind="RememberMe" /> Запам'ятати</div>
                     <button class="mbutton" @onclick="SignInRequest">Увійти</button>
-                    <button class="mbutton" @onclick="SignInRequestAdmin">Увійти як Адміністратор</button>
-                    <button class="mbutton" @onclick="SignInRequestUser">Увійти як Користувач</button>
                 }
                 else
                 {
@@ -31,7 +31,8 @@
                 }
             </div>
         </div>
-
+                    <button class="mbutton" @onclick="SignInRequestAdmin">Увійти як Адміністратор</button>
+                    <button class="mbutton" @onclick="SignInRequestUser">Увійти як Користувач</button>
     </NotAuthorized>
 </AuthorizeView>
 
