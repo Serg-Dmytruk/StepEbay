@@ -85,15 +85,16 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
         {
             var user = await _userDbService.GetUserByNickName("admin");
             var product = await _context.Products.Include(x => x.PurchaseType).FirstOrDefaultAsync(x => x.PurchaseType.Type == PurchaseTypesConstant.AUCTION);
-
-            await _purchesDbService.Add(new Purchase
+            if (!await _purchesDbService.Any(product.Id))
             {
-                PoductId = product.Id,
-                UserId = user.Id,
-                PurchasePrice = product.Price,
-                PurchaseState = await _context.PurchaseStates.FirstOrDefaultAsync(x => x.State == "open"),              
-            });
-
+                await _purchesDbService.Add(new Purchase
+                {
+                    PoductId = product.Id,
+                    UserId = user.Id,
+                    PurchasePrice = product.Price,
+                    PurchaseState = await _context.PurchaseStates.FirstOrDefaultAsync(x => x.State == "open"),
+                });
+            }
         }
 
         public async Task AddPurchesType()
@@ -109,38 +110,17 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddCategories()
         {
-            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.FOOD))
-                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.FOOD });
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.TELEPHONE))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.TELEPHONE });
 
-            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.FORKIDS))
-                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.FORKIDS });
-
-            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.FORGAMERS))
-                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.FORGAMERS });
-
-            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.INDUSTRIAL))
-                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.INDUSTRIAL });
-
-            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.FASHION))
-                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.FASHION });
-
-            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.HEALTHANDBUATY))
-                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.HEALTHANDBUATY });
-
-            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.HOMEANDGARDEN))
-                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.HOMEANDGARDEN });
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.CLOTH))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.CLOTH });
 
             if (!await _categoryDbService.AnyByName(ProductCategoryConstant.SPORT))
                 await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.SPORT });
 
-            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.AUTOANDPARTS))
-                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.AUTOANDPARTS });
-
-            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.COLLECTIBLE))
-                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.COLLECTIBLE });
-
-            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.ELECTRONIC))
-                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.ELECTRONIC });
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.BUATY))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.BUATY });
 
             await _context.SaveChangesAsync();
         }
@@ -156,10 +136,10 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             await _context.SaveChangesAsync();
         }
 
-        private async Task AddProduct(string title, string image, decimal price, string desc)
+        private async Task AddProduct(string title, string image, decimal price, string desc, string category)
         {
             var states = await _productStateDbService.GetAll();
-            var categories = await _categoryDbService.GetAll();
+            var categorie = await _categoryDbService.GetByName(category);
             var purchaseTypes = await _purchesTypeDbService.GetAll();
             var rand = new Random();
 
@@ -172,27 +152,27 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Title = title,
                     Image = image,
                     Price = price,
-                    Category = categories[rand.Next(0, categories.Count())],
+                    Category = categorie,
                     ProductState = states[rand.Next(0, states.Count())],
                     Description = desc,
                     PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
                     DateClose = DateTime.UtcNow.AddDays(1)
-                }) ;
+                });
 
             await _context.SaveChangesAsync();
         }
 
         public async Task AddProducts()
         {
-            await AddProduct("Кіндер Сюрприз", "none", 25, "опис відсутній");
-            await AddProduct("Шоколад Мілка", "none", 40, "з арахісовим маслом");
-            await AddProduct("Морські камінці", "none", 20, "ціна за 100г");
-            await AddProduct("Пістолет", "none", 250, "револьвер, пістони");
-            await AddProduct("Лазерний меч", "none", 800, "меч з зоряних війн");
-            await AddProduct("Набір: маленький лікар", "none", 500, "опис відсутній");
-            await AddProduct("Witcher 3", "none", 500, "гра witcher 3, steam");
-            await AddProduct("Підписка Netflix", "none", 100, "термін підписки: 2 місяці");
-            await AddProduct("Steam картка - 25$", "none", 1000, "опис відсутній");
+            await AddProduct("Nokia 2310", "none", 7500, "Смартфон Nokia 2310", ProductCategoryConstant.TELEPHONE);
+            await AddProduct("Спортивна куртка", "none", 600, "Спортивна куртка Nike", ProductCategoryConstant.CLOTH);
+            await AddProduct("Баскетбольний м'яч", "none", 400, "Баскетбольний м'яч Sporty", ProductCategoryConstant.SPORT);
+            await AddProduct("Крем для рук", "none", 130, "Крем для рук Viche", ProductCategoryConstant.BUATY);
+            await AddProduct("Футбольний м'яч", "none", 800, "Футбольний м'яч Sporty", ProductCategoryConstant.SPORT);
+            await AddProduct("Джинси жіночі", "none", 500, "Джинси Jins", ProductCategoryConstant.CLOTH);
+            await AddProduct("Sony 5510", "none", 15600, "Смартфон Sony 5510", ProductCategoryConstant.TELEPHONE);
+            await AddProduct("Крем для ніг", "none", 100, "Крем для ніг Viche", ProductCategoryConstant.BUATY);
+            await AddProduct("Мило Viche", "none", 40, "Мило Viche", ProductCategoryConstant.BUATY);
         }
 
         private async Task AddUser(string userName, string pass, string fullName, string email, string _role)
