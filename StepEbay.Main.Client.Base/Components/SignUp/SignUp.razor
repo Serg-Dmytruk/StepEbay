@@ -1,0 +1,108 @@
+﻿<div class="modalWindow">
+    <div class="mborder">
+        <p class="mMainHeader">Швидше заповняй та заходь до нас! </p>
+        @if (!ShowPreloader)
+        {
+            @if (Errors.Count > 0)
+            {
+                //<ModalDialog Title="@_errors.FirstOrDefault().Key" Text="@_errors.FirstOrDefault().Value" OnClose='@CloseModal' />
+                //Нікнейм
+                <div class="minputDiv">
+                    @if (@Errors.Any(e => e.Value.Contains("EmptyNickName")))
+                    {
+                        <p class="errorP">Обов'язкове поле!</p>
+                    }
+                    else if (@Errors.Any(e => e.Value.Contains("LengthNickName")))
+                    {
+                        <p class="errorP">5 - 30 символів!</p>
+                    }
+                    <input class="minput" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
+                </div>
+
+
+                //Повне ім'я
+                <div class="minputDiv">
+                    @if (@Errors.Any(e => e.Value.Contains("EmptyFullName")))
+                    {
+                        <p class="errorP">Обов'язкове поле!</p>
+                    }
+                    else if (@Errors.Any(e => e.Value.Contains("LengthFullName")))
+                    {
+                        <p class="errorP">3 - 30 символів!</p>
+                    }
+                    <input class="minput" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
+                </div>
+
+
+                //Електронна пошта
+
+                <div class="minputDiv">
+                    @if (@Errors.Any(e => e.Value.Contains("AgreementsMail")))
+                    {
+                        <p class="errorP">Невірний формат електронного адресу</p>
+                    }
+                    <input class="minput" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
+                </div>
+
+
+                //Пароль
+                <div class="minputDiv">
+                    @if (@Errors.Any(e => e.Value.Contains("EmptyPassword")))
+                    {
+                    <p class="errorP">Обов'язкове поле!</p>
+                    }
+                    else if (@Errors.Any(e => e.Value.Contains("LengthPassword")))
+                    {
+                    <p class="errorP">Мінімум 3 символи!</p>
+                    }
+                    else if (@Errors.Any(e => e.Value.Contains("AgreementsPassword")))
+                    {
+                    <p class="errorP">Мінімум 8 сим. Обов'язково(велика, маленька, цифра)</p>
+                    }
+                    <input class="minput" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
+                </div>
+
+                //Копія паролю
+                <div class="minputDiv">
+                    @if (@Errors.Any(e => e.Value.Contains("CopyPassword")))
+                    {
+                    <p class="errorP">Паролі не співпадають</p>
+                    }
+                    <input class="minput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
+                </div>
+                <button class="mbutton" @onclick="SignUpRequest">Зареєструватися</button>
+            }
+            else
+            {
+
+                <div class="minputDiv">
+                    <input class="minput" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
+                </div>
+                <div class="minputDiv">
+                    <input class="minput" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
+                </div>
+                <div class="minputDiv">
+                    <input class="minput" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
+                </div>
+                <div class="minputDiv">
+                    <input class="minput" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
+                </div>
+                <div class="minputDiv">
+                    <input class="minput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
+                </div>
+                <button class="mbutton" @onclick="SignUpRequest">Зареєструватися</button>
+            }
+
+            @if (ShowModal && Errors.Count == 0)
+            {
+                <ModalDialog Title="Успішно" Text="RegMess" OnClose='@CloseModal' />
+            }
+        }
+        else
+        {
+            <div class="spinner-border centerOnParrentHorizontal" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        }
+    </div>
+</div>
