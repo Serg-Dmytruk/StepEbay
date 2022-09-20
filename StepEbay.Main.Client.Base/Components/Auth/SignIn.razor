@@ -4,28 +4,32 @@
     <Redirect Url="@($"https://{DomainOptions.Value.Main}")" />
     </Authorized>*@
     <NotAuthorized>
-        <div class="divCenter">
-            @if (!ShowPreloader)
-            {
-                @if (ShowModal)
+        <div class="modalLogWindow">
+            <div class="mborder">
+                @if (!ShowPreloader)
                 {
-                    <ModalDialog Title="@_errors.FirstOrDefault().Key" Text="@_errors.FirstOrDefault().Value" OnClose='@CloseModal' />
+                    @if (ShowModal)
+                    {
+                        <ModalDialog Title="@_errors.FirstOrDefault().Key" Text="@_errors.FirstOrDefault().Value" OnClose='@CloseModal' />
+                    }
+                    <div class="minputDiv">
+                        <input class="minput" type="text" @bind="SignInRequestDto.NickName" placeholder="Нікнейм" />
+                    </div>
+                    <div class="minputDiv">
+                        <input class="minput" type="password" @bind="SignInRequestDto.Password" placeholder="Пароль" />
+                    </div>
+                    <div><input type="checkbox" style="cursor: pointer" @bind="RememberMe" /> Запам'ятати</div>
+                    <button class="mbutton" @onclick="SignInRequest">Увійти</button>
+                    <button class="mbutton" @onclick="SignInRequestAdmin">Увійти як Адміністратор</button>
+                    <button class="mbutton" @onclick="SignInRequestUser">Увійти як Користувач</button>
                 }
-                <input class="myInput" type="text" @bind="SignInRequestDto.NickName" placeholder="Нікнейм" />
-                <input class="myInput" type="password" @bind="SignInRequestDto.Password" placeholder="Пароль" />
-                <span><input type="checkbox" style="cursor: pointer" class="myInput" @bind="RememberMe" /> Запам'ятати</span>
-
-                <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignInRequest">Увійти</button>
-                <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignInRequestAdmin">Увійти як Адміністратор</button>
-                <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SignInRequestUser">Увійти як Користувач</button>
-                <a href="/signup">Реєстрація</a>
-            }
-            else
-            {
-                <div class="spinner-border centerOnParrentHorizontal" role="status">
-                    <span class="sr-only">Завантаження...</span>
-                </div>
-            }
+                else
+                {
+                    <div class="spinner-border centerOnParrentHorizontal" role="status">
+                        <span class="sr-only">Завантаження...</span>
+                    </div>
+                }
+            </div>
         </div>
 
     </NotAuthorized>

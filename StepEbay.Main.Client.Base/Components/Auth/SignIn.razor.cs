@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Common.Storages;
 using StepEbay.Main.Client.Base.Layout;
+using StepEbay.Main.Client.Common.Options;
 using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Auth;
 using System.Net;
-using Microsoft.Extensions.Options;
-using StepEbay.Main.Client.Common.Options;
-using StepEbay.Main.Client.Common.ClientsHub;
 
 namespace StepEbay.Main.Client.Base.Components.Auth
 {
