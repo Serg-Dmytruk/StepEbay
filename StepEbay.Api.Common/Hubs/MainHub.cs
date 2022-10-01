@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using StepEbay.Main.Api.Common.Models.HubContainers;
+using Microsoft.AspNetCore.SignalR;
 
 namespace StepEbay.Main.Api.Common.Hubs
 {
     [Authorize]
-    public class MainHub : Microsoft.AspNetCore.SignalR.Hub
+    public class MainHub : Hub
     {
         private readonly HubUserContainer _hubUserContainer;
 

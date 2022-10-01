@@ -69,5 +69,6 @@ app.MapControllers();
 
 app.MapHub<BetHub>("/bet/hub");
 app.MapHub<MainHub>("/main/hub");
+app.MapHub<PriceHub>("/price/hub");
 
 app.Run();

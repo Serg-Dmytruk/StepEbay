@@ -29,7 +29,10 @@ namespace StepEbay.Main.Api.Common.Services
             services.AddTransient<IValidator<SignUpRequestDto>, AuthValidator>();
             services.AddTransient<IValidator<ProductDto>, ProductValidator>();
             services.AddTransient<IFileService, FileService>();
+
             services.AddSingleton<HubUserContainer>();
+            services.AddSingleton<PriceUserContainer>();
+
             return services;
         }
 
