@@ -68,5 +68,14 @@ namespace StepEbay.Worker.ClientHubs
             if (_connection.State == HubConnectionState.Connected)
                 await _connection.InvokeAsync("OwnerDeactivate", owners);
         }
+
+        /// <summary>
+        /// Повідомлення про зміну ціни на аукціоні
+        /// </summary>
+        public async Task SendPriceChanged(List<ChangedPrice> prices)
+        {
+            if (_connection.State == HubConnectionState.Connected)
+                await _connection.InvokeAsync("ChangedPrice", prices);
+        }
     }
 }
