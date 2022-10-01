@@ -13,6 +13,7 @@ namespace StepEbay.Main.Client.Shared
     public partial class MainLayout
     {
         // [Inject] private LocalStorage LocalStorage { get; set; }
+        [Inject] private PriceHubClient PriceHubClient { get; set; }
         [Inject] private HubClient HubClient { get; set; }
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
@@ -37,6 +38,8 @@ namespace StepEbay.Main.Client.Shared
             {
                 await HubClient.Start();
             }
+
+            await PriceHubClient.Start();
 
             StateHasChanged();
 
@@ -86,7 +89,7 @@ namespace StepEbay.Main.Client.Shared
             {
                 if (product.PurchaseTypeId == 2)
                     MessageService.ShowWarning($"ТОВАР ДЕАКТИВОВАНО ЗАВЕРШЕНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
-              
+
             }
         }
         

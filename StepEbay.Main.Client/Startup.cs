@@ -51,6 +51,7 @@ namespace StepEbay.Main.Client
             services.AddScoped<AuthenticationStateProvider>(p => (TokenProvider)p.GetService<ITokenProvider>());
             services.AddScoped<SemaphoreManager>();
             services.AddScoped<HubClient>();
+            services.AddScoped<PriceHubClient>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

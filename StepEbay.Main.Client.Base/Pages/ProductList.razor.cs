@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using StepEbay.Common.Models.Pagination;
+using StepEbay.Common.Models.ProductInfo;
 using StepEbay.Main.Client.Base.Layout;
+using StepEbay.Main.Client.Common.ClientsHub;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Product;
 
@@ -15,6 +17,7 @@ namespace StepEbay.Main.Client.Base.Pages
         [Parameter] public string filter { get; set; }
         [Inject] IApiService ApiService { get; set; }
         [Inject] private IConfiguration Configuration { get; set; }
+        [Inject] private PriceHubClient PriceHubClient { get; set; }
 
         private bool ShowPreloader { get; set; } = false;
         private List<CategoryDto> _categories = new();
@@ -36,6 +39,8 @@ namespace StepEbay.Main.Client.Base.Pages
             //ShowPreloader = true;
             if (firstRender)
             {
+                PriceHubClient.ChangedPrice += ChangedPrice;
+
                 await GetCategories();
                 await GetProductStates();
                 SetDefaultFilters(_categories);
@@ -117,6 +122,17 @@ namespace StepEbay.Main.Client.Base.Pages
         {
             var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductStates());
             ProductFilters.States = responce.Data.Select(r => new State { Id = r.Id, Name = r.Name, Selected = true }).ToList();
+        }
+
+        private void ChangedPrice(List<ChangedPrice> changed)
+        {
+            _products.List.ForEach(x =>
+            {
+                var changedProduct = changed.SingleOrDefault(c => c.ProductId == x.Id);
+
+                if (changedProduct is not null)
+                    x.Price = changedProduct.Price;
+            });
         }
     }
 }
