@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StepEbay.Common.Constans;
+using StepEbay.Common.Models.ProductInfo;
 using StepEbay.Data.Common.Services.Default;
 using StepEbay.Data.Models.Products;
 using StepEbay.Main.Common.Models.Product;
@@ -36,10 +38,38 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
 
         public async Task<List<Product>> GetFilteredProducts(ProductFilterInfo info)
         {
-            var filteredList = await _context.Products.Where(product => info.Categories.Any(cId => cId == product.CategoryId) 
-            && info.States.Any(s => product.ProductStateId == s) && info.PriceStart <= product.Price && info.PriceEnd >= product.Price).ToListAsync();
+            var saleFiltered = await _context.Products.Include(p => p.PurchaseType).Where(product => info.Categories.Any(cId => cId == product.CategoryId) 
+            && info.States.Any(s => product.ProductStateId == s)
+            && info.PriceStart <= product.Price && info.PriceEnd >= product.Price
+            && product.IsActive
+            && product.PurchaseType.Type == PurchaseTypesConstant.SALE).ToListAsync();
 
-            return filteredList;
+            var autionFiltered = await _context.Products.Include(p => p.PurchaseType).Where(product => info.Categories.Any(cId => cId == product.CategoryId)
+            && info.States.Any(s => product.ProductStateId == s)
+            && info.PriceStart <= product.Price && info.PriceEnd >= product.Price
+            && product.IsActive
+            && product.PurchaseType.Type == PurchaseTypesConstant.AUCTION).ToListAsync();
+
+            var maxPrices = await _context.Purchases.Include(p => p.PurchaseState).Where(p => p.PurchaseState.State == PurchaseStatesConstant.OPEN)
+                .Where(p => autionFiltered.Select(x => x.Id).Contains(p.PoductId))
+                .GroupBy(p => p.PoductId)
+                 .Select(cp => new ChangedPrice
+                 {
+                     ProductId = cp.Key,
+                     Price = cp.Max(x => x.PurchasePrice),
+                 }).ToListAsync();
+
+            autionFiltered.ForEach(x =>
+            {
+                var price = maxPrices.SingleOrDefault(m => m.ProductId == x.Id);
+
+                if (price is not null)
+                    x.Price = price.Price;
+            });
+
+            saleFiltered.AddRange(autionFiltered);
+
+            return autionFiltered;
         }
 
         public async Task<List<Product>> GetProducts()

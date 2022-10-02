@@ -52,6 +52,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             ProductValidator validator = new();
             validator.Validate(productRequest);
             var result = validator.Validate(productRequest);
+
             if (!result.IsValid)
                 return ResponseData.Fail("Product", result.Errors.First().ErrorMessage);
 
