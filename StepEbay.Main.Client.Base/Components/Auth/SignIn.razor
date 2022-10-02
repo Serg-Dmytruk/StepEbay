@@ -1,9 +1,11 @@
-﻿
+﻿@using StepEbay.Main.Client.Base.Pages;
 <AuthorizeView>
     @*<Authorized>
     <Redirect Url="@($"https://{DomainOptions.Value.Main}")" />
     </Authorized>*@
     <NotAuthorized>
+        <div class="modal fade show" id="myModal" style="display:block; background-color: rgba(10,10,10,.8);"
+     aria-modal="true" role="dialog">
         <div class="modalLogWindow">
             <div class="mborder">
                  <p class="mMainHeader">З поверненням!</p>
@@ -22,6 +24,7 @@
                     </div>
                     <div><input type="checkbox" style="cursor: pointer" @bind="RememberMe" /> Запам'ятати</div>
                     <button class="mbutton" @onclick="SignInRequest">Увійти</button>
+                    <button class="mbutton" @onclick="ModalClose">Назад</button>
                 }
                 else
                 {
@@ -30,6 +33,7 @@
                     </div>
                 }
             </div>
+        </div>
         </div>
                     <button class="mbutton" @onclick="SignInRequestAdmin">Увійти як Адміністратор</button>
                     <button class="mbutton" @onclick="SignInRequestUser">Увійти як Користувач</button>
