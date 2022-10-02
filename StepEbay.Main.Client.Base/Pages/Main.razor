@@ -1,4 +1,5 @@
 ﻿@using StepEbay.Common.Constans
+@using StepEbay.Main.Client.Base.Components.SignUp
 <h3>Main</h3>
 
 @if (!ShowPreloader)
@@ -7,7 +8,9 @@
     {
         <ModalDialog Title="@MessageConfirmReg.FirstOrDefault().Key" Text="@MessageConfirmReg.FirstOrDefault().Value" OnClose='@CloseModal' />
     }
-
+    <div>
+        <button class="mbutton" @onclick="ShowSignIn">Увійти</button>
+    </div>
     <div>
         <a href="products/@ProductCategoryIdConstant.CLOTH"><img src="icons/category_cloth.jpg"/><div>Одяг</div></a>
         <a href="products/@ProductCategoryIdConstant.TELEPHONE"><img src="icons/category_phone.jpg"/><img src="icons/category_phone2.jpg"/><div>Телефони</div></a>
@@ -24,8 +27,14 @@
         </Authorized>
 
         <NotAuthorized>
-            <SignIn></SignIn>
-            <SignUp></SignUp>
+            @if (ShowSignInModal)
+            {
+                <SignIn OnClose='@CloseSignInModal'></SignIn>
+            }
+            @if (ShowSignUpModal)
+            {
+                <SignUp></SignUp>
+            }
         </NotAuthorized>
     </AuthorizeView>
 }

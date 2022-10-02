@@ -18,7 +18,8 @@ namespace StepEbay.Main.Client.Base.Pages
         [Inject] IMessageService MessageService { get; set; }
    
         public bool ShowModal { get; set; } = false;
-
+        public bool ShowSignInModal { get; set; } = false;
+        public bool ShowSignUpModal { get; set; } = false;
 
         private Dictionary<string, List<string>> MessageConfirmReg = new();
         private List<CategoryDto> _categories = new List<CategoryDto>();
@@ -75,6 +76,20 @@ namespace StepEbay.Main.Client.Base.Pages
         {
             ShowModal = show;
             StateHasChanged();
+        }
+
+        private void ShowSignIn() => ShowSignInModal = true;
+
+        private void CloseSignInModal(bool show)
+        {
+            ShowSignInModal = false;
+            StateHasChanged();
+        }
+
+        private void ShowSignUp()
+        {
+            ShowSignInModal = false;
+            ShowSignUpModal = true;
         }
     }
 }
