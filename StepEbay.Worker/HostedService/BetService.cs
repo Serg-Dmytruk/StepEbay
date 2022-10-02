@@ -34,8 +34,8 @@ namespace StepEbay.Worker.HostedService
         private async Task StartScanningBets(CancellationToken stoppingToken)
         {
             //запускаємо асинхронно відслідковування закриття товарів, ставок, та зміни цін
-            await Task.WhenAll(/*Task.Run(() => CloseBets(), stoppingToken),
-                Task.Run(() => DeactivateProducts(), stoppingToken),*/
+            await Task.WhenAll(Task.Run(() => CloseBets(), stoppingToken),
+                Task.Run(() => DeactivateProducts(), stoppingToken),
                 Task.Run(() => PriceChange(), stoppingToken));
         }
 
