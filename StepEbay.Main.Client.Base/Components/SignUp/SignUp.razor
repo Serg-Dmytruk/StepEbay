@@ -1,4 +1,6 @@
-﻿<div class="modalWindow">
+﻿<div class="modal fade show" id="myModal" style="display:block; background-color: rgba(10,10,10,.8);"
+     aria-modal="true" role="dialog">
+<div class="modalWindow">
     <div class="mborder">
         <p class="mMainHeader">Швидше заповняй та заходь до нас! </p>
         @if (!ShowPreloader)
@@ -71,10 +73,10 @@
                     <input class="minput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
                 </div>
                 <button class="mbutton" @onclick="SignUpRequest">Зареєструватися</button>
+                <button class="closebutton" @onclick="ModalClose">Назад</button>
             }
             else
             {
-
                 <div class="minputDiv">
                     <input class="minput" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
                 </div>
@@ -91,6 +93,7 @@
                     <input class="minput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
                 </div>
                 <button class="mbutton" @onclick="SignUpRequest">Зареєструватися</button>
+                <button class="closebutton" @onclick="ModalClose">Назад</button>
             }
 
             @if (ShowModal && Errors.Count == 0)
@@ -105,4 +108,5 @@
             </div>
         }
     </div>
+</div>
 </div>

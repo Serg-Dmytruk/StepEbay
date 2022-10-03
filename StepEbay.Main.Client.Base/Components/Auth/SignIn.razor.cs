@@ -22,8 +22,7 @@ namespace StepEbay.Main.Client.Base.Components.Auth
         [Inject] private LocalStorage LocalStorage { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
 
-        [Parameter]
-        public EventCallback<bool> OnClose { get; set; }
+        [Parameter] public EventCallback<bool> OnClose { get; set; }
         private SignInRequestDto SignInRequestDto { get; set; } = new();
         private bool ShowPreloader { get; set; } = true;
         private bool RememberMe { get; set; }

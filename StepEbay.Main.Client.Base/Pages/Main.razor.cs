@@ -86,10 +86,12 @@ namespace StepEbay.Main.Client.Base.Pages
             StateHasChanged();
         }
 
-        private void ShowSignUp()
+        private void CloseSignUpModal(bool show)
         {
-            ShowSignInModal = false;
-            ShowSignUpModal = true;
+            ShowSignUpModal = false;
+            StateHasChanged();
         }
+
+        private void ShowSignUp() => ShowSignUpModal = true;
     }
 }
