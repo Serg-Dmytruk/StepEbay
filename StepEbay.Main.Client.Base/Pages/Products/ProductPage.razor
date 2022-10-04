@@ -5,8 +5,8 @@
 <p>Ціна: @product.Price</p>
 @if (product.PurchaseTypeId == 1)
 {
-	<button>Купити зараз</button>
+	<button @onclick="Buy">Купити зараз</button>
 }
 else if(product.PurchaseTypeId==2){
-	<button>Поставити ставку</button>
+	<button @onclick="Buy">Поставити ставку</button>
 }

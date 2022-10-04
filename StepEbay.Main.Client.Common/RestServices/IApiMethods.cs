@@ -59,6 +59,9 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Post("/person/info")]
         Task<ApiResponse<List<ProductDto>>> GetProductInfo(ProductInfoDto productInfos);
+
+        [Post("/bet/place/{lotId}")]
+        Task<ApiResponse<ResponseData>> SetBet(int lotId);
     }
 }
 
