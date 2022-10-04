@@ -9,7 +9,8 @@
         <ModalDialog Title="@MessageConfirmReg.FirstOrDefault().Key" Text="@MessageConfirmReg.FirstOrDefault().Value" OnClose='@CloseModal' />
     }
     <div>
-        <button class="mbutton" @onclick="ShowSignIn">Увійти</button>
+        <button class="signInbutton" @onclick="ShowSignIn">Увійти</button>
+        <button class="signUpbutton" @onclick="ShowSignUp">Реєстрація</button>
     </div>
     <div>
         <a href="products/@ProductCategoryIdConstant.CLOTH"><img src="icons/category_cloth.jpg"/><div>Одяг</div></a>
@@ -33,7 +34,7 @@
             }
             @if (ShowSignUpModal)
             {
-                <SignUp></SignUp>
+                <SignUp OnClose='@CloseSignUpModal'></SignUp>
             }
         </NotAuthorized>
     </AuthorizeView>

@@ -13,9 +13,9 @@ namespace StepEbay.Main.Client.Base.Components.SignUp
     {
         [Inject] private NavigationManager NavigationManager { get; set; }
         [Inject] IApiService ApiService { get; set; }
-
+        [Parameter] public EventCallback<bool> OnClose { get; set; }
         private SignUpRequestDto SignUpRequestDto { get; set; } = new();
-        private bool ShowPreloader { get; set; } = true;
+        private bool ShowPreloader { get; set; } = false;
 
         private Dictionary<string, List<string>> Errors = new();
 
@@ -65,6 +65,11 @@ namespace StepEbay.Main.Client.Base.Components.SignUp
 
             ShowPreloader = false;
             StateHasChanged();
+        }
+
+        private Task ModalClose()
+        {
+            return OnClose.InvokeAsync(false);
         }
 
         private void CloseModal(bool show)

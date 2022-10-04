@@ -2,6 +2,7 @@
     position: relative;
     width: 400px;
     height: 425px;
+    margin: 0.5rem auto;
 }
 
 .modalLogWindow {
@@ -41,6 +42,60 @@
     &:focus {
         border-color: #AFC75D;
     }
+}
+
+.signInbutton {
+    background: #2EB4AB;
+    position: absolute;
+    top: 8%;
+    right: 3%;
+    width: 120px;
+    height: 46px;
+    border: 0px;
+    border-radius: 7px;
+    color: white;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+}
+
+.signUpbutton {
+    background: #2EB4AB;
+    position: absolute;
+    top: 8%;
+    right: 15%;
+    width: 120px;
+    height: 46px;
+    border: 0px;
+    border-radius: 7px;
+    color: white;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+}
+
+.closebutton {
+    background: #2EB4AB;
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    width: 120px;
+    height: 46px;
+    border: 0px;
+    border-radius: 7px;
+    color: white;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
 }
 
 .mbutton {
