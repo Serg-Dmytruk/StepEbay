@@ -8,16 +8,20 @@
     {
         <ModalDialog Title="@MessageConfirmReg.FirstOrDefault().Key" Text="@MessageConfirmReg.FirstOrDefault().Value" OnClose='@CloseModal' />
     }
+    <AuthorizeView>
+        <NotAuthorized>
+            <div>
+                <button class="signInbutton" @onclick="ShowSignIn">Увійти</button>
+                <button class="signUpbutton" @onclick="ShowSignUp">Реєстрація</button>
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
     <div>
-        <button class="signInbutton" @onclick="ShowSignIn">Увійти</button>
-        <button class="signUpbutton" @onclick="ShowSignUp">Реєстрація</button>
-    </div>
-    <div>
-        <a href="products/@ProductCategoryIdConstant.CLOTH"><img src="icons/category_cloth.jpg"/><div>Одяг</div></a>
-        <a href="products/@ProductCategoryIdConstant.TELEPHONE"><img src="icons/category_phone.jpg"/><img src="icons/category_phone2.jpg"/><div>Телефони</div></a>
-        <a href="products/@ProductCategoryIdConstant.BUATY"><img src="icons/category_buaty.jpg"/><img src="icons/category_buaty2.jpg"/><div>Краса</div></a>
-        <a href="products/@ProductCategoryIdConstant.SPORT"><img src="icons/category_sport.jpg"/><img src="icons/category_sport2.jpg"/><img src="icons/category_sport3.jpg"/><div>Спорт</div></a>
-        <a href="products/0"><img src="icons/category_all.jpg"/><div>Каталог</div></a>
+        <a href="products/@ProductCategoryIdConstant.CLOTH"><img style="width:50px; height:50px;" src="icons/category_cloth.jpg"/><div>Одяг</div></a>
+        <a href="products/@ProductCategoryIdConstant.TELEPHONE"><img style="width:50px; height:50px;" src="icons/category_phone.jpg"/><img src="icons/category_phone2.jpg"/><div>Телефони</div></a>
+        <a href="products/@ProductCategoryIdConstant.BUATY"><img style="width:50px; height:50px;" src="icons/category_buaty.jpg"/><img src="icons/category_buaty2.jpg"/><div>Краса</div></a>
+        <a href="products/@ProductCategoryIdConstant.SPORT"><img style="width:50px; height:50px;" src="icons/category_sport.jpg"/><img src="icons/category_sport2.jpg"/><img src="icons/category_sport3.jpg"/><div>Спорт</div></a>
+        <a href="products/0"><img style="width:50px; height:50px;" src="icons/category_all.jpg"/><div>Каталог</div></a>
     </div>
 
     <AuthorizeView>
