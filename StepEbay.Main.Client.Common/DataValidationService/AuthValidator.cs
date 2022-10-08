@@ -18,7 +18,9 @@ namespace StepEbay.Main.Client.Common.DataValidationServices
             RuleFor(data => data.NickName).Length(5, 30).WithMessage("LengthNickName");
             RuleFor(data => data.Password).MinimumLength(8).WithMessage("LengthPassword");
             //Ключові символи
-            RuleFor(data => data.Password).Matches("[A-Z]").Matches("[a-z]").Matches("[0-9]").WithMessage("AgreementsPassword");
+            RuleFor(data => data.Password).Matches("[A-Z]").WithMessage("AgreementsPassword");
+            RuleFor(data => data.Password).Matches("[a-z]").WithMessage("AgreementsPassword");
+            RuleFor(data => data.Password).Matches("[0-9]").WithMessage("AgreementsPassword");
             RuleFor(data => data.Email).EmailAddress().WithMessage("AgreementsMail");
             //Копія
             RuleFor(data => data.CopyPassword).Equal(data => data.Password).WithMessage("CopyPassword");

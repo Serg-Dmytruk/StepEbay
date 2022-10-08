@@ -4,6 +4,7 @@ using StepEbay.Main.Client.Base.Layout;
 using StepEbay.Main.Client.Common.DataValidationServices;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Auth;
+using StepEbay.PushMessage.Services;
 using System.Net;
 
 namespace StepEbay.Main.Client.Base.Components.SignUp
@@ -11,17 +12,13 @@ namespace StepEbay.Main.Client.Base.Components.SignUp
     [Layout(typeof(EmptyLayout))]
     public partial class SignUp
     {
-        [Inject] private NavigationManager NavigationManager { get; set; }
         [Inject] IApiService ApiService { get; set; }
+        [Inject] IMessageService MessageService { get; set; }
         [Parameter] public EventCallback<bool> OnClose { get; set; }
         private SignUpRequestDto SignUpRequestDto { get; set; } = new();
         private bool ShowPreloader { get; set; } = false;
 
         private Dictionary<string, List<string>> Errors = new();
-
-        private bool ShowModal { get; set; } = false;
-
-        private readonly List<string> RegMess = new() { "Вам надіслано лист для підтвердження реєстрації!" };
 
         protected void OnAfterRender(bool firstRender)
         {
@@ -51,17 +48,19 @@ namespace StepEbay.Main.Client.Base.Components.SignUp
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    ShowModal = true;
                     ShowPreloader = false;
                     StateHasChanged();
-                    return;
                 }
 
                 Errors = response.Errors;
             }
 
-            if (Errors.Count > 0)
-                ShowModal = true;
+            if (Errors.Count == 0)
+            {
+                MessageService.ShowSuccsess("Успіх", "Вам надіслано лист для підтвердження реєстрації!");
+                ModalClose();
+                return;
+            }
 
             ShowPreloader = false;
             StateHasChanged();
@@ -70,12 +69,6 @@ namespace StepEbay.Main.Client.Base.Components.SignUp
         private Task ModalClose()
         {
             return OnClose.InvokeAsync(false);
-        }
-
-        private void CloseModal(bool show)
-        {
-            ShowModal = show;
-            StateHasChanged();
         }
     }
 }

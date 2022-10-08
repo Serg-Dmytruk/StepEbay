@@ -7,6 +7,7 @@ using StepEbay.Main.Client.Common.Options;
 using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Auth;
+using StepEbay.PushMessage.Services;
 using System.Net;
 
 namespace StepEbay.Main.Client.Base.Components.Auth
@@ -21,6 +22,7 @@ namespace StepEbay.Main.Client.Base.Components.Auth
         [Inject] private IOptions<AccountOptions> AccountOptions { get; set; }
         [Inject] private LocalStorage LocalStorage { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
+        [Inject] IMessageService MessageService { get; set; }
 
         [Parameter] public EventCallback<bool> OnClose { get; set; }
         private SignInRequestDto SignInRequestDto { get; set; } = new();
@@ -57,7 +59,7 @@ namespace StepEbay.Main.Client.Base.Components.Auth
                 await TokenProvider.CheckAuthentication(true);
 
                 NavigationManager.NavigateTo("/main");
-               
+                MessageService.ShowSuccsess("Успіх", "Авторизовано");
                 return;
             }
 

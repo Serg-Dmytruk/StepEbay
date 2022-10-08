@@ -12,13 +12,17 @@
                 <div class="minputDiv">
                     @if (@Errors.Any(e => e.Value.Contains("EmptyNickName")))
                     {
-                        <p class="errorP">Обов'язкове поле!</p>
+                        <input class="minput borderColorInputError" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
+                        <p class="errorP">Нікнейм: *Обов'язкове поле!</p>
                     }
                     else if (@Errors.Any(e => e.Value.Contains("LengthNickName")))
                     {
-                        <p class="errorP">5 - 30 символів!</p>
+                        <input class="minput borderColorInputError" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
+                        <p class="errorP">Нікнейм: *5 - 30 символів!</p>
                     }
-                    <input class="minput" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
+                    else{
+                        <input class="minput borderColorInput" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
+                    }
                 </div>
 
 
@@ -26,79 +30,92 @@
                 <div class="minputDiv">
                     @if (@Errors.Any(e => e.Value.Contains("EmptyFullName")))
                     {
-                        <p class="errorP">Обов'язкове поле!</p>
+                        <input class="minput borderColorInputError" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
+                        <p class="errorP">Повне ім'я: *Обов'язкове поле!</p>
                     }
                     else if (@Errors.Any(e => e.Value.Contains("LengthFullName")))
                     {
-                        <p class="errorP">3 - 30 символів!</p>
+                        <input class="minput borderColorInputError" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
+                        <p class="errorP">Повне ім'я: *3 - 30 символів!</p>
                     }
-                    <input class="minput" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
+                    else{
+                        <input class="minput borderColorInput" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
+                    }
                 </div>
 
 
                 //Електронна пошта
 
                 <div class="minputDiv">
-                    @if (@Errors.Any(e => e.Value.Contains("AgreementsMail")))
+                    @if (@Errors.Any(e => e.Value.Contains("EmptyMail")))
                     {
-                        <p class="errorP">Невірний формат електронного адресу</p>
+                        <input class="minput borderColorInputError" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
+                        <p class="errorP">Електронна пошта: *Обов'язкове поле!</p>
                     }
-                    <input class="minput" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
+                    else if (@Errors.Any(e => e.Value.Contains("AgreementsMail")))
+                    {
+                        <input class="minput borderColorInputError" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
+                        <p class="errorP">Електронна пошта: *Невірний формат електронного адресу</p>
+                    }else{
+                        <input class="minput borderColorInput" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
+                    }
                 </div>
 
 
                 //Пароль
-                <div class="minputDiv">
+                <div class="minputDiv"> 
                     @if (@Errors.Any(e => e.Value.Contains("EmptyPassword")))
                     {
-                    <p class="errorP">Обов'язкове поле!</p>
+                        <input class="minput borderColorInputError" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
+                        <p class="errorP">Пароль: *Обов'язкове поле!</p>
                     }
                     else if (@Errors.Any(e => e.Value.Contains("LengthPassword")))
                     {
-                    <p class="errorP">Мінімум 3 символи!</p>
+                        <input class="minput borderColorInputError" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
+                        <p class="errorP">Пароль: *Мінімум 3 символи!</p>
                     }
                     else if (@Errors.Any(e => e.Value.Contains("AgreementsPassword")))
                     {
-                    <p class="errorP">Мінімум 8 сим. Обов'язково(велика, маленька, цифра)</p>
+                        <input class="minput borderColorInputError" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
+                        <p class="errorP">Пароль: *Мінімум 8 сим. Обов'язково(велика, маленька, цифра)</p>
                     }
-                    <input class="minput" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
+                    else{
+                        <input class="minput borderColorInput" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
+                    }
                 </div>
 
                 //Копія паролю
                 <div class="minputDiv">
                     @if (@Errors.Any(e => e.Value.Contains("CopyPassword")))
                     {
-                    <p class="errorP">Паролі не співпадають</p>
+                        <input class="minput borderColorInputError" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
+                        <p class="errorP">Пароль: *Паролі не співпадають</p>
+                    }else{
+                        <input class="minput borderColorInput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
                     }
-                    <input class="minput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
                 </div>
-                <button class="mbutton" @onclick="SignUpRequest">Зареєструватися</button>
-                <button class="closebutton" @onclick="ModalClose">Назад</button>
+                <button class="mbutton mbuttonBottomLeftPos" @onclick="SignUpRequest">Зареєструватися</button>
+                <button class="mbutton mbuttonBottomRightPos" @onclick="ModalClose">Назад</button>
             }
             else
-            {
+            {   
                 <div class="minputDiv">
-                    <input class="minput" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
+                    <input class="minput borderColorInput" type="text" @bind="SignUpRequestDto.NickName" placeholder="Нікнейм" />
                 </div>
                 <div class="minputDiv">
-                    <input class="minput" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
+                    <input class="minput borderColorInput" type="text" @bind="SignUpRequestDto.FullName" placeholder="Повне ім'я" />
                 </div>
                 <div class="minputDiv">
-                    <input class="minput" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
+                    <input class="minput borderColorInput" type="email" @bind="SignUpRequestDto.Email" placeholder="Електронна пошта" />
                 </div>
                 <div class="minputDiv">
-                    <input class="minput" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
+                    <input class="minput borderColorInput" type="password" @bind="SignUpRequestDto.Password" placeholder="Пароль" />
                 </div>
                 <div class="minputDiv">
-                    <input class="minput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
+                    <input class="minput borderColorInput" type="password" @bind="SignUpRequestDto.CopyPassword" placeholder="Повторіть пароль" />
                 </div>
-                <button class="mbutton" @onclick="SignUpRequest">Зареєструватися</button>
-                <button class="closebutton" @onclick="ModalClose">Назад</button>
-            }
-
-            @if (ShowModal && Errors.Count == 0)
-            {
-                <ModalDialog Title="Успішно" Text="RegMess" OnClose='@CloseModal' />
+                <button class="mbutton mbuttonBottomLeftPos" @onclick="SignUpRequest">Зареєструватися</button>
+                <button class="mbutton mbuttonBottomRightPos" @onclick="ModalClose">Назад</button>
             }
         }
         else

@@ -22,21 +22,26 @@
   background: white;
 }
 
-.minput {
+.borderColorInput {
   border: 2px solid #39DDD3;
+}
+
+.borderColorInputError {
+  border: 2px solid #e41b1b;
+}
+
+.minput {
   border-radius: 7px;
+  padding-left: 8px;
   width: 100%;
   height: 32px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 6px;
   font-family: "Nunito";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
-}
-.minput:hover {
-  border-color: #A3D27F;
 }
 .minput:focus {
   border-color: #AFC75D;
@@ -78,30 +83,30 @@
   text-align: center;
 }
 
-.closebutton {
-  background: #2EB4AB;
+.cheatButton1 {
   position: absolute;
-  top: 3%;
-  right: 3%;
-  width: 120px;
-  height: 46px;
-  border: 0px;
-  border-radius: 7px;
-  color: white;
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
-  text-align: center;
+  bottom: -20%;
+}
+
+.cheatButton2 {
+  position: absolute;
+  bottom: -30%;
+}
+
+.mbuttonBottomLeftPos {
+  position: absolute;
+  bottom: 5%;
+}
+
+.mbuttonBottomRightPos {
+  position: absolute;
+  bottom: 5%;
+  right: 7%;
 }
 
 .mbutton {
   background: #2EB4AB;
-  position: absolute;
-  bottom: 3%;
-  left: 115px;
-  width: 170px;
+  width: 165px;
   height: 46px;
   border: 0px;
   border-radius: 7px;
@@ -114,10 +119,12 @@
   text-align: center;
 }
 .mbutton:hover {
-  background: #8BC65D;
+  text-decoration: underline;
 }
 .mbutton:active {
-  background: #AFC75D;
+  color: black;
+  text-decoration: underline;
+  border: 1px solid #2EB4AB;
 }
 
 .mMainHeader {
@@ -141,12 +148,11 @@
 }
 
 .errorP {
-  margin-bottom: 2px;
+  margin-bottom: 8px;
   font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 1px;
-  text-align: center;
   color: #E41B1B;
 }

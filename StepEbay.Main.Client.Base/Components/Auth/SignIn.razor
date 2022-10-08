@@ -17,14 +17,16 @@
                         <ModalDialog Title="@_errors.FirstOrDefault().Key" Text="@_errors.FirstOrDefault().Value" OnClose='@CloseModal' />
                     }
                     <div class="minputDiv">
-                        <input class="minput" type="text" @bind="SignInRequestDto.NickName" placeholder="Нікнейм" />
+                        <input class="minput borderColorInput" type="text" @bind="SignInRequestDto.NickName" placeholder="Нікнейм" />
                     </div>
                     <div class="minputDiv">
-                        <input class="minput" type="password" @bind="SignInRequestDto.Password" placeholder="Пароль" />
+                        <input class="minput borderColorInput" type="password" @bind="SignInRequestDto.Password" placeholder="Пароль" />
                     </div>
                     <div><input type="checkbox" style="cursor: pointer" @bind="RememberMe" /> Запам'ятати</div>
-                    <button class="mbutton" @onclick="SignInRequest">Увійти</button>
-                    <button class="closebutton" @onclick="ModalClose">Назад</button>
+                    <button class="mbutton mbuttonBottomLeftPos" @onclick="SignInRequest">Зареєструватися</button>
+                    <button class="mbutton mbuttonBottomRightPos" @onclick="ModalClose">Назад</button>
+                    <button class="cheatButton1" @onclick="SignInRequestAdmin">Увійти як Адміністратор</button>
+                    <button class="cheatButton2" @onclick="SignInRequestUser">Увійти як Користувач</button>
                 }
                 else
                 {
@@ -35,8 +37,7 @@
             </div>
         </div>
         </div>
-                    <button class="mbutton" @onclick="SignInRequestAdmin">Увійти як Адміністратор</button>
-                    <button class="mbutton" @onclick="SignInRequestUser">Увійти як Користувач</button>
+
     </NotAuthorized>
 </AuthorizeView>
 
