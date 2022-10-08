@@ -1,58 +1,73 @@
-﻿<h3>Product</h3>
+﻿<div class="mainBlock">
 @if (!ShowPreloader)
 {
-    @foreach (var category in ProductFilters.Categories)
-    {
+    <div class="filterBlock">
+        @foreach (var category in ProductFilters.Categories)
+        {
+            <div>
+                @if (category.Selected is true)
+                {
+                    <input type="checkbox" @bind-value="category.Selected" checked />
+                    <label>@category.Name</label>
+                }
+                else
+                {
+                    <input type="checkbox" @bind-value="category.Selected" />
+                    <label>@category.Name</label>
+                }
+            </div>
+        }
+
         <div>
-            @if (category.Selected is true)
+            <p>Ціна від:</p>
+            <input type="number" @bind-value="ProductFilters.PriceStart"/>
+            <p>Ціна до:</p>
+            <input type="number" @bind-value="ProductFilters.PriceEnd"/>
+        </div>
+
+        <div>
+            @foreach(var state in ProductFilters.States)
             {
-                <input type="checkbox" @bind-value="category.Selected" checked />
-                <label>@category.Name</label>
-            }
-            else
-            {
-                <input type="checkbox" @bind-value="category.Selected" />
-                <label>@category.Name</label>
+                if(state.Selected is true){
+                    <input type="checkbox" @bind-value="state.Selected" checked />
+                    <label>@state.Name</label>
+                }
+                else
+                {
+                    <input type="checkbox" @bind-value="state.Selected" />
+                    <label>@state.Name</label>
+                }
             }
         </div>
-    }
 
-    <div>
-        <p>Ціна від:</p>
-        <input type="number" @bind-value="ProductFilters.PriceStart"/>
-        <p>Ціна до:</p>
-        <input type="number" @bind-value="ProductFilters.PriceEnd"/>
+        <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SubmitFilters">submit</button>
     </div>
-
     <div>
-        @foreach(var state in ProductFilters.States)
-        {
-            if(state.Selected is true){
-                <input type="checkbox" @bind-value="state.Selected" checked />
-                <label>@state.Name</label>
-            }
-            else
-            {
-                <input type="checkbox" @bind-value="state.Selected" />
-                <label>@state.Name</label>
-            }
-        }
-    </div>
-
-    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SubmitFilters">submit</button>
-    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PrevProductPage">prev @(ProductPageNumber + 1) of @MaxProductPageNumber</button>
-    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="NextProductPage">next</button>
-
     @if (_products is not null && _products.List is not null)
     {
+        <ul class="catalogUl">
         @foreach (var product in _products.List)
         {
             <li>
-                @product.Title, @product.Price
-                <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt=""/>
+                <div class="productCard">
+                    <a>
+                        <img class="imgCard" src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt=""/>
+                    </a>
+                    <a>
+                        <span> @product.Title</span>
+                    </a>
+                    <div>
+                        <span>@product.Price</span>
+                        <span>₴</span>
+                    </div>
+                </div>
             </li>
         }
+        </ul>
     }
+    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PrevProductPage">prev @(ProductPageNumber + 1) of @MaxProductPageNumber</button>
+    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="NextProductPage">next</button>
+    </div>
 }
 else
 {
@@ -60,4 +75,5 @@ else
         <span class="sr-only">Завантаження...</span>
     </div>
 }
+</div>
 

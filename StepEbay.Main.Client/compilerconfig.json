@@ -6,5 +6,9 @@
   {
     "outputFile": "wwwroot/css/modale/modalStyle.css",
     "inputFile": "wwwroot/css/modale/modalStyle.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/ProductList.css",
+    "inputFile": "wwwroot/css/ProductList.scss"
   }
 ]
