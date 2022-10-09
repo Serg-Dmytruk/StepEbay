@@ -16,7 +16,8 @@ namespace StepEbay.Main.Client.Base.Pages
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] IApiService ApiService { get; set; }
         [Inject] IMessageService MessageService { get; set; }
-   
+        [Inject] private NavigationManager NavigationManager { get; set; }
+
         public bool ShowModal { get; set; } = false;
         public bool ShowSignInModal { get; set; } = false;
         public bool ShowSignUpModal { get; set; } = false;
@@ -53,6 +54,7 @@ namespace StepEbay.Main.Client.Base.Pages
                     MessageConfirmReg.Add("Успішно", new List<string> { "Акаунт активовано!" });
 
                 ShowModal = true;
+                NavigationManager.NavigateTo("/");
             }
 
             ShowPreloader = false;
