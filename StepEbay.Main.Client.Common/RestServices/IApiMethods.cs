@@ -20,8 +20,8 @@ namespace StepEbay.Main.Client.Common.RestServices
         [Post("/auth/refresh")]
         Task<ApiResponse<RefreshTokenResponseDto>> RefreshToken(RefreshTokenRequestDto request);
 
-        [Post("/bet/place/{lotId}")]
-        Task<ApiResponse<BoolResult>> PlaceBet(int lotId);
+        [Post("/bet/place/{lotid}")]
+        Task<ApiResponse<ResponseData>> PlaceBet(int lotid);
 
         [Get("/email/confirm/{id}/{key}")]
         Task<ApiResponse<BoolResult>> ConfirmRegistration(string id, string key);
@@ -59,9 +59,6 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Post("/person/info")]
         Task<ApiResponse<List<ProductDto>>> GetProductInfo(ProductInfoDto productInfos);
-
-        [Post("/bet/place/{lotId}")]
-        Task<ApiResponse<ResponseData>> SetBet(int lotId);
     }
 }
 

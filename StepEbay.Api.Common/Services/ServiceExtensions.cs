@@ -13,6 +13,7 @@ using StepEbay.Main.Common.Models.Auth;
 using StepEbay.Main.Api.Common.Models.HubContainers;
 using StepEbay.Main.Common.Models.Product;
 using StepEbay.Main.Api.Common.Services.FileServices;
+using StepEbay.Main.Api.Common.Services.BetServices;
 
 namespace StepEbay.Main.Api.Common.Services
 {
@@ -23,6 +24,7 @@ namespace StepEbay.Main.Api.Common.Services
         public static IServiceCollection AddService(this IServiceCollection services)
         {
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IBetService, BetService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IProductService, ProductService>();
