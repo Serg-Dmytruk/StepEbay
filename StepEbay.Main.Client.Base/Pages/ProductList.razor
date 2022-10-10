@@ -50,10 +50,10 @@
         {
             <li>
                 <div class="productCard">
-                    <a>
+                    <a href="/product/@product.Id">
                         <img class="imgCard" src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt=""/>
                     </a>
-                    <a>
+                    <a href="/product/@product.Id">
                         <span> @product.Title</span>
                     </a>
                     <div>

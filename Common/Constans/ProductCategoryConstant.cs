@@ -15,4 +15,9 @@
         public static readonly string BUATY = "15";
         public static readonly string SPORT = "14";
     }
+
+    public static class ProductListConstant
+    {
+        public static readonly int MAXONPAGE = 6;
+    }
 }

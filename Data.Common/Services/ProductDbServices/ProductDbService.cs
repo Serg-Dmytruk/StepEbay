@@ -69,7 +69,7 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
 
             saleFiltered.AddRange(autionFiltered);
 
-            return autionFiltered;
+            return saleFiltered;
         }
 
         public async Task<List<Product>> GetProducts()

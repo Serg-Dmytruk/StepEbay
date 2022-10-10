@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
+using StepEbay.Common.Constans;
 using StepEbay.Common.Models.Pagination;
 using StepEbay.Common.Models.ProductInfo;
 using StepEbay.Main.Client.Base.Layout;
@@ -27,7 +28,6 @@ namespace StepEbay.Main.Client.Base.Pages
 
         public int ProductPageNumber = 0;
         public int MaxProductPageNumber = 0;
-        private readonly int _productOnPageNumber = 3;
 
         protected override void OnInitialized()
         {
@@ -96,7 +96,10 @@ namespace StepEbay.Main.Client.Base.Pages
             _products = responce.Data;
 
             if (_products is not null)
-                MaxProductPageNumber = (_products.CountAll / _productOnPageNumber);
+            {
+                MaxProductPageNumber = _products.CountAll % ProductListConstant.MAXONPAGE == 0 ? (_products.CountAll / ProductListConstant.MAXONPAGE) : (_products.CountAll / ProductListConstant.MAXONPAGE) + 1;
+            }
+                                
         }
 
         protected void SetDefaultFilters(List<CategoryDto> categories)
