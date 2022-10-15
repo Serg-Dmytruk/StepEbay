@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Refit;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Data.Models.Products;
@@ -15,39 +16,43 @@ namespace StepEbay.Main.Client.Base.Pages.Products
     public partial class ProductPage
     {
         [Parameter] public string Id { get; set; }
-        [Inject] private IApiService _apiService { get; set; }
-        [Inject] IMessageService _messageService { get; set; }
-
-        ProductDto product { get; set; }
+        [Inject] private IApiService ApiService { get; set; }
+        [Inject] IMessageService MessageService { get; set; }
+        [Inject] private IConfiguration Configuration { get; set; }
+        private string ApiConnection { get; set; }
+        ProductDto Product { get; set; }
 
         public ProductPage()
         {
-            product = new();
+            Product = new();
         }
+
         private async void Buy()
         {
-            var result= await _apiService.ExecuteRequest(() => _apiService.ApiMethods.PlaceBet(int.Parse(Id)));
-            if(result.StatusCode == HttpStatusCode.OK)
+            var result = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.PlaceBet(int.Parse(Id)));
+            if (result.StatusCode == HttpStatusCode.OK)
             {
-                _messageService.ShowSuccsess("Додано до кошику","Товар: \""+product.Title+"\" за ціною "+product.Price);
+                MessageService.ShowSuccsess($"Додано до кошику", "Товар: {Product.Title} за ціною {Product.Price}");
             }
-            else if(result.StatusCode == HttpStatusCode.Unauthorized)
+            else if (result.StatusCode == HttpStatusCode.Unauthorized)
             {
-                _messageService.ShowError("Відміна", "Потрібно авторизуватись");
+                MessageService.ShowError("Відміна", "Потрібно авторизуватись");
             }
             else
             {
-                _messageService.ShowError("Помилка", result.Errors.First().Value.First());
+                MessageService.ShowError("Помилка", result.Errors.First().Value.First());
             }
         }
+
         protected override async Task OnInitializedAsync()
         {
-            ResponseData<ProductDto> result = await _apiService.ExecuteRequest(() => _apiService.ApiMethods.GetProduct(int.Parse(Id)));
+            ApiConnection = Configuration.GetConnectionString("Api");
+            ResponseData<ProductDto> result = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProduct(int.Parse(Id)));
 
             if (result.StatusCode != HttpStatusCode.OK)
-                _messageService.ShowError("Помилка", result.Errors.First().Value.First());
+                MessageService.ShowError("Помилка", result.Errors.First().Value.First());
 
-            product = result.Data;
+            Product = result.Data;
 
             StateHasChanged();
         }

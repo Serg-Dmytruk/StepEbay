@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Options;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Common.Storages;
-using StepEbay.Main.Client.Base.Layout;
 using StepEbay.Main.Client.Common.Options;
 using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
@@ -13,12 +12,10 @@ using System.Net;
 namespace StepEbay.Main.Client.Base.Components.Auth
 {
 
-    [Layout(typeof(EmptyLayout))]
     public partial class SignIn
     {
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] IApiService ApiService { get; set; }
-        [Inject] private IOptions<DomainOptions> DomainOptions { get; set; }
         [Inject] private IOptions<AccountOptions> AccountOptions { get; set; }
         [Inject] private LocalStorage LocalStorage { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
@@ -28,7 +25,6 @@ namespace StepEbay.Main.Client.Base.Components.Auth
         private SignInRequestDto SignInRequestDto { get; set; } = new();
         private bool ShowPreloader { get; set; } = true;
         private bool RememberMe { get; set; }
-        public bool ShowModal { get; set; } = false;
 
         private Dictionary<string, List<string>> _errors = new();
         protected override void OnAfterRender(bool firstRender)
@@ -58,15 +54,12 @@ namespace StepEbay.Main.Client.Base.Components.Auth
 
                 await TokenProvider.CheckAuthentication(true);
 
-                NavigationManager.NavigateTo("/main");
+                await ModalClose();
                 MessageService.ShowSuccsess("Успіх", "Авторизовано");
                 return;
             }
 
             _errors = response.Errors;
-
-            if (_errors.Count > 0)
-                ShowModal = true;
 
             ShowPreloader = false;
             StateHasChanged();
@@ -95,12 +88,6 @@ namespace StepEbay.Main.Client.Base.Components.Auth
         private Task ModalClose()
         {
             return OnClose.InvokeAsync(false);
-        }
-
-        private void CloseModal(bool show)
-        {
-            ShowModal = show;
-            StateHasChanged();
         }
     }
 }

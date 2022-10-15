@@ -1,12 +1,17 @@
-﻿<h3>@product.Title</h3>
-<p>Image here @product.Image</p>
-<p>@product.Description</p>
-<p>Дата публікації: @product.Price</p>
-<p>Ціна: @product.Price</p>
-@if (product.PurchaseTypeId == 1)
-{
-	<button @onclick="Buy">Купити зараз</button>
-}
-else if(product.PurchaseTypeId==2){
-	<button @onclick="Buy">Поставити ставку</button>
-}
+﻿<h3>@Product.Title</h3>
+<img class="imgCard" src="@(string.IsNullOrEmpty(Product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{Product.Image}")" alt="" />
+<p>@Product.Description</p>
+<p>Дата публікації: @Product.Price</p>
+<p>Ціна: @Product.Price</p>
+<AuthorizeView>
+    <Authorized>
+        @if (Product.PurchaseTypeId == 1)
+        {
+            <button @onclick="Buy">Купити зараз</button>
+        }
+        else if (Product.PurchaseTypeId == 2)
+        {
+            <button @onclick="Buy">Поставити ставку</button>
+        }
+    </Authorized>
+</AuthorizeView>

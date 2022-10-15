@@ -13,9 +13,7 @@ namespace StepEbay.Main.Client.Base.Pages
     {
         [Parameter] public string Id { get; set; }
         [Parameter] public string Key { get; set; }
-        [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] IApiService ApiService { get; set; }
-        [Inject] IMessageService MessageService { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
 
         public bool ShowModal { get; set; } = false;
@@ -61,39 +59,10 @@ namespace StepEbay.Main.Client.Base.Pages
             StateHasChanged();
         }
 
-        private async Task PlaceBet()
-        {
-            await ApiService.ExecuteRequest(() => ApiService.ApiMethods.PlaceBet(1));
-        }
-
-        private void Show()
-        {
-            MessageService.ShowSuccsess("Успішно", "робіть");
-            MessageService.ShowWarning("Увага", "робіть");
-            MessageService.ShowError("Помилка", "робіть");
-            MessageService.ShowInfo("Інфо", "робіть");
-        }
-
         private void CloseModal(bool show)
         {
             ShowModal = show;
             StateHasChanged();
         }
-
-        private void ShowSignIn() => ShowSignInModal = true;
-
-        private void CloseSignInModal(bool show)
-        {
-            ShowSignInModal = false;
-            StateHasChanged();
-        }
-
-        private void CloseSignUpModal(bool show)
-        {
-            ShowSignUpModal = false;
-            StateHasChanged();
-        }
-
-        private void ShowSignUp() => ShowSignUpModal = true;
     }
 }

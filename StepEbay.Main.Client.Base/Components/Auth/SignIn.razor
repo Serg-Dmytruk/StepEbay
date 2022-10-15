@@ -1,20 +1,16 @@
 ﻿@using StepEbay.Main.Client.Base.Pages;
-<AuthorizeView>
-    @*<Authorized>
-    <Redirect Url="@($"https://{DomainOptions.Value.Main}")" />
-    </Authorized>*@
-    <NotAuthorized>
-        <div class="modal fade show" id="myModal" style="display:block; background-color: rgba(10,10,10,.8);"
+
+<div class="modal fade show" id="myModal" style="display:block; background-color: rgba(10,10,10,.8);"
      aria-modal="true" role="dialog">
-        <div class="modalLogWindow">
+    <div class="modalLogWindow">
         <div class="mborder">
             <p class="mMainHeader">З поверненням!</p>
             <p class="mMainHeader2">Для входу заповни тут:</p>
             @if (!ShowPreloader)
             {
-                @if(_errors.Count > 0)
+                @if (_errors.Count > 0)
                 {
-                    <p class="errorH">@_errors.FirstOrDefault().Value[0]</p>
+                    <p class="2">@_errors.FirstOrDefault().Value[0]</p>
                 }
                 <div class="minputDiv">
                     <input class="minput borderColorInput" type="text" @bind="SignInRequestDto.NickName" placeholder="Нікнейм" />
@@ -34,10 +30,7 @@
                     <span class="sr-only">Завантаження...</span>
                 </div>
             }
-            </div>
         </div>
-        </div>
-
-    </NotAuthorized>
-</AuthorizeView>
+    </div>
+</div>
 

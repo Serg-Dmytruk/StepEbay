@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Common.Models.RefitModels;
-using StepEbay.Main.Client.Base.Layout;
 using StepEbay.Main.Client.Common.DataValidationServices;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Auth;
@@ -9,7 +8,6 @@ using System.Net;
 
 namespace StepEbay.Main.Client.Base.Components.SignUp
 {
-    [Layout(typeof(EmptyLayout))]
     public partial class SignUp
     {
         [Inject] IApiService ApiService { get; set; }
@@ -58,7 +56,7 @@ namespace StepEbay.Main.Client.Base.Components.SignUp
             if (Errors.Count == 0)
             {
                 MessageService.ShowSuccsess("Успіх", "Вам надіслано лист для підтвердження реєстрації!");
-                ModalClose();
+                await ModalClose();
                 return;
             }
 

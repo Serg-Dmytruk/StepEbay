@@ -1,10 +1,16 @@
-﻿@inherits LayoutComponentBase
+﻿@using StepEbay.Main.Client.Base.Components.Auth
+@using StepEbay.Main.Client.Base.Components.SignUp
+@using StepEbay.Main.Client.Base.Pages
+@inherits LayoutComponentBase
 
 <div class="page">
 
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    <AuthorizeView Roles="admin">
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+    </AuthorizeView>
+
 
     <div class="main">
 
@@ -13,21 +19,34 @@
             {
                 <p>@UserName</p>
             }
+
             <AuthorizeView>
                 <Authorized>
                     <button class="btn btn-outline-danger centerOnParrentHorizontal" @onclick="Logout">Вийти</button>
                 </Authorized>
 
                 <NotAuthorized>
-                    <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="LogIn">Увійти</button>
+                    <div class="buttonContainer">
+                        <button class="conButton signInbutton" @onclick="ShowSignIn">Увійти</button>
+                        <button class="conButton signUpbutton" @onclick="ShowSignUp">Реєстрація</button>
+                    </div>
+                    @if (ShowSignInModal)
+                    {
+                        <SignIn OnClose='@CloseSignInModal'></SignIn>
+                    }
+
+                    @if (ShowSignUpModal)
+                    {
+                        <SignUp OnClose='@CloseSignUpModal'></SignUp>
+                    }
+
                 </NotAuthorized>
             </AuthorizeView>
-
         </div>
 
         <div class="content px-4">
-            @Body 
-            <PushMessageContainer Position="MessagePosition.BottomRight" TimeOut="5" />    
-        </div> 
+            @Body
+            <PushMessageContainer Position="MessagePosition.BottomRight" TimeOut="5" />
+        </div>
     </div>
 </div>
