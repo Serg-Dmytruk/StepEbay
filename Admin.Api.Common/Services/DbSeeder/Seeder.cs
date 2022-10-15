@@ -156,7 +156,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Description = desc,
                     PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
-                    DateClose = DateTime.UtcNow.AddDays(1)
+                    DateClose = DateTime.UtcNow.AddMinutes(10)
                 });
 
             await _context.SaveChangesAsync();
@@ -164,15 +164,15 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
         public async Task AddProducts()
         {
-            await AddProduct("Nokia 2310", "none", 7500, "Смартфон Nokia 2310", ProductCategoryConstant.TELEPHONE);
-            await AddProduct("Спортивна куртка", "none", 600, "Спортивна куртка Nike", ProductCategoryConstant.CLOTH);
-            await AddProduct("Баскетбольний м'яч", "none", 400, "Баскетбольний м'яч Sporty", ProductCategoryConstant.SPORT);
-            await AddProduct("Крем для рук", "none", 130, "Крем для рук Viche", ProductCategoryConstant.BUATY);
-            await AddProduct("Футбольний м'яч", "none", 800, "Футбольний м'яч Sporty", ProductCategoryConstant.SPORT);
-            await AddProduct("Джинси жіночі", "none", 500, "Джинси Jins", ProductCategoryConstant.CLOTH);
-            await AddProduct("Sony 5510", "none", 15600, "Смартфон Sony 5510", ProductCategoryConstant.TELEPHONE);
-            await AddProduct("Крем для ніг", "none", 100, "Крем для ніг Viche", ProductCategoryConstant.BUATY);
-            await AddProduct("Мило Viche", "none", 40, "Мило Viche", ProductCategoryConstant.BUATY);
+            await AddProduct("Nokia 2310", string.Empty, 7500, "Смартфон Nokia 2310", ProductCategoryConstant.TELEPHONE);
+            await AddProduct("Спортивна куртка", string.Empty, 600, "Спортивна куртка Nike", ProductCategoryConstant.CLOTH);
+            await AddProduct("Баскетбольний м'яч", string.Empty, 400, "Баскетбольний м'яч Sporty", ProductCategoryConstant.SPORT);
+            await AddProduct("Крем для рук", string.Empty, 130, "Крем для рук Viche", ProductCategoryConstant.BUATY);
+            await AddProduct("Футбольний м'яч", string.Empty, 800, "Футбольний м'яч Sporty", ProductCategoryConstant.SPORT);
+            await AddProduct("Джинси жіночі", string.Empty, 500, "Джинси Jins", ProductCategoryConstant.CLOTH);
+            await AddProduct("Sony 5510", string.Empty, 15600, "Смартфон Sony 5510", ProductCategoryConstant.TELEPHONE);
+            await AddProduct("Крем для ніг", string.Empty, 100, "Крем для ніг Viche", ProductCategoryConstant.BUATY);
+            await AddProduct("Мило Viche", string.Empty, 40, "Мило Viche", ProductCategoryConstant.BUATY);
         }
 
         private async Task AddUser(string userName, string pass, string fullName, string email, string _role)
