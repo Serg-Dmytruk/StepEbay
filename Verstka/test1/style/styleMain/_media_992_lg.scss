@@ -1,0 +1,40 @@
+//________________________________________________________________
+//сol
+@media screen and (min-width: 992px) {
+  #size::before {
+    content: "lg min-width: 992px";
+  }
+}
+//________________________________________________________________
+//lg
+@media screen and (min-width: 992px) {
+  .categoryContent {
+    height: 200px;
+    &.clothes {
+      @include bg($img: "images/плаття.png", $bg: $mainMintgreen);
+    }
+    &.phones {
+      @include bg($img: "images/телефони.png", $bg: $mainOrange);
+      background-size: auto 85%;
+    }
+    &.beauty {
+      @include bg($img: "images/краса2222.png", $bg: $mainRose);
+      background-size: auto 90%;
+    }
+    &.sport {
+      @include bg($img: "images/спорт2222.png", $bg: $mainGreen);
+      background-size: auto 100%;
+      background-position: right;
+    }
+    &.catalogue {
+      @include bg($img: "images/каталог 2222.png", $bg: $clrAqua);
+      background-position: right;
+    }
+    &.toys {
+      @include bg($img: "images/медвідь.png", $bg: $clrYellow);
+    }
+  }
+}
+
+//________________________________________________________________
+//lg

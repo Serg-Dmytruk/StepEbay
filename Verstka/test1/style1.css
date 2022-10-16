@@ -1,0 +1,90 @@
+:root {
+    font-family: 'Nunito', sans-serif;
+--clr-yellow: yellow;
+}
+.categoryContent {
+    height: 50px;
+    background-color: var (--clr-yellow);
+    border-radius: 20px;
+    padding: 5px 10px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 15px;
+}
+.categoryContent a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+
+
+}
+.categoryContent a:active, .categoryContent a:focus {
+    color: white;
+
+}
+.categoryContent a:hover {
+    color: gray;
+
+}
+
+.categoryContent.clothes {
+    background-color: aquamarine;
+    min-height: 190px;
+    margin-bottom: 130;
+
+}
+.categoryContent.clothes .img {
+    background: image();
+    height: 25px;
+    width: 25px;
+    background-size: contain;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+}
+
+.categoryContent.phones {
+    background-color: rgb(242, 166, 24);
+    min-height: 190px;
+    margin-bottom: 130;
+
+}
+.categoryContent.phones .img {
+    background: url("https://img.freepik.com/free-photo/the-cat-on-white-background_155003-15381.jpg?w=2000");
+    height: 25px;
+    width: 25px;
+    background-size: contain;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+}
+
+.categoryContent.beauty {
+    background-color: pink;
+    min-height: 190px;
+    margin-bottom: 130;
+
+}
+
+.categoryContent.sport {
+    background-color: rgb(140, 235, 140);
+    min-height: 190px;
+    margin-bottom: 130;
+
+}
+
+.categoryContent.catalogue {
+    background-color: rgb(111, 219, 251);
+    min-height: 190px;
+    margin-bottom: 130;
+
+}
+
+.categoryContent.toys {
+    background-color: yellow;
+    min-height: 190px;
+    margin-bottom: 130;
+
+}
