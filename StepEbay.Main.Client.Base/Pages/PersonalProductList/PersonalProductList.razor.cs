@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using StepEbay.Common.Models.Pagination;
-using StepEbay.Main.Client.Base.Layout;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Bet;
 using StepEbay.Main.Common.Models.Product;
@@ -10,7 +9,6 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalProductList
 {
     [Route("personal/products")]
     [Authorize]
-    [Layout(typeof(EmptyLayout))]
     public partial class PersonalProductList
     {
         [Inject] IApiService ApiService { get; set; }

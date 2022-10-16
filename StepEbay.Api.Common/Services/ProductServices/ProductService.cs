@@ -5,6 +5,7 @@ using StepEbay.Data.Common.Services.ProductDbServices;
 using StepEbay.Data.Models.Products;
 using StepEbay.Main.Api.Common.Services.DataValidationServices;
 using StepEbay.Main.Common.Models.Product;
+using StepEbay.Common.Constans;
 
 namespace StepEbay.Main.Api.Common.Services.ProductServices
 {
@@ -35,7 +36,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
             return new PaginatedList<ProductDto>
             {
-                List = products.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated }).Skip(page * 3).Take(3).ToList(),
+                List = products.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated }).Skip(page * ProductListConstant.MAXONPAGE).Take(ProductListConstant.MAXONPAGE).ToList(),
                 CountAll = products.Count()
             };
         }

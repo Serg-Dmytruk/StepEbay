@@ -4,6 +4,7 @@ using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Bet;
 using StepEbay.PushMessage.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace StepEbay.Main.Client.Shared
         [Inject] private IMessageService MessageService { get; set; }
         [Inject] private IApiService ApiService { get; set; }
         private string UserName { get; set; }
+        public bool ShowSignInModal { get; set; } = false;
+        public bool ShowSignUpModal { get; set; } = false;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -51,20 +54,13 @@ namespace StepEbay.Main.Client.Shared
             await TokenProvider.CheckAuthentication(false);
 
             await HubClient.Stop();
-
-            NavigationManager.NavigateTo("/");
-        }
-
-        private async Task LogIn()
-        {
-
         }
 
         private async void OwnerClosed(List<int> productInfo)
         {
             var products = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductInfo(new ProductInfoDto { ProductIds = productInfo }))).Data;
 
-            foreach(var product in products) 
+            foreach (var product in products)
                 MessageService.ShowInfo($"ВАШ ТОВАР КУПЛЕНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
         }
 
@@ -74,7 +70,7 @@ namespace StepEbay.Main.Client.Shared
 
             foreach (var product in products)
             {
-                if(product.PurchaseTypeId == 2)
+                if (product.PurchaseTypeId == 2)
                     MessageService.ShowInfo($"АУКЦІОН ЗАВЕРШЕНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
                 if (product.PurchaseTypeId == 1)
                     MessageService.ShowInfo($"ТОВАР ПРИДБАНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
@@ -92,6 +88,25 @@ namespace StepEbay.Main.Client.Shared
 
             }
         }
-        
+
+        private void ShowSignIn() => ShowSignInModal = true;
+
+        private void CloseSignInModal(bool show)
+        {
+            ShowSignInModal = false;
+            StateHasChanged();
+        }
+
+        private void CloseSignUpModal(bool show)
+        {
+            ShowSignUpModal = false;
+            StateHasChanged();
+        }
+
+        private void ShowSignUp()
+        {
+            Console.WriteLine("dasd");
+            ShowSignUpModal = true;
+        }
     }
 }

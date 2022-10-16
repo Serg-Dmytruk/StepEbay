@@ -2,16 +2,15 @@
 using Microsoft.Extensions.Configuration;
 using StepEbay.Common.Models.Pagination;
 using StepEbay.Common.Models.ProductInfo;
-using StepEbay.Main.Client.Base.Layout;
 using StepEbay.Main.Client.Common.ClientsHub;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Product;
+using StepEbay.Common.Constans;
 
 namespace StepEbay.Main.Client.Base.Pages
 {
     [Route("products")]
     [Route("products/{filter}")]
-    [Layout(typeof(EmptyLayout))]
     public partial class ProductList
     {
         [Parameter] public string filter { get; set; }
@@ -27,7 +26,6 @@ namespace StepEbay.Main.Client.Base.Pages
 
         public int ProductPageNumber = 0;
         public int MaxProductPageNumber = 0;
-        private readonly int _productOnPageNumber = 3;
 
         protected override void OnInitialized()
         {
@@ -96,7 +94,10 @@ namespace StepEbay.Main.Client.Base.Pages
             _products = responce.Data;
 
             if (_products is not null)
-                MaxProductPageNumber = (_products.CountAll / _productOnPageNumber);
+            {
+                MaxProductPageNumber = _products.CountAll % ProductListConstant.MAXONPAGE == 0 ? (_products.CountAll / ProductListConstant.MAXONPAGE) : (_products.CountAll / ProductListConstant.MAXONPAGE) + 1;
+            }
+                                
         }
 
         protected void SetDefaultFilters(List<CategoryDto> categories)
