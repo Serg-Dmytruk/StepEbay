@@ -59,8 +59,8 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
             var product = new Product()
             {
-                DateCreated = DateTime.Now,
-                DateClose = DateTime.Now.AddDays(2),
+                DateCreated = DateTime.UtcNow,
+                DateClose = DateTime.UtcNow.AddMinutes(10),
                 Image = productRequest.Image,
                 Title = productRequest.Title,
                 Description = productRequest.Description,
@@ -113,9 +113,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
             if (productDb == null)
                 return ResponseData<ProductDto>.Fail("product", "Продукта нема");
-            if (productDb.DateClose > DateTime.Now)
-                return ResponseData<ProductDto>.Fail("product", "Час продукта закінчився");
-
+       
             return new ResponseData<ProductDto>() { Data = new ProductDto() { Id = productDb.Id, Image = productDb.Image, Title = productDb.Title, Description = productDb.Description, Price = productDb.Price, CategoryId = productDb.CategoryId, StateId = productDb.ProductStateId, OwnerId = productDb.OwnerId, PurchaseTypeId = productDb.PurchaseTypeId, DateCreated = productDb.DateCreated, DateClosed = (DateTime)productDb.DateClose } };
         }
     }

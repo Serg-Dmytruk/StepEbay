@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StepEbay.Common;
+using StepEbay.Common.Helpers;
 using StepEbay.Common.Lockers;
 using StepEbay.Common.Storages;
 using StepEbay.Main.Client.Base.Providers;
@@ -47,6 +48,7 @@ namespace StepEbay.Main.Client
             services.AddScoped<ITokenProvider, TokenProvider>(p => new TokenProvider(p.GetService<CookieStorage>(),
                 cookieOptions.AccessToken, cookieOptions.RefreshToken, cookieOptions.Expires, domainOptions.Cookie));
 
+            services.AddScoped<TimezoneHelper>();
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<AuthenticationStateProvider>(p => (TokenProvider)p.GetService<ITokenProvider>());
             services.AddScoped<SemaphoreManager>();
