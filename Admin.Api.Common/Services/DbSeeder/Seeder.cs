@@ -147,7 +147,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
 
                 await _productDbService.Add(new Product()
                 {
-                    DateCreated = DateTime.Now,
+                    DateCreated = DateTime.UtcNow,
                     OwnerId = (await _userDbService.GetUserByNickName("admin")).Id,
                     Title = title,
                     Image = image,
