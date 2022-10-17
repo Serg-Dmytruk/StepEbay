@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
-using StepEbay.Main.Common.Models.Product;
-using StepEbay.PushMessage.Services;
 
 namespace StepEbay.Main.Client.Base.Pages
 {
@@ -21,14 +18,14 @@ namespace StepEbay.Main.Client.Base.Pages
         public bool ShowSignUpModal { get; set; } = false;
 
         private Dictionary<string, List<string>> MessageConfirmReg = new();
-        private List<CategoryDto> _categories = new List<CategoryDto>();
+        //private List<CategoryDto> _categories = new List<CategoryDto>();
 
         private bool ShowPreloader { get; set; } = true;
 
         protected async Task GetCategories()
         {
             var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetCategories());
-            _categories = responce.Data;
+            //_categories = responce.Data;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

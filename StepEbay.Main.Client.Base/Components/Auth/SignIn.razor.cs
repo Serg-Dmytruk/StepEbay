@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Common.Storages;
+using StepEbay.Main.Client.Common.DataValidationServices;
 using StepEbay.Main.Client.Common.Options;
 using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
@@ -23,8 +24,13 @@ namespace StepEbay.Main.Client.Base.Components.Auth
 
         [Parameter] public EventCallback<bool> OnClose { get; set; }
         private SignInRequestDto SignInRequestDto { get; set; } = new();
+        private SignUpRequestDto SignUpRequestDto { get; set; } = new();
+        private Dictionary<string, List<string>> Errors = new();
         private bool ShowPreloader { get; set; } = true;
         private bool RememberMe { get; set; }
+        private bool IsMainMenu { get; set; } = true;
+        private bool IsLogIn { get; set; }
+        private bool IsRegistration { get; set; }
 
         private Dictionary<string, List<string>> _errors = new();
         protected override void OnAfterRender(bool firstRender)
@@ -85,9 +91,68 @@ namespace StepEbay.Main.Client.Base.Components.Auth
 
             await SignInRequest();
         }
+
+        private async Task SignUpRequest()
+        {
+            Errors.Clear();
+            ShowPreloader = true;
+            var validator = new AuthValidator();
+            var result = await validator.ValidateAsync(SignUpRequestDto);
+
+            if (!result.IsValid)
+            {
+                var list = new List<string>();
+                result.Errors.ForEach(error => list.Add(error.ToString()));
+                Errors.Add("Registration", list);
+            }
+            else
+            {
+                ResponseData<SignInResponseDto> response = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.SignUp(SignUpRequestDto));
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    ShowPreloader = false;
+                    StateHasChanged();
+                }
+
+                Errors = response.Errors;
+            }
+
+            if (Errors.Count == 0)
+            {
+                MessageService.ShowSuccsess("Успіх", "Вам надіслано лист для підтвердження реєстрації!");
+                await ModalClose();
+                return;
+            }
+
+            ShowPreloader = false;
+            StateHasChanged();
+        }
+
         private Task ModalClose()
         {
             return OnClose.InvokeAsync(false);
+        }
+
+        private void ModalBack()
+        {
+            IsMainMenu = true;
+            IsRegistration = false;
+            IsLogIn = false;
+        }
+
+        private void IsSignUp()
+        {
+            IsMainMenu = false;
+            IsRegistration = true;
+            IsLogIn = false;
+        }
+
+        private void IsSignIn()
+        {
+            IsMainMenu = false;
+            IsLogIn = true;
+            IsRegistration = false;
         }
     }
 }
