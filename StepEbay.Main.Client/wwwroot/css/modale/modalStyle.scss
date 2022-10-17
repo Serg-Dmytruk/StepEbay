@@ -1,4 +1,26 @@
-﻿.modalWindow {
+﻿#palka {
+    margin: 7px auto;
+    width: 310px;
+    height: 3px;
+    background: #5AD9D9;
+}
+
+.header {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8em;
+    font-family: 'Nunito';
+}
+
+.textBlock {
+    width: 310px;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: 400;
+}
+
+.modalWindow {
     position: relative;
     width: 400px;
     height: 425px;
@@ -56,6 +78,16 @@
     &:focus {
         border-color: #AFC75D;
     }
+}
+
+.closeButton {
+    background-color: white;
+    position: absolute;
+    top: 1%;
+    right: 4%;
+    border: 0;
+    color: #2eb4ab;
+    font-size: 25px;
 }
 
 .signInbutton {

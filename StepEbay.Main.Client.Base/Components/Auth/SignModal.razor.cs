@@ -13,7 +13,7 @@ using System.Net;
 namespace StepEbay.Main.Client.Base.Components.Auth
 {
 
-    public partial class SignIn
+    public partial class SignModal
     {
         [Inject] private ITokenProvider TokenProvider { get; set; }
         [Inject] IApiService ApiService { get; set; }

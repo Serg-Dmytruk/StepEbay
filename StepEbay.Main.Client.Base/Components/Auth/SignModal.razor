@@ -5,22 +5,24 @@
             @if(IsMainMenu is true && ShowPreloader is false)
             {
                 <div class="modalLogWindow">
+                    <button class="closeButton" @onclick="ModalClose">x</button>
                     <div class="mborder">
                         <div>
-                            <h1>Привіт!</h1>
-                            <span>Ти знаєш, що якщо зареєструєшся, будеш мати такі плюшки:</span>
-                            <div class="palka"></div>
-                            <div>
+                            <h1 class="header">Привіт!</h1>
+                            <div class="textBlock">
+                                <span>Ти знаєш, що якщо зареєструєшся, будеш мати такі плюшки:</span>
+                            </div>
+                            <div id="palka"></div>
+                            <div class="textBlock">
                                 <ul>
                                     <li>швидкий вхід</li>
                                     <li>доступ до ставок та багато іншого</li>
                                 </ul>
                             </div>
-                            <div class="palka"></div>
+                            <div id="palka"></div>
                             <div>
                                 <button class="mbutton mbuttonBottomLeftPos" @onclick="IsSignUp">Реєстрація</button>
                                 <button class="mbutton mbuttonBottomRightPos" @onclick="IsSignIn">Вхід</button>
-                                <button @onclick="ModalClose">Закрити</button>
                             </div>
                         </div>
                      </div>
@@ -34,17 +36,36 @@
                         <p class="mMainHeader2">Для входу заповни тут:</p>
                         @if (!ShowPreloader)
                         {
-                            @if (_errors.Count > 0)
+                            @if (_errors.Count > 0 && @_errors.FirstOrDefault().Value[0] == "Нікнейм не знайдено!")
                             {
-                                <p class="2">@_errors.FirstOrDefault().Value[0]</p>
+                                <div class="minputDiv">
+                                    <input class="minput borderColorInputError" type="text" @bind="SignInRequestDto.NickName" placeholder="Нікнейм" />
+                                    <p class="errorP">*Невірний нікнейм!</p>
+                                </div>
+                                <div class="minputDiv">
+                                    <input class="minput borderColorInput" type="password" @bind="SignInRequestDto.Password" placeholder="Пароль" />
+                                </div>
+                            }
+                            else if (_errors.Count > 0 && @_errors.FirstOrDefault().Value[0] == "Невірний нікнейм або пароль!")
+                            {
+                                <div class="minputDiv">
+                                    <input class="minput borderColorInput" type="text" @bind="SignInRequestDto.NickName" placeholder="Нікнейм" />
+                                </div>
+                                <div class="minputDiv">
+                                    <input class="minput borderColorInputError" type="password" @bind="SignInRequestDto.Password" placeholder="Пароль" />
+                                    <p class="errorP">*Невірний пароль!</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="minputDiv">
+                                    <input class="minput borderColorInput" type="text" @bind="SignInRequestDto.NickName" placeholder="Нікнейм" />
+                                </div>
+                                <div class="minputDiv">
+                                    <input class="minput borderColorInput" type="password" @bind="SignInRequestDto.Password" placeholder="Пароль" />
+                                </div>
                             }
 
-                            <div class="minputDiv">
-                                <input class="minput borderColorInput" type="text" @bind="SignInRequestDto.NickName" placeholder="Нікнейм" />
-                            </div>
-                            <div class="minputDiv">
-                                <input class="minput borderColorInput" type="password" @bind="SignInRequestDto.Password" placeholder="Пароль" />
-                            </div>
                             <div><input type="checkbox" style="cursor: pointer" @bind="RememberMe" /> Запам'ятати</div>
                             <button class="mbutton mbuttonBottomLeftPos" @onclick="SignInRequest">Авторизуватись</button>
                             <button class="mbutton mbuttonBottomRightPos" @onclick="ModalBack">Назад</button>
