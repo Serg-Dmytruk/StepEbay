@@ -1,0 +1,69 @@
+.mGrid {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 7fr 4fr;
+  // grid-auto-rows: minmax(100px, auto);
+
+  .logo {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+  }
+  .mSearch {
+    padding-top: 15px;
+  }
+  .icons {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: minmax(15px, auto);
+    .icon {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  }
+  .catalog {
+    border-right: 1px solid gray;
+    padding-left: 15px;
+  }
+  .catalog::before {
+    content: "▲";
+    width: 1em;
+    height: 1em;
+    font-weight: 900;
+  }
+  .mNav {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: minmax(15px, auto);
+    .mNavItem a {
+      color: red;
+      text-decoration: none;
+    }
+  }
+  .buttons {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(15px, auto);
+    .mBtn {
+      padding: 2px 5px;
+      border: 1px solid red;
+      background: rgba($color: orange , $alpha: 0.5);
+      color: red;
+      border-radius: 5px;
+      text-align: center;
+      &:hover {
+        background: rgba($color: orange , $alpha: 0.3);
+      }
+    }
+  }
+}
+// <div class="logo"></div>
+//           <div class="mSearch"></div>
+//           <div class="icons"></div>
+//           <div class="catalog"></div>
+//           <div class="mNav"></div>
+//           <div class="buttons"></div>

@@ -122,6 +122,9 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             if (!await _categoryDbService.AnyByName(ProductCategoryConstant.BUATY))
                 await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.BUATY });
 
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.TOY))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.TOY });
+
             await _context.SaveChangesAsync();
         }
 
@@ -173,6 +176,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             await AddProduct("Sony 5510", string.Empty, 15600, "Смартфон Sony 5510", ProductCategoryConstant.TELEPHONE);
             await AddProduct("Крем для ніг", string.Empty, 100, "Крем для ніг Viche", ProductCategoryConstant.BUATY);
             await AddProduct("Мило Viche", string.Empty, 40, "Мило Viche", ProductCategoryConstant.BUATY);
+            await AddProduct("Пістолет Batman", string.Empty, 400, "Пістолет Batman", ProductCategoryConstant.TOY);
         }
 
         private async Task AddUser(string userName, string pass, string fullName, string email, string _role)

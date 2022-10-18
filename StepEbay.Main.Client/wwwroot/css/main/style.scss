@@ -1,0 +1,112 @@
+$clrYellow: #e4ff1a;
+$clrAqua: #18f8ea;
+
+$mainRose: #ffd9d3;
+$mainOrange: #ffd362;
+$mainGreen: #85fdc9;
+$mainMintgreen: #c1ff9b;
+$mainBlack: #000;
+
+//$mainBlack: darken($mainGray, 20%);
+$clrCategoryHref: $mainBlack;
+$fs: 1em;
+
+:root {
+  font-family: "Nunito", sans-serif;
+  //background-color: $mainBlack;
+}
+
+@import "menu.scss";
+.mGrid {
+  .logo {
+    background-image: url("../../images/logo.png");
+  }
+  .icons {
+    .icon1 {
+      background-image: url("../../images/logo.png");
+    }
+    .icon2 {
+      background-image: url("../../images/logo.png");
+    }
+    .icon3 {
+      background-image: url("../../images/logo.png");
+    }
+  }
+
+}
+.categoryContent {
+  height: 230px;
+  border-radius: 20px;
+  padding: 5px 10px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 15px;
+  a {
+    font-size: $fs;
+    color: $clrCategoryHref;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    display: flex;
+
+    align-items: center;
+
+    &:after {
+      content: "";
+      position: relative;
+      margin-left: 5px;
+      height: $fs;
+      width: $fs;
+      background-color: $clrCategoryHref;
+      //transform: rotate(45deg);
+      clip-path: polygon(0 0, 0 100%, 39% 48%);
+    }
+
+    &:active,
+    &:focus {
+      color: $clrCategoryHref;
+    }
+    &:hover {
+      color: lighten($color: $clrCategoryHref, $amount: 20%);
+    }
+  }
+}
+@mixin bg($img, $bg) {
+  background-color: $bg;
+  background-image: url($img);
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+.categoryContent {
+  &.clothes {
+    @include bg($img: "../../images/плаття.png", $bg: $mainMintgreen);
+  }
+  &.phones {
+    @include bg($img: "../../images/телефони.png", $bg: $mainOrange);
+    background-size: auto 75%;
+  }
+  &.beauty {
+    @include bg($img: "../../images/краса.png", $bg: $mainRose);
+    background-size: auto 90%;
+  }
+  &.sport {
+    @include bg($img: "../../images/спорт.png", $bg: $mainGreen);
+    background-size: auto 80%;
+    background-position: center;
+  }
+  &.catalogue {
+    @include bg($img: "../../images/каталог.png", $bg: $clrAqua);
+    background-position: center;
+  }
+  &.toys {
+    @include bg($img: "../../images/медвідь.png", $bg: $clrYellow);
+  }
+}
+
+//*****************************************************************************
+@import "media/media_576_col";
+@import "media/media_577_sm";
+@import "media/media_768_md";
+@import "media/media_992_lg";
+@import "media/media_1200_xxl";

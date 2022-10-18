@@ -10,5 +10,33 @@
   {
     "outputFile": "wwwroot/css/ProductList.css",
     "inputFile": "wwwroot/css/ProductList.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/main/style.css",
+    "inputFile": "wwwroot/css/main/style.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/main/_menu.css",
+    "inputFile": "wwwroot/css/main/_menu.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/main/media/_media_1200_xxl.css",
+    "inputFile": "wwwroot/css/main/media/_media_1200_xxl.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/main/media/_media_576_col.css",
+    "inputFile": "wwwroot/css/main/media/_media_576_col.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/main/media/_media_577_sm.css",
+    "inputFile": "wwwroot/css/main/media/_media_577_sm.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/main/media/_media_768_md.css",
+    "inputFile": "wwwroot/css/main/media/_media_768_md.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/main/media/_media_992_lg.css",
+    "inputFile": "wwwroot/css/main/media/_media_992_lg.scss"
   }
 ]
