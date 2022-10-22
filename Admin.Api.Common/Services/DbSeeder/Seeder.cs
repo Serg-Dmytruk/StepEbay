@@ -165,14 +165,30 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
         public async Task AddProducts()
         {
             await AddProduct("Nokia 2310", string.Empty, 7500, "Смартфон Nokia 2310", ProductCategoryConstant.TELEPHONE);
-            await AddProduct("Спортивна куртка", string.Empty, 600, "Спортивна куртка Nike", ProductCategoryConstant.CLOTH);
-            await AddProduct("Баскетбольний м'яч", string.Empty, 400, "Баскетбольний м'яч Sporty", ProductCategoryConstant.SPORT);
-            await AddProduct("Крем для рук", string.Empty, 130, "Крем для рук Viche", ProductCategoryConstant.BUATY);
-            await AddProduct("Футбольний м'яч", string.Empty, 800, "Футбольний м'яч Sporty", ProductCategoryConstant.SPORT);
-            await AddProduct("Джинси жіночі", string.Empty, 500, "Джинси Jins", ProductCategoryConstant.CLOTH);
+            await AddProduct("Nokia 5310", string.Empty, 12527, "Смартфон Nokia 5310", ProductCategoryConstant.TELEPHONE);
             await AddProduct("Sony 5510", string.Empty, 15600, "Смартфон Sony 5510", ProductCategoryConstant.TELEPHONE);
+            await AddProduct("Sony 8000", string.Empty, 88000, "Смартфон Sony 8000", ProductCategoryConstant.TELEPHONE);
+            await AddProduct("Asus 5", string.Empty, 21000, "Смартфон Asus 5", ProductCategoryConstant.TELEPHONE);
+            await AddProduct("Asus 4+", string.Empty, 16000, "Смартфон Asus 4+", ProductCategoryConstant.TELEPHONE);
+
+            await AddProduct("Спортивна куртка", string.Empty, 600, "Спортивна куртка Nike", ProductCategoryConstant.CLOTH);
+            await AddProduct("Не cпортивна куртка", string.Empty, 200, "Не спортивна куртка не Nike", ProductCategoryConstant.CLOTH);
+            await AddProduct("Напів спортивна куртка", string.Empty, 400, "Напів спортивна куртка можливо Nike", ProductCategoryConstant.CLOTH);
+            await AddProduct("Джинси жіночі", string.Empty, 500, "Джинси Jins", ProductCategoryConstant.CLOTH);
+            await AddProduct("Футболка", string.Empty, 200, "Футболка T-shirt", ProductCategoryConstant.CLOTH);
+            await AddProduct("Краватка", string.Empty, 800, "Чорна краватка", ProductCategoryConstant.CLOTH);
+
+            await AddProduct("Баскетбольний м'яч", string.Empty, 400, "Баскетбольний м'яч Sporty", ProductCategoryConstant.SPORT);
+            await AddProduct("Футбольний м'яч", string.Empty, 800, "Футбольний м'яч Sporty", ProductCategoryConstant.SPORT);
+            await AddProduct("Скакалка", string.Empty, 150, "Скакалка Sporty", ProductCategoryConstant.SPORT);
+            await AddProduct("Гантелі 10кг", string.Empty, 900, "Одна гантеля 10 кг", ProductCategoryConstant.SPORT);
+
+            await AddProduct("Крем для рук", string.Empty, 130, "Крем для рук Viche", ProductCategoryConstant.BUATY);
             await AddProduct("Крем для ніг", string.Empty, 100, "Крем для ніг Viche", ProductCategoryConstant.BUATY);
+            await AddProduct("Крем для голови", string.Empty, 200, "Крем для голови Viche", ProductCategoryConstant.BUATY);
             await AddProduct("Мило Viche", string.Empty, 40, "Мило Viche", ProductCategoryConstant.BUATY);
+            await AddProduct("Рідке мило Viche", string.Empty, 80, "Рідке мило Viche", ProductCategoryConstant.BUATY);
+            await AddProduct("Шампунь", string.Empty, 40, "Шампунь headandshoulders 200мл", ProductCategoryConstant.BUATY);
         }
 
         private async Task AddUser(string userName, string pass, string fullName, string email, string _role)
