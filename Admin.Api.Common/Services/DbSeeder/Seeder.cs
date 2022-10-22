@@ -122,6 +122,9 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             if (!await _categoryDbService.AnyByName(ProductCategoryConstant.BUATY))
                 await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.BUATY });
 
+            if (!await _categoryDbService.AnyByName(ProductCategoryConstant.TOY))
+                await _categoryDbService.Add(new Category() { Name = ProductCategoryConstant.TOY });
+
             await _context.SaveChangesAsync();
         }
 

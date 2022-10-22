@@ -21,8 +21,7 @@ namespace StepEbay.Main.Client.Shared
         [Inject] private IMessageService MessageService { get; set; }
         [Inject] private IApiService ApiService { get; set; }
         private string UserName { get; set; }
-        public bool ShowSignInModal { get; set; } = false;
-        public bool ShowSignUpModal { get; set; } = false;
+        public bool IsShowSignModal { get; set; } = false;
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -89,24 +88,16 @@ namespace StepEbay.Main.Client.Shared
             }
         }
 
-        private void ShowSignIn() => ShowSignInModal = true;
-
-        private void CloseSignInModal(bool show)
+        private void CloseSignModal(bool show)
         {
-            ShowSignInModal = false;
+            IsShowSignModal = false;
             StateHasChanged();
         }
 
-        private void CloseSignUpModal(bool show)
-        {
-            ShowSignUpModal = false;
-            StateHasChanged();
-        }
-
-        private void ShowSignUp()
+        private void ShowSignModal()
         {
             Console.WriteLine("dasd");
-            ShowSignUpModal = true;
+            IsShowSignModal = true;
         }
     }
 }
