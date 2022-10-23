@@ -17,23 +17,18 @@ $fs: 1em;
 }
 
 @import "style/menu.scss";
-.mGrid {
-  .logo {
-    background-image: url("images/logo.png");
+
+.logo {
+  background-image: url("images/LOGO.svg");
+}
+
+  .icon1 {
+    background-image: url("images/icon_basket.svg");
   }
-  .icons {
-    .icon1 {
-      background-image: url("images/logo.png");
-    }
-    .icon2 {
-      background-image: url("images/logo.png");
-    }
-    .icon3 {
-      background-image: url("images/logo.png");
-    }
+  .icon2 {
+    background-image: url("images/profile_icon.svg");
   }
 
-}
 .categoryContent {
   height: 230px;
   border-radius: 20px;
