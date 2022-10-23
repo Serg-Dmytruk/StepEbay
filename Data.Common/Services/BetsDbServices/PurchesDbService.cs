@@ -16,5 +16,10 @@ namespace StepEbay.Data.Common.Services.BetsDbServices
         {
             return await _dbContext.Purchases.Where(p => p.UserId == id).ToListAsync();
         }
+
+        public async Task<List<Purchase>> GetPurchasesByProductId(int id)
+        {
+            return await _dbContext.Purchases.Where(p => p.PoductId == id).ToListAsync();
+        }
     }
 }

@@ -53,6 +53,9 @@ namespace StepEbay.Main.Client.Common.RestServices
         [Get("/product/{id}")]
         Task<ApiResponse<ProductDto>> GetProduct(int id);
 
+        [Post("/product/{id}/bets")]
+        Task<ApiResponse<List<PurchaseDto>>> GetPurchase(int id);
+
         [Multipart]
         [Post("/image/upload")]
         Task<ApiResponse<ImageResponseDto>> UploadImage(StreamPart file);
