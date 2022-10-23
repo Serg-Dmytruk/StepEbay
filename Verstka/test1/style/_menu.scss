@@ -1,34 +1,74 @@
-.logo {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: left center;
-}
-.mSearch {
-  padding-top: 15px;
-}
 
-.icon {
-  height: 3em;
-
-  background-size: 80% 80%;
-  background-repeat: no-repeat;
-  background-position: center bottom;
+#menubg{
+  position: relative;
 }
+#menu {
+  position: fixed;
+  background:#fff;
+  z-index: 100;
+  .logo {
+    background-image: url("images/LOGO.svg");
 
-
-.catalog {
-  border-right: 1px solid gray;
-  padding-left: 15px;
-}
-.catalog::before {
-  content: "▲";
-  width: 1em;
-  height: 1em;
-  font-weight: 900;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .icon1 {
+    background-image: url("images/icon_basket.svg");
+  }
+  .icon2 {
+    background-image: url("images/profile_icon.svg");
+  }
 }
 
-  .mNavItem a {
-    color: red;
-    text-decoration: none;
+#menu {
+  //--1rst row---------------------
+  .logo {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+  }
+  .search {
+    padding: 15px;
   }
 
+  .icon {
+    height: 3.2em;
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+  }
+
+  //--2nd row---------------------
+
+  .navMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    list-style: none;
+    cursor: pointer;
+    padding: 0;
+
+    & > li > a {
+
+      text-decoration: none;
+      color: $darkGreen;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    & > li > a {
+      &:hover {
+        color: $lightGreen;
+      }
+      &:active,
+      &:focus {
+        color: $pastelOrange;
+      }
+    }
+    & > li.current > a {
+      color: $pastelOrange;
+    }
+  }
+}

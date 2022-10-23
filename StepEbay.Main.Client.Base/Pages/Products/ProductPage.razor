@@ -3,7 +3,23 @@
 <p>@Product.Description</p>
 <p>Дата публікації: @Product.DateCreated.ToString("yyyy:MM:dd:HH:mm")</p>
 <p>Дата закриття: @Product.DateClosed.ToString("yyyy:MM:dd:HH:mm")</p>
-<p>Ціна: @Product.Price</p>
+@if (Product.PurchaseTypeId == 1){
+    <p>Ціна: @Product.Price</p>
+}
+else if (Product.PurchaseTypeId == 2)
+{
+    <p>Стартова ціна: @Product.Price</p>
+    @if (LastPurchase != null)
+    {
+        <p>Остання ставка: @LastPurchase.PurchasePrice</p>
+        <p>Твоя ціна: @LastPurchase.PurchasePrice*0.02</p>
+    }
+    else{
+        <p>Немає ставок</p>
+        <p>Твоя ціна: @Product.Price*0.02</p>
+    }
+}
+
 <AuthorizeView>
     <Authorized>
         @if (Product.PurchaseTypeId == 1)

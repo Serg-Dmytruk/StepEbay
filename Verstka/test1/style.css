@@ -3,52 +3,6 @@
   font-family: "Nunito", sans-serif;
 }
 
-.logo {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: left center;
-}
-
-.mSearch {
-  padding-top: 15px;
-}
-
-.icon {
-  height: 3em;
-  background-size: 80% 80%;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-}
-
-.catalog {
-  border-right: 1px solid gray;
-  padding-left: 15px;
-}
-
-.catalog::before {
-  content: "▲";
-  width: 1em;
-  height: 1em;
-  font-weight: 900;
-}
-
-.mNavItem a {
-  color: red;
-  text-decoration: none;
-}
-
-.logo {
-  background-image: url("images/LOGO.svg");
-}
-
-.icon1 {
-  background-image: url("images/icon_basket.svg");
-}
-
-.icon2 {
-  background-image: url("images/profile_icon.svg");
-}
-
 .categoryContent {
   height: 230px;
   border-radius: 20px;
@@ -129,6 +83,67 @@
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: bottom right;
+}
+
+#menubg {
+  position: relative;
+}
+
+#menu {
+  position: fixed;
+  background: #fff;
+  z-index: 100;
+}
+#menu .logo {
+  background-image: url("images/LOGO.svg");
+}
+#menu .logo:hover {
+  cursor: pointer;
+}
+#menu .icon1 {
+  background-image: url("images/icon_basket.svg");
+}
+#menu .icon2 {
+  background-image: url("images/profile_icon.svg");
+}
+
+#menu .logo {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+#menu .search {
+  padding: 15px;
+}
+#menu .icon {
+  height: 3.2em;
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+#menu .navMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+  padding: 0;
+}
+#menu .navMenu > li > a {
+  text-decoration: none;
+  color: #045316;
+  font-weight: 700;
+  white-space: nowrap;
+}
+#menu .navMenu > li > a:hover {
+  color: #8BC65D;
+}
+#menu .navMenu > li > a:active, #menu .navMenu > li > a:focus {
+  color: #FF8A00;
+}
+#menu .navMenu > li.current > a {
+  color: #FF8A00;
 }
 
 @media screen and (max-width: 576px) {
