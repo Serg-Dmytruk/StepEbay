@@ -7,6 +7,12 @@ $mainGreen: #85fdc9;
 $mainMintgreen: #c1ff9b;
 $mainBlack: #000;
 
+// primaryColors
+$darkGreen:#045316;
+$lightGreen:#8BC65D;
+$pastelOrange:#FF8A00;
+
+
 //$mainBlack: darken($mainGray, 20%);
 $clrCategoryHref: $mainBlack;
 $fs: 1em;
@@ -16,18 +22,6 @@ $fs: 1em;
   //background-color: $mainBlack;
 }
 
-@import "style/menu.scss";
-
-.logo {
-  background-image: url("images/LOGO.svg");
-}
-
-  .icon1 {
-    background-image: url("images/icon_basket.svg");
-  }
-  .icon2 {
-    background-image: url("images/profile_icon.svg");
-  }
 
 .categoryContent {
   height: 230px;
@@ -98,7 +92,10 @@ $fs: 1em;
     @include bg($img: "images/медвідь.png", $bg: $clrYellow);
   }
 }
+//-Styles ID-------------------------------------------------------------------
+@import "style/menu.scss";
 
+//-----------------------------------------------------------------------------
 //*****************************************************************************
 @import "style/styleMain/media_576_col";
 @import "style/styleMain/media_577_sm";
