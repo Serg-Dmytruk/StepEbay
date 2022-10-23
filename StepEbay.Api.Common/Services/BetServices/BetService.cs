@@ -37,7 +37,8 @@ namespace StepEbay.Main.Api.Common.Services.BetServices
             }
             else //Коли ставимо ставку
             {
-                product.Price = product.Price * (decimal)1.05;
+                product.Price = product.Price * (decimal)1.02;
+                product.DateClose = product.DateClose.Value.AddMinutes(10);
                 await _productDbService.Update(product);
             }
 

@@ -1,0 +1,62 @@
+﻿@charset "UTF-8";
+.mGrid {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 7fr 4fr;
+}
+.mGrid .logo {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+.mGrid .mSearch {
+  padding-top: 15px;
+}
+.mGrid .icons {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: minmax(15px, auto);
+}
+.mGrid .icons .icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.mGrid .catalog {
+  border-right: 1px solid gray;
+  padding-left: 15px;
+}
+.mGrid .catalog::before {
+  content: "▲";
+  width: 1em;
+  height: 1em;
+  font-weight: 900;
+}
+.mGrid .mNav {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: minmax(15px, auto);
+}
+.mGrid .mNav .mNavItem a {
+  color: red;
+  text-decoration: none;
+}
+.mGrid .buttons {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: minmax(15px, auto);
+}
+.mGrid .buttons .mBtn {
+  padding: 2px 5px;
+  border: 1px solid red;
+  background: rgba(255, 165, 0, 0.5);
+  color: red;
+  border-radius: 5px;
+  text-align: center;
+}
+.mGrid .buttons .mBtn:hover {
+  background: rgba(255, 165, 0, 0.3);
+}
