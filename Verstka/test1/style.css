@@ -3,79 +3,50 @@
   font-family: "Nunito", sans-serif;
 }
 
-.mGrid {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: 1fr 7fr 4fr;
-}
-.mGrid .logo {
+.logo {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left center;
 }
-.mGrid .mSearch {
+
+.mSearch {
   padding-top: 15px;
 }
-.mGrid .icons {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: minmax(15px, auto);
-}
-.mGrid .icons .icon {
-  background-size: contain;
+
+.icon {
+  height: 3em;
+  background-size: 80% 80%;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center bottom;
 }
-.mGrid .catalog {
+
+.catalog {
   border-right: 1px solid gray;
   padding-left: 15px;
 }
-.mGrid .catalog::before {
+
+.catalog::before {
   content: "▲";
   width: 1em;
   height: 1em;
   font-weight: 900;
 }
-.mGrid .mNav {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-auto-rows: minmax(15px, auto);
-}
-.mGrid .mNav .mNavItem a {
+
+.mNavItem a {
   color: red;
   text-decoration: none;
 }
-.mGrid .buttons {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-rows: minmax(15px, auto);
-}
-.mGrid .buttons .mBtn {
-  padding: 2px 5px;
-  border: 1px solid red;
-  background: rgba(255, 165, 0, 0.5);
-  color: red;
-  border-radius: 5px;
-  text-align: center;
-}
-.mGrid .buttons .mBtn:hover {
-  background: rgba(255, 165, 0, 0.3);
+
+.logo {
+  background-image: url("images/LOGO.svg");
 }
 
-.mGrid .logo {
-  background-image: url("images/logo.png");
+.icon1 {
+  background-image: url("images/icon_basket.svg");
 }
-.mGrid .icons .icon1 {
-  background-image: url("images/logo.png");
-}
-.mGrid .icons .icon2 {
-  background-image: url("images/logo.png");
-}
-.mGrid .icons .icon3 {
-  background-image: url("images/logo.png");
+
+.icon2 {
+  background-image: url("images/profile_icon.svg");
 }
 
 .categoryContent {
