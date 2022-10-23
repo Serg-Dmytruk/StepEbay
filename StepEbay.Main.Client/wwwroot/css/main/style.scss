@@ -16,6 +16,32 @@ $fs: 1em;
   //background-color: $mainBlack;
 }
 
+.categoryLink {
+    color: #807575;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: $fs;
+
+    &:after {
+        content: "";
+        position: relative;
+        margin-left: 5px;
+        height: $fs;
+        width: $fs;
+        background-color: $clrCategoryHref;
+        clip-path: polygon(0 0, 0 100%, 39% 48%);
+    }
+
+    &:active,
+    &:focus {
+        color: $clrCategoryHref;
+    }
+
+    &:hover {
+        color: lighten($color: $clrCategoryHref, $amount: 20%);
+    }
+}
+
 @import "menu.scss";
 .mGrid {
   .logo {

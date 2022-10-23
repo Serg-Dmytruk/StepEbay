@@ -20,6 +20,6 @@
 
     public static class ProductListConstant
     {
-        public static readonly int MAXONPAGE = 6;
+        public static readonly int MAXONPAGE = 5;
     }
 }

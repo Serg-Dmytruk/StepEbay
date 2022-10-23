@@ -7,16 +7,16 @@
         <ModalDialog Title="@MessageConfirmReg.FirstOrDefault().Key" Text="@MessageConfirmReg.FirstOrDefault().Value" OnClose='@CloseModal' />
     }
 
-    <div id="carouselExampleControls" class="carousel slide carouselSize" data-bs-ride="carousel">
-      <div class="carousel-inner">
+    <div id="carouselExampleControls" class="carousel slide col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl carosel-size" data-bs-ride="carousel">
+      <div class="carousel-inner carousel-radius">
         <div class="carousel-item active">
-          <img src="@($"{ApiConnection}/images/слайдер1.png")" class="d-block w-100" alt="...">
+          <img src="@($"{ApiConnection}/images/slider.png")" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="@($"{ApiConnection}/images/слайдер1.png")" class="d-block w-100" alt="...">
+          <img src="@($"{ApiConnection}/images/slider.png")" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="@($"{ApiConnection}/images/слайдер1.png")" class="d-block w-100" alt="...">
+          <img src="@($"{ApiConnection}/images/slider.png")" class="d-block w-100" alt="...">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -34,7 +34,7 @@
         <div class="row">
 
          <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl">
-            <a href="products/@ProductCategoryIdConstant.CLOTH">
+            <a class="categoryLink" href="products/@ProductCategoryIdConstant.CLOTH">
                 <div class="categoryContent clothes">
                     <span>Одяг</span>
                 </div>
@@ -42,7 +42,7 @@
          </div>
 
          <div class="col-12 col-sm-12 col-md-4 col-lg-1 col-lg-3 col-xxl-2">
-            <a href="products/@ProductCategoryIdConstant.TELEPHONE">
+            <a class="categoryLink" href="products/@ProductCategoryIdConstant.TELEPHONE">
                 <div class="categoryContent phones">
                     <span>Телефони</span>
                 </div>
@@ -50,7 +50,7 @@
          </div>
 
           <div class="col">
-              <a href="products/@ProductCategoryIdConstant.BUATY">
+              <a class="categoryLink" href="products/@ProductCategoryIdConstant.BUATY">
                 <div class="categoryContent beauty">
                   <span>Краса</span>
                 </div>
@@ -60,7 +60,7 @@
         
         <div class="row">
             <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-6 col-xxl">
-                <a href="products/@ProductCategoryIdConstant.SPORT">
+                <a class="categoryLink" href="products/@ProductCategoryIdConstant.SPORT">
                     <div class="categoryContent sport">
                       <span>Спорт</span>
                     </div>
@@ -68,7 +68,7 @@
             </div>
             
         <div class="col-12 col-sm-12 col-md-4 col-lg-1 col-lg-3 col-xxl-2">
-            <a href="products/0">
+            <a class="categoryLink" href="products/0">
                 <div class="categoryContent catalogue">
                     <span>Каталог</span>
                 </div>
@@ -76,7 +76,7 @@
         </div>
 
         <div class="col">
-            <a href="products/@ProductCategoryIdConstant.TOY">
+            <a class="categoryLink" href="products/@ProductCategoryIdConstant.TOY">
                 <div class="categoryContent toys">
                   <span>Іграшки</span>
                 </div>
