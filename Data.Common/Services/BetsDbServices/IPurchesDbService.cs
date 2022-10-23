@@ -6,5 +6,6 @@ namespace StepEbay.Data.Common.Services.BetsDbServices
     public interface IPurchesDbService : IDefaultDbService<int, Purchase>
     {
         public Task<List<Purchase>> GetPurchaseByUserId(int id);
+        public Task<List<Purchase>> GetPurchasesByProductId(int id);
     }
 }

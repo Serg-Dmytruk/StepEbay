@@ -6,6 +6,7 @@ using StepEbay.Common.Helpers;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Data.Models.Products;
 using StepEbay.Main.Client.Common.RestServices;
+using StepEbay.Main.Common.Models.Bet;
 using StepEbay.Main.Common.Models.Product;
 using StepEbay.PushMessage.Services;
 using System;
@@ -23,6 +24,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         [Inject]private TimezoneHelper TimezoneHelper { get; set; }
         private string ApiConnection { get; set; }
         ProductDto Product { get; set; }
+        PurchaseDto LastPurchase { get; set; }
 
         public ProductPage()
         {
@@ -58,6 +60,11 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             Product.DateClosed = await TimezoneHelper.ToLocalTime(Product.DateClosed);
             Product.DateCreated = await TimezoneHelper.ToLocalTime(Product.DateCreated);
 
+            if (Product.PurchaseTypeId == 2)
+            {
+                ResponseData<List<PurchaseDto>> resultPurchases = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetPurchase(int.Parse(Id)));
+                LastPurchase = resultPurchases.Data.Last();
+            }
             StateHasChanged();
         }
     }
