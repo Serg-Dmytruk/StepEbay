@@ -60,3 +60,12 @@
 .mGrid .buttons .mBtn:hover {
   background: rgba(255, 165, 0, 0.3);
 }
+
+.carousel-radius {
+  border-radius: 25px;
+}
+
+.carosel-size {
+  width: 86%;
+  margin-left: 7%;
+}

@@ -1,6 +1,11 @@
 ﻿<div class="mainBlock">
     @if (!ShowPreloader)
     {
+        @if (ShowModal)
+        {
+            <ModalDialog Title="@MessageConfirmReg.FirstOrDefault().Key" Text="@MessageConfirmReg.FirstOrDefault().Value" OnClose='@CloseModal' />
+        }
+
         <div class="filterBlock">
             <span>Категорія:</span>
             @foreach (var category in ProductFilters.Categories)
@@ -60,17 +65,31 @@
                 <ul class="catalogUl">
                     @foreach (var product in _products.List)
                     {
+                        @if(product.Description.Length > 45)
+                        {
+                            product.Description = product.Description[..45] + "...";
+                        }
                         <li>
                             <div class="productCard">
-                                <a href="/product/@product.Id">
-                                    <img class="imgCard" src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
-                                </a>
-                                <a href="/product/@product.Id">
-                                    <span> @product.Title</span>
-                                </a>
                                 <div>
-                                    <span>@product.Price</span>
+                                    <a href="/product/@product.Id">
+                                        <img class="imgCard" src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
+                                    </a>
+                                </div>
+                                <div class="mt-20 pl-15">
+                                    <a class="linkText" href="/product/@product.Id">
+                                        <span> @product.Title</span>
+                                    </a>
+                                </div>
+                                <div class="mt-13 descriptionBlock pl-15">
+                                    <span class="description"> @product.Description</span>
+                                </div>
+                                <div class="mt-20 pl-15">
                                     <span>₴</span>
+                                    <span>@product.Price</span>
+                                </div>
+                                <div class="mt-20">
+                                    <button>Детальніше</button>
                                 </div>
                                 <div>
                                     <AuthorizeView>

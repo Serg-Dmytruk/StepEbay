@@ -3,6 +3,28 @@
   font-family: "Nunito", sans-serif;
 }
 
+.categoryLink {
+  color: #807575;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1em;
+}
+.categoryLink:after {
+  content: "";
+  position: relative;
+  margin-left: 5px;
+  height: 1em;
+  width: 1em;
+  background-color: #000;
+  clip-path: polygon(0 0, 0 100%, 39% 48%);
+}
+.categoryLink:active, .categoryLink:focus {
+  color: #000;
+}
+.categoryLink:hover {
+  color: #333333;
+}
+
 .mGrid {
   display: grid;
   gap: 15px;
@@ -63,6 +85,15 @@
 }
 .mGrid .buttons .mBtn:hover {
   background: rgba(255, 165, 0, 0.3);
+}
+
+.carousel-radius {
+  border-radius: 25px;
+}
+
+.carosel-size {
+  width: 86%;
+  margin-left: 7%;
 }
 
 .mGrid .logo {

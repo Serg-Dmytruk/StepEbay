@@ -16,11 +16,8 @@ namespace StepEbay.Main.Client.Base.Pages
         [Inject] private IConfiguration Configuration { get; set; }
         private string ApiConnection { get; set; }
         public bool ShowModal { get; set; } = false;
-        public bool ShowSignInModal { get; set; } = false;
-        public bool ShowSignUpModal { get; set; } = false;
 
         private Dictionary<string, List<string>> MessageConfirmReg = new();
-        //private List<CategoryDto> _categories = new List<CategoryDto>();
 
         private bool ShowPreloader { get; set; } = true;
 
@@ -29,19 +26,9 @@ namespace StepEbay.Main.Client.Base.Pages
             ApiConnection = Configuration.GetConnectionString("Api");
         }
 
-        protected async Task GetCategories()
-        {
-            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetCategories());
-            //_categories = responce.Data;
-        }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             ShowPreloader = true;
-
-            if (firstRender)
-                await GetCategories();
-
 
             if (!string.IsNullOrEmpty(Id) && !string.IsNullOrEmpty(Key))
             {

@@ -1,12 +1,80 @@
-﻿.productCard {
-    width: 235px;
-    height: 300px;
-    padding: 15px;
+﻿* {
+    font-family: Nunito;
 }
 
-.imgCard{
-    width:205px;
-    height:170px;
+.description {
+    font-family: Nunito;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 7px;
+    letter-spacing: .065em;
+    text-align: left;
+}
+
+.descriptionBlock {
+    height: 40px;
+}
+
+.productCard {
+    position: relative;
+    width: 280px;
+    height: 400px;
+    margin: 15px;
+    padding: 0px;
+    border: 1px solid #8BC65D;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+
+    button {
+        position: absolute;
+        height: 60px;
+        width: 100%;
+        color: white;
+        background: #8BC65D;
+        font-weight: 1000;
+        bottom: 0px;
+        border: 0px;
+        border-radius: 0px 0px 5px 5px;
+
+        &:hover {
+            background: #FFA740;
+        }
+    }
+
+    img {
+        border-radius: 6px;
+        object-fit: cover;
+    }
+
+    &:hover {
+        border: 1px solid #FFA740;
+    }
+}
+
+.linkText {
+    color: black;
+    text-decoration: none;
+
+    &:hover {
+        color: black;
+    }
+}
+
+.mt-20{
+    margin-top:20px;
+}
+
+.mt-13 {
+    margin-top: 13px;
+}
+
+.pl-15{
+    padding-left:15px;
+}
+
+.imgCard {
+    width: 100%;
+    height: 185px;
 }
 
 .catalogUl {
