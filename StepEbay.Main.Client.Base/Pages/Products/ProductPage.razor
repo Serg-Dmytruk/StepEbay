@@ -1,7 +1,8 @@
 ﻿<h3>@Product.Title</h3>
 <img class="imgCard" src="@(string.IsNullOrEmpty(Product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{Product.Image}")" alt="" />
 <p>@Product.Description</p>
-<p>Дата публікації: @Product.Price</p>
+<p>Дата публікації: @Product.DateCreated.ToString("yyyy:MM:dd:HH:mm")</p>
+<p>Дата закриття: @Product.DateClosed.ToString("yyyy:MM:dd:HH:mm")</p>
 <p>Ціна: @Product.Price</p>
 <AuthorizeView>
     <Authorized>

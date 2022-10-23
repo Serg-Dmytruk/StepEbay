@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
-using StepEbay.Main.Common.Models.Product;
-using StepEbay.PushMessage.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace StepEbay.Main.Client.Base.Pages
 {
@@ -15,20 +13,26 @@ namespace StepEbay.Main.Client.Base.Pages
         [Parameter] public string Key { get; set; }
         [Inject] IApiService ApiService { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
-
+        [Inject] private IConfiguration Configuration { get; set; }
+        private string ApiConnection { get; set; }
         public bool ShowModal { get; set; } = false;
         public bool ShowSignInModal { get; set; } = false;
         public bool ShowSignUpModal { get; set; } = false;
 
         private Dictionary<string, List<string>> MessageConfirmReg = new();
-        private List<CategoryDto> _categories = new List<CategoryDto>();
+        //private List<CategoryDto> _categories = new List<CategoryDto>();
 
         private bool ShowPreloader { get; set; } = true;
+
+        protected override void OnInitialized()
+        {
+            ApiConnection = Configuration.GetConnectionString("Api");
+        }
 
         protected async Task GetCategories()
         {
             var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetCategories());
-            _categories = responce.Data;
+            //_categories = responce.Data;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)

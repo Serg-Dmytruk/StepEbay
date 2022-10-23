@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Refit;
+using StepEbay.Common.Helpers;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Data.Models.Products;
 using StepEbay.Main.Client.Common.RestServices;
@@ -19,6 +20,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         [Inject] private IApiService ApiService { get; set; }
         [Inject] IMessageService MessageService { get; set; }
         [Inject] private IConfiguration Configuration { get; set; }
+        [Inject]private TimezoneHelper TimezoneHelper { get; set; }
         private string ApiConnection { get; set; }
         ProductDto Product { get; set; }
 
@@ -53,6 +55,8 @@ namespace StepEbay.Main.Client.Base.Pages.Products
                 MessageService.ShowError("Помилка", result.Errors.First().Value.First());
 
             Product = result.Data;
+            Product.DateClosed = await TimezoneHelper.ToLocalTime(Product.DateClosed);
+            Product.DateCreated = await TimezoneHelper.ToLocalTime(Product.DateCreated);
 
             StateHasChanged();
         }
