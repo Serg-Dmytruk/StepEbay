@@ -68,7 +68,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
   </ItemGroup>
 
