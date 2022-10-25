@@ -122,20 +122,6 @@
                                 <div class="mt-20">
                                     <button>Детальніше</button>
                                 </div>
-                                <div>
-                                    <AuthorizeView>
-                                        <Authorized>
-                                            @if (product.PurchaseTypeId == 1)
-                                            {
-                                                <button>Купити</button>
-                                            }
-                                            else if (product.PurchaseTypeId == 2)
-                                            {
-                                                <button>До Аукціону</button>
-                                            }
-                                        </Authorized>
-                                    </AuthorizeView>
-                                </div>
                             </div>
                         </li>
                     }
