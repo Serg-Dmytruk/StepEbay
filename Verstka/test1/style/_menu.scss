@@ -1,10 +1,17 @@
-
-#menubg{
+#menubg1 {
   position: relative;
+  min-height: 100px;
 }
+#menubg2 {
+  position: relative;
+  min-height: 100px;
+  display: none;
+}
+
+
 #menu {
   position: fixed;
-  background:#fff;
+  // background:#fff;
   z-index: 100;
   .logo {
     background-image: url("images/LOGO.svg");
@@ -39,11 +46,15 @@
     padding: 15px;
   }
 
+  .icons {   
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
   .icon {
-    height: 3.2em;
-    background-size: 80% 80%;
+    margin: 0 5px;
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center bottom;
+    background-position: center center;
   }
 
   //--2nd row---------------------

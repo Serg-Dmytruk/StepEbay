@@ -7,31 +7,26 @@
         }
 
         <div class="filterBlock">
-            <span>Категорія:</span>
-            @foreach (var category in ProductFilters.Categories)
-            {
-                <div>
-                    @if (category.Selected is true)
-                    {
-                        <input type="checkbox" @bind-value="category.Selected" checked />
-                        <label>@category.Name</label>
-                    }
-                    else
-                    {
-                        <input type="checkbox" @bind-value="category.Selected" />
-                        <label>@category.Name</label>
-                    }
-                </div>
-            }
-
             <div>
-                <span>Ціна від:</span>
-                <input type="number" @bind-value="ProductFilters.PriceStart" />
-                <span>Ціна до:</span>
-                <input type="number" @bind-value="ProductFilters.PriceEnd" />
+                <span>Категорія:</span>
+                @foreach (var category in ProductFilters.Categories)
+                {
+                    <div>
+                        @if (category.Selected is true)
+                        {
+                            <input type="checkbox" @bind-value="category.Selected" checked />
+                            <label class="checkedColor">@category.Name</label>
+                        }
+                        else
+                        {
+                            <input type="checkbox" @bind-value="category.Selected" />
+                            <label>@category.Name</label>
+                        }
+                    </div>
+                }
             </div>
 
-            <div>
+            <div class="mt-20 testP">
                 <span>Стан:</span>
                 @foreach (var state in ProductFilters.States)
                 {
@@ -46,26 +41,62 @@
                         }
                         @if (state.Name == "used")
                         {
-                            <label>Б/У</label>
+                            @if (state.Selected is true)
+                            {
+                                <label class="checkedColor">Б/У</label>
+                            }
+                            else
+                            {
+                                <label>Б/У</label>
+                            }
                         }
                         @if (state.Name == "new")
                         {
-                            <label>Новий</label>
+                            @if (state.Selected is true)
+                            {
+                                <label class="checkedColor">Новий</label>
+                            }
+                            else
+                            {
+                                <label>Новий</label>
+                            }
                         }
 
                     </div>
                 }
             </div>
 
-            <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="SubmitFilters">Підтвердити</button>
+            <div class="mt-20">
+                <div>
+                    <span>Ціна:</span>
+                </div>
+                <div>
+                    <div>
+                        <span>від</span>
+                    </div>
+                    <div>
+                        <input type="number" @bind-value="ProductFilters.PriceStart" />
+                    </div>
+                </div>
+                <div class="mt-13">
+                    <div>
+                        <span>до</span>
+                    </div>
+                    <div>
+                        <input type="number" @bind-value="ProductFilters.PriceEnd" />
+                    </div>
+                </div>
+            </div>
+
+            <button class="filterButton centerOnParrentHorizontal mt-20" @onclick="SubmitFilters">Підтвердити</button>
         </div>
-        <div>
+        <div class="catalogBlock">
             @if (_products is not null && _products.List is not null)
             {
                 <ul class="catalogUl">
                     @foreach (var product in _products.List)
                     {
-                        @if(product.Description.Length > 45)
+                        @if (product.Description.Length > 45)
                         {
                             product.Description = product.Description[..45] + "...";
                         }
@@ -110,9 +141,84 @@
                     }
                 </ul>
             }
-            <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="PrevProductPage">Попередня</button>
-            <span>@(ProductPageNumber + 1) з @MaxProductPageNumber</span>
-            <button class="btn btn-outline-primary centerOnParrentHorizontal" @onclick="NextProductPage">Наступна</button>
+            <div class="pagePagination">
+                <div class="borderRight">
+                    <button class="prevPageImg" @onclick="PrevProductPage"></button>
+                </div>
+                @if (MaxProductPageNumber <= 1)
+                {
+                    <div class="currPage borderRight">
+                        <span>1</span>
+                    </div>
+                }
+                else if (MaxProductPageNumber == 2)
+                {
+                    for (int i = 1; i <= MaxProductPageNumber; i++)
+                    {
+                        @if ((ProductPageNumber + 1) == i && i == 1)
+                        {
+                            <div class="currPage borderRight">
+                                <span>@(ProductPageNumber + 1)</span>
+                            </div>
+                            <div class="borderRight">
+                                <span>2</span>
+                            </div>
+                        }
+
+                        @if ((ProductPageNumber + 1) == i && i == 2)
+                        {
+                            <div class="borderRight">
+                                <span>1</span>
+                            </div>
+                            <div class="currPage borderRight">
+                                <span>@(ProductPageNumber + 1)</span>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    @if ((ProductPageNumber + 1) == 1)
+                    {
+                        <div class="currPage borderRight">
+                            <span>@(ProductPageNumber + 1)</span>
+                        </div>
+                        <div class="borderRight">
+                            <span>2</span>
+                        </div>
+                        <div class="borderRight">
+                            <span>3</span>
+                        </div>
+                    }
+                    else if ((ProductPageNumber + 1) == MaxProductPageNumber)
+                    {
+                        <div class="borderRight">
+                            <span>@(MaxProductPageNumber - 2)</span>
+                        </div>
+                        <div class="borderRight">
+                            <span>@(MaxProductPageNumber - 1)</span>
+                        </div>
+                        <div class="currPage borderRight">
+                            <span>@(ProductPageNumber + 1)</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="borderRight">
+                            <span>@ProductPageNumber</span>
+                        </div>
+                        <div class="currPage borderRight">
+                            <span>@(ProductPageNumber + 1)</span>
+                        </div>
+                        <div class="borderRight">
+                            <span>@(ProductPageNumber + 2)</span>
+                        </div>
+                    }
+                }
+                <div>
+                    <button class="nextPageImg" @onclick="NextProductPage"></button>
+                </div>
+            </div>
         </div>
     }
     else

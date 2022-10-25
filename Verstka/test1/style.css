@@ -3,6 +3,24 @@
   font-family: "Nunito", sans-serif;
 }
 
+.carousel-item {
+  height: 50vh;
+  background-position: center center;
+  background-size: cover;
+}
+
+.carousel-item.item1 {
+  background-image: url("images/test1.jpg");
+}
+
+.carousel-item.item2 {
+  background-image: url("images/test2.jpg");
+}
+
+.carousel-item.item3 {
+  background-image: url("images/test3.jpg");
+}
+
 .categoryContent {
   height: 230px;
   border-radius: 20px;
@@ -85,13 +103,19 @@
   background-position: bottom right;
 }
 
-#menubg {
+#menubg1 {
   position: relative;
+  min-height: 100px;
+}
+
+#menubg2 {
+  position: relative;
+  min-height: 100px;
+  display: none;
 }
 
 #menu {
   position: fixed;
-  background: #fff;
   z-index: 100;
 }
 #menu .logo {
@@ -122,11 +146,15 @@
 #menu .search {
   padding: 15px;
 }
+#menu .icons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 #menu .icon {
-  height: 3.2em;
-  background-size: 80% 80%;
+  margin: 0 5px;
+  background-size: contain;
   background-repeat: no-repeat;
-  background-position: center bottom;
+  background-position: center center;
 }
 #menu .navMenu {
   display: flex;

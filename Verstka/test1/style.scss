@@ -22,6 +22,22 @@ $fs: 1em;
   //background-color: $mainBlack;
 }
 
+.carousel-item{
+  height: 50vh;
+  
+  background-position: center center;
+  background-size: cover;
+}
+.carousel-item.item1{
+  background-image: url("images/test1.jpg");
+}
+.carousel-item.item2{
+  background-image: url("images/test2.jpg");
+}
+.carousel-item.item3{
+  background-image: url("images/test3.jpg");
+}
+
 
 .categoryContent {
   height: 230px;
