@@ -1,10 +1,17 @@
-
-#menubg{
+#menubg1 {
   position: relative;
+  min-height: 100px;
 }
+#menubg2 {
+  position: relative;
+  min-height: 100px;
+  display: none;
+}
+
+
 #menu {
   position: fixed;
-  background:#fff;
+  // background:#fff;
   z-index: 100;
   .logo {
     background-image: url("images/LOGO.svg");
@@ -15,9 +22,16 @@
   }
   .icon1 {
     background-image: url("images/icon_basket.svg");
+    &:hover {
+      cursor: pointer;
+      background-image: url("images/icon basket active.svg");
+    }
   }
   .icon2 {
     background-image: url("images/profile_icon.svg");
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -32,11 +46,15 @@
     padding: 15px;
   }
 
+  .icons {   
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
   .icon {
-    height: 3.2em;
-    background-size: 80% 80%;
+    margin: 0 5px;
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center bottom;
+    background-position: center center;
   }
 
   //--2nd row---------------------
@@ -50,7 +68,7 @@
     cursor: pointer;
     padding: 0;
 
-    & > li > a {
+    & li a {
 
       text-decoration: none;
       color: $darkGreen;
@@ -58,7 +76,7 @@
       white-space: nowrap;
     }
 
-    & > li > a {
+    & li a {
       &:hover {
         color: $lightGreen;
       }
@@ -67,7 +85,7 @@
         color: $pastelOrange;
       }
     }
-    & > li.current > a {
+    & li.current a {
       color: $pastelOrange;
     }
   }
