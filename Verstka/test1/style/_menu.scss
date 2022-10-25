@@ -15,9 +15,16 @@
   }
   .icon1 {
     background-image: url("images/icon_basket.svg");
+    &:hover {
+      cursor: pointer;
+      background-image: url("images/icon basket active.svg");
+    }
   }
   .icon2 {
     background-image: url("images/profile_icon.svg");
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -50,7 +57,7 @@
     cursor: pointer;
     padding: 0;
 
-    & > li > a {
+    & li a {
 
       text-decoration: none;
       color: $darkGreen;
@@ -58,7 +65,7 @@
       white-space: nowrap;
     }
 
-    & > li > a {
+    & li a {
       &:hover {
         color: $lightGreen;
       }
@@ -67,7 +74,7 @@
         color: $pastelOrange;
       }
     }
-    & > li.current > a {
+    & li.current a {
       color: $pastelOrange;
     }
   }

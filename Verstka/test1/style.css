@@ -103,8 +103,15 @@
 #menu .icon1 {
   background-image: url("images/icon_basket.svg");
 }
+#menu .icon1:hover {
+  cursor: pointer;
+  background-image: url("images/icon basket active.svg");
+}
 #menu .icon2 {
   background-image: url("images/profile_icon.svg");
+}
+#menu .icon2:hover {
+  cursor: pointer;
 }
 
 #menu .logo {
@@ -130,19 +137,19 @@
   cursor: pointer;
   padding: 0;
 }
-#menu .navMenu > li > a {
+#menu .navMenu li a {
   text-decoration: none;
   color: #045316;
   font-weight: 700;
   white-space: nowrap;
 }
-#menu .navMenu > li > a:hover {
+#menu .navMenu li a:hover {
   color: #8BC65D;
 }
-#menu .navMenu > li > a:active, #menu .navMenu > li > a:focus {
+#menu .navMenu li a:active, #menu .navMenu li a:focus {
   color: #FF8A00;
 }
-#menu .navMenu > li.current > a {
+#menu .navMenu li.current a {
   color: #FF8A00;
 }
 
