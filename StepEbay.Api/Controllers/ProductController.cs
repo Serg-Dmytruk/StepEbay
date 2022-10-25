@@ -2,7 +2,9 @@
 using StepEbay.Common.Models.Pagination;
 using StepEbay.Common.Models.RefitModels;
 using StepEbay.Data.Models.Users;
+using StepEbay.Main.Api.Common.Services.BetServices;
 using StepEbay.Main.Api.Common.Services.ProductServices;
+using StepEbay.Main.Common.Models.Bet;
 using StepEbay.Main.Common.Models.Product;
 using System.Security.Claims;
 
@@ -12,10 +14,12 @@ namespace StepEbay.Main.Api.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IBetService _betService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IBetService betService)
         {
             _productService = productService;
+            _betService = betService;
         }
 
         [HttpPost("add")]
@@ -58,6 +62,11 @@ namespace StepEbay.Main.Api.Controllers
         public async Task<ResponseData<ProductDto>> GetProduct(int id)
         {
             return await _productService.GetProduct(id);
+        }
+        [HttpPost("{id}/bets")]
+        public async Task<ResponseData<List<PurchaseDto>>> GetBetsProduct(int id)
+        {
+            return new ResponseData<List<PurchaseDto>>() { Data= await _betService.GetPurchase(id) } ;
         }
     }
 }
