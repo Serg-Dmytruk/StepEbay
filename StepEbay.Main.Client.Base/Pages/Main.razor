@@ -7,91 +7,79 @@
         <ModalDialog Title="@MessageConfirmReg.FirstOrDefault().Key" Text="@MessageConfirmReg.FirstOrDefault().Value" OnClose='@CloseModal' />
     }
 
-    <div id="carouselExampleControls" class="carousel slide col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl carosel-size" data-bs-ride="carousel">
-      <div class="carousel-inner carousel-radius">
-        <div class="carousel-item active">
-          <img src="@($"{ApiConnection}/images/slider.png")" class="d-block w-100" alt="...">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item item1 active"></div>
+            <div class="carousel-item item2"></div>
+            <div class="carousel-item item3"></div>
         </div>
-        <div class="carousel-item">
-          <img src="@($"{ApiConnection}/images/slider.png")" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="@($"{ApiConnection}/images/slider.png")" class="d-block w-100" alt="...">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 
-        <div class="container-fluid category">
-      <div class="container">
-        <div class="row">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
 
-         <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl">
-            <a class="categoryLink" href="products/@ProductCategoryIdConstant.CLOTH">
-                <div class="categoryContent clothes">
-                    <span>Одяг</span>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl">
+                    <a class="categoryLink" href="products/@ProductCategoryIdConstant.CLOTH">
+                        <div class="categoryContent clothes">
+                            <span>Одяг</span>
+                        </div>
+                    </a>
                 </div>
-            </a>
-         </div>
 
-         <div class="col-12 col-sm-12 col-md-4 col-lg-1 col-lg-3 col-xxl-2">
-            <a class="categoryLink" href="products/@ProductCategoryIdConstant.TELEPHONE">
-                <div class="categoryContent phones">
-                    <span>Телефони</span>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-1 col-lg-3 col-xxl-2">
+                    <a class="categoryLink" href="products/@ProductCategoryIdConstant.TELEPHONE">
+                        <div class="categoryContent phones">
+                            <span>Телефони</span>
+                        </div>
+                    </a>
                 </div>
-            </a>
-         </div>
 
-          <div class="col">
-              <a class="categoryLink" href="products/@ProductCategoryIdConstant.BUATY">
-                <div class="categoryContent beauty">
-                  <span>Краса</span>
+                <div class="col">
+                    <a class="categoryLink" href="products/@ProductCategoryIdConstant.BUATY">
+                        <div class="categoryContent beauty">
+                            <span>Краса</span>
+                        </div>
+                    </a>
                 </div>
-              </a>
-          </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-6 col-xxl">
-                <a class="categoryLink" href="products/@ProductCategoryIdConstant.SPORT">
-                    <div class="categoryContent sport">
-                      <span>Спорт</span>
-                    </div>
-                </a>
             </div>
-            
-        <div class="col-12 col-sm-12 col-md-4 col-lg-1 col-lg-3 col-xxl-2">
-            <a class="categoryLink" href="products/0">
-                <div class="categoryContent catalogue">
-                    <span>Каталог</span>
-                </div>
-            </a>
-        </div>
 
-        <div class="col">
-            <a class="categoryLink" href="products/@ProductCategoryIdConstant.TOY">
-                <div class="categoryContent toys">
-                  <span>Іграшки</span>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-6 col-xxl">
+                    <a class="categoryLink" href="products/@ProductCategoryIdConstant.SPORT">
+                        <div class="categoryContent sport">
+                            <span>Спорт</span>
+                        </div>
+                    </a>
                 </div>
-            </a>
+
+                <div class="col-12 col-sm-12 col-md-4 col-lg-1 col-lg-3 col-xxl-2">
+                    <a class="categoryLink" href="products/0">
+                        <div class="categoryContent catalogue">
+                            <span>Каталог</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col">
+                    <a class="categoryLink" href="products/@ProductCategoryIdConstant.TOY">
+                        <div class="categoryContent toys">
+                            <span>Іграшки</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
         </div>
-          
-        </div>
-      </div>
     </div>
-
-    <AuthorizeView>
-        <Authorized>
-            <a href="personal/products">До ваших покупок</a>
-        </Authorized>
-    </AuthorizeView>
 }
 else
 {

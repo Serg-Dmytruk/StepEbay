@@ -1,71 +1,78 @@
-@charset "UTF-8";
-.mGrid {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: 1fr 7fr 4fr;
+﻿#menubg1 {
+  position: relative;
+  min-height: 100px;
 }
-.mGrid .logo {
+
+#menubg2 {
+  position: relative;
+  min-height: 100px;
+  display: none;
+}
+
+#menu {
+  position: fixed;
+  z-index: 100;
+  background-color: white;
+}
+#menu .logo {
+  background-image: url("../../images/LOGO.svg");
+}
+#menu .logo:hover {
+  cursor: pointer;
+}
+#menu .icon1 {
+  background-image: url("../../images/icon_basket.svg");
+}
+#menu .icon1:hover {
+  cursor: pointer;
+  background-image: url("../../images/icon_basket_active.svg");
+}
+#menu .icon2 {
+  background-image: url("../../images/profile_icon.svg");
+}
+#menu .icon2:hover {
+  cursor: pointer;
+}
+
+#menu .logo {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left center;
 }
-.mGrid .mSearch {
-  padding-top: 15px;
+#menu .search {
+  padding: 15px;
 }
-.mGrid .icons {
+#menu .icons {
   display: grid;
-  gap: 15px;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: minmax(15px, auto);
+  grid-template-columns: 1fr 1fr;
 }
-.mGrid .icons .icon {
+#menu .icon {
+  margin: 0 5px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
 }
-.mGrid .catalog {
-  border-right: 1px solid gray;
-  padding-left: 15px;
-}
-.mGrid .catalog::before {
-  content: "▲";
-  width: 1em;
-  height: 1em;
-  font-weight: 900;
-}
-.mGrid .mNav {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-auto-rows: minmax(15px, auto);
-}
-.mGrid .mNav .mNavItem a {
-  color: red;
+#menu .navMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+  padding: 0;
 }
-.mGrid .buttons {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-rows: minmax(15px, auto);
+#menu .navMenu li a {
+  text-decoration: none;
+  color: #045316;
+  font-weight: 700;
+  white-space: nowrap;
 }
-.mGrid .buttons .mBtn {
-  padding: 2px 5px;
-  border: 1px solid red;
-  background: rgba(255, 165, 0, 0.5);
-  color: red;
-  border-radius: 5px;
-  text-align: center;
+#menu .navMenu li a:hover {
+  color: #8BC65D;
 }
-.mGrid .buttons .mBtn:hover {
-  background: rgba(255, 165, 0, 0.3);
+#menu .navMenu li a:active, #menu .navMenu li a:focus {
+  color: #FF8A00;
 }
-
-.carousel-radius {
-  border-radius: 25px;
-}
-
-.carosel-size {
-  width: 86%;
-  margin-left: 7%;
+#menu .navMenu li.current a {
+  color: #FF8A00;
 }

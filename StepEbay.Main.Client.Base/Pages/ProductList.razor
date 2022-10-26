@@ -1,11 +1,6 @@
 ﻿<div class="mainBlock">
     @if (!ShowPreloader)
     {
-        @if (ShowModal)
-        {
-            <ModalDialog Title="@MessageConfirmReg.FirstOrDefault().Key" Text="@MessageConfirmReg.FirstOrDefault().Value" OnClose='@CloseModal' />
-        }
-
         <div class="filterBlock">
             <div>
                 <span>Категорія:</span>
@@ -120,7 +115,9 @@
                                     <span>@product.Price</span>
                                 </div>
                                 <div class="mt-20">
-                                    <button>Детальніше</button>
+                                    <a href="/product/@product.Id">
+                                        <button>Детальніше</button>
+                                    </a>
                                 </div>
                             </div>
                         </li>

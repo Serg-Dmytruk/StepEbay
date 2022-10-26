@@ -17,7 +17,6 @@ namespace StepEbay.Main.Client.Base.Pages
         [Inject] IApiService ApiService { get; set; }
         [Inject] private IConfiguration Configuration { get; set; }
         [Inject] private PriceHubClient PriceHubClient { get; set; }
-        public bool ShowModal { get; set; } = false;
 
         private Dictionary<string, List<string>> MessageConfirmReg = new();
         private bool ShowPreloader { get; set; } = true;
@@ -51,12 +50,6 @@ namespace StepEbay.Main.Client.Base.Pages
             ShowPreloader = false;
             StateHasChanged();
             
-        }
-
-        private void CloseModal(bool show)
-        {
-            ShowModal = show;
-            StateHasChanged();
         }
 
         protected async void PrevProductPage()

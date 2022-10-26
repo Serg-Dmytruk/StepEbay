@@ -55,6 +55,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\main\_menu.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\StepEbay.Common.csproj" />
     <ProjectReference Include="..\Serilog.HttpLoging\Serilog.HttpLoging.csproj" />
     <ProjectReference Include="..\StepEbay.Components.Common\StepEbay.Components.Common.csproj" />
