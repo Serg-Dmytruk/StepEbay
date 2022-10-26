@@ -12,11 +12,11 @@ else if (Product.PurchaseTypeId == 2)
     @if (LastPurchase != null)
     {
         <p>Остання ставка: @LastPurchase.PurchasePrice</p>
-        <p>Твоя ціна: @LastPurchase.PurchasePrice*0.02</p>
+        <p>Твоя ціна: @(Product.Price+LastPurchase.PurchasePrice * (decimal)0.02)</p>
     }
     else{
         <p>Немає ставок</p>
-        <p>Твоя ціна: @Product.Price*0.02</p>
+        <p>Твоя ціна: @(Product.Price+Product.Price * (decimal)0.02)</p>
     }
 }
 
