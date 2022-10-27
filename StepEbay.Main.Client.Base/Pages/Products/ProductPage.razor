@@ -1,4 +1,38 @@
-﻿<div class="mainD">
+﻿<h3>@Product.Title</h3>
+<img class="imgCard" src="@(string.IsNullOrEmpty(Product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{Product.Image}")" alt="" />
+<p>@Product.Description</p>
+<p>Дата публікації: @Product.DateCreated.ToString("yyyy:MM:dd:HH:mm")</p>
+<p>Дата закриття: @Product.DateClosed.ToString("yyyy:MM:dd:HH:mm")</p>
+@if (Product.PurchaseTypeId == 1){
+    <p>Ціна: @Product.Price</p>
+}
+else if (Product.PurchaseTypeId == 2)
+{
+    <p>Стартова ціна: @Product.Price</p>
+    @if (LastPurchase != null)
+    {
+        <p>Остання ставка: @LastPurchase.PurchasePrice</p>
+        <p>Твоя ціна: @(Product.Price+LastPurchase.PurchasePrice * (decimal)0.02)</p>
+    }
+    else{
+        <p>Немає ставок</p>
+        <p>Твоя ціна: @(Product.Price+Product.Price * (decimal)0.02)</p>
+    }
+}
+
+<AuthorizeView>
+    <Authorized>
+        @if (Product.PurchaseTypeId == 1)
+        {
+            <button @onclick="Buy">Купити зараз</button>
+        }
+        else if (Product.PurchaseTypeId == 2)
+        {
+            <button @onclick="Buy">Поставити ставку</button>
+        }
+    </Authorized>
+</AuthorizeView>
+<div class="mainD">
     <div class="childD pictureD">
         <img class="mainPicture" src="@(string.IsNullOrEmpty(currentPicture) ? "icons/no_photo.png" : $"{ApiConnection}/images/{currentPicture}")" alt="" />
         <div class="slideMainD">

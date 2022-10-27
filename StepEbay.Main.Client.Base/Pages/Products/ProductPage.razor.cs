@@ -75,7 +75,14 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             if (Product.PurchaseTypeId == 2)
             {
                 ResponseData<List<PurchaseDto>> resultPurchases = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetPurchase(int.Parse(Id)));
-                LastPurchase = resultPurchases.Data.Last();
+                if (resultPurchases.Data.Count > 0)
+                {
+                    LastPurchase = resultPurchases.Data.Last();
+                }
+                else
+                {
+                    LastPurchase = null;
+                }
             }
 
             StateHasChanged();
