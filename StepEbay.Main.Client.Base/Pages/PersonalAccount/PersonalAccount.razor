@@ -1,4 +1,11 @@
-﻿<h3>Акаунт</h3>
+﻿<div class="top-row px-4">
+    <AuthorizeView>
+        <Authorized>
+            <button class="btn btn-outline-danger centerOnParrentHorizontal" @onclick="Logout">Вийти</button>
+        </Authorized>
+    </AuthorizeView>
+</div>
+<h3>Акаунт</h3>
 <input type="text" placeholder="nick name" @bind-value="_request.NickName" />
 <br />
 <input type="email" placeholder="Пошта" @bind-value="_request.Email" />

@@ -47,14 +47,6 @@ namespace StepEbay.Main.Client.Shared
 
         }
 
-        private async Task Logout()
-        {
-            await TokenProvider.RemoveToken();
-            await TokenProvider.CheckAuthentication(false);
-
-            await HubClient.Stop();
-        }
-
         private async void OwnerClosed(List<int> productInfo)
         {
             var products = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductInfo(new ProductInfoDto { ProductIds = productInfo }))).Data;

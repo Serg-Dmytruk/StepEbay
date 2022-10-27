@@ -1,34 +1,122 @@
-﻿<h3>@Product.Title</h3>
-<img class="imgCard" src="@(string.IsNullOrEmpty(Product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{Product.Image}")" alt="" />
-<p>@Product.Description</p>
-<p>Дата публікації: @Product.DateCreated.ToString("yyyy:MM:dd:HH:mm")</p>
-<p>Дата закриття: @Product.DateClosed.ToString("yyyy:MM:dd:HH:mm")</p>
-@if (Product.PurchaseTypeId == 1){
-    <p>Ціна: @Product.Price</p>
-}
-else if (Product.PurchaseTypeId == 2)
-{
-    <p>Стартова ціна: @Product.Price</p>
-    @if (LastPurchase != null)
-    {
-        <p>Остання ставка: @LastPurchase.PurchasePrice</p>
-        <p>Твоя ціна: @LastPurchase.PurchasePrice*0.02</p>
-    }
-    else{
-        <p>Немає ставок</p>
-        <p>Твоя ціна: @Product.Price*0.02</p>
-    }
-}
+﻿<div class="mainD">
+    <div class="childD pictureD">
+        <img class="mainPicture" src="@(string.IsNullOrEmpty(currentPicture) ? "icons/no_photo.png" : $"{ApiConnection}/images/{currentPicture}")" alt="" />
+        <div class="slideMainD">
+            <div class="slideChildD">
+            @foreach (var pic in SrcPictures)
+            {
+                <a @onclick="() => ImageChanger(pic)">
+                    <img class="slideImg" src=@($"{ApiConnection}/images/{pic}")/>
+                </a>
+            }
+            </div>
+        </div>
+    </div>
+    <div class="childD infoD">
+        <div>
+            <h3>@Product.Title</h3>
+        </div>
+        <div class="testD">
+            <div>
+                <img src="images/star.png" />
+                <img src="images/star.png" />
+                <img src="images/star.png" />
+                <img src="images/star.png" />
+                <img src="images/star.png" />
+            </div>
 
-<AuthorizeView>
-    <Authorized>
-        @if (Product.PurchaseTypeId == 1)
-        {
-            <button @onclick="Buy">Купити зараз</button>
-        }
-        else if (Product.PurchaseTypeId == 2)
-        {
-            <button @onclick="Buy">Поставити ставку</button>
-        }
-    </Authorized>
-</AuthorizeView>
+            <img class="like" src="images/like.png" />
+        </div>
+        <div class="mt-25">
+            @if (Product.PurchaseTypeId == 1)
+            {
+                <span>Ціна: @Product.Price</span>
+            }
+            else if (Product.PurchaseTypeId == 2)
+            {
+                <span>Стартова ціна: @Product.Price</span>
+            }
+            <span>₴</span>
+        </div>
+        <div class="mt-25">
+            @if (@Product.StateId == 1)
+            {
+                <span>Стан: Б/У</span>
+            }
+            else
+            {
+                <span>Стан: Новий</span>
+            }
+        </div>
+        <div>
+            @if (Product.PurchaseTypeId == 2)
+            {
+                <div class="mt-25">
+                    <span>Дата публікації: @Product.DateCreated.ToString("yyyy:MM:dd:HH:mm")</span>
+                </div>
+                <div class="mt-13">
+                    <span>Дата закриття: @Product.DateClosed.ToString("yyyy:MM:dd:HH:mm")</span>
+                </div>
+                @if (LastPurchase != null)
+                {
+                    <div class="mt-25">
+                        <span>Остання ставка: @LastPurchase.PurchasePrice</span>
+                    </div>
+                    <div class="mt-13">
+                        <span>Підняти до: @(Math.Round((@LastPurchase.PurchasePrice + (Product.Price * (decimal)0.02)), 2))</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="mt-25">
+                        <span>Немає ставок</span>
+                    </div>
+                    <div class="mt-13">
+                        <span>Підняти до: @(Math.Round((Product.Price + (Product.Price * (decimal)0.02)), 2))</span>
+                    </div>
+                }
+            }
+        </div>
+        <AuthorizeView>
+            <Authorized>
+                @if (Product.PurchaseTypeId == 1)
+                {
+                    <button class="buybutton mt-25" @onclick="Buy">Купити зараз</button>
+                }
+                else if (Product.PurchaseTypeId == 2)
+                {
+                    <button class="buybutton mt-25" @onclick="Buy">Поставити ставку</button>
+                }
+            </Authorized>
+        </AuthorizeView>
+    </div>
+</div>
+
+<div>
+    <div class="descriptionD mt-25">
+        <div class="descriptionHeader">
+            <span>Характеристики:</span>
+        </div>
+
+        <div class="descriptionHeader mt-20">
+            <span>Опис:</span>
+        </div>
+        <div>
+            <span>@Product.Description</span>
+        </div>
+
+        <div class="descriptionHeader mt-20">
+            <span>Стан:</span>
+        </div>
+        <div>
+            @if (@Product.StateId == 1)
+            {
+                <span>Б/У</span>
+            }
+            else
+            {
+                <span>Новий</span>
+            }
+        </div>
+    </div>
+</div>

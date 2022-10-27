@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using StepEbay.Main.Client.Common.ClientsHub;
+using StepEbay.Main.Client.Common.Providers;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Person;
 using StepEbay.PushMessage.Services;
@@ -13,6 +15,9 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
     {
         [Inject] IApiService _apiService { get; set; }
         [Inject] IMessageService _messageService { get; set; }
+        [Inject] private ITokenProvider TokenProvider { get; set; }
+        [Inject] private HubClient HubClient { get; set; }
+
         private PersonUpdateRequestDto _request { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -26,6 +31,15 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
 
             StateHasChanged();
         }
+
+        private async Task Logout()
+        {
+            await TokenProvider.RemoveToken();
+            await TokenProvider.CheckAuthentication(false);
+
+            await HubClient.Stop();
+        }
+
         protected async Task UpdatePerson()
         {
             var result = await _apiService.ExecuteRequest(() => _apiService.ApiMethods.TryUpdate(_request));

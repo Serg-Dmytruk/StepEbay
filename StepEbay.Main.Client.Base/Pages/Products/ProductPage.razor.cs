@@ -25,6 +25,9 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         private string ApiConnection { get; set; }
         ProductDto Product { get; set; }
         PurchaseDto LastPurchase { get; set; }
+        private List<string> SrcPictures { get; set; } = new List<string>();
+
+        private string currentPicture { get; set; } = "";
 
         public ProductPage()
         {
@@ -60,12 +63,27 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             Product.DateClosed = await TimezoneHelper.ToLocalTime(Product.DateClosed);
             Product.DateCreated = await TimezoneHelper.ToLocalTime(Product.DateCreated);
 
+            if(SrcPictures.Count == 0)
+            {
+                currentPicture = Product.Image;
+                SrcPictures.Add(Product.Image);
+                SrcPictures.Add("test1.png");
+                SrcPictures.Add("test2.png");
+            }
+                
+
             if (Product.PurchaseTypeId == 2)
             {
                 ResponseData<List<PurchaseDto>> resultPurchases = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetPurchase(int.Parse(Id)));
                 LastPurchase = resultPurchases.Data.Last();
             }
+
             StateHasChanged();
+        }
+
+        void ImageChanger(string src)
+        {
+            currentPicture = src;
         }
     }
 }

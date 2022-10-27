@@ -1,19 +1,19 @@
 * {
     font-family: Nunito;
-  }
-  
-  .description {
+}
+
+.description {
     font-family: Nunito;
     font-size: 12px;
     font-weight: 300;
     line-height: 7px;
     letter-spacing: 0.065em;
     text-align: left;
-  }
-  
-  .descriptionBlock {
+}
+
+.descriptionBlock {
     height: 40px;
-  }
+}
 
 .productCard {
     position: relative;
@@ -26,63 +26,73 @@
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
     border-radius: 6px;
 }
-  .productCard button {
-    position: absolute;
-    height: 60px;
-    width: 100%;
-    color: white;
-    background: #8BC65D;
-    font-weight: 1000;
-    bottom: 0px;
-    border: 0px;
-    border-radius: 0px 0px 5px 5px;
-  }
-  .productCard button:hover {
-    background: #FFA740;
-  }
-  .productCard img {
-    border-radius: 6px;
-    object-fit: cover;
-  }
-  .productCard:hover {
-    border: 1px solid #FFA740;
-  }
-  
-  .linkText {
+
+    .productCard button {
+        position: absolute;
+        height: 60px;
+        width: 100%;
+        color: white;
+        background: #8BC65D;
+        font-weight: 1000;
+        bottom: 0px;
+        border: 0px;
+        border-radius: 0px 0px 5px 5px;
+    }
+
+        .productCard button:hover {
+            background: #FFA740;
+        }
+
+    .productCard img {
+        border-radius: 6px;
+        object-fit: cover;
+    }
+
+    .productCard:hover {
+        border: 1px solid #FFA740;
+    }
+
+.linkText {
     color: black;
     text-decoration: none;
-  }
-  .linkText:hover {
-    color: black;
-  }
-  
-  .mt-20 {
-    margin-top: 20px;
-  }
-  
-  .mt-13 {
-    margin-top: 13px;
-  }
+}
 
-  .mb-20 {
-      margin-bottom: 20px;
-  }
-  
-  .pl-15 {
+    .linkText:hover {
+        color: black;
+    }
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mt-25 {
+    margin-top: 25px;
+}
+
+.mt-13 {
+    margin-top: 13px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.pl-15 {
     padding-left: 15px;
-  }
-  
-  .imgCard {
+}
+
+.imgCard {
     width: 100%;
     height: 185px;
-  }
+}
 
 .catalogBlock {
     min-height: 90%;
-    padding: 20px;
+    padding-top: 15px;
+    padding-left: 15px;
 }
-  
-  .catalogUl {
+
+.catalogUl {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -92,12 +102,13 @@
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 0px;
-  }
-  
-  .mainBlock {
+}
+
+.mainBlock {
+    padding: 25px;
     display: flex;
     flex-direction: row;
-  }
+}
 
 .filterBlock input[type=checkbox] {
     -moz-appearance: none;
@@ -122,10 +133,10 @@
     color: #FFFFFF;
 }
 
-.filterButton:hover{
-    background-color:#FFA740;
-    border: 2px solid #FFA740;
-}
+    .filterButton:hover {
+        background-color: #FFA740;
+        border: 2px solid #FFA740;
+    }
 
 .checkedColor {
     color: #429600;
@@ -138,11 +149,11 @@
     color: #272727;
 }
 
-.filterBlock input[type=number] {
-    width: 100px;
-    border: 2px solid #8BC65D;
-    border-radius: 12px;
-}
+    .filterBlock input[type=number] {
+        width: 100px;
+        border: 2px solid #8BC65D;
+        border-radius: 12px;
+    }
 
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
@@ -160,34 +171,34 @@ input::-webkit-inner-spin-button {
     border: 1px solid #8BC65D;
     width: fit-content;
     border-radius: 15px;
-    text-align:center;
+    text-align: center;
 }
 
-.pagePagination > div{
-    width:50px;
-    height:36px;
-}
+    .pagePagination > div {
+        width: 50px;
+        height: 36px;
+    }
 
-.pagePagination button{
-    width: 100%;
-    height: 100%;
-    background-color:white;
-    border: 0px;
-    border-radius: 15px;
-}
+    .pagePagination button {
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        border: 0px;
+        border-radius: 15px;
+    }
 
-.pagePagination div{
-    position: relative;
-}
+    .pagePagination div {
+        position: relative;
+    }
 
-.pagePagination span{
-    margin: 0px;
-    margin-left: -5px;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
+    .pagePagination span {
+        margin: 0px;
+        margin-left: -5px;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
 
 .prevPageImg {
     background: url("../images/prevPage.png");
@@ -212,4 +223,3 @@ input::-webkit-inner-spin-button {
 .testP input[type=checkbox] {
     margin-right: 5px;
 }
-  
