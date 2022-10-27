@@ -2,7 +2,7 @@
     margin: 7px auto;
     width: 310px;
     height: 3px;
-    background: #5AD9D9;
+    background: #8BC65D;
 }
 
 .header {
@@ -45,7 +45,7 @@
 }
 
 .mborder {
-    border: 3px solid #2EB4AB;
+    border: 3px solid #8BC65D;
     border-radius: 20px;
     box-sizing: border-box;
     width: 100%;
@@ -55,11 +55,11 @@
 }
 
 .borderColorInput {
-    border: 2px solid #39DDD3;
+    border: 2px solid #8BC65D;
 }
 
 .borderColorInputError {
-    border: 2px solid #e41b1b;
+    border: 2px solid #DA1A1A;
 }
 
 .minput {
@@ -86,9 +86,13 @@
     top: 1%;
     right: 4%;
     border: 0;
-    color: #2eb4ab;
+    color: #8BC65D;
     font-size: 25px;
 }
+
+    .closeButton:hover {
+        color: #FFA740;
+    }
 
 .signInbutton {
     background: #2EB4AB;
@@ -148,7 +152,7 @@
 }
 
 .mbutton {
-    background: #2EB4AB;
+    background: #8BC65D;
     width: 165px;
     height: 46px;
     border: 0px;
@@ -164,12 +168,7 @@
 
     .mbutton:hover {
         text-decoration: underline;
-    }
-
-    .mbutton:active {
-        color: black;
-        text-decoration: underline;
-        border: 1px solid #2EB4AB;
+        background-color: #FFA740;
     }
 
 .mMainHeader {
@@ -199,7 +198,7 @@
     font-weight: 700;
     font-size: 15px;
     line-height: 1px;
-    color: #E41B1B;
+    color: #DA1A1A;
     text-align: center;
 }
 
@@ -210,5 +209,5 @@
     font-weight: 700;
     font-size: 10px;
     line-height: 1px;
-    color: #E41B1B;
+    color: #DA1A1A;
 }
