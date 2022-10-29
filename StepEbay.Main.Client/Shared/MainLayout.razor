@@ -131,13 +131,6 @@
     <!--end nav-->
 
     <div class="main">
-
-        <div class="top-row px-4">
-            @if (!string.IsNullOrEmpty(@UserName))
-            {
-                <p>@UserName</p>
-            }
-
             <AuthorizeView>
                 <NotAuthorized>
                     @if (IsShowSignModal)
@@ -146,7 +139,6 @@
                     }
                 </NotAuthorized>
             </AuthorizeView>
-        </div>
 
         <div class="content px-4">
             @Body

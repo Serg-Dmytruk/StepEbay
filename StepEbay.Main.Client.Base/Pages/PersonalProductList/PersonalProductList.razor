@@ -1,33 +1,31 @@
-﻿<h3>PersonalProductList</h3>
+﻿@using StepEbay.Main.Client.Base.Pages.PersonalAccount
 
-<div>
-    @if (_filters.Active is true)
-    {
-        <input type="checkbox" @bind-value="_filters.Active" checked />
-    }
-    else
-    {
-        <input type="checkbox" @bind-value="_filters.Active" />
-    }
-    <label>Активні</label>
-    
-    @if (_filters.Closed is true)
-    {
-        <input type="checkbox" @bind-value="_filters.Closed" checked />
-    }
-    else
-    {
-        <input type="checkbox" @bind-value="_filters.Closed" />
-    }
-    <label>Закінчені</label>
-    <button @onclick="GetAllUserProducts">Прийняти</button>
+<div id="flex">
+
+    <div>
+        <span class="header">Активні аукціони</span>
+        @foreach (var product in _products.List)
+        {
+            if (product.PurchaseTypeId == 1)
+            {
+                <li>@product.Title</li>
+                <li>@product.DateClosed</li>
+            }
+        }
+    </div>
+
+    <div>
+        <span class="header">Покупки</span>
+        @foreach (var product in _products.List)
+        {
+            if (product.PurchaseTypeId == 2)
+            {
+                <li>@product.Title</li>
+                <li>@product.DateClosed</li>
+            }
+        }
+    </div>
+    <PersonalAccount />
 </div>
 
-<div>
-    @foreach(var product in _products.List)
-    {
-        <li>@product.Title</li>
-        <li>@product.DateClosed</li>
-    }
-</div>
 
