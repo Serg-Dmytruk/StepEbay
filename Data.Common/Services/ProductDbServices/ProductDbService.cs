@@ -16,6 +16,11 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
             _context = context;
         }
 
+        public async Task<List<Product>> GetProductByIds(SearchIdsDto products)
+        {
+            return await _context.Products.Where(x => products.Ids.Contains(x.Id)).ToListAsync();
+        }
+
         public async Task<bool> AnyProductsByTitle(string productTitle)
         {
             return await _context.Products.AnyAsync(p => p.Title == productTitle);
@@ -85,6 +90,12 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
         public async Task<List<Product>> GetProductForInfo(List<int> products)
         {
             return await _context.Products.Where(x => products.Contains(x.Id)).ToListAsync();
+        }
+
+        public async Task<List<int>> GetSearchIds(string product) 
+        {
+            return await _context.Products.Where(x => x.Title.ToLower().StartsWith(product.ToLower())
+            || x.Title.ToLower().Contains(product.ToLower())).Select(x => x.Id).ToListAsync();   
         }
     }
 }

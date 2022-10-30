@@ -29,6 +29,31 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             _purchaseTypeDb = purchaseTypeDb;
             _purchaseDb = purchaseDb;
         }
+        public async Task<List<ProductDto>> GetSearch(SearchIdsDto products)
+        {
+            return (await _productDb.GetProductByIds(products)).Select(x => new ProductDto 
+            { 
+                Id = x.Id, 
+                Image = x.Image, 
+                Title = x.Title, 
+                Description = x.Description, 
+                Price = x.Price, 
+                CategoryId = x.CategoryId, 
+                StateId = x.ProductStateId, 
+                OwnerId = x.OwnerId, 
+                PurchaseTypeId = x.PurchaseTypeId,
+                DateCreated = x.DateCreated 
+            }).ToList();
+
+        }
+
+        public async Task<SearchIdsDto> Search(string product)
+        {
+            return new SearchIdsDto
+            {
+                Ids = await _productDb.GetSearchIds(product)
+            };
+        }
 
         public async Task<PaginatedList<ProductDto>> GetFilteredProducts(ProductFilterInfo info, int page)
         {

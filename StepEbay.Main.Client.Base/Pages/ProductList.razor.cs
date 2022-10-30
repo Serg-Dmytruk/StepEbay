@@ -6,6 +6,7 @@ using StepEbay.Main.Client.Common.ClientsHub;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Product;
 using StepEbay.Common.Constans;
+using StepEbay.PushMessage.Services;
 
 namespace StepEbay.Main.Client.Base.Pages
 {
@@ -13,7 +14,11 @@ namespace StepEbay.Main.Client.Base.Pages
     [Route("products/{filter}")]
     public partial class ProductList
     {
-        [Parameter] public string filter { get; set; }
+        [Parameter]
+        [SupplyParameterFromQuery(Name = "product")]
+        public int[]? SearchResult { get; set; }
+        [Parameter] public string Filter { get; set; }
+        [Inject] private IMessageService MessageService { get; set; }
         [Inject] IApiService ApiService { get; set; }
         [Inject] private IConfiguration Configuration { get; set; }
         [Inject] private PriceHubClient PriceHubClient { get; set; }
@@ -44,12 +49,26 @@ namespace StepEbay.Main.Client.Base.Pages
                 await GetCategories();
                 await GetProductStates();
                 SetDefaultFilters(_categories);
-                await SubmitFilters();
+
+                if (SearchResult.Length > 0 && SearchResult[0] != 0)
+                {
+                    await GetSearchProducts();
+                    MessageService.ShowInfo("ЗНАЙДЕНО!", $"{SearchResult.Length} - {(SearchResult.Length > 1 ? "товарів" : "товар")}");
+                }
+                else if (SearchResult.Length > 0 && SearchResult[0] == 0)
+                {
+                    _products = new();
+                    MessageService.ShowError("НЕ ЗНАЙДЕНО!", "За вашим запитом нічого не знайдено");
+                }
+                else
+                {
+                    await SubmitFilters();
+                }
             }
 
             ShowPreloader = false;
             StateHasChanged();
-            
+
         }
 
         protected async void PrevProductPage()
@@ -104,7 +123,7 @@ namespace StepEbay.Main.Client.Base.Pages
 
         protected void SetDefaultFilters(List<CategoryDto> categories)
         {
-            if (filter == "0")
+            if (Filter == "0")
             {
                 categories.ForEach(category => ProductFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = true }));
             }
@@ -112,7 +131,7 @@ namespace StepEbay.Main.Client.Base.Pages
             {
                 foreach (var category in categories)
                 {
-                    if (!string.IsNullOrEmpty(filter) && category.Id.ToString() == filter)
+                    if (!string.IsNullOrEmpty(Filter) && category.Id.ToString() == Filter)
                         ProductFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = true });
                     else
                         ProductFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = false });
@@ -136,6 +155,12 @@ namespace StepEbay.Main.Client.Base.Pages
                 if (changedProduct is not null)
                     x.Price = changedProduct.Price;
             });
+        }
+
+        private async Task GetSearchProducts()
+        {
+            _products.List = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetSearch(new SearchIdsDto { Ids = SearchResult.ToList()}))).Data;
+            StateHasChanged();
         }
     }
 }

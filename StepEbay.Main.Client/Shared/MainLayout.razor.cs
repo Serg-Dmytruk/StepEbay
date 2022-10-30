@@ -22,6 +22,7 @@ namespace StepEbay.Main.Client.Shared
         [Inject] private IApiService ApiService { get; set; }
         private string UserName { get; set; }
         public bool IsShowSignModal { get; set; } = false;
+        private string SearchRequest { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -88,8 +89,23 @@ namespace StepEbay.Main.Client.Shared
 
         private void ShowSignModal()
         {
-            Console.WriteLine("dasd");
             IsShowSignModal = true;
+        }
+
+        private async Task Search()
+        {
+            var response = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetSearchIds(SearchRequest))).Data;
+
+            if (response.Ids.Count > 0)
+            {
+                NavigationManager.NavigateTo(uri:$"/products?{string.Join("&", response.Ids.Select(x => "product=" + x))}", forceLoad: true);    
+            }
+            else
+            {
+                NavigationManager.NavigateTo(uri: $"/products?product=0", forceLoad: true);
+            }
+
+            StateHasChanged();
         }
     }
 }

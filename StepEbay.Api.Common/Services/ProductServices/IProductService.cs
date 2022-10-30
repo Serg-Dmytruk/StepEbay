@@ -1,6 +1,5 @@
 ﻿using StepEbay.Common.Models.Pagination;
 using StepEbay.Common.Models.RefitModels;
-using StepEbay.Data.Models.Products;
 using StepEbay.Main.Common.Models.Product;
 
 namespace StepEbay.Main.Api.Common.Services.ProductServices
@@ -14,5 +13,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
         public Task<List<PurchaseTypeResponseDto>> GetAllPurchaseTypes();
         public Task<PaginatedList<ProductDto>> GetPersonalProductList(int id, int page, bool active, bool closed);
         public Task<ResponseData<ProductDto>> GetProduct(int id);
+        public Task<SearchIdsDto> Search(string product);
+        public Task<List<ProductDto>> GetSearch(SearchIdsDto products);
     }
 }

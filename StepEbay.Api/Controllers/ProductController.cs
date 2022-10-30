@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StepEbay.Common.Models.Pagination;
 using StepEbay.Common.Models.RefitModels;
-using StepEbay.Data.Models.Users;
 using StepEbay.Main.Api.Common.Services.BetServices;
 using StepEbay.Main.Api.Common.Services.ProductServices;
 using StepEbay.Main.Common.Models.Bet;
@@ -15,7 +14,6 @@ namespace StepEbay.Main.Api.Controllers
     {
         private readonly IProductService _productService;
         private readonly IBetService _betService;
-
         public ProductController(IProductService productService, IBetService betService)
         {
             _productService = productService;
@@ -63,10 +61,23 @@ namespace StepEbay.Main.Api.Controllers
         {
             return await _productService.GetProduct(id);
         }
+
         [HttpPost("{id}/bets")]
         public async Task<ResponseData<List<PurchaseDto>>> GetBetsProduct(int id)
         {
             return new ResponseData<List<PurchaseDto>>() { Data= await _betService.GetPurchase(id) } ;
         }
+
+        [HttpGet("search/{product}")]
+        public async Task<SearchIdsDto> Seacrch(string product)
+        {
+            return await _productService.Search(product);
+        }
+
+        [HttpPost("search")]
+        public async Task<List<ProductDto>> GetSearch([FromBody] SearchIdsDto products)
+        {
+            return await _productService.GetSearch(products);
+        }        
     }
 }
