@@ -62,6 +62,12 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Post("/person/info")]
         Task<ApiResponse<List<ProductDto>>> GetProductInfo(ProductInfoDto productInfos);
+
+        [Get("/product/search/{product}")]
+        Task<ApiResponse<SearchIdsDto>> GetSearchIds(string product);
+
+        [Post("/product/search")]
+        Task<ApiResponse<List<ProductDto>>> GetSearch(SearchIdsDto products);
     }
 }
 
