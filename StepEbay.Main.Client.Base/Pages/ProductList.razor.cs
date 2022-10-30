@@ -25,6 +25,8 @@ namespace StepEbay.Main.Client.Base.Pages
 
         private Dictionary<string, List<string>> MessageConfirmReg = new();
         private bool ShowPreloader { get; set; } = true;
+        private bool ShowProductsPreloader { get; set; } = true;
+
         private List<CategoryDto> _categories = new();
         private PaginatedList<ProductDto> _products = new();
         private string ApiConnection { get; set; }
@@ -40,10 +42,9 @@ namespace StepEbay.Main.Client.Base.Pages
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            ShowPreloader = true;
-
             if (firstRender)
             {
+                ShowPreloader = true;
                 PriceHubClient.ChangedPrice += ChangedPrice;
 
                 await GetCategories();
@@ -64,11 +65,10 @@ namespace StepEbay.Main.Client.Base.Pages
                 {
                     await SubmitFilters();
                 }
+
+                ShowPreloader = false;
+                StateHasChanged();
             }
-
-            ShowPreloader = false;
-            StateHasChanged();
-
         }
 
         protected async void PrevProductPage()
@@ -97,6 +97,8 @@ namespace StepEbay.Main.Client.Base.Pages
 
         protected async Task SubmitFilters()
         {
+            ShowProductsPreloader = true;
+
             List<int> categories = new();
             foreach (var category in ProductFilters.Categories)
             {
@@ -119,6 +121,8 @@ namespace StepEbay.Main.Client.Base.Pages
             {
                 MaxProductPageNumber = _products.CountAll % ProductListConstant.MAXONPAGE == 0 ? (_products.CountAll / ProductListConstant.MAXONPAGE) : (_products.CountAll / ProductListConstant.MAXONPAGE) + 1;
             }
+
+            ShowProductsPreloader = false;
         }
 
         protected void SetDefaultFilters(List<CategoryDto> categories)
@@ -137,7 +141,6 @@ namespace StepEbay.Main.Client.Base.Pages
                         ProductFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = false });
                 }
             }
-
         }
 
         protected async Task GetProductStates()
@@ -159,8 +162,10 @@ namespace StepEbay.Main.Client.Base.Pages
 
         private async Task GetSearchProducts()
         {
+            ShowProductsPreloader = true;
             _products.List = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetSearch(new SearchIdsDto { Ids = SearchResult.ToList()}))).Data;
-            StateHasChanged();
+
+            ShowProductsPreloader = false;
         }
     }
 }

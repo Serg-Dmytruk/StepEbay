@@ -1,15 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Refit;
 using StepEbay.Common.Helpers;
 using StepEbay.Common.Models.RefitModels;
-using StepEbay.Data.Models.Products;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Bet;
 using StepEbay.Main.Common.Models.Product;
 using StepEbay.PushMessage.Services;
-using System;
 using System.Net;
 
 namespace StepEbay.Main.Client.Base.Pages.Products

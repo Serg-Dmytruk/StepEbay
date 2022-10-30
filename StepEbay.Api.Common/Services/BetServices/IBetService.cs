@@ -1,5 +1,4 @@
 ﻿using StepEbay.Common.Models.RefitModels;
-using StepEbay.Data.Models.Bets;
 using StepEbay.Main.Common.Models.Bet;
 
 namespace StepEbay.Main.Api.Common.Services.BetServices

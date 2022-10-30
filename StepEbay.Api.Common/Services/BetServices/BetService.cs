@@ -38,8 +38,12 @@ namespace StepEbay.Main.Api.Common.Services.BetServices
             }
             else //Коли ставимо ставку
             {
-                Purchase lastPurchase =_purchesDbService.GetPurchasesByProductId(productId).Result.Last();
-                purchase.PurchasePrice = lastPurchase.PurchasePrice * (decimal)1.02;
+                var result = _purchesDbService.GetPurchasesByProductId(productId).Result;
+                if(result != null && result.Count != 0)
+                {
+                    Purchase lastPurchase = _purchesDbService.GetPurchasesByProductId(productId).Result.Last();
+                    purchase.PurchasePrice = lastPurchase.PurchasePrice * (decimal)1.02;
+                }
                 product.DateClose = product.DateClose.Value.AddMinutes(10);
                 await _productDbService.Update(product);
             }

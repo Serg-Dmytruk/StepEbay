@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StepEbay.Common.Models.RefitModels;
-using StepEbay.Data.Common.Services.BetsDbServices;
 using StepEbay.Main.Api.Common.Services.BetServices;
 using System.Security.Claims;
 

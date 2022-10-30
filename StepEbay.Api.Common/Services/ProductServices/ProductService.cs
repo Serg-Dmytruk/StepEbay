@@ -126,7 +126,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
             return new PaginatedList<ProductDto>
             {
-                List = productList.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated, DateClosed = (DateTime)x.DateClose }).Skip(page * 3).Take(3).ToList(),
+                List = productList.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated, DateClosed = (DateTime)x.DateClose }).Skip(page * 6).Take(6).ToList(),
                 CountAll = productList.Count()
             };
         }

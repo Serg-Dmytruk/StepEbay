@@ -1,45 +1,115 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 
-<h3>Додати продукт</h3>
-<InputFile AdditionalAttributes="LogoAttributes" OnChange="UploadImage"/>
-<div>
-    <p></p>
-    <div>
-        <img src="@(string.IsNullOrEmpty(request.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{request.Image}")" alt="">
+<div id="flex">
+    <div class="flexBlock">
+        <div class="header">
+            <span>Ваші товари</span>
+        </div>
+
+        @foreach (var product in _products.List)
+        {
+            <a href="/product/@product.Id">
+                <div id="flex" class="personalCard mt-20">
+                    <div>
+                        <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
+                    </div>
+                    <div class="ml-10">
+                        <div class="mt-13">
+                            <span>@product.Title</span>
+                        </div>
+                        <div>
+                            <span>Ціна: @product.Price</span>
+                            <span>₴</span>
+                        </div>
+                        <div>
+                            <span>@product.DateClosed</span>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+        }
+    </div>
+
+    <div class="flexBlock">
+        <div class="header">
+            <span>Запити на покупки</span>
+        </div>
+
+        @*        @foreach (var product in _products.List)
+            {
+            if (product.PurchaseTypeId == 1)
+            {
+            <a href="/product/@product.Id">
+            <div id="flex" class="personalCard mt-20">
+            <div>
+            <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
+            </div>
+            <div class="ml-10">
+            <div class="mt-13">
+            <span>@product.Title</span>
+            </div>
+            <div>
+            <span>Ціна: @product.Price</span>
+            <span>₴</span>
+            </div>
+            <div>
+            <span>@product.DateClosed</span>
+            </div>
+            </div>
+
+            </div>
+            </a>
+            }
+            }*@
+    </div>
+
+    <div class="flexBlock">
+        <div class="header">
+            <span>Додати товар</span>
+        </div>
+
+        <InputFile AdditionalAttributes="LogoAttributes" OnChange="UploadImage" />
+        <div>
+            <p></p>
+            <div>
+                <img src="@(string.IsNullOrEmpty(request.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{request.Image}")" alt="">
+            </div>
+        </div>
+        <span>Заголовок:</span><input @bind="request.Title" /><br />
+        <span>Опис:</span><input @bind="request.Description" /><br />
+        <span>Ціна:</span><input type="number" @bind="request.Price" /><br />
+        <span>Категорія:</span>
+        <select @bind="request.CategoryId">
+            @foreach (var item in Categories)
+            {
+                <option value="@item.Id">
+                    @item.Name
+                </option>
+            }
+        </select>
+        <br />
+        <span>Статус:</span>
+        <select @bind="request.StateId">
+            @foreach (var item in States)
+            {
+                <option value="@item.Id">
+                    @item.Name
+                </option>
+            }
+        </select>
+        <br />
+        <span>Тип:</span>
+        <select @bind="request.PurchaseTypeId">
+            @foreach (var item in Types)
+            {
+                <option value="@item.Id">
+                    @item.Name
+                </option>
+            }
+        </select>
+        <button @onclick="Submith">
+            Додати
+        </button>
     </div>
 </div>
-<span>Заголовок:</span><input @bind="request.Title" /><br />
-<span>Опис:</span><input @bind="request.Description" /><br />
-<span>Ціна:</span><input type="number" @bind="request.Price" /><br />
-<span>Категорія:</span>
-<select @bind="request.CategoryId">
-    @foreach (var item in Categories)
-    {
-        <option value="@item.Id">
-            @item.Name
-        </option>
-    }
-</select>
-<br />
-<span>Статус:</span>
-<select @bind="request.StateId">
-    @foreach (var item in States)
-    {
-        <option value="@item.Id">
-            @item.Name
-        </option>
-    }
-</select>
-<br />
-<span>Тип:</span>
-<select @bind="request.PurchaseTypeId">
-    @foreach (var item in Types)
-    {
-        <option value="@item.Id">
-            @item.Name
-        </option>
-    }
-</select>
-<button @onclick="Submith">
-    Додати
-</button>
