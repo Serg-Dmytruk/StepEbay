@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Configuration;
 using StepEbay.Common.Models.Pagination;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Bet;
@@ -12,7 +13,9 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalProductList
     public partial class PersonalProductList
     {
         [Inject] IApiService ApiService { get; set; }
+        [Inject] private IConfiguration Configuration { get; set; }
 
+        private string ApiConnection { get; set; }
         private PaginatedList<ProductDto> _products = new PaginatedList<ProductDto>();
         private BetFilter _filters = new BetFilter();
         public int ProductPageNumber = 0;
@@ -21,6 +24,7 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalProductList
 
         protected override async Task OnInitializedAsync()
         {
+            ApiConnection = Configuration.GetConnectionString("Api");
             _filters.Active = true;
             _filters.Closed = true;
             _products.List = new List<ProductDto>();

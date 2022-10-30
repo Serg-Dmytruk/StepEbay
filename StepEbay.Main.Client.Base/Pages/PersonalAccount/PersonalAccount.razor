@@ -1,26 +1,32 @@
-﻿<div>
+﻿<div class="flexBlock">
     <AuthorizeView>
         <Authorized>
-            <button class="btn btn-outline-danger centerOnParrentHorizontal" @onclick="Logout">Вийти</button>
-            <span class="header">Налаштування аккаунту</span>
-            <h3>Акаунт</h3>
-            <input type="text" placeholder="nick name" @bind-value="_request.NickName" />
-            <br />
-            <input type="email" placeholder="Пошта" @bind-value="_request.Email" />
-            <br />
-            <input type="password" placeholder="Пароль" @bind-value="_request.Password" />
-            <br />
-            <input type="password" placeholder="Повторіть пароль" @bind-value="_request.PasswordRepeat" />
-            <br />
-            <input type="text" placeholder="Повне Ім'я" @bind-value="_request.FullName" />
-            <br />
-            <input type="text" placeholder="Адреса" @bind-value="_request.Adress" />
-            <br />
-            <hr />
-            <input type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
-            <br />
-            <hr />
+            <div class="header">
+                <span>Налаштування аккаунту</span>
+            </div>
+            <div>
+                <input type="text" placeholder="nick name" @bind-value="_request.NickName" />
+            </div>
+            <div>
+                <input type="email" placeholder="Пошта" @bind-value="_request.Email" />
+            </div>
+            <div>
+                <input type="password" placeholder="Пароль" @bind-value="_request.Password" />
+            </div>
+            <div>
+                <input type="password" placeholder="Повторіть пароль" @bind-value="_request.PasswordRepeat" />
+            </div>
+            <div>
+                <input type="text" placeholder="Повне Ім'я" @bind-value="_request.FullName" />
+            </div>
+            <div>
+                <input type="text" placeholder="Адреса" @bind-value="_request.Adress" />
+            </div>
+            <div>
+                <input type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
+            </div>
             <button @onclick="UpdatePerson">Змінити</button>
+            <button class="btn btn-outline-danger centerOnParrentHorizontal" @onclick="Logout">Вийти</button>
         </Authorized>
     </AuthorizeView>
 </div>
