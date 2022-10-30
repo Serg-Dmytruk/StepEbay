@@ -1,33 +1,72 @@
-﻿<h3>PersonalProductList</h3>
+﻿@using StepEbay.Main.Client.Base.Pages.PersonalAccount
 
-<div>
-    @if (_filters.Active is true)
-    {
-        <input type="checkbox" @bind-value="_filters.Active" checked />
-    }
-    else
-    {
-        <input type="checkbox" @bind-value="_filters.Active" />
-    }
-    <label>Активні</label>
-    
-    @if (_filters.Closed is true)
-    {
-        <input type="checkbox" @bind-value="_filters.Closed" checked />
-    }
-    else
-    {
-        <input type="checkbox" @bind-value="_filters.Closed" />
-    }
-    <label>Закінчені</label>
-    <button @onclick="GetAllUserProducts">Прийняти</button>
+<div id="flex">
+    <div class="flexBlock">
+        <div class="header">
+            <span>Аукціони</span>
+        </div>
+
+        @foreach (var product in _products.List)
+        {
+            if (product.PurchaseTypeId == 2)
+            {
+                <a href="/product/@product.Id">
+                    <div id="flex" class="personalCard mt-20">
+                        <div>
+                            <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
+                        </div>
+                        <div class="ml-10">
+                            <div class="mt-13">
+                                <span>@product.Title</span>
+                            </div>
+                            <div>
+                                <span>Ціна: @product.Price</span>
+                                <span>₴</span>
+                            </div>
+                            <div>
+                                <span>@product.DateClosed</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            }
+        }
+    </div>
+
+    <div class="flexBlock">
+        <div class="header">
+            <span>Покупки</span>
+        </div>
+
+        @foreach (var product in _products.List)
+        {
+            if (product.PurchaseTypeId == 1)
+            {
+                <a href="/product/@product.Id">
+                    <div id="flex" class="personalCard mt-20">
+                        <div>
+                            <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
+                        </div>
+                        <div class="ml-10">
+                            <div class="mt-13">
+                                <span>@product.Title</span>
+                            </div>
+                            <div>
+                                <span>Ціна: @product.Price</span>
+                                <span>₴</span>
+                            </div>
+                            <div>
+                                <span>@product.DateClosed</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            }
+        }
+    </div>
+    <PersonalAccount />
 </div>
 
-<div>
-    @foreach(var product in _products.List)
-    {
-        <li>@product.Title</li>
-        <li>@product.DateClosed</li>
-    }
-</div>
 
