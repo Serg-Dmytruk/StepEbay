@@ -124,21 +124,48 @@
                     }
                 </ul>
             }
-            <div class="pagePagination">
-                <div class="borderRight">
-                    <button class="prevPageImg" @onclick="PrevProductPage"></button>
-                </div>
-                @if (MaxProductPageNumber <= 1)
-                {
-                    <div class="currPage borderRight">
-                        <span>1</span>
+            @if (_products.List is not null && _products.List.Count != 0)
+            {
+                <div class="pagePagination">
+
+                    <div class="borderRight">
+                        <button class="prevPageImg" @onclick="PrevProductPage"></button>
                     </div>
-                }
-                else if (MaxProductPageNumber == 2)
-                {
-                    for (int i = 1; i <= MaxProductPageNumber; i++)
+
+                    @if (MaxProductPageNumber <= 1)
                     {
-                        @if ((ProductPageNumber + 1) == i && i == 1)
+                        <div class="currPage borderRight">
+                            <span>1</span>
+                        </div>
+                    }
+                    else if (MaxProductPageNumber == 2)
+                    {
+                        for (int i = 1; i <= MaxProductPageNumber; i++)
+                        {
+                            @if ((ProductPageNumber + 1) == i && i == 1)
+                            {
+                                <div class="currPage borderRight">
+                                    <span>@(ProductPageNumber + 1)</span>
+                                </div>
+                                <div class="borderRight">
+                                    <span>2</span>
+                                </div>
+                            }
+
+                            @if ((ProductPageNumber + 1) == i && i == 2)
+                            {
+                                <div class="borderRight">
+                                    <span>1</span>
+                                </div>
+                                <div class="currPage borderRight">
+                                    <span>@(ProductPageNumber + 1)</span>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        @if ((ProductPageNumber + 1) == 1)
                         {
                             <div class="currPage borderRight">
                                 <span>@(ProductPageNumber + 1)</span>
@@ -146,62 +173,46 @@
                             <div class="borderRight">
                                 <span>2</span>
                             </div>
+                            <div class="borderRight">
+                                <span>3</span>
+                            </div>
                         }
-
-                        @if ((ProductPageNumber + 1) == i && i == 2)
+                        else if ((ProductPageNumber + 1) == MaxProductPageNumber)
                         {
                             <div class="borderRight">
-                                <span>1</span>
+                                <span>@(MaxProductPageNumber - 2)</span>
+                            </div>
+                            <div class="borderRight">
+                                <span>@(MaxProductPageNumber - 1)</span>
                             </div>
                             <div class="currPage borderRight">
                                 <span>@(ProductPageNumber + 1)</span>
                             </div>
                         }
+                        else
+                        {
+                            <div class="borderRight">
+                                <span>@ProductPageNumber</span>
+                            </div>
+                            <div class="currPage borderRight">
+                                <span>@(ProductPageNumber + 1)</span>
+                            </div>
+                            <div class="borderRight">
+                                <span>@(ProductPageNumber + 2)</span>
+                            </div>
+                        }
                     }
-                }
-                else
-                {
-                    @if ((ProductPageNumber + 1) == 1)
-                    {
-                        <div class="currPage borderRight">
-                            <span>@(ProductPageNumber + 1)</span>
-                        </div>
-                        <div class="borderRight">
-                            <span>2</span>
-                        </div>
-                        <div class="borderRight">
-                            <span>3</span>
-                        </div>
-                    }
-                    else if ((ProductPageNumber + 1) == MaxProductPageNumber)
-                    {
-                        <div class="borderRight">
-                            <span>@(MaxProductPageNumber - 2)</span>
-                        </div>
-                        <div class="borderRight">
-                            <span>@(MaxProductPageNumber - 1)</span>
-                        </div>
-                        <div class="currPage borderRight">
-                            <span>@(ProductPageNumber + 1)</span>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="borderRight">
-                            <span>@ProductPageNumber</span>
-                        </div>
-                        <div class="currPage borderRight">
-                            <span>@(ProductPageNumber + 1)</span>
-                        </div>
-                        <div class="borderRight">
-                            <span>@(ProductPageNumber + 2)</span>
-                        </div>
-                    }
-                }
-                <div>
-                    <button class="nextPageImg" @onclick="NextProductPage"></button>
+
+                    <div>
+                        <button class="nextPageImg" @onclick="NextProductPage"></button>
+                    </div>
+
                 </div>
-            </div>
+            }
+            else
+            {
+                <h3 class="header">Нічого не знайдено...</h3>
+            }
         </div>
     }
     else
