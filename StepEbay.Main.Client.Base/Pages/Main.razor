@@ -7,7 +7,7 @@
         <ModalDialog Title="@MessageConfirmReg.FirstOrDefault().Key" Text="@MessageConfirmReg.FirstOrDefault().Value" OnClose='@CloseModal' />
     }
 
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide d-none d-md-block" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item item1 active"></div>
             <div class="carousel-item item2"></div>
@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
                     <a class="categoryLink" href="products/@ProductCategoryIdConstant.CLOTH">
                         <div class="categoryContent clothes">
                             <span>Одяг</span>
@@ -35,7 +35,7 @@
                     </a>
                 </div>
 
-                <div class="col-12 col-sm-12 col-md-4 col-lg-1 col-lg-3 col-xxl-2">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
                     <a class="categoryLink" href="products/@ProductCategoryIdConstant.TELEPHONE">
                         <div class="categoryContent phones">
                             <span>Телефони</span>
@@ -53,7 +53,7 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-6 col-xxl">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-6 col-xl-6 col-xxl-6">
                     <a class="categoryLink" href="products/@ProductCategoryIdConstant.SPORT">
                         <div class="categoryContent sport">
                             <span>Спорт</span>
@@ -61,10 +61,10 @@
                     </a>
                 </div>
 
-                <div class="col-12 col-sm-12 col-md-4 col-lg-1 col-lg-3 col-xxl-2">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
                     <a class="categoryLink" href="products/0">
                         <div class="categoryContent catalogue">
-                            <span>Каталог</span>
+                            <span>Весь асортимент</span>
                         </div>
                     </a>
                 </div>

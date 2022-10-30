@@ -1,78 +1,120 @@
 ﻿#menubg1 {
-  position: relative;
-  min-height: 100px;
+    position: relative;
+    min-height: 100px;
 }
 
 #menubg2 {
-  position: relative;
-  min-height: 100px;
-  display: none;
+    position: relative;
+    min-height: 100px;
+    display: none;
 }
 
 #menu {
-  position: fixed;
-  z-index: 100;
-  background-color: white;
-}
-#menu .logo {
-  background-image: url("../../images/LOGO.svg");
-}
-#menu .logo:hover {
-  cursor: pointer;
-}
-#menu .icon1 {
-  background-image: url("../../images/icon_basket.svg");
-}
-#menu .icon1:hover {
-  cursor: pointer;
-  background-image: url("../../images/icon_basket_active.svg");
-}
-#menu .icon2 {
-  background-image: url("../../images/profile_icon.svg");
-}
-#menu .icon2:hover {
-  cursor: pointer;
+    position: fixed;
+    background-color: white;
+    -webkit-box-shadow: 0px 3px 8px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 3px 8px 2px rgba(0,0,0,0.2);
+    box-shadow: 0px 3px 8px 2px rgba(0,0,0,0.2);
 }
 
+.catalog.dropdown-menu.show {
+    position: absolute !important;
+    top: 25px !important;
+}
+
+.mpos-dropdown-menu.dropdown-menu.show {
+    color:green;
+    position: absolute !important;
+    top: 50px !important;
+    -webkit-box-shadow: 0px 3px 8px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 3px 8px 2px rgba(0,0,0,0.2);
+    box-shadow: 0px 3px 8px 2px rgba(0,0,0,0.2);
+}
+
+    .mpos-dropdown-menu.dropdown-menu.show li a {
+        text-decoration: none;
+        color: #045316;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+        .mpos-dropdown-menu.dropdown-menu.show li a:hover {
+            color: #8BC65D;
+        }
+
+        #menu .logo {
+            background-image: url("../../images/LOGO.svg");
+        }
+
+    #menu .logo:hover {
+        cursor: pointer;
+    }
+
+#menu .icon1 {
+    background-image: url("../../images/icon_basket.svg");
+}
+
+    #menu .icon1:hover {
+        cursor: pointer;
+        background-image: url("../../images/icon_basket_active.svg");
+    }
+
+#menu .icon2 {
+    background-image: url("../../images/profile_icon.svg");
+}
+
+    #menu .icon2:hover {
+        cursor: pointer;
+        background-image: url("../../images/icon_profile_active.svg");
+    }
+
 #menu .logo {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: left center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
 }
+
 #menu .search {
-  padding: 15px;
+    padding: 15px;
 }
+
 #menu .icons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
+
 #menu .icon {
-  margin: 0 5px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
+    margin: 0 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
+
 #menu .navMenu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-decoration: none;
-  list-style: none;
-  cursor: pointer;
-  padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    list-style: none;
+    cursor: pointer;
+    padding: 0;
 }
-#menu .navMenu li a {
-  text-decoration: none;
-  color: #045316;
-  font-weight: 700;
-  white-space: nowrap;
-}
-#menu .navMenu li a:hover {
-  color: #8BC65D;
-}
-#menu .navMenu li a:active, #menu .navMenu li a:focus {
-  color: #FF8A00;
-}
-#menu .navMenu li.current a {
-  color: #FF8A00;
-}
+
+    #menu .navMenu li a {
+        text-decoration: none;
+        color: #045316;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+        #menu .navMenu li a:hover {
+            color: #8BC65D;
+        }
+
+        #menu .navMenu li a:active, #menu .navMenu li a:focus {
+            color: #FF8A00;
+        }
+
+    #menu .navMenu li.current a {
+        color: #FF8A00;
+    }

@@ -136,7 +136,8 @@ a{
   background-image: url("images/icon basket active.svg");
 }
 #menu .icon2 {
-  background-image: url("images/profile_icon.svg");
+    position:relative;
+    background-image: url("images/profile_icon.svg");
 }
 #menu .icon2:hover {
   cursor: pointer;
