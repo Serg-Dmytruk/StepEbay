@@ -17,7 +17,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         [Inject] private IApiService ApiService { get; set; }
         [Inject] IMessageService MessageService { get; set; }
         [Inject] private IConfiguration Configuration { get; set; }
-        [Inject]private TimezoneHelper TimezoneHelper { get; set; }
+        //[Inject]private TimezoneHelper TimezoneHelper { get; set; }
         private string ApiConnection { get; set; }
         ProductDto Product { get; set; }
         PurchaseDto LastPurchase { get; set; }
@@ -56,10 +56,12 @@ namespace StepEbay.Main.Client.Base.Pages.Products
                 MessageService.ShowError("Помилка", result.Errors.First().Value.First());
 
             Product = result.Data;
-            Product.DateClosed = await TimezoneHelper.ToLocalTime(Product.DateClosed);
-            Product.DateCreated = await TimezoneHelper.ToLocalTime(Product.DateCreated);
+            Product.DateClosed = Product.DateClosed;
+            Product.DateCreated = Product.DateCreated;
+            //Product.DateClosed = await TimezoneHelper.ToLocalTime(Product.DateClosed);
+            //Product.DateCreated = await TimezoneHelper.ToLocalTime(Product.DateCreated);
 
-            if(SrcPictures.Count == 0)
+            if (SrcPictures.Count == 0)
             {
                 currentPicture = Product.Image;
                 SrcPictures.Add(Product.Image);

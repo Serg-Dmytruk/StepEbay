@@ -100,6 +100,10 @@
                             <li>
                                 <div class="productCard">
                                     <div>
+                                        @if(product.PurchaseTypeId == 2)
+                                        {
+                                            <div id="aution"></div>
+                                        }
                                         <a href="/product/@product.Id">
                                             <img class="imgCard" src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
                                         </a>
