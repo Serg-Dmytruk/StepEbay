@@ -42,7 +42,9 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                 StateId = x.ProductStateId, 
                 OwnerId = x.OwnerId, 
                 PurchaseTypeId = x.PurchaseTypeId,
-                DateCreated = x.DateCreated 
+                DateCreated = x.DateCreated,
+                AdditionalInfo=x.AditionalInfo,
+                Rate=x.Rate
             }).ToList();
 
         }
@@ -61,7 +63,20 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
             return new PaginatedList<ProductDto>
             {
-                List = products.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated }).Skip(page * ProductListConstant.MAXONPAGE).Take(ProductListConstant.MAXONPAGE).ToList(),
+                List = products.Select(x => new ProductDto { 
+                    Id = x.Id,
+                    Image = x.Image,
+                    Title = x.Title,
+                    Description = x.Description,
+                    Price = x.Price,
+                    CategoryId = x.CategoryId,
+                    StateId = x.ProductStateId,
+                    OwnerId = x.OwnerId,
+                    PurchaseTypeId = x.PurchaseTypeId,
+                    DateCreated = x.DateCreated,
+                    AdditionalInfo = x.AditionalInfo,
+                    Rate=x.Rate
+                }).Skip(page * ProductListConstant.MAXONPAGE).Take(ProductListConstant.MAXONPAGE).ToList(),
                 CountAll = products.Count()
             };
         }
@@ -93,7 +108,9 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                 CategoryId = productRequest.CategoryId,
                 ProductStateId = productRequest.StateId,
                 PurchaseTypeId = productRequest.PurchaseTypeId,
-                OwnerId = productRequest.OwnerId
+                OwnerId = productRequest.OwnerId,
+                Rate = productRequest.Rate,
+                AditionalInfo=productRequest.AdditionalInfo
             };
 
             await _productDb.Add(product);
@@ -126,7 +143,21 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
             return new PaginatedList<ProductDto>
             {
-                List = productList.Select(x => new ProductDto { Id = x.Id, Image = x.Image, Title = x.Title, Description = x.Description, Price = x.Price, CategoryId = x.CategoryId, StateId = x.ProductStateId, OwnerId = x.OwnerId, PurchaseTypeId = x.PurchaseTypeId, DateCreated = x.DateCreated, DateClosed = (DateTime)x.DateClose }).Skip(page * 6).Take(6).ToList(),
+                List = productList.Select(x => new ProductDto { 
+                    Id = x.Id,
+                    Image = x.Image,
+                    Title = x.Title,
+                    Description = x.Description,
+                    Price = x.Price,
+                    CategoryId = x.CategoryId,
+                    StateId = x.ProductStateId,
+                    OwnerId = x.OwnerId,
+                    PurchaseTypeId = x.PurchaseTypeId,
+                    DateCreated = x.DateCreated,
+                    DateClosed = (DateTime)x.DateClose,
+                    AdditionalInfo=x.AditionalInfo,
+                    Rate=x.Rate
+                }).Skip(page * 6).Take(6).ToList(),
                 CountAll = productList.Count()
             };
         }

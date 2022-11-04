@@ -17,6 +17,9 @@ namespace StepEbay.Data.Models.Products
         public decimal Price { get; set; }
         public DateTime? DateClose { get; set; }
         public bool IsActive { get; set; }
+        public int Rate { get; set; }
+        public string AditionalInfo { get; set; }
+
 
         [ForeignKey("Owner")]
         public int OwnerId { get; set; }
