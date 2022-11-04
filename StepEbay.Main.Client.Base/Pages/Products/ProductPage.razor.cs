@@ -35,7 +35,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             var result = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.PlaceBet(int.Parse(Id)));
             if (result.StatusCode == HttpStatusCode.OK)
             {
-                MessageService.ShowSuccsess($"Додано до кошику", "Товар: "+Product.Title+" за ціною "+Product.Price);
+                MessageService.ShowSuccsess($"Додано до кошику", $"Товар: {Product.Title} за ціною {Product.Price}"); ;
             }
             else if (result.StatusCode == HttpStatusCode.Unauthorized)
             {

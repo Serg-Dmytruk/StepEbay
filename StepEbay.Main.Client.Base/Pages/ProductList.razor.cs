@@ -59,6 +59,7 @@ namespace StepEbay.Main.Client.Base.Pages
                 else if (SearchResult.Length > 0 && SearchResult[0] == 0)
                 {
                     _products = new();
+                    ShowProductsPreloader = true;
                     MessageService.ShowError("НЕ ЗНАЙДЕНО!", "За вашим запитом нічого не знайдено");
                 }
                 else
@@ -164,7 +165,6 @@ namespace StepEbay.Main.Client.Base.Pages
         {
             ShowProductsPreloader = true;
             _products.List = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetSearch(new SearchIdsDto { Ids = SearchResult.ToList()}))).Data;
-
             ShowProductsPreloader = false;
         }
     }
