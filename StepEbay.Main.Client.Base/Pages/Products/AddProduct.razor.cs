@@ -66,6 +66,9 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
         private async void Submith()
         {
+            Random rand = new();
+            request.Rate =rand.Next(3,6);
+            request.Rate = rand;
             var result = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.AddProduct(request));
 
             if (result.StatusCode != HttpStatusCode.OK)
