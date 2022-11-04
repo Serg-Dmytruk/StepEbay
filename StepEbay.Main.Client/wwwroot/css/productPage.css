@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+#descriptionD {
+    padding: 90px 0 90px 0;
+    position: relative;
+    min-height: 300px;
+}
+
 .mainD {
     padding: 30px 0px;
     display: flex;
@@ -13,7 +19,7 @@
 }
 
 .infoD {
-    position:relative;
+    position: relative;
     min-width: 43%;
 }
 
@@ -42,13 +48,30 @@
         background: #FFA740;
     }
 
-    .descriptionD{
-        text-align:center;
+.descriptionD {
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 45px;
+    transition: 0.3s;
+}
+
+    .descriptionD h2 {
+        transition: 0.3s;
     }
 
+    .descriptionD:hover {
+        border: 1px solid green;
+        background-color: rgba(200,200,200,0.3);
+    }
+
+        .descriptionD:hover h2 {
+            color: green;
+        }
+
 .descriptionHeader {
+    padding: 0px 0 30px 0;
     font-size: 24px;
-    font-weight: 600px;
+    font-weight: 700;
     color: #F4A063;
 }
 
@@ -106,7 +129,7 @@
         top: 0px;
         left: -20%;
         bottom: 0px;
-        width: 80%;
+        width: 70%;
         background-color: #8EC763;
         z-index: 1;
         transform: skewX(35deg);
