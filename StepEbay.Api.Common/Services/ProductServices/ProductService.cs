@@ -33,8 +33,10 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
         {
             return (await _productDb.GetProductByIds(products)).Select(x => new ProductDto 
             { 
-                Id = x.Id, 
-                Image = x.Image, 
+                Id = x.Id,
+                Image1 = x.Image1,
+                Image2 = x.Image2,
+                Image3 = x.Image3,
                 Title = x.Title, 
                 Description = x.Description, 
                 Price = x.Price, 
@@ -65,7 +67,9 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             {
                 List = products.Select(x => new ProductDto { 
                     Id = x.Id,
-                    Image = x.Image,
+                    Image1 = x.Image1,
+                    Image2 = x.Image2,
+                    Image3 = x.Image3,
                     Title = x.Title,
                     Description = x.Description,
                     Price = x.Price,
@@ -101,7 +105,9 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             {
                 DateCreated = DateTime.UtcNow,
                 DateClose = DateTime.UtcNow.AddMinutes(10),
-                Image = productRequest.Image,
+                Image1 = productRequest.Image1,
+                Image2 = productRequest.Image2,
+                Image3 = productRequest.Image3,
                 Title = productRequest.Title,
                 Description = productRequest.Description,
                 Price = productRequest.Price,
@@ -145,7 +151,9 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             {
                 List = productList.Select(x => new ProductDto { 
                     Id = x.Id,
-                    Image = x.Image,
+                    Image1 = x.Image1,
+                    Image2 = x.Image2,
+                    Image3 = x.Image3,
                     Title = x.Title,
                     Description = x.Description,
                     Price = x.Price,
@@ -170,7 +178,22 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             if (productDb == null)
                 return ResponseData<ProductDto>.Fail("product", "Продукта нема");
        
-            return new ResponseData<ProductDto>() { Data = new ProductDto() { Id = productDb.Id, Image = productDb.Image, Title = productDb.Title, Description = productDb.Description, Price = productDb.Price, CategoryId = productDb.CategoryId, StateId = productDb.ProductStateId, OwnerId = productDb.OwnerId, PurchaseTypeId = productDb.PurchaseTypeId, DateCreated = productDb.DateCreated, DateClosed = (DateTime)productDb.DateClose } };
+            return new ResponseData<ProductDto>() { Data = new ProductDto() 
+            { 
+                Id = productDb.Id,
+                Image1 = productDb.Image1,
+                Image2 = productDb.Image2,
+                Image3 = productDb.Image3,
+                Title = productDb.Title,
+                Description = productDb.Description,
+                Price = productDb.Price,
+                CategoryId = productDb.CategoryId,
+                StateId = productDb.ProductStateId,
+                OwnerId = productDb.OwnerId,
+                PurchaseTypeId = productDb.PurchaseTypeId,
+                DateCreated = productDb.DateCreated,
+                DateClosed = (DateTime)productDb.DateClose
+            } };
         }
     }
 }

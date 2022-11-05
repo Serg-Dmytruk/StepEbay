@@ -11,7 +11,7 @@
             <a href="/product/@product.Id">
                 <div id="flex" class="personalCard mt-20">
                     <div>
-                        <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
+                        <img src="@(string.IsNullOrEmpty(product.Image1) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image1}")" alt="" />
                     </div>
                     <div class="ml-10">
                         <div class="mt-13">
@@ -37,45 +37,61 @@
         </div>
 
         @*        @foreach (var product in _products.List)
-            {
-            if (product.PurchaseTypeId == 1)
-            {
-            <a href="/product/@product.Id">
-            <div id="flex" class="personalCard mt-20">
-            <div>
-            <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
-            </div>
-            <div class="ml-10">
-            <div class="mt-13">
-            <span>@product.Title</span>
-            </div>
-            <div>
-            <span>Ціна: @product.Price</span>
-            <span>₴</span>
-            </div>
-            <div>
-            <span>@product.DateClosed</span>
-            </div>
-            </div>
+        {
+        if (product.PurchaseTypeId == 1)
+        {
+        <a href="/product/@product.Id">
+        <div id="flex" class="personalCard mt-20">
+        <div>
+        <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
+        </div>
+        <div class="ml-10">
+        <div class="mt-13">
+        <span>@product.Title</span>
+        </div>
+        <div>
+        <span>Ціна: @product.Price</span>
+        <span>₴</span>
+        </div>
+        <div>
+        <span>@product.DateClosed</span>
+        </div>
+        </div>
 
-            </div>
-            </a>
-            }
-            }*@
+        </div>
+        </a>
+        }
+        }*@
     </div>
 
     <div class="flexBlock">
         <div class="header">
             <span>Додати товар</span>
-        </div>
-
-        <InputFile AdditionalAttributes="LogoAttributes" OnChange="UploadImage" />
+        </div>     
         <div>
             <p></p>
             <div>
-                <img src="@(string.IsNullOrEmpty(request.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{request.Image}")" alt="">
+                <img src="@(string.IsNullOrEmpty(request.Image1) ? "icons/no_photo.png" : $"{ApiConnection}/images/{request.Image1}")" alt="">
             </div>
         </div>
+        <InputFile AdditionalAttributes="LogoAttributes" OnChange="UploadImage" />
+
+        <div>
+            <p></p>
+            <div>
+                <img src="@(string.IsNullOrEmpty(request.Image2) ? "icons/no_photo.png" : $"{ApiConnection}/images/{request.Image2}")" alt="">
+            </div>
+        </div>
+        <InputFile AdditionalAttributes="LogoAttributes" OnChange="UploadImage" />
+       
+        <div>
+            <p></p>
+            <div>
+                <img src="@(string.IsNullOrEmpty(request.Image3) ? "icons/no_photo.png" : $"{ApiConnection}/images/{request.Image3}")" alt="">
+            </div>
+        </div>
+         <InputFile AdditionalAttributes="LogoAttributes" OnChange="UploadImage" />
+
         <span>Заголовок:</span><input @bind="request.Title" /><br />
         <span>Опис:</span><input @bind="request.Description" /><br />
         <span>Додаткова інформація:</span><input @bind="request.AdditionalInfo" /><br />

@@ -63,10 +63,10 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
             if (SrcPictures.Count == 0)
             {
-                currentPicture = Product.Image;
-                SrcPictures.Add(Product.Image);
-                SrcPictures.Add("test1.png");
-                SrcPictures.Add("test2.png");
+                currentPicture = Product.Image3;
+                SrcPictures.Add(Product.Image3);
+                SrcPictures.Add(Product.Image2);
+                SrcPictures.Add(Product.Image1);
             }
                 
 

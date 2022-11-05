@@ -24,6 +24,8 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         private BetFilter _filters = new BetFilter();
         public int ProductPageNumber = 0;
         public int MaxProductPageNumber = 0;
+
+        int Images = 0;
         private List<CategoryDto> Categories { get; set; }
         private List<ProductStateDto> States { get; set; }
         private List<PurchaseTypeResponseDto> Types { get; set; }
@@ -36,7 +38,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
         private string PictureFileName { get; set; }
 
-        private ProductDto request = new ProductDto();
+        private ProductDto request = new();
 
         public AddProduct()
         {
@@ -83,7 +85,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         {
             if (e.FileCount != 0)
             {
-                PictureFileName = "Загрузка...";
+                Images++;
 
                 var image = e.File;
                 var stream = image.OpenReadStream(ByteHelper.ConvertMegabytesToBytes(20));
@@ -93,11 +95,23 @@ namespace StepEbay.Main.Client.Base.Pages.Products
                 stream.Close();
 
                 StreamPart streamPart = new(memoryStream, image.Name);
-                request.Image = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.UploadImage(streamPart)))
+                var fileName = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.UploadImage(streamPart)))
                     .Data.FileName;
 
+                switch (Images)
+                {
+                    case 1:
+                        request.Image1 = fileName;
+                        break;
+                    case 2:
+                        request.Image2 = fileName;
+                        break;
+                    case 3:
+                        request.Image3 = fileName;
+                        break;
+                }
+
                 memoryStream.Close();
-                PictureFileName = image.Name;
             }
         }
 

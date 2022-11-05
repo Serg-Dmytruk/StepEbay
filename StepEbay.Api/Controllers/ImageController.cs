@@ -18,7 +18,7 @@ namespace StepEbay.Main.Api.Controllers
 
         [HttpPost("upload")]
         [SwaggerResponse(200, Type = typeof(ImageResponseDto))]
-        public async Task<ImageResponseDto> UploadImageTemp(IFormFile file)
+        public async Task<ImageResponseDto> UploadImageTemp(int number, IFormFile file)
         {
             return await _fileService.SaveImage(file);
         }
