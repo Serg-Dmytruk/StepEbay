@@ -49,6 +49,7 @@ function heart(){
 
     });
     heart.addEventListener('mousedown', (event) => {
+        alert(cleked)
         let style = heart.style;
         style.setProperty('--heartBlockBeforeBG', "#FFA740");
         style.setProperty('--heartBlockAfterBG', "#FFA740");
