@@ -12,9 +12,9 @@
     public static class ProductCategoryIdConstant
     {
         public static readonly string TELEPHONE = "1";
-        public static readonly string CLOTH = "3";
+        public static readonly string CLOTH = "2";
         public static readonly string BUATY = "4";
-        public static readonly string SPORT = "2";
+        public static readonly string SPORT = "3";
         public static readonly string TOY = "5";
     }
 
