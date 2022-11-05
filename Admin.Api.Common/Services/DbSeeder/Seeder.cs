@@ -161,7 +161,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     ProductState = states[rand.Next(0, states.Count())],
                     Description = desc,
                     PurchaseType = purchaseTypes[rand.Next(0, purchaseTypes.Count())],
-                    DateClose = DateTime.UtcNow.AddMinutes(10),
+                    DateClose = DateTime.UtcNow.AddMinutes(30),
                     AditionalInfo = additionalInfo,
                     Rate = rate
                 });
