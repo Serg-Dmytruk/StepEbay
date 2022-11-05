@@ -24,7 +24,7 @@ namespace StepEbay.Main.Api.Common.Services.AuthServices
         private readonly IRoleDbService _roleDbService;
         private readonly IEmailService _emailSenderService;
 
-        private readonly TimeSpan _expires = new(0, 20, 0);
+        private readonly TimeSpan _expires = new(24, 0, 0);
         public AuthService(IConfiguration config,
             IUserDbService userDbService,
             IRefreshTokenDbService refreshTokenDbService,
