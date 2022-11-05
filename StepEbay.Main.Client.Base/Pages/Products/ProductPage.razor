@@ -39,9 +39,15 @@
                         <h3>@Product.Title</h3>
                     </div>
                     <div class="testD">
-                        <div id="starsRatingBlock" style="--stDB: 70%;--starsRatingBlockWidth:10%; --starsRatingBG:#716B6B;">
+                        <div id="starsRatingBlock"
+                             onmousemove="MM()"
+                             onmouseleave="ML()"
+                             onmouseup="MU()"
+                             onmousedown="MD()"
+                             style="--stDB: 70%;--starsRatingBlockWidth:10%; --starsRatingBG:#716B6B;">
                             <img src="/images/stars5.svg" alt="stars">
                         </div>
+
                         <div id="heartBlock" class="heartBlockActive" style="--heartBlockBeforeBG: #DA1A1A;--heartBlockAfterBG: #ffffff">
                             <img src="/images/Heart.svg" alt="stars">
                         </div>
