@@ -44,12 +44,16 @@
                              onmouseleave="ML()"
                              onmouseup="MU()"
                              onmousedown="MD()"
-                             style="--stDB: 70%;--starsRatingBlockWidth:10%; --starsRatingBG:#716B6B;">
+                             style=@($"--stDB: {(Product.Rate * 100) / 5}%;--starsRatingBlockWidth:0%; --starsRatingBG:#716B6B;")>
                             <img src="/images/stars5.svg" alt="stars">
                         </div>
 
-                        <div id="heartBlock" class="heartBlockActive" style="--heartBlockBeforeBG: #DA1A1A;--heartBlockAfterBG: #ffffff">
-                            <img src="/images/Heart.svg" alt="stars">
+                        <div id="heartBlock"
+                             onmouseup="hMU()"
+                             onmousedown="hMD()"
+                             class="heartBlockActive"
+                             style="--heartBlockBeforeBG: #DA1A1A;--heartBlockAfterBG: #ffffff">
+                            <img src="/images/heart.svg" alt="stars">
                         </div>
                     </div>
                     <div class="mt-25">

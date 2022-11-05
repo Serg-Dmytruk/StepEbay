@@ -192,7 +192,8 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                 OwnerId = productDb.OwnerId,
                 PurchaseTypeId = productDb.PurchaseTypeId,
                 DateCreated = productDb.DateCreated,
-                DateClosed = (DateTime)productDb.DateClose
+                DateClosed = (DateTime)productDb.DateClose,
+                Rate = productDb.Rate
             } };
         }
     }
