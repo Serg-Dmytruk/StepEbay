@@ -11,11 +11,11 @@
 
     public static class ProductCategoryIdConstant
     {
-        public static readonly string TELEPHONE = "12";
-        public static readonly string CLOTH = "13";
-        public static readonly string BUATY = "15";
-        public static readonly string SPORT = "14";
-        public static readonly string TOY = "16";
+        public static readonly string TELEPHONE = "1";
+        public static readonly string CLOTH = "3";
+        public static readonly string BUATY = "4";
+        public static readonly string SPORT = "2";
+        public static readonly string TOY = "5";
     }
 
     public static class ProductListConstant
