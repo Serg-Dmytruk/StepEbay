@@ -131,7 +131,7 @@
         bottom: 0px;
         width: 70%;
         background-color: #8EC763;
-        z-index: 1;
+        z-index: 4;
         transform: skewX(35deg);
         transition:2s;
     }
