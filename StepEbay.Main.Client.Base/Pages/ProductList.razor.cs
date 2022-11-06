@@ -45,6 +45,7 @@ namespace StepEbay.Main.Client.Base.Pages
             if (firstRender)
             {
                 ShowPreloader = true;
+                PriceHubClient.ResetChangedPriceSingle();
                 PriceHubClient.ChangedPrice += ChangedPrice;
 
                 await GetCategories();

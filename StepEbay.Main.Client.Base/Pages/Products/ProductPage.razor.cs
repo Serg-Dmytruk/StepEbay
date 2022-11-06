@@ -20,10 +20,11 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         [Inject] IMessageService MessageService { get; set; }
         [Inject] private IConfiguration Configuration { get; set; }
         [Inject] private PriceHubClient PriceHubClient { get; set; }
+        private ProductDto LastProd { get; set; }
         //[Inject]private TimezoneHelper TimezoneHelper { get; set; }
         private string ApiConnection { get; set; }
-        ProductDto Product { get; set; }
-        PurchaseDto LastPurchase { get; set; }
+        ProductDto Product { get; set; } = new();
+        PurchaseDto LastPurchase { get; set; } = new();
         private List<string> SrcPictures { get; set; } = new List<string>();
 
         private string currentPicture { get; set; } = "";
@@ -78,24 +79,26 @@ namespace StepEbay.Main.Client.Base.Pages.Products
                 }
                 else
                 {
-                    LastPurchase = null;
+                    LastPurchase = new();
                 }
             }
 
             StateHasChanged();
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override void OnAfterRender(bool firstRender)
         {
+            PriceHubClient.ResetMyBetClosed();
             PriceHubClient.ChangedPriceSingle += ChangedPriceSingle;
         }
 
         private void ChangedPriceSingle(List<ChangedPrice> changed)
         {
             var changedProduct = changed.SingleOrDefault(c => c.ProductId == Product.Id);
-
-            if (changedProduct is not null)
+            
+            if (changedProduct is not null && (LastProd is null || (LastProd.Price != changedProduct.Price)))
             {
+                LastProd = new ProductDto { Price = changedProduct.Price };
                 Product.Price = changedProduct.Price;
                 LastPurchase.PurchasePrice = changedProduct.Price;
                 MessageService.ShowInfo("Ціна змінилася", $"{Product.Title} - {Product.Price}");

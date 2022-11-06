@@ -18,8 +18,16 @@ namespace StepEbay.Main.Client.Common.ClientsHub
 
             _connection.KeepAliveInterval = new TimeSpan(0, 0, 1);
 
-            _connection.On<List<ChangedPrice>>("ChangedPrice", value => ChangedPrice.Invoke(value));
-            _connection.On<List<ChangedPrice>>("ChangedPriceSingle", value => ChangedPriceSingle.Invoke(value));
+            _connection.On<List<ChangedPrice>>("ChangedPrice", value => 
+            { 
+                if(ChangedPrice != null)
+                    ChangedPrice.Invoke(value);
+            });
+            _connection.On<List<ChangedPrice>>("ChangedPriceSingle", value =>
+            {
+                if (ChangedPriceSingle != null)
+                    ChangedPriceSingle.Invoke(value);
+            });
             
             _connection.Closed += async error =>
             {
@@ -30,6 +38,15 @@ namespace StepEbay.Main.Client.Common.ClientsHub
 
         public event Action<List<ChangedPrice>> ChangedPrice;
         public event Action<List<ChangedPrice>> ChangedPriceSingle;
+
+        public void ResetMyBetClosed()
+        {
+            ChangedPrice = null;
+        }
+        public void ResetChangedPriceSingle()
+        {
+            ChangedPriceSingle = null;
+        }
 
         public async Task Start()
         {
