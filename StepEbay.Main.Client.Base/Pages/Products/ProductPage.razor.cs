@@ -40,10 +40,6 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             {
                 MessageService.ShowSuccsess($"Додано до кошику", $"Товар: {Product.Title} за ціною {Product.Price}"); ;
             }
-            else if (result.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                MessageService.ShowError("Відміна", "Потрібно авторизуватись");
-            }
             else
             {
                 MessageService.ShowError("Помилка", result.Errors.First().Value.First());
@@ -59,8 +55,8 @@ namespace StepEbay.Main.Client.Base.Pages.Products
                 MessageService.ShowError("Помилка", result.Errors.First().Value.First());
 
             Product = result.Data;
-            Product.DateClosed = Product.DateClosed;
-            Product.DateCreated = Product.DateCreated;
+            Product.DateClosed = Product.DateClosed.AddHours(2);
+            Product.DateCreated = Product.DateCreated.AddHours(2);
             //Product.DateClosed = await TimezoneHelper.ToLocalTime(Product.DateClosed);
             //Product.DateCreated = await TimezoneHelper.ToLocalTime(Product.DateCreated);
 
@@ -91,16 +87,18 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            PriceHubClient.ChangedPrice += ChangedPrice;
+            PriceHubClient.ChangedPriceSingle += ChangedPriceSingle;
         }
 
-        private void ChangedPrice(List<ChangedPrice> changed)
+        private void ChangedPriceSingle(List<ChangedPrice> changed)
         {
             var changedProduct = changed.SingleOrDefault(c => c.ProductId == Product.Id);
 
             if (changedProduct is not null)
             {
                 Product.Price = changedProduct.Price;
+                LastPurchase.PurchasePrice = changedProduct.Price;
+                MessageService.ShowInfo("Ціна змінилася", $"{Product.Title} - {Product.Price}");
             }
         }
 

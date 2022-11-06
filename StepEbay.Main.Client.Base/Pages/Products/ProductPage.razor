@@ -6,7 +6,7 @@
                 <div id="pictures" class="pictures">
                     @foreach (var pic in SrcPictures)
                     {
-                        <div @onclick="() => ImageChanger(pic)" class="pic" style='background:url("@($"{ApiConnection}/images/{pic}")"); background-size: cover; background-repeat: no-repeat; background-position: center;'></div>
+                        <div @onclick="() => ImageChanger(pic)" class="pic" style='background:url("@(!string.IsNullOrEmpty(pic) ?  $"{ApiConnection}/images/{pic}" : "icons/no_photo.png")"); background-size: cover; background-repeat: no-repeat; background-position: center;'></div>
                     }
                 </div>
             </div>

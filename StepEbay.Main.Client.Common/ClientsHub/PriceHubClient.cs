@@ -19,7 +19,8 @@ namespace StepEbay.Main.Client.Common.ClientsHub
             _connection.KeepAliveInterval = new TimeSpan(0, 0, 1);
 
             _connection.On<List<ChangedPrice>>("ChangedPrice", value => ChangedPrice.Invoke(value));
-          
+            _connection.On<List<ChangedPrice>>("ChangedPriceSingle", value => ChangedPriceSingle.Invoke(value));
+            
             _connection.Closed += async error =>
             {
                 await Task.Delay(1000);
@@ -28,6 +29,7 @@ namespace StepEbay.Main.Client.Common.ClientsHub
         }
 
         public event Action<List<ChangedPrice>> ChangedPrice;
+        public event Action<List<ChangedPrice>> ChangedPriceSingle;
 
         public async Task Start()
         {
