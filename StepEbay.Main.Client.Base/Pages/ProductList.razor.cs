@@ -157,7 +157,10 @@ namespace StepEbay.Main.Client.Base.Pages
                 var changedProduct = changed.SingleOrDefault(c => c.ProductId == x.Id);
 
                 if (changedProduct is not null)
+                {
                     x.Price = changedProduct.Price;
+                    MessageService.ShowInfo("Ціна змінилася", $"{x.Title} - {x.Price}");
+                }
             });
         }
 

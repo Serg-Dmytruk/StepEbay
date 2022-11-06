@@ -1,23 +1,4 @@
-﻿<h1 id="size"></h1>
-<div class="container-fluid">
-    <div class="container">
-        <div class="row">
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-        </div>
-    </div>
-</div>
-<div id="mainD" class="container-fluid">
+﻿<div id="mainD" class="container-fluid">
     <span class="animated-bg"></span>
     <div class="container">
         <div class="row">
@@ -39,15 +20,22 @@
                         <h3>@Product.Title</h3>
                     </div>
                     <div class="testD">
-                        <div>
-                            <img src="images/star.png" />
-                            <img src="images/star.png" />
-                            <img src="images/star.png" />
-                            <img src="images/star.png" />
-                            <img src="images/star.png" />
+                        <div id="starsRatingBlock"
+                             onmousemove="MM()"
+                             onmouseleave="ML()"
+                             onmouseup="MU()"
+                             onmousedown="MD()"
+                             style=@($"--stDB: {(Product.Rate * 100) / 5}%;--starsRatingBlockWidth:0%; --starsRatingBG:#716B6B;")>
+                            <img src="/images/stars.svg" alt="stars">
                         </div>
 
-                        <img class="like" src="images/like.png" />
+                        <div id="heartBlock"
+                             onmouseup="hMU()"
+                             onmousedown="hMD()"
+                             class="heartBlockActive"
+                             style="--heartBlockBeforeBG: #DA1A1A;--heartBlockAfterBG: #ffffff">
+                            <img src="/images/heart.svg" alt="stars">
+                        </div>
                     </div>
                     <div class="mt-25">
                         @if (Product.PurchaseTypeId == 1)

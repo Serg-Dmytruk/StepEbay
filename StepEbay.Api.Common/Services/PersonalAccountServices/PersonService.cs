@@ -83,7 +83,9 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
             return (await _productDbService.GetProductForInfo(productInfos.ProductIds)).Select(x => new ProductDto
             {
                 Id = x.Id,
-                Image = x.Image,
+                Image1 = x.Image1,
+                Image2 = x.Image2,
+                Image3 = x.Image3,
                 Title = x.Title,
                 Description = x.Description,
                 Price = x.Price,

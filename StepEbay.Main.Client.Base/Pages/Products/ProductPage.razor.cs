@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using StepEbay.Common.Helpers;
+using StepEbay.Common.Models.ProductInfo;
 using StepEbay.Common.Models.RefitModels;
+using StepEbay.Main.Client.Common.ClientsHub;
 using StepEbay.Main.Client.Common.RestServices;
 using StepEbay.Main.Common.Models.Bet;
 using StepEbay.Main.Common.Models.Product;
@@ -17,6 +19,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         [Inject] private IApiService ApiService { get; set; }
         [Inject] IMessageService MessageService { get; set; }
         [Inject] private IConfiguration Configuration { get; set; }
+        [Inject] private PriceHubClient PriceHubClient { get; set; }
         //[Inject]private TimezoneHelper TimezoneHelper { get; set; }
         private string ApiConnection { get; set; }
         ProductDto Product { get; set; }
@@ -63,12 +66,12 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
             if (SrcPictures.Count == 0)
             {
-                currentPicture = Product.Image;
-                SrcPictures.Add(Product.Image);
-                SrcPictures.Add("test1.png");
-                SrcPictures.Add("test2.png");
+                currentPicture = Product.Image1;
+                SrcPictures.Add(Product.Image1);
+                SrcPictures.Add(Product.Image2);
+                SrcPictures.Add(Product.Image3);
             }
-                
+
 
             if (Product.PurchaseTypeId == 2)
             {
@@ -84,6 +87,21 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             }
 
             StateHasChanged();
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            PriceHubClient.ChangedPrice += ChangedPrice;
+        }
+
+        private void ChangedPrice(List<ChangedPrice> changed)
+        {
+            var changedProduct = changed.SingleOrDefault(c => c.ProductId == Product.Id);
+
+            if (changedProduct is not null)
+            {
+                Product.Price = changedProduct.Price;
+            }
         }
 
         void ImageChanger(string src)
