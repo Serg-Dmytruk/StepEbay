@@ -77,8 +77,9 @@ namespace StepEbay.Main.Client.Shared
             {
                 if (product.PurchaseTypeId == 2)
                     MessageService.ShowWarning($"ТОВАР ДЕАКТИВОВАНО ЗАВЕРШЕНО", $"{product.Title} - {product.Price}, Час:{product.DateClosed}");
-
             }
+
+            StateHasChanged();
         }
 
         private void CloseSignModal(bool show)

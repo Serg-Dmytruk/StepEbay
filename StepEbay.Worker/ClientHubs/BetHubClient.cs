@@ -75,7 +75,10 @@ namespace StepEbay.Worker.ClientHubs
         public async Task SendPriceChanged(List<ChangedPrice> prices)
         {
             if (_connection.State == HubConnectionState.Connected)
+            {
                 await _connection.InvokeAsync("ChangedPrice", prices);
+                await _connection.InvokeAsync("ChangedPriceSingle", prices);
+            }
         }
     }
 }

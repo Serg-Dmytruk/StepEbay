@@ -1,23 +1,4 @@
-﻿<h1 id="size"></h1>
-<div class="container-fluid">
-    <div class="container">
-        <div class="row">
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-            <div class="col bg-info">Column</div>
-            <div class="col bg-success">Column</div>
-        </div>
-    </div>
-</div>
-<div id="mainD" class="container-fluid">
+﻿<div id="mainD" class="container-fluid">
     <span class="animated-bg"></span>
     <div class="container">
         <div class="row">
@@ -25,7 +6,7 @@
                 <div id="pictures" class="pictures">
                     @foreach (var pic in SrcPictures)
                     {
-                        <div @onclick="() => ImageChanger(pic)" class="pic" style='background:url("@($"{ApiConnection}/images/{pic}")"); background-size: cover; background-repeat: no-repeat; background-position: center;'></div>
+                        <div @onclick="() => ImageChanger(pic)" class="pic" style='background:url("@(!string.IsNullOrEmpty(pic) ?  $"{ApiConnection}/images/{pic}" : "icons/no_photo.png")"); background-size: cover; background-repeat: no-repeat; background-position: center;'></div>
                     }
                 </div>
             </div>
@@ -45,7 +26,7 @@
                              onmouseup="MU()"
                              onmousedown="MD()"
                              style=@($"--stDB: {(Product.Rate * 100) / 5}%;--starsRatingBlockWidth:0%; --starsRatingBG:#716B6B;")>
-                            <img src="/images/stars5.svg" alt="stars">
+                            <img src="/images/stars.svg" alt="stars">
                         </div>
 
                         <div id="heartBlock"
@@ -86,13 +67,13 @@
                             <div class="mt-13">
                                 <span>Дата закриття: @Product.DateClosed.ToString("yyyy:MM:dd:HH:mm")</span>
                             </div>
-                            @if (LastPurchase != null)
+                            @if (LastPurchase.PurchasePrice != 0)
                             {
                                 <div class="mt-25">
                                     <span>Остання ставка: @LastPurchase.PurchasePrice</span>
                                 </div>
                                 <div class="mt-13">
-                                    <span>Підняти до: @(Math.Round(Product.Price+LastPurchase.PurchasePrice * (decimal)0.02, 2))</span>
+                                    <span>Підняти до: @(Math.Round(LastPurchase.PurchasePrice+LastPurchase.PurchasePrice * (decimal)0.02, 2))</span>
                                 </div>
                             }
                             else

@@ -45,10 +45,9 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                 OwnerId = x.OwnerId, 
                 PurchaseTypeId = x.PurchaseTypeId,
                 DateCreated = x.DateCreated,
-                AdditionalInfo=x.AditionalInfo,
-                Rate=x.Rate
+                AdditionalInfo = x.AditionalInfo,
+                Rate = x.Rate
             }).ToList();
-
         }
 
         public async Task<SearchIdsDto> Search(string product)

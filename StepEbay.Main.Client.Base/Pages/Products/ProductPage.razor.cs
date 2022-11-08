@@ -20,10 +20,11 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         [Inject] IMessageService MessageService { get; set; }
         [Inject] private IConfiguration Configuration { get; set; }
         [Inject] private PriceHubClient PriceHubClient { get; set; }
+        private ProductDto LastProd { get; set; }
         //[Inject]private TimezoneHelper TimezoneHelper { get; set; }
         private string ApiConnection { get; set; }
-        ProductDto Product { get; set; }
-        PurchaseDto LastPurchase { get; set; }
+        ProductDto Product { get; set; } = new();
+        PurchaseDto LastPurchase { get; set; } = new();
         private List<string> SrcPictures { get; set; } = new List<string>();
 
         private string currentPicture { get; set; } = "";
@@ -40,10 +41,6 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             {
                 MessageService.ShowSuccsess($"Додано до кошику", $"Товар: {Product.Title} за ціною {Product.Price}"); ;
             }
-            else if (result.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                MessageService.ShowError("Відміна", "Потрібно авторизуватись");
-            }
             else
             {
                 MessageService.ShowError("Помилка", result.Errors.First().Value.First());
@@ -59,8 +56,8 @@ namespace StepEbay.Main.Client.Base.Pages.Products
                 MessageService.ShowError("Помилка", result.Errors.First().Value.First());
 
             Product = result.Data;
-            Product.DateClosed = Product.DateClosed;
-            Product.DateCreated = Product.DateCreated;
+            Product.DateClosed = Product.DateClosed.AddHours(2);
+            Product.DateCreated = Product.DateCreated.AddHours(2);
             //Product.DateClosed = await TimezoneHelper.ToLocalTime(Product.DateClosed);
             //Product.DateCreated = await TimezoneHelper.ToLocalTime(Product.DateCreated);
 
@@ -82,25 +79,29 @@ namespace StepEbay.Main.Client.Base.Pages.Products
                 }
                 else
                 {
-                    LastPurchase = null;
+                    LastPurchase = new PurchaseDto { PurchasePrice = 0};
                 }
             }
 
             StateHasChanged();
         }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override void OnAfterRender(bool firstRender)
         {
-            PriceHubClient.ChangedPrice += ChangedPrice;
+            PriceHubClient.ResetMyBetClosed();
+            PriceHubClient.ChangedPriceSingle += ChangedPriceSingle;
         }
 
-        private void ChangedPrice(List<ChangedPrice> changed)
+        private void ChangedPriceSingle(List<ChangedPrice> changed)
         {
             var changedProduct = changed.SingleOrDefault(c => c.ProductId == Product.Id);
-
-            if (changedProduct is not null)
+            
+            if (changedProduct is not null && (LastProd is null || (LastProd.Price != changedProduct.Price)))
             {
+                LastProd = new ProductDto { Price = changedProduct.Price };
                 Product.Price = changedProduct.Price;
+                LastPurchase.PurchasePrice = Math.Round(changedProduct.Price + LastPurchase.PurchasePrice * (decimal)0.02, 2);
+                MessageService.ShowInfo("Ціна змінилася", $"{Product.Title} - {LastPurchase.PurchasePrice}");
             }
         }
 

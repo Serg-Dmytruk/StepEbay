@@ -150,7 +150,7 @@
 
 .mainPicture {
     position: relative;
-    z-index: 2;
+    z-index: 5;
     overflow: hidden;
     border: 1px solid #8EC763;
     background-size: cover;
@@ -164,7 +164,7 @@
 
 .pictures {
     position: relative;
-    z-index: 2;
+    z-index: 5;
     display:grid;
     grid-template-columns:1fr;
     height:100%;

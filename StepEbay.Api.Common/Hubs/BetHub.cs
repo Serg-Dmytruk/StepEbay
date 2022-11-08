@@ -56,5 +56,10 @@ namespace StepEbay.Main.Api.Common.Hubs
         {
             await _priceHubContext.Clients.Clients(_priceUserContainer.Users).SendAsync("ChangedPrice", prices);
         }
+
+        public async Task ChangedPriceSingle(List<ChangedPrice> prices)
+        {
+            await _priceHubContext.Clients.Clients(_priceUserContainer.Users).SendAsync("ChangedPriceSingle", prices);
+        }
     }
 }

@@ -45,6 +45,7 @@ namespace StepEbay.Main.Client.Base.Pages
             if (firstRender)
             {
                 ShowPreloader = true;
+                PriceHubClient.ResetChangedPriceSingle();
                 PriceHubClient.ChangedPrice += ChangedPrice;
 
                 await GetCategories();
@@ -159,7 +160,7 @@ namespace StepEbay.Main.Client.Base.Pages
                 if (changedProduct is not null)
                 {
                     x.Price = changedProduct.Price;
-                    MessageService.ShowInfo("Ціна змінилася", $"{x.Title} - {x.Price}");
+                    MessageService.ShowInfo("Ціна змінилася", $"{x.Title} - {Math.Round(x.Price + x.Price * (decimal)0.02, 2)}");
                 }
             });
         }
