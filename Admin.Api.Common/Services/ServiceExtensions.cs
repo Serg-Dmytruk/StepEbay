@@ -8,6 +8,7 @@ using StepEbay.Data.Common.Services.UserDbServices;
 using StepEbay.Data.Common.Services.AuthDbServices;
 using StepEbay.Data.Common.Services.BetsDbServices;
 using StepEbay.Admin.Api.Common.Services.Products;
+using StepEbay.Admin.Api.Common.Services.User;
 
 namespace StepEbay.Admin.Api.Common.Services
 {
@@ -19,6 +20,7 @@ namespace StepEbay.Admin.Api.Common.Services
             services.AddTransient<ITelegramService, TelegramService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IUserService, UserService>();
 
             return services;
         }
