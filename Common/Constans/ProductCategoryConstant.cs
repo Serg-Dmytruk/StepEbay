@@ -11,11 +11,19 @@
 
     public static class ProductCategoryIdConstant
     {
-        public static readonly string TELEPHONE = "1";
-        public static readonly string CLOTH = "2";
-        public static readonly string BUATY = "4";
-        public static readonly string SPORT = "3";
-        public static readonly string TOY = "5";
+        public static string TELEPHONE = "1";
+        public static string CLOTH = "2";
+        public static string BUATY = "4";
+        public static string SPORT = "3";
+        public static string TOY = "5";
+        public static void setConstants(Dictionary<string, int> categorys)
+        {
+            ProductCategoryIdConstant.TELEPHONE = categorys[ProductCategoryConstant.TELEPHONE].ToString();
+            ProductCategoryIdConstant.CLOTH = categorys[ProductCategoryConstant.CLOTH].ToString();
+            ProductCategoryIdConstant.BUATY = categorys[ProductCategoryConstant.BUATY].ToString();
+            ProductCategoryIdConstant.SPORT = categorys[ProductCategoryConstant.SPORT].ToString();
+            ProductCategoryIdConstant.TOY = categorys[ProductCategoryConstant.TOY].ToString();
+        }
     }
 
     public static class ProductListConstant

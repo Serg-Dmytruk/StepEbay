@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StepEbay.Main.Client.Common.RestServices;
 using Microsoft.Extensions.Configuration;
+using StepEbay.Common.Constans;
 
 namespace StepEbay.Main.Client.Base.Pages
 {
@@ -29,6 +30,9 @@ namespace StepEbay.Main.Client.Base.Pages
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             ShowPreloader = true;
+
+            var categoryResponse = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetCategories());
+            ProductCategoryIdConstant.setConstants(categoryResponse.Data.ToDictionary(k=>k.Name,k=>k.Id));
 
             if (!string.IsNullOrEmpty(Id) && !string.IsNullOrEmpty(Key))
             {
