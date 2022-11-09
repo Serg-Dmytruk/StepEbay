@@ -1,0 +1,34 @@
+﻿<h3>User</h3>
+<p>Add</p>
+<input @bind-value="_nickName1" placeholder="Nick name" /><br/>
+<input @bind-value="_fullName1" placeholder="Full name" /><br />
+<input @bind-value="_email1" placeholder="Email" /><br />
+<input @bind-value="_adress1" placeholder="Adress" /><br />
+<input @bind-value="_password1" placeholder="Password" /><br />
+<span>Is email confirmed:</span><input @bind-value="_isEmailConfirmed1" type="checkbox"/><br />
+<button @onclick="AddUser">Add</button>
+ <hr/>
+
+<p>Remove</p>
+<input @bind-value="_id2" placeholder="Id" /><br/>
+<button @onclick="RemoveUser">Remove</button>
+<hr />
+
+<p>Update</p>
+<input @bind-value="_id3" placeholder="Id" />
+<br />
+<input @bind-value="_nickName3" placeholder="Nick name" />
+<br />
+<input @bind-value="_fullName3" placeholder="Full name" />
+<br />
+<input @bind-value="_email3" placeholder="Email" />
+<br />
+<input @bind-value="_adress3" placeholder="Adress" />
+<br />
+<input @bind-value="_password3" placeholder="Password" />
+<br />
+<span>Is email confirmed:</span>
+<input @bind-value="_isEmailConfirmed3" type="checkbox" />
+<br />
+<button @onclick="UpdateUser">Update</button>
+<hr />
