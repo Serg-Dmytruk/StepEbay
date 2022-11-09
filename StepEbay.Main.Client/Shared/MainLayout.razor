@@ -13,24 +13,28 @@
     <div id="drop-down-menu">
         <div class="bg-empty">
         </div>
-        <div class="dropdownmenu-nav container">
-            <ul>
-                <li><p style="cursor: pointer" @onclick="ShowSignModal">Увійти</p></li>
-                <li><a href='#'>abc</a></li>
-            </ul>
-            <ul>
-                <li><a href='#'>abc</a></li>
-                <li><a href='#'>abc</a></li>
-            </ul>
-            <ul>
-                <li><a href='#'>abc</a></li>
-                <li><a href='#'>abc</a></li>
-            </ul>
-            <ul>
-                <li><a href='#'>abc</a></li>
-                <li><a href='#'>abc</a></li>
-            </ul>
-        </div>
+        <AuthorizeView>
+            <Authorized>
+                <div class="dropdownmenu-nav container">
+                    <ul class="cat-icon">
+                        <li><a href='#'><div></div></a></li>
+                        <li><a id="cat-icon-name" href='#'>@@@UserName</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href='#'>abc</a></li>
+                        <li><a href='#'>abc</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href='#'>abc</a></li>
+                        <li><a href='#'>abc</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href='#'>abc</a></li>
+                        <li><a href='#'>abc</a></li>
+                    </ul>
+                </div>
+            </Authorized>
+        </AuthorizeView>
     </div>
     <div id="menubg1" class="d-none d-sm-block">
         <div id="menu" class="container-fluid">
@@ -39,7 +43,7 @@
                 <div class="row">
                     <!-- logo -->
                     <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
-                        <div class="logo"></div>
+                        <a href='#'><div class="logo"></div></a>
                     </div>
                     <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1"></div>
                     <!-- search -->
@@ -53,7 +57,28 @@
                     </div>
                     <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1"></div>
                     <div class="burger col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1">
-                        <div class="btn-burger" onclick="dropDownMenu()"></div>
+                        <AuthorizeView>
+                            <Authorized>
+                                <div class="btn-burger" onclick="dropDownMenu()"></div>
+                            </Authorized>
+                            <NotAuthorized>
+                                <div @onclick="ShowSignModal" class="flip-card">
+                                    @if (IsShowSignModal)
+                                    {
+                                        <div class="flip-card-active">
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front"></div>
+                                            <div class="flip-card-back"></div>
+                                        </div>
+                                    }
+                                </div>
+                                @*<div class="btn-burger-noauth" @onclick="ShowSignModal"></div>*@
+                            </NotAuthorized>
+                        </AuthorizeView>
                     </div>
                 </div>
             </div>
