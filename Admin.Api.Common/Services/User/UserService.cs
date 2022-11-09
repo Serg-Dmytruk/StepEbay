@@ -4,7 +4,7 @@ using StepEbay.Data.Models.Users;
 using System.Text.RegularExpressions;
 using BC = BCrypt.Net.BCrypt;
 
-namespace StepEbay.Admin.Api.Common.Services.User
+namespace StepEbay.Admin.Api.Common.Services.UserServices
 {
     public class UserService:IUserService
     {

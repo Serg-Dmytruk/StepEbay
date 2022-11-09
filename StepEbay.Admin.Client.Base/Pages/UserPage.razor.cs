@@ -4,9 +4,9 @@ using StepEbay.Admin.Client.Common.RestServices;
 
 namespace StepEbay.Admin.Client.Base.Pages
 {
-    [Route("/telegram")]
-    [Authorize(Roles = "admin")]
-    public partial class User
+    [Route("/user")]
+    //[Authorize(Roles = "admin")]
+    public partial class UserPage
     {
         [Inject] IApiService _service { get; set; }
 
@@ -29,7 +29,7 @@ namespace StepEbay.Admin.Client.Base.Pages
 
         public async Task AddUser()
         {
-            await _service.ExecuteRequest(() => _service.ApiMethods.AddUser(_nickName1, _fullName1, _email1, _adress1, _password1, _isEmailConfirmed1));
+            var result=await _service.ExecuteRequest(() => _service.ApiMethods.AddUser(_nickName1, _fullName1, _email1, _adress1, _password1, _isEmailConfirmed1));
             _nickName1 = string.Empty;
             _fullName1 = string.Empty;
             _email1 = string.Empty;

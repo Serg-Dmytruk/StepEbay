@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StepEbay.Admin.Api.Common.Services.User;
+using StepEbay.Admin.Api.Common.Services.UserServices;
 using StepEbay.Common.Models.RefitModels;
 
 namespace StepEbay.Admin.Api.Controllers
@@ -8,6 +8,11 @@ namespace StepEbay.Admin.Api.Controllers
     public class UserController
     {
         private readonly IUserService _userService;
+        
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
 
         /// <summary>
         /// Додає нового користувача у базу данних

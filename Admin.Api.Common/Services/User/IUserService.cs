@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StepEbay.Admin.Api.Common.Services.User
+namespace StepEbay.Admin.Api.Common.Services.UserServices
 {
     public interface IUserService
     {

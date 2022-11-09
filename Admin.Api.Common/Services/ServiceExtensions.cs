@@ -8,7 +8,7 @@ using StepEbay.Data.Common.Services.UserDbServices;
 using StepEbay.Data.Common.Services.AuthDbServices;
 using StepEbay.Data.Common.Services.BetsDbServices;
 using StepEbay.Admin.Api.Common.Services.Products;
-using StepEbay.Admin.Api.Common.Services.User;
+using StepEbay.Admin.Api.Common.Services.UserServices;
 
 namespace StepEbay.Admin.Api.Common.Services
 {
