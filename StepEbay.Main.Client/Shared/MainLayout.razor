@@ -10,7 +10,51 @@
     </AuthorizeView>
     <!-- *************************************** -->
     <!--start nav-->
-    <div id="drop-down-menu">
+    <div id="menu" class="container-fluid d-none d-sm-block">
+        <div class="container">
+            <!-- ** 1st row ** -->
+            <div class="row">
+                <!-- logo -->
+                <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
+                    <a href='#'><div class="logo"></div></a>
+                </div>
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1">
+                    &nbsp;
+                </div>
+                <!-- search -->
+                <div class="search col-7 col-sm-7 col-md-8 col-lg-7 col-xl-6 col-xxl-7">
+                    <input type="search" placeholder="Пошук" aria-label="Search" @bind="SearchRequest" />
+                    <button type="submit" @onclick="Search">Пошук</button>
+                </div>
+                <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1"></div>
+                <div class="burger col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1">
+                    <AuthorizeView>
+                        <Authorized>
+                            <div class="btn-burger" onclick="dropDownMenu()"></div>
+                        </Authorized>
+                        <NotAuthorized>
+                            <div @onclick="ShowSignModal" class="flip-card">
+                                @if (IsShowSignModal)
+                                {
+                                    <div class="flip-card-active">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front"></div>
+                                        <div class="flip-card-back"></div>
+                                    </div>
+                                }
+                            </div>
+                            @*<div class="btn-burger-noauth" @onclick="ShowSignModal"></div>*@
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="drop-down-menu" class="container-fluid">
         <div class="bg-empty">
         </div>
         <AuthorizeView>
@@ -36,54 +80,6 @@
             </Authorized>
         </AuthorizeView>
     </div>
-    <div id="menubg1">
-        <div id="menu" class="container-fluid d-none d-sm-block">
-            <div class="container">
-                <!-- ** 1st row ** -->
-                <div class="row">
-                    <!-- logo -->
-                    <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
-                        <a href='#'><div class="logo"></div></a>
-                    </div>
-                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1"></div>
-                    <!-- search -->
-                    <div class="search col-7 col-sm-7 col-md-8 col-lg-7 col-xl-6 col-xxl-7">
-                        <div class="d-flex">
-                            <input class="me-0" type="search" placeholder="Пошук" aria-label="Search" @bind="SearchRequest" />
-                            <button type="submit" @onclick="Search">
-                                Пошук
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1"></div>
-                    <div class="burger col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1">
-                        <AuthorizeView>
-                            <Authorized>
-                                <div class="btn-burger" onclick="dropDownMenu()"></div>
-                            </Authorized>
-                            <NotAuthorized>
-                                <div @onclick="ShowSignModal" class="flip-card">
-                                    @if (IsShowSignModal)
-                                    {
-                                        <div class="flip-card-active">
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="flip-card-inner">
-                                            <div class="flip-card-front"></div>
-                                            <div class="flip-card-back"></div>
-                                        </div>
-                                    }
-                                </div>
-                                @*<div class="btn-burger-noauth" @onclick="ShowSignModal"></div>*@
-                            </NotAuthorized>
-                        </AuthorizeView>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="main">
         <AuthorizeView>
             <NotAuthorized>
@@ -99,6 +95,7 @@
             <PushMessageContainer Position="MessagePosition.BottomRight" TimeOut="5" />
         </div>
     </div>
+    <div class="footer"></div>
     <footer>
         <h2>Чекаєм на ваші вподобайки</h2>
         <div class="footer-icons">

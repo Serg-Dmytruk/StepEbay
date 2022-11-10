@@ -1,5 +1,220 @@
 ﻿#menu {
-  background-color: red;
+  background-color: white;
+  position: fixed;
+  z-index: 100;
+  padding: 15px 0 15px 0;
+  height: 90px;
+  -webkit-box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
+}
+
+#menu .logo {
+  background-image: url("../../../images/LOGO.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+}
+#menu .logo:hover {
+  cursor: pointer;
+}
+
+#menu .search {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#menu .search input[type=search] {
+  border: 1px solid var(--clr-light-grey);
+  border-radius: 10px 0 0 10px;
+  -webkit-border-radius: 10px 0 0 10px;
+  -moz-border-radius: 10px 0 0 10px;
+  -khtml-border-radius: 10px 0 0 10px;
+  background: #ffffff !important;
+  outline: none;
+  padding: 5px;
+  padding-left: 15px;
+  width: 80%;
+  height: 75%;
+}
+#menu .search input[type=search]:focus {
+  color: var(--clr-black);
+  border: 1px solid var(--clr-green);
+}
+#menu .search input[type=search]:active {
+  border: 1px solid var(--clr-green);
+}
+#menu .search button[type=submit] {
+  border: 1px solid var(--clr-green);
+  border-radius: 0 10px 10px 0;
+  -webkit-border-radius: 0 10px 10px 0;
+  -moz-border-radius: 0 10px 10px 0;
+  -khtml-border-radius: 0 10px 10px 0;
+  background: var(--clr-green);
+  outline: none;
+  height: 75%;
+  padding: 5px;
+  width: 20%;
+}
+#menu .search button[type=submit]:focus {
+  color: var(--clr-black);
+  border: 1px solid var(--clr-black);
+}
+
+#menu .burger {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+#menu .burger .btn-burger {
+  width: 60px;
+  height: 60px;
+  background-color: var(--clr-green);
+  position: relative;
+  border-radius: 10px;
+}
+#menu .burger .btn-burger:before {
+  content: "";
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  top: 10%;
+  left: 10%;
+  background-color: white;
+  border-radius: 50%;
+  z-index: 2;
+  transition: 0.3s;
+}
+#menu .burger .btn-burger:hover {
+  background-color: var(--clr-orange);
+}
+#menu .burger .btn-burger:hover:before {
+  background-color: var(--clr-orange);
+  top: 50%;
+  left: 50%;
+}
+
+#menu .burger {
+  /* This container is needed to position the front and back side */
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  /* Position the front and back side */
+  /* Style the front side (fallback if image is missing) */
+  /* Style the back side */
+}
+#menu .burger .flip-card {
+  background-color: transparent;
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  perspective: 1000px;
+  /* Remove this if you don't want the 3D effect */
+  overflow: hidden;
+}
+#menu .burger .flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+#menu .burger .flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+#menu .burger .flip-card-front, #menu .burger .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  /* Safari */
+  backface-visibility: hidden;
+}
+#menu .burger .flip-card-front {
+  background: url(../../../icons/catBody-01.svg);
+  background-color: #FFA740;
+  color: black;
+}
+#menu .burger .flip-card-back {
+  background: url(../../../icons/catFace-01.svg);
+  background-color: #8BC65D;
+  color: white;
+  transform: rotateY(180deg);
+}
+#menu .burger .flip-card-active {
+  background: url(../../../icons/catFace-01.svg);
+  background-color: #ddd;
+  width: 100%;
+  height: 100%;
+}
+
+#drop-down-menu {
+  position: fixed;
+  min-height: 300px;
+  padding-top: 105px;
+  background-color: cadetblue;
+  top: -300px;
+  z-index: 99;
+  transition: 0.3s;
+  -webkit-box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+footer {
+  min-height: 300px;
+  width: 100%;
+  background-color: #716B6B;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  flex-direction: column;
+  align-items: center;
+}
+footer h2 {
+  padding: 45px 0px 30px 0px;
+  color: white;
+  font-family: "Caveat";
+}
+footer h6 {
+  display: inline-block;
+  padding: 30px 15px 0px 15px;
+  font-family: "Caveat";
+}
+footer h6 > a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+}
+.footer-icons div {
+  background-color: #333;
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+}
+.footer-icons div p {
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-size: 2em;
+  font-weight: 700;
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.footer {
+  height: 300px;
+  width: 100%;
 }
 
 body {
