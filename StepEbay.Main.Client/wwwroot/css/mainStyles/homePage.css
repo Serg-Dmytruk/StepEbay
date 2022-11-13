@@ -167,7 +167,7 @@ footer {
   width: 100%;
   background-color: #716B6B;
   display: flex;
-  position: absolute;
+  /*position:absolute;*/
   bottom: 0;
   flex-direction: column;
   align-items: center;
@@ -217,6 +217,350 @@ footer h6 > a {
   width: 100%;
 }
 
+.modalLogWindow {
+  position: relative;
+  width: 400px;
+  height: 325px;
+  margin: 0.5rem auto;
+}
+
+.modalWindow {
+  position: relative;
+  width: 400px;
+  height: 425px;
+  margin: 0.5rem auto;
+}
+
+.modalLogWindow input[type=text], .modalLogWindow input[type=password], .modalLogWindow input[type=email], .modalWindow input[type=text], .modalWindow input[type=password], .modalWindow input[type=email] {
+  border-radius: 7px;
+  padding-left: 8px;
+  width: 100%;
+  height: 32px;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  border: 2px solid #8BC65D;
+}
+.modalLogWindow input[type=text]:focus, .modalLogWindow input[type=password]:focus, .modalLogWindow input[type=email]:focus, .modalWindow input[type=text]:focus, .modalWindow input[type=password]:focus, .modalWindow input[type=email]:focus {
+  border-color: #AFC75D;
+}
+
+.error input {
+  border: 2px solid #DA1A1A !important;
+}
+.error p {
+  margin-bottom: 8px;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 1px;
+  color: #DA1A1A;
+}
+
+.closeButton {
+  background-color: white;
+  position: absolute;
+  top: 1%;
+  right: 4%;
+  border: 0;
+  color: #8BC65D;
+  font-size: 25px;
+}
+.closeButton:hover {
+  color: #FFA740;
+}
+
+.mborder {
+  border: 3px solid #8BC65D;
+  border-radius: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+  background: white;
+}
+
+.header {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.8em;
+  font-family: "Nunito";
+}
+
+.textBlock {
+  width: 310px;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 400;
+}
+
+#palka {
+  margin: 7px auto;
+  width: 310px;
+  height: 3px;
+  background: #8BC65D;
+}
+
+.mbutton {
+  background: #8BC65D;
+  width: 165px;
+  height: 46px;
+  border: 0px;
+  border-radius: 7px;
+  color: white;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+}
+.mbutton:hover {
+  text-decoration: underline;
+  background-color: #FFA740;
+}
+
+.mbuttonBottomLeftPos {
+  position: absolute;
+  bottom: 5%;
+}
+
+.mbuttonBottomRightPos {
+  position: absolute;
+  bottom: 5%;
+  right: 7%;
+}
+
+.mMainHeader {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+}
+
+.mMainHeader2 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+}
+
+.mainBlock {
+  padding: 100px 25px 0 25px;
+  display: flex;
+  flex-direction: row;
+}
+
+.filterBlock {
+  padding-left: 15px;
+  padding-top: 15px;
+  min-width: 200px;
+  color: #272727;
+}
+.filterBlock input[type=checkbox] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  border: 2px solid #8BC65D;
+  width: 17px;
+  height: 17px;
+  border-radius: 5px;
+}
+.filterBlock input[type=checkbox]:checked {
+  background-color: #8BC65D;
+}
+.filterBlock input[type=number] {
+  width: 100px;
+  border: 2px solid #8BC65D;
+  border-radius: 12px;
+  padding-left: 6px;
+}
+
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.filterButton {
+  width: 120px;
+  height: 36px;
+  background: #8BC65D;
+  border-radius: 10px;
+  border: 2px solid #8BC65D;
+  color: #FFFFFF;
+}
+.filterButton:hover {
+  background-color: #FFA740;
+  border: 2px solid #FFA740;
+}
+
+.catalogBlock {
+  min-height: 90%;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+.catalogBlock ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+.productCard {
+  position: relative;
+  width: 280px;
+  height: 400px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  padding: 0px;
+  border: 1px solid #8BC65D;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+.productCard button {
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  color: white;
+  background: #8BC65D;
+  font-weight: 1000;
+  bottom: 0px;
+  border: 0px;
+  border-radius: 0px 0px 5px 5px;
+}
+.productCard button:hover {
+  background: #FFA740;
+}
+.productCard img {
+  border-radius: 6px;
+  object-fit: cover;
+}
+.productCard:hover {
+  border: 1px solid #FFA740;
+}
+.productCard a {
+  color: black;
+  text-decoration: none;
+}
+.productCard a:hover {
+  color: black;
+}
+
+.descriptionBlock {
+  height: 40px;
+}
+
+#aution {
+  position: absolute;
+  background: url(../images/auction.svg);
+  background-size: cover;
+  width: 60px;
+  height: 60px;
+  top: 3px;
+  right: 3px;
+}
+
+.imgCard {
+  width: 100%;
+  height: 185px;
+}
+
+.testP input[type=checkbox] {
+  margin-right: 5px;
+}
+
+.checkedColor {
+  color: #429600;
+}
+
+.pagePagination {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #8BC65D;
+  width: fit-content;
+  border-radius: 15px;
+  text-align: center;
+}
+.pagePagination > div {
+  width: 50px;
+  height: 36px;
+}
+.pagePagination button {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: 0px;
+  border-radius: 15px;
+}
+.pagePagination div {
+  position: relative;
+}
+.pagePagination span {
+  margin: 0px;
+  margin-left: -5px;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.borderRight {
+  border-right: 1px solid #8BC65D;
+}
+
+.prevPageImg {
+  background: url("../images/prevPage.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.currPage {
+  color: #FFA740;
+}
+
+.prevPageImg {
+  background: url("../../../images/prevPage.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nextPageImg {
+  background: url("../../../images/nextPage.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 body {
   background-color: white;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-13 {
+  margin-top: 13px;
+}
+
+.pl-15 {
+  padding-left: 15px;
 }

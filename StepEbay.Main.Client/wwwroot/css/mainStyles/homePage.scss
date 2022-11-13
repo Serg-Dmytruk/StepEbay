@@ -1,6 +1,20 @@
 ﻿@use 'mainLayout/menu';
 @use 'mainLayout/footer';
+@use 'mainLayout/modal';
+@use 'pages/productListPage';
 
 body {
     background-color: white;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mt-13 {
+    margin-top: 13px;
+}
+
+.pl-15 {
+    padding-left: 15px;
 }

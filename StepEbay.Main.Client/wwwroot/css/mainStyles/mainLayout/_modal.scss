@@ -1,0 +1,147 @@
+﻿.modalLogWindow {
+    position: relative;
+    width: 400px;
+    height: 325px;
+    margin: 0.5rem auto;
+}
+
+.modalWindow {
+    position: relative;
+    width: 400px;
+    height: 425px;
+    margin: 0.5rem auto;
+}
+
+.modalLogWindow, .modalWindow {
+    input[type='text'], input[type=password], input[type='email'] {
+        border-radius: 7px;
+        padding-left: 8px;
+        width: 100%;
+        height: 32px;
+        margin-top: 10px;
+        margin-bottom: 6px;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+        border: 2px solid #8BC65D;
+
+        &:focus {
+            border-color: #AFC75D;
+        }
+    }
+}
+
+.error {
+    input {
+        border: 2px solid #DA1A1A!important;
+    }
+
+    p {
+        margin-bottom: 8px;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 1px;
+        color: #DA1A1A;
+    }
+}
+
+.closeButton {
+    background-color: white;
+    position: absolute;
+    top: 1%;
+    right: 4%;
+    border: 0;
+    color: #8BC65D;
+    font-size: 25px;
+
+    &:hover {
+        color: #FFA740;
+    }
+}
+
+.mborder {
+    border: 3px solid #8BC65D;
+    border-radius: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    background: white;
+}
+
+.header {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8em;
+    font-family: "Nunito";
+}
+
+.textBlock {
+    width: 310px;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: 400;
+}
+
+#palka {
+    margin: 7px auto;
+    width: 310px;
+    height: 3px;
+    background: #8BC65D;
+}
+
+.mbutton {
+    background: #8BC65D;
+    width: 165px;
+    height: 46px;
+    border: 0px;
+    border-radius: 7px;
+    color: white;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+
+    &:hover {
+        text-decoration: underline;
+        background-color: #FFA740;
+    }
+}
+
+.mbuttonBottomLeftPos {
+    position: absolute;
+    bottom: 5%;
+}
+
+.mbuttonBottomRightPos {
+    position: absolute;
+    bottom: 5%;
+    right: 7%;
+}
+
+.mMainHeader {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+}
+
+.mMainHeader2 {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+}
