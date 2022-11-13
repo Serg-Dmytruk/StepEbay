@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap");
 
 #loading {
-    background: #ddd;
     position: fixed;
     display: grid;
     place-content: center;
@@ -27,8 +26,8 @@ h1 {
 }
 
 .dots--animate .dot.z {
-    -webkit-animation: scale 0.8s 0.2s forwards;
-    animation: scale 0.8s 0.2s forwards;
+    -webkit-animation: scale 0.2s 0.1s forwards;
+    animation: scale 0.2s 0.2s forwards;
 }
 
 .dots--animate .dot.f,

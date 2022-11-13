@@ -26,8 +26,8 @@ function animate(element, className) {
     element.classList.remove(className);
     setTimeout(() => {
       animate(element, className);
-    }, 500);
-  }, 2500);
+    }, 250);
+  }, 500);
 }
 
 // Execution
