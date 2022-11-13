@@ -1,13 +1,31 @@
 ﻿#menubg1 {
-    position: relative;
+    position: fixed;
     min-height: 100px;
+    width:100%;
+    z-index:1000;
 }
 
 #menubg2 {
-    position: relative;
+    position: fixed;
     min-height: 100px;
     display: none;
+    z-index: 1000;
 }
+
+.buttons-authorization{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    width:100%;
+    height:200px;
+}
+
+    .buttons-authorization div {
+        padding: 15px 30px;
+        background-color: #8BC65D;
+        border-radius:5px;
+        color:white;
+    }
 
 #menu {
     padding: 15px 0 15px 0;
@@ -69,6 +87,14 @@
         align-items:center;
     }
 
+    #menu .btn-burger-noauth {
+        width: 3.5em;
+        height: 3.5em;
+        background: url();
+        position: relative;
+        border-radius: 50%;
+    }
+
 #menu .btn-burger {
     width: 3.5em;
     height: 3.5em;
@@ -79,15 +105,15 @@
 
     #menu .btn-burger:before {
         content: '';
-        position:absolute;
-        width:40%;
-        height:40%;
-        top:10%;
-        left:10%;
-        background-color:white;
-        border-radius:50%;
-        z-index:2;
-        transition:.3s;
+        position: absolute;
+        width: 40%;
+        height: 40%;
+        top: 10%;
+        left: 10%;
+        background-color: white;
+        border-radius: 50%;
+        z-index: 2;
+        transition: .3s;
     }
 
         #menu .btn-burger:hover {
@@ -105,7 +131,7 @@
     height: 300px;
     width: 100%;
     background-color: white;
-    top: -300px;
+    top: 300px;
     z-index: 100;
     transition: .3s;
     -webkit-box-shadow: 0px 3px 8px 2px rgba(0,0,0,0.2);
@@ -116,7 +142,7 @@
 
     #drop-down-menu .bg-empty {
         width: 100%;
-        height: 100px;
+        height: 90px;
         background-color: white;
     }
 
@@ -128,13 +154,14 @@
     }
 
     #drop-down-menu .dropdownmenu-nav ul{
-        padding:0;
+        padding: 20px 15px;
         list-style:none;
     }
         #drop-down-menu .dropdownmenu-nav a {
             color: gray;
+            font-weight:700 !important;
             text-decoration: none;
-            transition: 2s cubic-bezier( 0, 1.02, 0.52, 0.31 );
+            transition: .2s cubic-bezier( 0, .002, .052, .0031 );
         }
 
             #drop-down-menu .dropdownmenu-nav a:hover {
@@ -161,6 +188,7 @@
         color: #045316;
         font-weight: 700;
         white-space: nowrap;
+        cursor: pointer;
     }
 
         .mpos-dropdown-menu.dropdown-menu.show li a:hover {
@@ -236,3 +264,83 @@
     #menu .navMenu li.current a {
         color: #FF8A00;
     }
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+    background-color: transparent;
+    width: 3.5em;
+    height: 3.5em;
+    border-radius:50%;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    overflow:hidden;
+}
+
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+    background: url(../../icons/catBody-01.svg);
+    background-color: #FFA740;
+    color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+    background: url(../../icons/catFace-01.svg);
+    background-color: #8BC65D;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.flip-card-active {
+    background: url(../../icons/catFace-01.svg);
+    background-color: #ddd;
+    width: 100%;
+    height: 100%;
+}
+
+.cat-icon div {
+    background: url(../../icons/catFace-01.svg);
+    width: 100px;
+    height: 100px;
+    background-color: #8BC65D;
+    border-radius:50%;
+    background-size:cover;
+    cursor:pointer;
+}
+
+.cat-icon {
+    width: 100%;
+    background-color: #FFA740;
+}
+
+    .cat-icon:hover {
+        background-color: #8BC65D;
+    }
+
+#cat-icon-name:hover{
+    color:white !important;
+}

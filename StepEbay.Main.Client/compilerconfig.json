@@ -38,5 +38,9 @@
   {
     "outputFile": "wwwroot/css/main/media/_media_992_lg.css",
     "inputFile": "wwwroot/css/main/media/_media_992_lg.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/mainStyles/homePage.css",
+    "inputFile": "wwwroot/css/mainStyles/homePage.scss"
   }
 ]

@@ -1,0 +1,15 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+:root {
+    --clr-dark-grey: #625E5E;
+    --clr-light-grey: #D9D9D9;
+    --clr-green: #8BC65D;
+    --clr-orange: #FFA740;
+    --clr-dark-green: #429600;
+    --clr-red: #DA1A1A;
+    --clr-black: #272727;
+}
