@@ -1,0 +1,420 @@
+﻿#categories {
+    padding: 30px 0 45px 0;
+
+    .categoryContent {
+        height: 230px;
+        width: 100%;
+        border-radius: 20px;
+        padding: 5px 10px;
+        position: relative;
+        overflow: hidden;
+        margin-top: 15px;
+    }
+
+    .categoryLink {
+        font-size: 1em;
+        color: var(--clr-black);
+        text-decoration: none;
+        font-weight: bold;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        &:after {
+            content: "";
+            position: relative;
+            background-color: #000;
+            -webkit-clip-path: polygon(0 0, 0 100%, 39% 48%);
+            clip-path: polygon(0 0, 0 100%, 39% 48%);
+        }
+
+        &:active, &:focus {
+            color: var(--clr-black);
+            opacity: 0.5;
+        }
+
+        &:hover {
+            color: var(--clr-black);
+            opacity: 0.9;
+        }
+
+        &:hover .categoryContent {
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+        }
+
+        & span {
+            display:block;
+            padding-top: 5px;
+        }
+    }
+
+    .categoryContent {
+        background-repeat: no-repeat;
+        background-position: bottom right;
+
+        &.clothes {
+            background-color: #c1ff9b;
+            background-image: url("../../../../images/dress.png");
+            background-size: auto 100%;
+        }
+
+        &.phones {
+            background-color: #ffd362;
+            background-image: url("../../../../images/phones.png");
+            background-size: auto 75%;
+        }
+
+        &.beauty {
+            background-color: #ffd9d3;
+            background-image: url("../../../../images/buaty.png");
+            background-size: auto 90%;
+        }
+
+        &.sport {
+            background-color: #85fdc9;
+            background-image: url("../../../../images/sport.png");
+            background-size: auto 80%;
+            background-position: center;
+        }
+
+        &.catalogue {
+            background-color: #18f8ea;
+            background-image: url("../../../../images/katalog.png");
+            background-position: center;
+        }
+
+        &.toys {
+            background-color: #e4ff1a;
+            background-image: url("../../../../images/bear.png");
+            background-size: auto 100%;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        .categoryContent {
+            height: 120px;
+        }
+
+        .categoryContent.clothes {
+            background-color: #c1ff9b;
+            background-image: url("../../../../images/dress.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+
+        .categoryContent.phones {
+            background-color: #ffd362;
+            background-image: url("../../../../images/phones.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 85%;
+        }
+
+        .categoryContent.beauty {
+            background-color: #ffd9d3;
+            background-image: url("../../../../images/buaty.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 90%;
+        }
+
+        .categoryContent.sport {
+            background-color: #85fdc9;
+            background-image: url("../../../../images/sport.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 100%;
+            background-position: right;
+        }
+
+        .categoryContent.catalogue {
+            background-color: #18f8ea;
+            background-image: url("../../../../images/katalog.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-position: right;
+        }
+
+        .categoryContent.toys {
+            background-color: #e4ff1a;
+            background-image: url("../../../../images/bear.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+    }
+
+    @media screen and (max-width: 360px) {
+        .categoryContent {
+            height: 80px;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        #size::before {
+            content: "col max-width: 576px";
+        }
+    }
+
+    @media screen and (min-width: 577px) {
+        #size::before {
+            content: "sm min-width: 577px";
+        }
+    }
+
+    @media screen and (min-width: 577px) {
+        .categoryContent {
+            height: 120px;
+        }
+
+        .categoryContent.clothes {
+            background-color: #c1ff9b;
+            background-image: url("../../../../images/dress.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+
+        .categoryContent.phones {
+            background-color: #ffd362;
+            background-image: url("../../../../images/phones.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 85%;
+        }
+
+        .categoryContent.beauty {
+            background-color: #ffd9d3;
+            background-image: url("../../../../images/buaty.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 90%;
+        }
+
+        .categoryContent.sport {
+            background-color: #85fdc9;
+            background-image: url("../../../../images/sport.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 100%;
+            background-position: right;
+        }
+
+        .categoryContent.catalogue {
+            background-color: #18f8ea;
+            background-image: url("../../../../images/katalog.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-position: right;
+        }
+
+        .categoryContent.toys {
+            background-color: #e4ff1a;
+            background-image: url("../../../../images/bear.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        #size::before {
+            content: "md min-width: 768px";
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .categoryContent {
+            height: 120px;
+        }
+
+        .categoryContent.clothes {
+            background-color: #c1ff9b;
+            background-image: url("../../../../images/dress.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+
+        .categoryContent.phones {
+            background-color: #ffd362;
+            background-image: url("../../../../images/phones.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 85%;
+        }
+
+        .categoryContent.beauty {
+            background-color: #ffd9d3;
+            background-image: url("../../../../images/buaty.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 90%;
+        }
+
+        .categoryContent.sport {
+            background-color: #85fdc9;
+            background-image: url("../../../../images/sport.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 100%;
+            background-position: right;
+        }
+
+        .categoryContent.catalogue {
+            background-color: #18f8ea;
+            background-image: url("../../../../images/katalog.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-position: right;
+        }
+
+        .categoryContent.toys {
+            background-color: #e4ff1a;
+            background-image: url("../../../../images/bear.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        #size::before {
+            content: "lg min-width: 992px";
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        .categoryContent {
+            height: 200px;
+        }
+
+        .categoryContent.clothes {
+            background-color: #c1ff9b;
+            background-image: url("../../../../images/dress.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+
+        .categoryContent.phones {
+            background-color: #ffd362;
+            background-image: url("../../../../images/phones.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 85%;
+        }
+
+        .categoryContent.beauty {
+            background-color: #ffd9d3;
+            background-image: url("../../../../images/buaty.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 90%;
+        }
+
+        .categoryContent.sport {
+            background-color: #85fdc9;
+            background-image: url("../../../../images/sport.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 100%;
+            background-position: right;
+        }
+
+        .categoryContent.catalogue {
+            background-color: #18f8ea;
+            background-image: url("../../../../images/katalog.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-position: right;
+        }
+
+        .categoryContent.toys {
+            background-color: #e4ff1a;
+            background-image: url("../../../../images/bear.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        #size::before {
+            content: "xxl min-width: 1200px";
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        .categoryContent {
+            height: 230px;
+        }
+
+        .categoryContent.clothes {
+            background-color: #c1ff9b;
+            background-image: url("../../../../images/dress.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+
+        .categoryContent.phones {
+            background-color: #ffd362;
+            background-image: url("../../../../images/phones.png");
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 85%;
+        }
+
+        .categoryContent.beauty {
+            background-color: #ffd9d3;
+            background-image: url("../../../../images/buaty.png");
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: auto 90%;
+        }
+
+        .categoryContent.sport {
+            background-color: #85fdc9;
+            background-image: url("../../../../images/sport.png");
+            background-repeat: no-repeat;
+            background-size: auto 100%;
+            background-position: right;
+        }
+
+        .categoryContent.catalogue {
+            background-color: #18f8ea;
+            background-image: url("../../../../images/katalog.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: right;
+        }
+
+        .categoryContent.toys {
+            background-color: #e4ff1a;
+            background-image: url("../../../../images/bear.png");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+    }
+}

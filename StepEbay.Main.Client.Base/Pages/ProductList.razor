@@ -109,8 +109,10 @@
                                         </a>
                                     </div>
                                     <div class="mt-20 pl-15">
-                                        <a class="linkText" href="/product/@product.Id">
-                                            <span> @product.Title</span>
+                                        
+                                        <a class="linkText mtooltip" href="/product/@product.Id">
+                                            <span class="cardHeader"> @product.Title</span>
+                                            <span class="tooltiptext">@product.Title</span>
                                         </a>
                                     </div>
                                     <div class="mt-13 descriptionBlock pl-15">
@@ -227,7 +229,7 @@
             else
             {
                 <div class="spinner-border centerOnParrentHorizontal" role="status">
-                    <span class="sr-only">Завантаження...</span>
+                    <span class="sr-only"></span>
                 </div>
             }
         </div>

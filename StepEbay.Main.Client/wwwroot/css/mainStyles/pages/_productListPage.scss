@@ -1,5 +1,5 @@
 ﻿.mainBlock {
-    padding: 100px 25px 0 25px;
+    padding: 25px 25px 0 25px;
     display: flex;
     flex-direction: row;
 }
@@ -202,4 +202,46 @@ input::-webkit-inner-spin-button {
     background: url("../../../images/nextPage.png");
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.mtooltip {
+    position: relative;
+}
+
+.mtooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: -25px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.mtooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.mtooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.cardHeader {
+    overflow: hidden;
+    height: 2em;
+    display: block;
 }

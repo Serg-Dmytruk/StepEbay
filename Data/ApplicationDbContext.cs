@@ -42,6 +42,7 @@ namespace StepEbay.Data
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductState> ProductStates { get; set; }
+        public virtual DbSet<ProductDesc> ProductDesc { get; set; }
         #endregion
 
         #region Telegram
@@ -85,6 +86,7 @@ namespace StepEbay.Data
             builder.Entity<Product>().ToTable("Products");
             builder.Entity<ProductState>().ToTable("ProductStates");
             builder.Entity<Category>().ToTable("Categories");
+            builder.Entity<ProductDesc>().ToTable("Description");
 
             builder.Entity<DeveloperGroup>().ToTable("DeveloperGroups");
 

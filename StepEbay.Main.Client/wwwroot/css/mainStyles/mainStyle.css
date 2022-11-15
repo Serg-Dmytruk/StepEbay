@@ -12,4 +12,83 @@
     --clr-dark-green: #429600;
     --clr-red: #DA1A1A;
     --clr-black: #272727;
+    font-family: "Nunito", sans-serif;
+}
+
+#content {
+    padding-top: 90px;
+    display: grid;
+    width: 100%;
+    min-height: calc(100vh - 90px);
+    grid-template-rows: auto 300px;
+}
+
+@media screen and (max-width: 576px) {
+    .logo{
+        background-size:100% 100% !important;
+    }
+
+    #menu .search input[type=search] {
+        width: 65% !important;
+    }
+
+    #menu .search button[type=submit] {
+        width: 35% !important;
+    }
+
+    #menu .burger .btn-burger {
+        width: 42px !important;
+        height: 42px !important;
+    }
+
+    .mainBlock {
+        flex-direction: column!important;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #menu .search input[type=search] {
+        font-size: 13px;
+        width: 62% !important;
+    }
+
+    #menu .search button[type=submit] {
+        font-size: 13px;
+        width: 38% !important;
+    }
+}
+
+/*---------------------------------------------------*/
+#size::before {
+    content: "basa";
+}
+
+@media screen and (max-width: 576px) {
+    #size::before {
+        content: "col max-width: 576px";
+    }
+}
+
+@media screen and (min-width: 577px) {
+    #size::before {
+        content: "sm min-width: 577px";
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #size::before {
+        content: "md min-width: 768px";
+    }
+}
+
+@media screen and (min-width: 992px) {
+    #size::before {
+        content: "lg min-width: 992px";
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #size::before {
+        content: "xxl min-width: 1200px";
+    }
 }

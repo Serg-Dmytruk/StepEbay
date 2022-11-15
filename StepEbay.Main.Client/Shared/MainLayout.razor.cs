@@ -108,5 +108,18 @@ namespace StepEbay.Main.Client.Shared
 
             StateHasChanged();
         }
+
+        private async Task Logout()
+        {
+            await TokenProvider.RemoveToken();
+            await TokenProvider.CheckAuthentication(false);
+
+            await HubClient.Stop();
+        }
+
+        private static void TestException()
+        {
+            throw new ArgumentException("test exception");
+        }
     }
 }

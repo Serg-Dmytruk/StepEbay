@@ -3,31 +3,27 @@
 @inherits LayoutComponentBase
 
 <div class="page">
-    <AuthorizeView Roles="admin">
-        <div class="sidebar">
-            <NavMenu />
-        </div>
-    </AuthorizeView>
+
     <!-- *************************************** -->
     <!--start nav-->
-    <div id="menu" class="container-fluid d-none d-sm-block">
+    <div id="menu" class="container-fluid">
         <div class="container">
             <!-- ** 1st row ** -->
             <div class="row">
                 <!-- logo -->
-                <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
                     <a href='#'><div class="logo"></div></a>
                 </div>
-                <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1">
+                <div class="d-none d-md-block col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1">
                     &nbsp;
                 </div>
                 <!-- search -->
-                <div class="search col-7 col-sm-7 col-md-8 col-lg-7 col-xl-6 col-xxl-7">
+                <div class="search col-6 col-sm-7 col-md-6 col-lg-7 col-xl-6 col-xxl-7">
                     <input type="search" placeholder="Пошук" aria-label="Search" @bind="SearchRequest" />
                     <button type="submit" @onclick="Search">Пошук</button>
                 </div>
-                <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1"></div>
-                <div class="burger col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1">
+                <div class="d-none d-lg-block col-lg-1 col-xl-1 col-xxl-1"></div>
+                <div class="burger col-3 col-sm-2 col-md-2 col-lg-1 col-xl-1 col-xxl-1">
                     <AuthorizeView>
                         <Authorized>
                             <div class="btn-burger" onclick="dropDownMenu()"></div>
@@ -54,61 +50,88 @@
             </div>
         </div>
     </div>
-    <div id="drop-down-menu" class="container-fluid">
-        <a href='personal/products'>Personal</a>
+
+    @*        <a href='personal/products'>Personal</a>
         <a href='add/product'>Add product</a>
         <div class="bg-empty">
-        </div>
-        <AuthorizeView>
-            <Authorized>
+        </div>*@
+    <AuthorizeView Roles="manager">
+        <Authorized>
+            <div id="drop-down-menu" class="container-fluid">
                 <div class="dropdownmenu-nav container">
                     <ul class="cat-icon">
+                        <li><a onclick="hideMenu()" href='#'><div></div></a></li>
+                        <li><a onclick="hideMenu()" id="cat-icon-name" href='#'>@@@UserName</a></li>
+                    </ul>
+                    <ul>
+                        <li><a onclick="hideMenu()" href='/add/product'>Мій магазин</a></li>
+                        <li><a onclick="hideMenu()" href='/personal/products'>Покупки</a></li>
+                    </ul>
+                    <ul>
+                        <li><a onclick="hideMenu()" href='personal/setting'>Налаштування</a></li>
+                        <li><a onclick="hideMenu()" href='#'>abc</a></li>
+                    </ul>
+                    <ul @onclick="Logout" id="cat-icon-exit">
+                        <li><a id="cat-exit-name" href='#'>Вихід</a></li>
                         <li><a href='#'><div></div></a></li>
-                        <li><a id="cat-icon-name" href='#'>@@@UserName</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href='https://localhost:7107/user'>user</a></li>
-                        <li><a href='#'>abc</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href='#'>abc</a></li>
-                        <li><a href='#'>abc</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href='#'>abc</a></li>
-                        <li><a href='#'>abc</a></li>
                     </ul>
                 </div>
-            </Authorized>
-        </AuthorizeView>
-    </div>
-    <div class="main">
-        <AuthorizeView>
-            <NotAuthorized>
-                @if (IsShowSignModal)
-                {
-                    <SignModal OnClose='@CloseSignModal'></SignModal>
-                }
-            </NotAuthorized>
-        </AuthorizeView>
+            </div>
+        </Authorized>
+    </AuthorizeView>
+    <AuthorizeView Roles="admin">
+        <Authorized>
+            <div id="drop-down-menu" class="container-fluid">
+                <div class="dropdownmenu-nav container">
+                    <ul class="cat-icon">
+                        <li><a onclick="hideMenu()" href='#'><div></div></a></li>
+                        <li><a onclick="hideMenu()"id="cat-icon-name" href='#'>@@@UserName</a></li>
+                    </ul>
+                    <ul>
+                        <li><a onclick="hideMenu()" href='/add/product'>Мій магазин</a></li>
+                        <li><a onclick="hideMenu()" href='/personal/products'>Покупки</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href='#' @onclick="TestException">Перевірка обробника помилок</a></li>
+                        <li><a onclick="hideMenu()" href='personal/setting'>Налаштування</a></li>
+                    </ul>
+                    <ul id="cat-icon-exit" @onclick="Logout">
+                        <li><a id="cat-exit-name" href='#'>Вихід</a></li>
+                        <li><a href='#'><div></div></a></li>
+                    </ul>
+                </div>
+            </div>
+        </Authorized>
+    </AuthorizeView>
 
-        <div>
-            @Body
-            <PushMessageContainer Position="MessagePosition.BottomRight" TimeOut="5" />
+    <div id="content">
+        <div class="main">
+            <AuthorizeView>
+                <NotAuthorized>
+                    @if (IsShowSignModal)
+                    {
+                        <SignModal OnClose='@CloseSignModal'></SignModal>
+                    }
+                </NotAuthorized>
+            </AuthorizeView>
+
+            <div>
+                @Body
+                <PushMessageContainer Position="MessagePosition.BottomRight" TimeOut="5" />
+            </div>
         </div>
+        <footer>
+            <h2>Чекаєм на ваші вподобайки</h2>
+            <div class="footer-icons">
+                <div><p>A</p></div>
+                <div><p>B</p></div>
+                <div><p>C</p></div>
+            </div>
+            <div>
+                <h6><a href='#'>Політика конфіденційності</a></h6>
+                <h6><a href='#'>Контакти</a></h6>
+            </div>
+            <h6>©Copyright 2022</h6>
+        </footer>
     </div>
-    <div class="footer"></div>
-    <footer>
-        <h2>Чекаєм на ваші вподобайки</h2>
-        <div class="footer-icons">
-            <div><p>A</p></div>
-            <div><p>B</p></div>
-            <div><p>C</p></div>
-        </div>
-        <div>
-            <h6><a href='#'>Політика конфіденційності</a></h6>
-            <h6><a href='#'>Контакти</a></h6>
-        </div>
-        <h6>©Copyright 2022</h6>
-    </footer>
 </div>

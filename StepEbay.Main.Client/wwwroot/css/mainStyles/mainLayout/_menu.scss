@@ -159,9 +159,8 @@
 
 #drop-down-menu {
     position: fixed;
-    min-height: 300px;
-    padding-top: 105px;
-    background-color: cadetblue;
+    padding-top: 90px;
+    background-color: white;
     top: -300px;
     z-index: 99;
     transition: .3s;
@@ -169,5 +168,110 @@
     -moz-box-shadow: 0px 3px 8px 2px rgba(0,0,0,0.2);
     box-shadow: 0px 3px 8px 2px rgba(0,0,0,0.2);
     overflow: hidden;
+
+    .dropdownmenu-nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        height: 250px;
+
+        ul {
+            list-style: none;
+            margin:0 !important;
+            padding:15px !important;
+        }
+
+        a {
+            color: gray;
+            font-weight: 700 !important;
+            text-decoration: none;
+            transition: .2s cubic-bezier( 0, .002, .052, .0031 );
+
+            &:hover {
+                color: #8BC65D;
+                text-decoration: none;
+            }
+        }
+    }
 }
+
+.cat-icon {
+    width: 100%;
+    background-color: var(--clr-dark-grey);
+
+    &:hover {
+        background-color: #8BC65D;
+    }
+
+    div {
+        background: url(../../icons/catFace-01.svg);
+        width: 100px;
+        height: 100px;
+        background-color: #8BC65D;
+        border-radius: 50%;
+        background-size: cover;
+        cursor: pointer;
+    }
+}
+
+#cat-icon-name {
+    display: block;
+    color: white !important;
+    padding-top: 15px;
+    transition: 0s !important;
+
+    &:hover {
+        color: var(--clr-dark-grey) !important;
+    }
+
+    &:active {
+        color: var(--clr-orange) !important;
+    }
+}
+
+#cat-icon-exit {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    width: 100%;
+    background-color: var(--clr-dark-grey);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--clr-red);
+    }
+
+    div {
+        background: url(../../icons/catFace-01.svg);
+        width: 100px;
+        height: 100px;
+        background-color: #8BC65D;
+        border-radius: 50%;
+        background-size: cover;
+        cursor: pointer;
+        transform: scale(-1, 1);
+    }
+
+    &:hover div {
+        background: url(../../icons/CatFaceSad-01.svg);
+        background-color: var(--clr-red);
+    }
+
+    &:hover #cat-exit-name {
+        font-size: 10pt;
+    }
+}
+
+#cat-exit-name {
+    display: block;
+    color: white !important;
+    padding-bottom: 15px;
+    font-size: 36px;
+    transition: font-size .5s !important;
+
+    &:active {
+        color: var(--clr-orange) !important;
+    }
+}
+
 

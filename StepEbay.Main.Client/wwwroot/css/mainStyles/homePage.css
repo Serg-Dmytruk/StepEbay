@@ -150,9 +150,8 @@
 
 #drop-down-menu {
   position: fixed;
-  min-height: 300px;
-  padding-top: 105px;
-  background-color: cadetblue;
+  padding-top: 90px;
+  background-color: white;
   top: -300px;
   z-index: 99;
   transition: 0.3s;
@@ -160,6 +159,97 @@
   -moz-box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+}
+#drop-down-menu .dropdownmenu-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 250px;
+}
+#drop-down-menu .dropdownmenu-nav ul {
+  list-style: none;
+  margin: 0 !important;
+  padding: 15px !important;
+}
+#drop-down-menu .dropdownmenu-nav a {
+  color: gray;
+  font-weight: 700 !important;
+  text-decoration: none;
+  transition: 0.2s cubic-bezier(0, 0.002, 0.052, 0.0031);
+}
+#drop-down-menu .dropdownmenu-nav a:hover {
+  color: #8BC65D;
+  text-decoration: none;
+}
+
+.cat-icon {
+  width: 100%;
+  background-color: var(--clr-dark-grey);
+}
+.cat-icon:hover {
+  background-color: #8BC65D;
+}
+.cat-icon div {
+  background: url(../../icons/catFace-01.svg);
+  width: 100px;
+  height: 100px;
+  background-color: #8BC65D;
+  border-radius: 50%;
+  background-size: cover;
+  cursor: pointer;
+}
+
+#cat-icon-name {
+  display: block;
+  color: white !important;
+  padding-top: 15px;
+  transition: 0s !important;
+}
+#cat-icon-name:hover {
+  color: var(--clr-dark-grey) !important;
+}
+#cat-icon-name:active {
+  color: var(--clr-orange) !important;
+}
+
+#cat-icon-exit {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+  width: 100%;
+  background-color: var(--clr-dark-grey);
+  cursor: pointer;
+}
+#cat-icon-exit:hover {
+  background-color: var(--clr-red);
+}
+#cat-icon-exit div {
+  background: url(../../icons/catFace-01.svg);
+  width: 100px;
+  height: 100px;
+  background-color: #8BC65D;
+  border-radius: 50%;
+  background-size: cover;
+  cursor: pointer;
+  transform: scale(-1, 1);
+}
+#cat-icon-exit:hover div {
+  background: url(../../icons/CatFaceSad-01.svg);
+  background-color: var(--clr-red);
+}
+#cat-icon-exit:hover #cat-exit-name {
+  font-size: 10pt;
+}
+
+#cat-exit-name {
+  display: block;
+  color: white !important;
+  padding-bottom: 15px;
+  font-size: 36px;
+  transition: font-size 0.5s !important;
+}
+#cat-exit-name:active {
+  color: var(--clr-orange) !important;
 }
 
 footer {
@@ -213,7 +303,6 @@ footer h6 > a {
 }
 
 .footer {
-  height: 300px;
   width: 100%;
 }
 
@@ -358,7 +447,7 @@ footer h6 > a {
 }
 
 .mainBlock {
-  padding: 100px 25px 0 25px;
+  padding: 25px 25px 0 25px;
   display: flex;
   flex-direction: row;
 }
@@ -547,6 +636,561 @@ input::-webkit-inner-spin-button {
   background: url("../../../images/nextPage.png");
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.mtooltip {
+  position: relative;
+}
+
+.mtooltip .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: -25px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.mtooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.mtooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cardHeader {
+  overflow: hidden;
+  height: 2em;
+  display: block;
+}
+
+#flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexBlock {
+  width: 30vw;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+#flex img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+#flex a {
+  color: black;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.personalCard {
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+#settings div {
+  padding-top: 5px;
+}
+
+#settings div {
+  padding: 0 !important;
+}
+
+.accordion-button:focus {
+  z-index: 3;
+  border-color: var(--clr-dark-grey);
+  outline: 0 !important;
+  /* I changed the color on this line */
+  /* If you do not want any color, just delete */
+  /*box-shadow: 0 0 0 0.25rem rgba(139, 198, 93, 0.25);*/
+  box-shadow: 0 0 0 0.25rem rgba(198, 194, 194, 0.25);
+}
+
+.accordion-button:not(.collapsed) {
+  color: white;
+  font-weight: 700;
+  background-color: var(--clr-dark-grey);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.13);
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: url(../../../icons/arrow.svg);
+  transform: rotate(-180deg);
+  fill: red;
+}
+
+.groupInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.groupInput input, .groupInput label {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  height: 40px;
+  line-height: 1 !important;
+}
+.groupInput input {
+  border: 1px solid var(--clr-light-grey);
+  /*        border-radius: 10px 0 0 10px;
+          -webkit-border-radius: 0 10px 10px 0;
+          -moz-border-radius: 0 10px 10px 0;
+          -khtml-border-radius: 0 10px 10px 0;*/
+  background: #ffffff !important;
+  outline: none;
+  padding: 5px;
+  padding-left: 15px;
+  width: 65%;
+}
+.groupInput input:focus {
+  color: var(--clr-black);
+  border: 1px solid var(--clr-green);
+}
+.groupInput input:active {
+  border: 1px solid var(--clr-green);
+}
+.groupInput label {
+  border: 1px solid var(--clr-green);
+  /*        border-radius: 10px 0 0 10px;
+          -webkit-border-radius: 10px 0 0 10px;
+          -moz-border-radius: 10px 0 0 10px;
+          -khtml-border-radius: 10px 0 0 10px;*/
+  background: var(--clr-green);
+  outline: none;
+  padding: 5px;
+  width: 35%;
+  padding-left: 15px;
+  padding-top: 11px;
+}
+.groupInput label:focus {
+  color: var(--clr-black);
+  border: 1px solid var(--clr-black);
+}
+
+.accordion-body button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--clr-orange);
+  /*        border-radius: 10px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          -khtml-border-radius: 10px;*/
+  background: var(--clr-orange);
+  outline: none;
+  width: 100%;
+  padding: 15px;
+  font-weight: 700;
+}
+.accordion-body button:focus {
+  color: var(--clr-black);
+  border: 1px solid var(--clr-black);
+}
+
+#categories {
+  padding: 30px 0 45px 0;
+}
+#categories .categoryContent {
+  height: 230px;
+  width: 100%;
+  border-radius: 20px;
+  padding: 5px 10px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 15px;
+}
+#categories .categoryLink {
+  font-size: 1em;
+  color: var(--clr-black);
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+#categories .categoryLink:after {
+  content: "";
+  position: relative;
+  background-color: #000;
+  -webkit-clip-path: polygon(0 0, 0 100%, 39% 48%);
+  clip-path: polygon(0 0, 0 100%, 39% 48%);
+}
+#categories .categoryLink:active, #categories .categoryLink:focus {
+  color: var(--clr-black);
+  opacity: 0.5;
+}
+#categories .categoryLink:hover {
+  color: var(--clr-black);
+  opacity: 0.9;
+}
+#categories .categoryLink:hover .categoryContent {
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+#categories .categoryLink span {
+  display: block;
+  padding-top: 5px;
+}
+#categories .categoryContent {
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+#categories .categoryContent.clothes {
+  background-color: #c1ff9b;
+  background-image: url("../../../../images/dress.png");
+  background-size: auto 100%;
+}
+#categories .categoryContent.phones {
+  background-color: #ffd362;
+  background-image: url("../../../../images/phones.png");
+  background-size: auto 75%;
+}
+#categories .categoryContent.beauty {
+  background-color: #ffd9d3;
+  background-image: url("../../../../images/buaty.png");
+  background-size: auto 90%;
+}
+#categories .categoryContent.sport {
+  background-color: #85fdc9;
+  background-image: url("../../../../images/sport.png");
+  background-size: auto 80%;
+  background-position: center;
+}
+#categories .categoryContent.catalogue {
+  background-color: #18f8ea;
+  background-image: url("../../../../images/katalog.png");
+  background-position: center;
+}
+#categories .categoryContent.toys {
+  background-color: #e4ff1a;
+  background-image: url("../../../../images/bear.png");
+  background-size: auto 100%;
+}
+@media screen and (max-width: 576px) {
+  #categories .categoryContent {
+    height: 120px;
+  }
+  #categories .categoryContent.clothes {
+    background-color: #c1ff9b;
+    background-image: url("../../../../images/dress.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+  #categories .categoryContent.phones {
+    background-color: #ffd362;
+    background-image: url("../../../../images/phones.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 85%;
+  }
+  #categories .categoryContent.beauty {
+    background-color: #ffd9d3;
+    background-image: url("../../../../images/buaty.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 90%;
+  }
+  #categories .categoryContent.sport {
+    background-color: #85fdc9;
+    background-image: url("../../../../images/sport.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 100%;
+    background-position: right;
+  }
+  #categories .categoryContent.catalogue {
+    background-color: #18f8ea;
+    background-image: url("../../../../images/katalog.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-position: right;
+  }
+  #categories .categoryContent.toys {
+    background-color: #e4ff1a;
+    background-image: url("../../../../images/bear.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+}
+@media screen and (max-width: 360px) {
+  #categories .categoryContent {
+    height: 80px;
+  }
+}
+@media screen and (max-width: 576px) {
+  #categories #size::before {
+    content: "col max-width: 576px";
+  }
+}
+@media screen and (min-width: 577px) {
+  #categories #size::before {
+    content: "sm min-width: 577px";
+  }
+}
+@media screen and (min-width: 577px) {
+  #categories .categoryContent {
+    height: 120px;
+  }
+  #categories .categoryContent.clothes {
+    background-color: #c1ff9b;
+    background-image: url("../../../../images/dress.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+  #categories .categoryContent.phones {
+    background-color: #ffd362;
+    background-image: url("../../../../images/phones.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 85%;
+  }
+  #categories .categoryContent.beauty {
+    background-color: #ffd9d3;
+    background-image: url("../../../../images/buaty.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 90%;
+  }
+  #categories .categoryContent.sport {
+    background-color: #85fdc9;
+    background-image: url("../../../../images/sport.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 100%;
+    background-position: right;
+  }
+  #categories .categoryContent.catalogue {
+    background-color: #18f8ea;
+    background-image: url("../../../../images/katalog.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-position: right;
+  }
+  #categories .categoryContent.toys {
+    background-color: #e4ff1a;
+    background-image: url("../../../../images/bear.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+}
+@media screen and (min-width: 768px) {
+  #categories #size::before {
+    content: "md min-width: 768px";
+  }
+}
+@media screen and (min-width: 768px) {
+  #categories .categoryContent {
+    height: 120px;
+  }
+  #categories .categoryContent.clothes {
+    background-color: #c1ff9b;
+    background-image: url("../../../../images/dress.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+  #categories .categoryContent.phones {
+    background-color: #ffd362;
+    background-image: url("../../../../images/phones.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 85%;
+  }
+  #categories .categoryContent.beauty {
+    background-color: #ffd9d3;
+    background-image: url("../../../../images/buaty.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 90%;
+  }
+  #categories .categoryContent.sport {
+    background-color: #85fdc9;
+    background-image: url("../../../../images/sport.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 100%;
+    background-position: right;
+  }
+  #categories .categoryContent.catalogue {
+    background-color: #18f8ea;
+    background-image: url("../../../../images/katalog.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-position: right;
+  }
+  #categories .categoryContent.toys {
+    background-color: #e4ff1a;
+    background-image: url("../../../../images/bear.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+}
+@media screen and (min-width: 992px) {
+  #categories #size::before {
+    content: "lg min-width: 992px";
+  }
+}
+@media screen and (min-width: 992px) {
+  #categories .categoryContent {
+    height: 200px;
+  }
+  #categories .categoryContent.clothes {
+    background-color: #c1ff9b;
+    background-image: url("../../../../images/dress.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+  #categories .categoryContent.phones {
+    background-color: #ffd362;
+    background-image: url("../../../../images/phones.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 85%;
+  }
+  #categories .categoryContent.beauty {
+    background-color: #ffd9d3;
+    background-image: url("../../../../images/buaty.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 90%;
+  }
+  #categories .categoryContent.sport {
+    background-color: #85fdc9;
+    background-image: url("../../../../images/sport.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 100%;
+    background-position: right;
+  }
+  #categories .categoryContent.catalogue {
+    background-color: #18f8ea;
+    background-image: url("../../../../images/katalog.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-position: right;
+  }
+  #categories .categoryContent.toys {
+    background-color: #e4ff1a;
+    background-image: url("../../../../images/bear.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+}
+@media screen and (min-width: 1200px) {
+  #categories #size::before {
+    content: "xxl min-width: 1200px";
+  }
+}
+@media screen and (min-width: 1200px) {
+  #categories .categoryContent {
+    height: 230px;
+  }
+  #categories .categoryContent.clothes {
+    background-color: #c1ff9b;
+    background-image: url("../../../../images/dress.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+  #categories .categoryContent.phones {
+    background-color: #ffd362;
+    background-image: url("../../../../images/phones.png");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 85%;
+  }
+  #categories .categoryContent.beauty {
+    background-color: #ffd9d3;
+    background-image: url("../../../../images/buaty.png");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 90%;
+  }
+  #categories .categoryContent.sport {
+    background-color: #85fdc9;
+    background-image: url("../../../../images/sport.png");
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: right;
+  }
+  #categories .categoryContent.catalogue {
+    background-color: #18f8ea;
+    background-image: url("../../../../images/katalog.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+  #categories .categoryContent.toys {
+    background-color: #e4ff1a;
+    background-image: url("../../../../images/bear.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+}
+
+.carousel-item {
+  height: 50vh;
+  background-position: center center;
+  background-size: cover;
+}
+
+.carousel-item.item1 {
+  background-image: url("../../../../images/slider/test1.jpg");
+}
+
+.carousel-item.item2 {
+  background-image: url("../../../../images/slider/test2.jpg");
+}
+
+.carousel-item.item3 {
+  background-image: url("../../../../images/slider/test3.jpg");
 }
 
 body {

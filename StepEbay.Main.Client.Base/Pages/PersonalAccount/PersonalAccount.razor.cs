@@ -9,6 +9,7 @@ using System.Net;
 
 namespace StepEbay.Main.Client.Base.Pages.PersonalAccount
 {
+    [Route("personal/setting")]
     [Authorize]
     public partial class PersonalAccount
     {

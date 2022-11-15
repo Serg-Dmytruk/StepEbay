@@ -49,3 +49,7 @@ function dropDownMenu() {
     dropdown.style.top = dropdown.style.top <= '0' ? '0' : '-300px';
 }
 
+function hideMenu() {
+    dropDownMenu();
+}
+

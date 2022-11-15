@@ -2,6 +2,10 @@
 @use 'mainLayout/footer';
 @use 'mainLayout/modal';
 @use 'pages/productListPage';
+@use 'pages/personalPage';
+@use 'pages/settings';
+@use 'pages//homePageElements/category';
+@use 'pages//homePageElements/slider';
 
 body {
     background-color: white;
