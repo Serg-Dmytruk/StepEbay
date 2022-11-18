@@ -30,7 +30,8 @@ namespace StepEbay.Admin.Api.Common.Services
         {
             services.AddScoped<IDeveloperGroupDbService, DeveloperGroupDbService>();
             services.AddScoped<IProductDbService, ProductDbService>();
-            services.AddScoped<IProductStateDbService, ProductStateDbService>();    
+            services.AddScoped<IProductStateDbService, ProductStateDbService>();
+            services.AddScoped<IProductDescDbService, ProductDescDbService>();
             services.AddScoped<ICategoryDbService, CategoryDbService>();
             services.AddScoped<IPurchaseTypeDbService, PurchaseTypeDbService>();
             services.AddScoped<ISeeder, Seeder>();
