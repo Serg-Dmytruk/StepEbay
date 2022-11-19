@@ -25,6 +25,9 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         public int ProductPageNumber = 0;
         public int MaxProductPageNumber = 0;
 
+        public string keyDescInput="";
+        public string valueDescInput = "";
+
         int Images = 0;
         private List<CategoryDto> Categories { get; set; }
         private List<ProductStateDto> States { get; set; }
@@ -45,6 +48,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             Categories = new List<CategoryDto>();
             States = new List<ProductStateDto>();
             Types = new List<PurchaseTypeResponseDto>();
+            request.ProductDescs = new List<(string, string)>();
         }
 
         protected override async Task OnInitializedAsync()
@@ -66,10 +70,23 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             StateHasChanged();
         }
 
+        private void addDesc()
+        {
+            request.ProductDescs.Add((keyDescInput, valueDescInput));
+            keyDescInput = "";
+            valueDescInput = "";
+            StateHasChanged();
+        }
+        private void removeDesc(int id)
+        {
+            request.ProductDescs.RemoveAt(id);
+            StateHasChanged();
+        }
         private async void Submith()
         {
             Random rand = new();
             request.Rate =rand.Next(3,6);
+
             var result = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.AddProduct(request));
 
             if (result.StatusCode != HttpStatusCode.OK)

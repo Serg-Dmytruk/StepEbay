@@ -17,5 +17,6 @@
         public int PurchaseTypeId { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateClosed { get; set; }
+        public List<(string, string)> ProductDescs { get; set; }
     }
 }

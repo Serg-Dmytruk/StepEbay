@@ -12,18 +12,21 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
     public class ProductService : IProductService
     {
         private readonly IProductDbService _productDb;
+        private readonly IProductDescDbService _productDescDb;
         private readonly ICategoryDbService _categoryDb;
         private readonly IProductStateDbService _productStateDb;
         private readonly IPurchaseTypeDbService _purchaseTypeDb;
         private readonly IPurchesDbService _purchaseDb;
 
         public ProductService(IProductDbService productDb,
+            IProductDescDbService productDescDb,
             ICategoryDbService categoryDb,
             IProductStateDbService productStateDb,
             IPurchaseTypeDbService purchaseTypeDb,
             IPurchesDbService purchaseDb)
         {
             _productDb = productDb;
+            _productDescDb = productDescDb;
             _categoryDb = categoryDb;
             _productStateDb = productStateDb;
             _purchaseTypeDb = purchaseTypeDb;
@@ -45,7 +48,6 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                 OwnerId = x.OwnerId, 
                 PurchaseTypeId = x.PurchaseTypeId,
                 DateCreated = x.DateCreated,
-                AdditionalInfo = x.AditionalInfo,
                 Rate = x.Rate
             }).ToList();
         }
@@ -77,7 +79,6 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                     OwnerId = x.OwnerId,
                     PurchaseTypeId = x.PurchaseTypeId,
                     DateCreated = x.DateCreated,
-                    AdditionalInfo = x.AditionalInfo,
                     Rate=x.Rate
                 }).Skip(page * ProductListConstant.MAXONPAGE).Take(ProductListConstant.MAXONPAGE).ToList(),
                 CountAll = products.Count()
@@ -114,11 +115,11 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                 ProductStateId = productRequest.StateId,
                 PurchaseTypeId = productRequest.PurchaseTypeId,
                 OwnerId = productRequest.OwnerId,
-                Rate = productRequest.Rate,
-                AditionalInfo=productRequest.AdditionalInfo
+                Rate = productRequest.Rate
             };
 
-            await _productDb.Add(product);
+            Product endProduct=await _productDb.Add(product);
+            await _productDescDb.AddRange(productRequest.ProductDescs.Select(n => new ProductDesc() { ProductId = product.Id, Name = n.Item1, About = n.Item2 }));
 
             return ResponseData.Ok();
         }
@@ -162,7 +163,6 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                     PurchaseTypeId = x.PurchaseTypeId,
                     DateCreated = x.DateCreated,
                     DateClosed = (DateTime)x.DateClose,
-                    AdditionalInfo=x.AditionalInfo,
                     Rate=x.Rate
                 }).Skip(page * 6).Take(6).ToList(),
                 CountAll = productList.Count()
