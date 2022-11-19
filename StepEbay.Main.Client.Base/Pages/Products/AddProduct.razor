@@ -144,6 +144,55 @@
   </select>
 </div>
 
+        <span>Заголовок:</span><input @bind="request.Title" /><br />
+        <span>Опис:</span><input @bind="request.Description" /><br />
+        <span>Ціна:</span><input type="number" @bind="request.Price" /><br />
+        <span>Категорія:</span>
+        <select @bind="request.CategoryId">
+            @foreach (var item in Categories)
+            {
+                <option value="@item.Id">
+                    @item.Name
+                </option>
+            }
+        </select>
+        <br />
+        <span>Статус:</span>
+        <select @bind="request.StateId">
+            @foreach (var item in States)
+            {
+                <option value="@item.Id">
+                    @item.Name
+                </option>
+            }
+        </select>
+        <br />
+        <span>Тип:</span>
+        <select @bind="request.PurchaseTypeId">
+            @foreach (var item in Types)
+            {
+                <option value="@item.Id">
+                    @item.Name
+                </option>
+            }
+        </select>
+        <br/>
+        @for(int i=0;i<request.ProductDescs.Count; i++){
+             int m = i;
+            <span>@request.ProductDescs[i].Item1 : @request.ProductDescs[i].Item2</span>
+            <button @onclick="() => removeDesc(m)">X</button>
+            <br/>
+        }
+        <input @bind="keyDescInput"/><input @bind="valueDescInput"/>
+        <button @onclick="addDesc">
+            Додати характеристику
+        </button>
+        <br />
+        <button @onclick="Submith">
+            Додати товар
+        </button>
+    </div>
+</div>
 @*<span>Заголовок:</span>
     <input @bind="request.Title" />
     <br />

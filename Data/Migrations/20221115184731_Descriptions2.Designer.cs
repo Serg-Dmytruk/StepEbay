@@ -12,8 +12,8 @@ using StepEbay.Data;
 namespace StepEbay.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221115174814_Descriptions")]
-    partial class Descriptions
+    [Migration("20221115184731_Descriptions2")]
+    partial class Descriptions2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -263,6 +263,8 @@ namespace StepEbay.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProductId");
+
                     b.ToTable("Description", (string)null);
                 });
 
@@ -462,6 +464,17 @@ namespace StepEbay.Data.Migrations
                     b.Navigation("PurchaseType");
                 });
 
+            modelBuilder.Entity("StepEbay.Data.Models.Products.ProductDesc", b =>
+                {
+                    b.HasOne("StepEbay.Data.Models.Products.Product", "Product")
+                        .WithMany("Descriptions")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("StepEbay.Data.Models.Users.Favorite", b =>
                 {
                     b.HasOne("StepEbay.Data.Models.Products.Product", "Product")
@@ -483,6 +496,8 @@ namespace StepEbay.Data.Migrations
 
             modelBuilder.Entity("StepEbay.Data.Models.Products.Product", b =>
                 {
+                    b.Navigation("Descriptions");
+
                     b.Navigation("Favorites");
 
                     b.Navigation("Purchases");

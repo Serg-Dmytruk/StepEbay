@@ -95,6 +95,7 @@ namespace StepEbay.Data
             builder.Entity<Favorite>().HasOne(x => x.Product).WithMany(x => x.Favorites).OnDelete(DeleteBehavior.NoAction);
             //builder.Entity<Purchase>().HasOne(x => x.User).WithMany(x => x.Purchases).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Purchase>().HasOne(x => x.Product).WithMany(x => x.Purchases).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<ProductDesc>().HasOne(x => x.Product).WithMany(x => x.Descriptions).OnDelete(DeleteBehavior.NoAction);
 
             //builder.Entity<User>().HasMany(x => x.Purchases).WithOne(x => x.User).OnDelete(DeleteBehavior.Cascade);
             //builder.Entity<User>().HasMany(x => x.Favorites).WithOne(x => x.User).OnDelete(DeleteBehavior.Cascade);
