@@ -4,7 +4,7 @@
 
 namespace StepEbay.Data.Migrations
 {
-    public partial class Descriptions : Migration
+    public partial class Descriptions2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,7 +21,17 @@ namespace StepEbay.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Description", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Description_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Description_ProductId",
+                table: "Description",
+                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

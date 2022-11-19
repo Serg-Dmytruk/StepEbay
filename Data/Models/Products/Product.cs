@@ -39,7 +39,6 @@ namespace StepEbay.Data.Models.Products
         public virtual PurchaseType PurchaseType { get; set; }
         public virtual ProductState ProductState { get; set; }
         public virtual Category Category { get; set; }
-
         public virtual List<Favorite> Favorites { get; set; }
         public virtual List<Purchase> Purchases { get; set; }
         public virtual List<ProductDesc> Descriptions { get; set; }

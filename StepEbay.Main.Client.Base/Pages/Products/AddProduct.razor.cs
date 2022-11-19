@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Configuration;
 using Refit;
 using StepEbay.Common.Helpers;
-using StepEbay.Common.Models.Pagination;
 using StepEbay.Main.Client.Common.RestServices;
-using StepEbay.Main.Common.Models.Bet;
 using StepEbay.Main.Common.Models.Product;
 using StepEbay.PushMessage.Services;
 using System.Net;
@@ -20,8 +18,8 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         [Inject] private IApiService ApiService { get; set; }
         [Inject] IMessageService MessageService { get; set; }
 
-        private PaginatedList<ProductDto> _products = new PaginatedList<ProductDto>();
-        private BetFilter _filters = new BetFilter();
+/*        private PaginatedList<ProductDto> _products = new PaginatedList<ProductDto>();
+        private BetFilter _filters = new BetFilter();*/
         public int ProductPageNumber = 0;
         public int MaxProductPageNumber = 0;
 
@@ -53,11 +51,6 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
         protected override async Task OnInitializedAsync()
         {
-            _filters.Active = true;
-            _filters.Closed = true;
-            _products.List = new List<ProductDto>();
-            await GetAllUserProducts();
-
             ApiConnection = Configuration.GetConnectionString("Api");
             Categories = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetCategories())).Data;
             States = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductStates())).Data;
@@ -92,6 +85,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         private async void Submith()
         {
             Random rand = new();
+            request.Rate = rand.Next(3,6);
             request.Rate =rand.Next(3,6);
 
             var result = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.AddProduct(request));
@@ -137,12 +131,6 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
                 memoryStream.Close();
             }
-        }
-
-        public async Task GetAllUserProducts()
-        {
-            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetPersonalProduct(ProductPageNumber, _filters.Active, _filters.Closed));
-            _products = responce.Data;
         }
 
         private void ClearFields()
