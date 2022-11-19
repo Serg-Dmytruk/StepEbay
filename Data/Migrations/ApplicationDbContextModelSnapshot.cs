@@ -261,6 +261,8 @@ namespace StepEbay.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProductId");
+
                     b.ToTable("Description", (string)null);
                 });
 
@@ -460,6 +462,17 @@ namespace StepEbay.Data.Migrations
                     b.Navigation("PurchaseType");
                 });
 
+            modelBuilder.Entity("StepEbay.Data.Models.Products.ProductDesc", b =>
+                {
+                    b.HasOne("StepEbay.Data.Models.Products.Product", "Product")
+                        .WithMany("Descriptions")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("StepEbay.Data.Models.Users.Favorite", b =>
                 {
                     b.HasOne("StepEbay.Data.Models.Products.Product", "Product")
@@ -481,6 +494,8 @@ namespace StepEbay.Data.Migrations
 
             modelBuilder.Entity("StepEbay.Data.Models.Products.Product", b =>
                 {
+                    b.Navigation("Descriptions");
+
                     b.Navigation("Favorites");
 
                     b.Navigation("Purchases");
