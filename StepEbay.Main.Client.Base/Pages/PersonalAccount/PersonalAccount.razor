@@ -1,97 +1,103 @@
-﻿<div id="settings" class="flexBlock">
+﻿<div id="settings">
     <AuthorizeView>
         <Authorized>
             <div class="header">
                 Налаштування аккаунту
             </div>
-
             @*--------------------------------------------------------*@
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                            Змінити логин
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                        <div class="accordion-body">
-                            <div class="groupInput">
-                                <label>Логин</label>
-                                <input type="text" placeholder="nick name" @bind-value="_request.NickName" />
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="d-none d-lg-block col-lg-2 col-xl-2 col-xxl-2"></div>
+                        <div class="accordion col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                        Змінити логин
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body">
+                                        <div class="groupInput">
+                                            <label class="mHeightL">Логин</label>
+                                            <input class="mHeight" type="text" placeholder="nick name" @bind-value="_request.NickName" />
+                                        </div>
+                                        <div class="groupInput">
+                                            <label class="mHeightL">Підтвердіть пароль</label>
+                                            <input class="mHeight" type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
+                                        </div>
+                                        <button @onclick="UpdatePerson">Змінити</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="groupInput">
-                                <label>Підтвердіть пароль</label>
-                                <input type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                        Змінити пароль
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                    <div class="accordion-body">
+                                        <div class="groupInput">
+                                            <label class="mHeightL">Новий пароль</label>
+                                            <input class="mHeight" type="password" placeholder="Новий пароль" @bind-value="_request.Password" />
+                                        </div>
+                                        <div class="groupInput">
+                                            <label class="mHeightL">Повторити пароль</label>
+                                            <input class="mHeight" type="password" placeholder="Повторіть пароль" @bind-value="_request.PasswordRepeat" />
+                                        </div>
+                                        <div class="groupInput">
+                                            <label class="mHeightL">Підтвердіть пароль</label>
+                                            <input class="mHeight" type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
+                                        </div>
+                                        <button @onclick="UpdatePerson">Змінити</button>
+                                    </div>
+                                </div>
                             </div>
-                            <button @onclick="UpdatePerson">Змінити</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                            Змінити пароль
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                        <div class="accordion-body">
-                            <div class="groupInput">
-                                <label>Новий пароль</label>
-                                <input type="password" placeholder="Новий пароль" @bind-value="_request.Password" />
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                        Змінити персональні данні
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                                    <div class="accordion-body">
+                                        <div class="groupInput">
+                                            <label class="mHeightL">Повне Ім'я</label>
+                                            <input class="mHeight" type="text" placeholder="Повне Ім'я" @bind-value="_request.FullName" />
+                                        </div>
+                                        <div class="groupInput">
+                                            <label class="mHeightL">Адреса</label>
+                                            <input class="mHeight" type="text" placeholder="Адреса" @bind-value="_request.Adress" />
+                                        </div>
+                                        <div class="groupInput">
+                                            <label class="mHeightL">Підтвердіть пароль</label>
+                                            <input class="mHeight" type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
+                                        </div>
+                                        <button @onclick="UpdatePerson">Змінити</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="groupInput">
-                                <label>Повторити пароль</label>
-                                <input type="password" placeholder="Повторіть пароль" @bind-value="_request.PasswordRepeat" />
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                                        Змінити електронну адресу
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                                    <div class="accordion-body">
+                                        <div class="groupInput">
+                                            <label class="mHeightL">Електронна адреса</label>
+                                            <input class="mHeight" type="email" placeholder="Пошта" @bind-value="_request.Email" />
+                                        </div>
+                                        <div class="groupInput">
+                                            <label class="mHeightL">Підтвердіть пароль</label>
+                                            <input class="mHeight" type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
+                                        </div>
+                                        <button @onclick="UpdatePerson">Змінити</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="groupInput">
-                                <label>Підтвердіть пароль</label>
-                                <input type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
-                            </div>
-                            <button @onclick="UpdatePerson">Змінити</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                            Змінити персональні данні
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                        <div class="accordion-body">
-                            <div class="groupInput">
-                                <label>Повне Ім'я</label>
-                                <input type="text" placeholder="Повне Ім'я" @bind-value="_request.FullName" />
-                            </div>
-                            <div class="groupInput">
-                                <label>Адреса</label>
-                                <input type="text" placeholder="Адреса" @bind-value="_request.Adress" />
-                            </div>
-                            <div class="groupInput">
-                                <label>Підтвердіть пароль</label>
-                                <input type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
-                            </div>
-                            <button @onclick="UpdatePerson">Змінити</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-                            Змінити електронну адресу
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
-                        <div class="accordion-body">
-                            <div class="groupInput">
-                                <label>Електронна адреса</label>
-                                <input type="email" placeholder="Пошта" @bind-value="_request.Email" />
-                            </div>
-                            <div class="groupInput">
-                                <label>Підтвердіть пароль</label>
-                                <input type="password" placeholder="Старий пароль для підтвердження" @bind-value="_request.OldPasswordForConfirm" />
-                            </div>
-                            <button @onclick="UpdatePerson">Змінити</button>
                         </div>
                     </div>
                 </div>

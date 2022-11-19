@@ -1,0 +1,182 @@
+﻿* {
+	box-sizing: border-box;
+}
+
+.mainD {
+	padding: 30px 0px;
+	display: flex;
+	flex-direction: row;
+}
+
+#descriptionD {
+	padding: 90px 0 90px 0;
+	position: relative;
+	min-height: 300px;
+}
+
+
+
+.childD {
+	padding: 20px;
+}
+
+.infoD {
+	position: relative;
+	min-width: 43%;
+}
+
+.pictureD {
+	width: max-content;
+}
+
+.buybutton {
+	color: white;
+	width: 160.58px;
+	height: 38.68px;
+	left: 408px;
+	top: 421px;
+	background: #716B6B;
+	border-radius: 10px;
+	border: none;
+}
+
+.buybutton:hover {
+	background: #FFA740;
+}
+
+.descriptionD {
+	text-align: center;
+	border: 1px solid transparent;
+	padding: 45px;
+	transition: 0.3s;
+
+	h2 {
+		transition: 0.3s;
+	}
+
+	&:hover {
+		border: 1px solid green;
+		background-color: rgba(200,200,200,0.3);
+	}
+
+	&:hover h2 {
+		color: green;
+	}
+}
+
+.descriptionHeader {
+	padding: 0px 0 30px 0;
+	font-size: 24px;
+	font-weight: 700;
+	color: #F4A063;
+}
+
+.testD {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 30px;
+}
+
+.like {
+	margin-left: 10%;
+}
+
+.testD img {
+	width: 30px;
+	height: 30px;
+}
+
+.slideImg {
+	width: 12vw;
+	height: 12vh;
+	object-fit: contain;
+}
+
+.slideMainD {
+	width: 100%;
+	padding: 20px;
+}
+
+.slideChildD {
+	display: flex;
+	flex-direction: row;
+	width: fit-content;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.slideChildD a {
+	border: 1px solid grey;
+}
+
+/*--------------------------------------*/
+
+#mainD {
+	padding: 30px 0px;
+	position: relative;
+	background-color: #ddd;
+	min-height: 100px;
+	overflow: hidden;
+
+	.animated-bg {
+		position: absolute;
+		top: 0px;
+		left: -20%;
+		bottom: 0px;
+		width: 70%;
+		background-color: #8EC763;
+		z-index: 4;
+		transform: skewX(35deg);
+		transition: 2s;
+	}
+
+	&:hover > .animated-bg {
+		left: 200%;
+		background-color: grey;
+	}
+
+	&:hover #mainPicture {
+		-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	}
+}
+
+.mainPicture {
+	position: relative;
+	z-index: 5;
+	overflow: hidden;
+	border: 1px solid #8EC763;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	transition: 1s .2s;
+}
+
+.pictures {
+	position: relative;
+	z-index: 5;
+	display: grid;
+	grid-template-columns: 1fr;
+	height: 100%;
+
+	.pic {
+		border: 1px solid grey;
+		position: relative;
+		height: 100%;
+		z-index: 3;
+		width: 100%;
+		opacity: 0.9;
+		transition: .3s;
+		transform: scale(0.9);
+	}
+
+	.pic:hover {
+		opacity: 1;
+		transform: scale(1);
+	}
+}

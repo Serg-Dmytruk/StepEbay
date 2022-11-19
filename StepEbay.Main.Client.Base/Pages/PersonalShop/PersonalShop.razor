@@ -1,0 +1,61 @@
+﻿<div class="flexBlock">
+    <div class="header">
+        <span>Ваші товари</span>
+    </div>
+
+    @foreach (var product in _products.List)
+    {
+        <a href="/product/@product.Id">
+            <div id="flex" class="personalCard mt-20">
+                <div>
+                    <img src="@(string.IsNullOrEmpty(product.Image1) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image1}")" alt="" />
+                </div>
+                <div class="ml-10">
+                    <div class="mt-13">
+                        <span>@product.Title</span>
+                    </div>
+                    <div>
+                        <span>Ціна: @product.Price</span>
+                        <span>₴</span>
+                    </div>
+                    <div>
+                        <span>@product.DateClosed</span>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+    }
+</div>
+
+@*    <div class="flexBlock">
+    <div class="header">
+    <span>Запити на покупки</span>
+    </div>*@
+
+@*        @foreach (var product in _products.List)
+    {
+    if (product.PurchaseTypeId == 1)
+    {
+    <a href="/product/@product.Id">
+    <div id="flex" class="personalCard mt-20">
+    <div>
+    <img src="@(string.IsNullOrEmpty(product.Image) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image}")" alt="" />
+    </div>
+    <div class="ml-10">
+    <div class="mt-13">
+    <span>@product.Title</span>
+    </div>
+    <div>
+    <span>Ціна: @product.Price</span>
+    <span>₴</span>
+    </div>
+    <div>
+    <span>@product.DateClosed</span>
+    </div>
+    </div>
+
+    </div>
+    </a>
+    }
+    }*@
