@@ -73,7 +73,7 @@
                                     <span>Остання ставка: @LastPurchase.PurchasePrice</span>
                                 </div>
                                 <div class="mt-13">
-                                    <span>Підняти до: @(Math.Round(LastPurchase.PurchasePrice+LastPurchase.PurchasePrice * (decimal)0.02, 2))</span>
+                                    <span>Підняти до: @(Math.Round(LastPurchase.PurchasePrice + LastPurchase.PurchasePrice * (decimal)0.02, 2))</span>
                                 </div>
                             }
                             else
@@ -82,7 +82,7 @@
                                     <span>Немає ставок</span>
                                 </div>
                                 <div class="mt-13">
-                                    <span>Підняти до: @(Math.Round(Product.Price+Product.Price * (decimal)0.02, 2))</span>
+                                    <span>Підняти до: @(Math.Round(Product.Price + Product.Price * (decimal)0.02, 2))</span>
                                 </div>
                             }
                         }
