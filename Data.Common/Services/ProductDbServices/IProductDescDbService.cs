@@ -5,6 +5,6 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
 {
     public interface IProductDescDbService : IDefaultDbService<int, ProductDesc>
     {
-        public Task<ProductDesc> GetProductDescByProductId(int productId);
+        public Task<List<ProductDesc>> GetProductDescByProductId(int productId);
     }
 }

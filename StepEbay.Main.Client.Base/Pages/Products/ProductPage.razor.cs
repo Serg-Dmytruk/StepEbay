@@ -32,6 +32,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         public ProductPage()
         {
             Product = new();
+            Product.ProductDescs = new Dictionary<string, string>();
         }
 
         private async void Buy()

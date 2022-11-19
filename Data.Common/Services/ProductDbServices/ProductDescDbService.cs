@@ -13,9 +13,9 @@ namespace StepEbay.Data.Common.Services.ProductDbServices
             _context = context;
         }
 
-        public async Task<ProductDesc> GetProductDescByProductId(int productId)
+        public async Task<List<ProductDesc>> GetProductDescByProductId(int productId)
         {
-            return await _context.ProductDesc.FirstOrDefaultAsync(n=> n.ProductId==productId);
+            return await _context.ProductDesc.Where(n=> n.ProductId==productId).ToListAsync();
         }
     }
 }

@@ -176,9 +176,9 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
 
             if (productDb == null)
                 return ResponseData<ProductDto>.Fail("product", "Продукта нема");
-       
-            return new ResponseData<ProductDto>() { Data = new ProductDto() 
-            { 
+
+            return new ResponseData<ProductDto>() { Data = new ProductDto()
+            {
                 Id = productDb.Id,
                 Image1 = productDb.Image1,
                 Image2 = productDb.Image2,
@@ -192,7 +192,8 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                 PurchaseTypeId = productDb.PurchaseTypeId,
                 DateCreated = productDb.DateCreated,
                 DateClosed = (DateTime)productDb.DateClose,
-                Rate = productDb.Rate
+                Rate = productDb.Rate,
+                ProductDescs = (await _productDescDb.GetProductDescByProductId(productDb.Id)).ToDictionary(x => x.Name, x => x.About)
             } };
         }
     }
