@@ -100,9 +100,10 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             {
                 LastProd = new ProductDto { Price = changedProduct.Price };
                 Product.Price = changedProduct.Price;
-                LastPurchase.PurchasePrice = Math.Round(changedProduct.Price + LastPurchase.PurchasePrice * (decimal)0.02, 2);
-                MessageService.ShowInfo("Ціна змінилася", $"{Product.Title} - {LastPurchase.PurchasePrice}");
+                LastPurchase.PurchasePrice = changedProduct.Price;
+                MessageService.ShowInfo("Ціна змінилася", $"{Product.Title} - {Math.Round(Product.Price+Product.Price * (decimal)0.02, 2)}");
             }
+            StateHasChanged();
         }
 
         void ImageChanger(string src)

@@ -120,7 +120,7 @@
                                     </div>
                                     <div class="mt-20 pl-15">
                                         <span>₴</span>
-                                        <span>@product.Price</span>
+                                        <span>@(Math.Round(product.Price + product.Price * (decimal)0.02, 2))</span>
                                     </div>
                                     <div class="mt-20">
                                         <a href="/product/@product.Id">
