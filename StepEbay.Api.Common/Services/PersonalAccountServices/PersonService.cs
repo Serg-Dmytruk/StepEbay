@@ -95,7 +95,6 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
                 PurchaseTypeId = x.PurchaseTypeId,
                 DateCreated = x.DateCreated,
                 DateClosed = x.DateClose.Value,
-                AdditionalInfo = x.AditionalInfo,
                 Rate = x.Rate
             }).ToList();
         }
