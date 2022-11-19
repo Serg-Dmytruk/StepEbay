@@ -1,6 +1,15 @@
-﻿#settings div{
+﻿#settings {
+    padding-top: 45px;
+}
+
+#settings div{
     padding: 0!important;
 }
+
+#settings .accordion{
+    margin: 45px 0 45px 0;
+}
+
 
 .accordion-button:focus {
     z-index: 3;
@@ -81,19 +90,21 @@
 
 .accordion-body {
     button {
-        display:flex;
-        justify-content:center;
-        align-items:center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border: 1px solid var(--clr-orange);
-/*        border-radius: 10px;
+        /*        border-radius: 10px;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         -khtml-border-radius: 10px;*/
         background: var(--clr-orange);
         outline: none;
         width: 100%;
-        padding:15px;
+        padding: 15px;
         font-weight: 700;
+        margin-top: 15px;
+        margin-bottom: 15px;
 
         &:focus {
             color: var(--clr-black);

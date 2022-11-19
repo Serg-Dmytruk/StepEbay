@@ -1,35 +1,89 @@
-﻿#flex {
+﻿#settings {
+    padding-top: 45px;
+}
+
+#settings div {
+    padding: 0 !important;
+}
+
+#settings .accordion {
+    margin: 45px 0 45px 0;
+}
+
+
+.accordion-button:focus {
+    z-index: 3;
+    border-color: var(--clr-dark-grey);
+    outline: 0 !important;
+    /* I changed the color on this line */
+    /* If you do not want any color, just delete */
+    /*box-shadow: 0 0 0 0.25rem rgba(139, 198, 93, 0.25);*/
+    box-shadow: 0 0 0 0.25rem rgba(198, 194, 194, 0.25);
+}
+
+.accordion-button:not(.collapsed) {
+    color: white;
+    font-weight: 700;
+    background-color: var(--clr-dark-grey);
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url(../../../icons/arrow.svg);
+    transform: rotate(-180deg);
+    fill: red;
+}
+
+#settings .groupInput {
     display: flex;
-    flex-direction: row;
-}
+    justify-content: space-between;
+    align-items: center;
 
-.flexBlock {
-    width: 30vw;
-    margin: 0 auto;
-    margin-top: 20px;
-}
+    input, label {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        height: 40px;
+        line-height: 1 !important;
+    }
 
-#flex img {
-    width: 100px;
-    height: 100px;
-    border-radius: 10px;
-}
+    input {
+        border: 1px solid var(--clr-light-grey);
+        /*        border-radius: 10px 0 0 10px;
+        -webkit-border-radius: 0 10px 10px 0;
+        -moz-border-radius: 0 10px 10px 0;
+        -khtml-border-radius: 0 10px 10px 0;*/
+        background: #ffffff !important;
+        outline: none;
+        padding: 5px;
+        padding-left: 15px;
+        width: 65%;
 
-#flex a {
-    color: black;
-}
+        &:focus {
+            color: var(--clr-black);
+            border: 1px solid var(--clr-green)
+        }
 
-.ml-10 {
-    margin-left: 10px;
-}
+        &:active {
+            border: 1px solid var(--clr-green)
+        }
+    }
 
-.personalCard {
-    border: 1px solid grey;
-    border-radius: 10px;
-}
+    label {
+        border: 1px solid var(--clr-green);
+        /*        border-radius: 10px 0 0 10px;
+        -webkit-border-radius: 10px 0 0 10px;
+        -moz-border-radius: 10px 0 0 10px;
+        -khtml-border-radius: 10px 0 0 10px;*/
+        background: var(--clr-green);
+        outline: none;
+        padding: 5px;
+        width: 35%;
+        padding-left: 15px;
+        padding-top: 11px;
 
-#settings{
-    div{
-        padding-top:5px;
+        &:focus {
+            color: var(--clr-black);
+            border: 1px solid var(--clr-black)
+        }
     }
 }

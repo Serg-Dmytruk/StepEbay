@@ -4,6 +4,8 @@
 @use 'pages/productListPage';
 @use 'pages/personalPage';
 @use 'pages/settings';
+@use 'pages/productPage';
+@use 'pages/addProduct';
 @use 'pages//homePageElements/category';
 @use 'pages//homePageElements/slider';
 
@@ -21,4 +23,20 @@ body {
 
 .pl-15 {
     padding-left: 15px;
+}
+
+@media screen and (max-width: 576px) {
+    #settings .mHeight {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        height: 60px;
+    }
+
+    #settings .mHeightL {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        height: 60px;
+        display:flex;
+        align-items:center;
+    }
 }
