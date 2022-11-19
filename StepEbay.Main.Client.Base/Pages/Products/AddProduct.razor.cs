@@ -18,8 +18,8 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         [Inject] private IApiService ApiService { get; set; }
         [Inject] IMessageService MessageService { get; set; }
 
-        private PaginatedList<ProductDto> _products = new PaginatedList<ProductDto>();
-        private BetFilter _filters = new BetFilter();
+/*        private PaginatedList<ProductDto> _products = new PaginatedList<ProductDto>();
+        private BetFilter _filters = new BetFilter();*/
         public int ProductPageNumber = 0;
         public int MaxProductPageNumber = 0;
 
