@@ -119,7 +119,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             };
 
             Product endProduct=await _productDb.Add(product);
-            await _productDescDb.AddRange(productRequest.ProductDescs.Select(n => new ProductDesc() { ProductId = product.Id, Name = n.Item1, About = n.Item2 }));
+            await _productDescDb.AddRange(productRequest.ProductDescs.Select(n => new ProductDesc() { ProductId = product.Id, Name = n.Key, About = n.Value }));
 
             return ResponseData.Ok();
         }

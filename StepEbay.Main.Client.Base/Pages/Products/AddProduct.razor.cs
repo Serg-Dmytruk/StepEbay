@@ -48,7 +48,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
             Categories = new List<CategoryDto>();
             States = new List<ProductStateDto>();
             Types = new List<PurchaseTypeResponseDto>();
-            request.ProductDescs = new List<(string, string)>();
+            request.ProductDescs = new Dictionary<string, string>();
         }
 
         protected override async Task OnInitializedAsync()
@@ -72,14 +72,21 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
         private void addDesc()
         {
-            request.ProductDescs.Add((keyDescInput, valueDescInput));
-            keyDescInput = "";
-            valueDescInput = "";
+            if (!request.ProductDescs.ContainsKey(keyDescInput))
+            {
+                request.ProductDescs.Add(keyDescInput, valueDescInput);
+                keyDescInput = "";
+                valueDescInput = "";
+            }
+            else
+            {
+                MessageService.ShowError("Помилка", "Категорія вже існує");
+            }
             StateHasChanged();
         }
-        private void removeDesc(int id)
+        private void removeDesc(string id)
         {
-            request.ProductDescs.RemoveAt(id);
+            request.ProductDescs.Remove(id);
             StateHasChanged();
         }
         private async void Submith()
@@ -141,6 +148,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         private void ClearFields()
         {
             request = new();
+            request.ProductDescs = new Dictionary<string, string>();
             StateHasChanged();
         }
     }

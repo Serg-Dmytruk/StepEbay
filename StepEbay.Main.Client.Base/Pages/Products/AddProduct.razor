@@ -125,10 +125,10 @@
             }
         </select>
         <br/>
-        @for(int i=0;i<request.ProductDescs.Count; i++){
-             int m = i;
-            <span>@request.ProductDescs[i].Item1 : @request.ProductDescs[i].Item2</span>
-            <button @onclick="() => removeDesc(m)">X</button>
+        @foreach (var item in request.ProductDescs)
+        {
+            <span>@item.Key : @item.Value</span>
+            <button @onclick="() => removeDesc(item.Key)">X</button>
             <br/>
         }
         <input @bind="keyDescInput"/><input @bind="valueDescInput"/>
