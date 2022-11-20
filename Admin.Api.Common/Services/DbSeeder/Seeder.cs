@@ -61,11 +61,11 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             await AddPurchesState();
             await AddPurchase();
         }
-        private List<(string, string)> getListOfProperties(string url)
+        private Dictionary<string, string> getListOfProperties(string url)
         {
             var web = new HtmlAgilityPack.HtmlWeb();
             HtmlDocument doc = web.Load(url);
-            List<(string, string)> values = new List<(string, string)>();
+            Dictionary<string, string> values = new Dictionary<string, string>();
 
             var selects = doc.DocumentNode.SelectNodes("/html/body/app-root/div/div/rz-product/div/rz-product-tab-characteristics/div/div/main/rz-product-characteristics-list/section");
             for(int i = 0; i < selects.Count; i++)
@@ -80,7 +80,8 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     {
                         value+=", "+li[ii].SelectNodes("/html/body/app-root/div/div/rz-product/div/rz-product-tab-characteristics/div/div/main/rz-product-characteristics-list/section[" + (i + 1) + "]/dl/div[" + (j + 1) + "]/dd/ul/li[" + (ii + 1) + "]")[0].InnerText;
                     }
-                    values.Add((key, value));
+                    if (!values.ContainsKey(key))
+                        values.Add(key, value);
                 }
             }
             return values;
@@ -168,7 +169,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
             await _context.SaveChangesAsync();
         }
 
-        private async Task AddProduct(string title, string image1, string image2, string image3, decimal price, string desc, string additionalInfo, string category, int rate, List<(string, string)> productDescs)
+        private async Task AddProduct(string title, string image1, string image2, string image3, decimal price, string desc, string additionalInfo, string category, int rate, Dictionary<string, string> productDescs)
         {
             var states = await _productStateDbService.GetAll();
             var categorie = await _categoryDbService.GetByName(category);
@@ -196,7 +197,7 @@ namespace StepEbay.Admin.Api.Common.Services.DbSeeder
                     Rate = rate
                 });
 
-                await _productDescDbService.AddRange(productDescs.Select(n=>new ProductDesc() { ProductId=product.Id, Name=n.Item1, About=n.Item2}));
+                await _productDescDbService.AddRange(productDescs.Select(n=>new ProductDesc() { ProductId=product.Id, Name=n.Key, About=n.Value}));
             }
 
             await _context.SaveChangesAsync();
