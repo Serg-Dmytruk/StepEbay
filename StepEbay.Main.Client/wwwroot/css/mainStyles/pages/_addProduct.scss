@@ -39,16 +39,21 @@
     justify-content: space-between;
     align-items: center;
 
-    input, label {
+    input, label, .form-select {
         margin-top: 15px;
         margin-bottom: 15px;
         height: 40px;
         line-height: 1 !important;
     }
 
+    .form-select{
+        border-radius: 0 !important;
+        box-shadow:none;
+    }
+
     input {
         border: 1px solid var(--clr-light-grey);
-/*        border-radius: 10px 0 0 10px;
+        /*        border-radius: 10px 0 0 10px;
         -webkit-border-radius: 0 10px 10px 0;
         -moz-border-radius: 0 10px 10px 0;
         -khtml-border-radius: 0 10px 10px 0;*/
@@ -70,7 +75,7 @@
 
     label {
         border: 1px solid var(--clr-green);
-/*        border-radius: 10px 0 0 10px;
+        /*        border-radius: 10px 0 0 10px;
         -webkit-border-radius: 10px 0 0 10px;
         -moz-border-radius: 10px 0 0 10px;
         -khtml-border-radius: 10px 0 0 10px;*/
@@ -107,7 +112,7 @@
     content: 'Select some files';
     display: inline-block;
     background: linear-gradient(top, #f9f9f9, #e3e3e3);
-    border: 1px solid #999;
+    border: 1px solid var(--clr-light-grey);
     border-radius: 3px;
     padding: 5px 8px;
     outline: none;
@@ -132,9 +137,9 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(top, #f9f9f9, #e3e3e3);
-    border: 1px solid #999;
+    border: 1px solid var(--clr-light-grey);
     border-radius: 3px;
-    color: black;
+    color: var(--clr-black);
     cursor: pointer;
     position: relative;
     width: 120px;
@@ -147,13 +152,13 @@
         white-space: nowrap;
         -webkit-user-select: none;
         cursor: pointer;
-        text-shadow: 1px 1px #fff;
         font-weight: 700;
         font-size: 10pt;
     }
 
     &:hover {
-        background-color: lightblue;
+        background-color: var(--clr-green);
+        color: white;
     }
 }
 
@@ -165,62 +170,89 @@
     cursor: pointer;
 }
 
-/* The container must be positioned relative: */
-.custom-select {
-    position: relative;
-    font-family: Arial;
+.productDescB {
+    border: 1px solid var(--clr-dark-grey);
+    margin: 15px 0;
 }
 
-.custom-select select {
-    display: none; /*hide original SELECT element: */
+.productDesc {
+
+    div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h3 {
+        display: inline-block;
+        box-sizing: border-box;
+        border: 1px solid var(--clr-green);
+        background: var(--clr-green);
+        padding: 5px;
+        padding-left: 15px;
+        padding-top: 11px;
+        font-size: 1em;
+        margin: 0;
+        width: 100%;
+    }
+
+    p {
+        border: 1px solid var(--clr-green);
+        padding: 5px;
+        width: 100%;
+        padding-left: 15px;
+        padding-top: 11px;
+        font-size: 1em;
+        margin: 0;
+    }
+
+    .removeDescBtn {
+        border: 1px solid var(--clr-dark-grey);
+        background-color: var(--clr-dark-grey);
+        width: 30%;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+            border: 1px solid var(--clr-red);
+            background-color: var(--clr-red);
+        }
+    }
 }
 
-.select-selected {
-    background-color: DodgerBlue;
+h2.productDesc {
+    box-sizing: border-box;
+    background: var(--clr-dark-grey);
+    padding: 5px;
+    padding-left: 15px;
+    padding-top: 11px;
+    font-size: 1em;
+    margin: 0;
+    width: 100%;
+    text-align:center;
+    color:white;
 }
 
-/* Style the arrow inside the select element: */
-.select-selected:after {
-    position: absolute;
-    content: "";
-    top: 14px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-color: #fff transparent transparent transparent;
-}
 
-/* Point the arrow upwards when the select box is open (active): */
-.select-selected.select-arrow-active:after {
-    border-color: transparent transparent #fff transparent;
-    top: 7px;
-}
 
-/* style the items (options), including the selected item: */
-.select-items div, .select-selected {
-    color: #ffffff;
-    padding: 8px 16px;
-    border: 1px solid transparent;
-    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-    cursor: pointer;
-}
+.buttonFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-/* Style items (options): */
-.select-items {
-    position: absolute;
-    background-color: DodgerBlue;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 99;
-}
+    div {
+        width: 60%;
+    }
 
-/* Hide the items when the select box is closed: */
-.select-hide {
-    display: none;
-}
+    h2.productDescBtn {
+        margin: 15px 0;
+        padding:15px;
+        width: 40%;
+        background: var(--clr-orange);
+        cursor: pointer;
+        text-align:right;
 
-.select-items div:hover, .same-as-selected {
-    background-color: rgba(0, 0, 0, 0.1);
+        &:hover {
+            background-color: var(--clr-green);
+        }
+    }
 }

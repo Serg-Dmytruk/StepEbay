@@ -86,9 +86,9 @@
                         <input class="mHeight" type="text" @bind="request.Price" />
                     </div>
 
-                    <span>Категорія:</span>
-                    <div class="custom-select" style="width:200px;">
-                        <select @bind="request.CategoryId">
+                    <div class="groupInput">
+                        <label class="mHeightL">Категорія:</label>
+                        <select class="form-select" @bind="request.CategoryId" aria-label="Default select example">
                             @foreach (var item in Categories)
                             {
                                 <option value="@item.Id">
@@ -98,107 +98,93 @@
                         </select>
                     </div>
 
-                    <span>Статус:</span>
-                    <select @bind="request.StateId">
-                        @foreach (var item in States)
+                    <div class="groupInput">
+                        <label class="mHeightL">Статуc</label>
+                        <select class="form-select" @bind="request.StateId" aria-label="Default select example">
+                            @foreach (var item in States)
+                            {
+                                @if (@item.Name == "used")
+                                {
+                                    <option value="@item.Id">
+                                        Б/У
+                                    </option>
+                                }
+
+                                @if (@item.Name == "new")
+                                {
+                                    <option value="@item.Id">
+                                        Новий
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="groupInput">
+                        <label class="mHeightL">Тип</label>
+                        <select class="form-select" @bind="request.PurchaseTypeId">
+                            @foreach (var item in Types)
+                            {
+                                @if (@item.Name == "sale")
+                                {
+                                    <option value="@item.Id">
+                                        Продаж
+                                    </option>
+                                }
+
+                                @if (@item.Name == "auction")
+                                {
+                                    <option value="@item.Id">
+                                        Аукціон
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <div class="productDescB">
+                        <h2 class="productDesc">Характеристики</h2>
+                        <div class="groupInput">
+                            <label class="mHeightL">Назва:</label>
+                            <input class="mHeight" @bind="keyDescInput" />
+                        </div>
+                        <div class="groupInput">
+                            <label class="mHeightL">Опис:</label>
+                            <input class="mHeight" @bind="valueDescInput" />
+                        </div>
+                        <div class="buttonFlex">
+                            <div></div>
+                            <h2 class="productDesc productDescBtn" @onclick="addDesc">Додати характеристику</h2>
+                        </div>
+                        
+                        @foreach (var item in request.ProductDescs)
                         {
-                            <option value="@item.Id">
-                                @item.Name
-                            </option>
+                            <div class="productDesc">
+                                <div>
+                                    <h3>@item.Key</h3>
+                                    <h3 class="removeDescBtn" @onclick="() => removeDesc(item.Key)">Видалити</h3>
+                                </div>
+
+                                <p>@item.Value</p>
+                            </div>
                         }
-                    </select>
-                    <br />
-                    <span>Тип:</span>
-                    <select @bind="request.PurchaseTypeId">
-                        @foreach (var item in Types)
-                        {
-                            <option value="@item.Id">
-                                @item.Name
-                            </option>
-                        }
-                    </select>
-                    <button @onclick="Submith">
-                        Додати
-                    </button>
+                        </div>
+                    </div>
+                    <div class="buttonFlex">
+                        <div></div>
+                        <h2 class="productDesc productDescBtn" @onclick="Submith">Закінчити</h2>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="custom-select" style="width:200px;">
-  <select>
-    <option value="0">Select car:</option>
-    <option value="1">Audi</option>
-    <option value="2">BMW</option>
-    <option value="3">Citroen</option>
-    <option value="4">Ford</option>
-    <option value="5">Honda</option>
-    <option value="6">Jaguar</option>
-    <option value="7">Land Rover</option>
-    <option value="8">Mercedes</option>
-    <option value="9">Mini</option>
-    <option value="10">Nissan</option>
-    <option value="11">Toyota</option>
-    <option value="12">Volvo</option>
-  </select>
-</div>
-
-        <span>Заголовок:</span><input @bind="request.Title" /><br />
-        <span>Опис:</span><input @bind="request.Description" /><br />
-        <span>Ціна:</span><input type="number" @bind="request.Price" /><br />
-        <span>Категорія:</span>
-        <select @bind="request.CategoryId">
-            @foreach (var item in Categories)
-            {
-                <option value="@item.Id">
-                    @item.Name
-                </option>
-            }
-        </select>
-        <br />
-        <span>Статус:</span>
-        <select @bind="request.StateId">
-            @foreach (var item in States)
-            {
-                <option value="@item.Id">
-                    @item.Name
-                </option>
-            }
-        </select>
-        <br />
-        <span>Тип:</span>
-        <select @bind="request.PurchaseTypeId">
-            @foreach (var item in Types)
-            {
-                <option value="@item.Id">
-                    @item.Name
-                </option>
-            }
-        </select>
-        <br/>
-        @foreach (var item in request.ProductDescs)
-        {
-            <span>@item.Key : @item.Value</span>
-            <button @onclick="() => removeDesc(item.Key)">X</button>
-            <br/>
-        }
-        <input @bind="keyDescInput"/><input @bind="valueDescInput"/>
-        <button @onclick="addDesc">
-            Додати характеристику
-        </button>
-        <br />
-        <button @onclick="Submith">
-            Додати товар
-        </button>
 @*<span>Заголовок:</span>
     <input @bind="request.Title" />
     <br />
     <span>Опис:</span>
     <input @bind="request.Description" />
-    <br />
-    <span>Додаткова інформація:</span>
-    <input @bind="request.AdditionalInfo" />
     <br />
     <span>Ціна:</span>
     <input type="number" @bind="request.Price" />
@@ -232,6 +218,19 @@
     </option>
     }
     </select>
+    <br />
+    @foreach (var item in request.ProductDescs)
+    {
+    <span>@item.Key : @item.Value</span>
+    <button @onclick="() => removeDesc(item.Key)">X</button>
+    <br />
+    }
+    <input @bind="keyDescInput" />
+    <input @bind="valueDescInput" />
+    <button @onclick="addDesc">
+    Додати характеристику
+    </button>
+    <br />
     <button @onclick="Submith">
-    Додати
+    Додати товар
     </button>*@
