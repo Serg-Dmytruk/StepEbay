@@ -68,6 +68,12 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Post("/product/search")]
         Task<ApiResponse<List<ProductDto>>> GetSearch(SearchIdsDto products);
+
+        [Post("/person/favorite/{product}")]
+        Task<ApiResponse<BoolResult>> ToggleFavorite(int product);
+
+        [Post("/person/isfavorite/{product}")]
+        Task<ApiResponse<BoolResult>> isFavorite(int product);
     }
 }
 

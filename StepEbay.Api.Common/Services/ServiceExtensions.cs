@@ -45,6 +45,7 @@ namespace StepEbay.Main.Api.Common.Services
             services.AddScoped<IProductDbService, ProductDbService>();
             services.AddScoped<ICategoryDbService, CategoryDbService>();
             services.AddScoped<IProductStateDbService, ProductStateDbService>();
+            services.AddScoped<IFavoriteDbService, FavoriteDbService>();
             services.AddScoped<IProductDescDbService, ProductDescDbService>();
             services.AddScoped<IPurchaseTypeDbService, PurchaseTypeDbService>();
             services.AddScoped<IPurchesDbService, PurchesDbService>();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StepEbay.Common.Models.RefitModels;
+using StepEbay.Data.Models.Products;
 using StepEbay.Main.Api.Common.Services.PersonalAccountServices;
 using StepEbay.Main.Common.Models.Bet;
 using StepEbay.Main.Common.Models.Person;
@@ -35,6 +36,19 @@ namespace StepEbay.Main.Api.Controllers
         public async Task<List<ProductDto>> GetProductsInfo([FromBody] ProductInfoDto productInfos)
         {
             return await _personService.GetProductsInfo(productInfos);
+        }
+
+        [HttpPost("favorite/{product}")]
+        public async Task<BoolResult> ToggleFavorite(int product)
+        {
+            int userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
+            return await _personService.ToggleFavorite(product, userId);
+        }
+        [HttpPost("isfavorite/{product}")]
+        public async Task<BoolResult> IsFavorite(int product)
+        {
+            int userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
+            return await _personService.IsFavorite(product, userId);
         }
     }
 }
