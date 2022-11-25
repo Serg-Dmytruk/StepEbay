@@ -71,6 +71,9 @@ namespace StepEbay.Main.Client.Common.RestServices
 
         [Post("/person/favorite/{product}")]
         Task<ApiResponse<BoolResult>> ToggleFavorite(int product);
+
+        [Post("/person/isfavorite/{product}")]
+        Task<ApiResponse<BoolResult>> isFavorite(int product);
     }
 }
 

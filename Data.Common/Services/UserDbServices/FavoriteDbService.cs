@@ -24,5 +24,9 @@ namespace StepEbay.Data.Common.Services.UserDbServices
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<bool> IsFavorite(int productId, int userId)
+        {
+            return await _context.Favorites.AnyAsync(n => n.ProductId == productId && n.UserId == userId);
+        }
     }
 }

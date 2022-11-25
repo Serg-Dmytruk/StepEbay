@@ -11,5 +11,6 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
         Task<PersonResponseDto> GetPersonToUpdateInCabinet(int id);
         Task<List<ProductDto>> GetProductsInfo(ProductInfoDto productInfos);
         Task<BoolResult> ToggleFavorite(int productId, int userId);
+        Task<BoolResult> IsFavorite(int productId, int userId);
     }
 }

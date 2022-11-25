@@ -28,6 +28,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         private List<string> SrcPictures { get; set; } = new List<string>();
 
         private string currentPicture { get; set; } = "";
+        private bool isFavorite { get; set; } = false;
 
         public ProductPage()
         {
@@ -84,6 +85,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
                 }
             }
 
+            isFavorite=(await ApiService.ExecuteRequest(()=> ApiService.ApiMethods.isFavorite(int.Parse(Id)))).Data.Value;
             StateHasChanged();
         }
 

@@ -105,5 +105,10 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
         {
             return new BoolResult(await _favoriteDbService.ToggleFavorite(productId, userId));
         }
+
+        public async Task<BoolResult> IsFavorite(int productId, int userId)
+        {
+            return new BoolResult(await _favoriteDbService.IsFavorite(productId, userId));
+        }
     }
 }
