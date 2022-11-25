@@ -111,5 +111,10 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         {
             currentPicture = src;
         }
+
+        async void Favorite()
+        {
+            var result=await ApiService.ExecuteRequest(() => ApiService.ApiMethods.ToggleFavorite(int.Parse(Id)));
+        }
     }
 }

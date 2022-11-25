@@ -15,10 +15,12 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
     {
         IUserDbService _userDbService;
         IProductDbService _productDbService;
-        public PersonService(IUserDbService userDbService, IProductDbService productDbService)
+        IFavoriteDbService _favoriteDbService;
+        public PersonService(IUserDbService userDbService, IProductDbService productDbService, IFavoriteDbService favoriteDbService)
         {
             _userDbService = userDbService;
             _productDbService = productDbService;
+            _favoriteDbService = favoriteDbService;
         }
 
         public async Task<ResponseData> TryUpdate(int id, PersonUpdateRequestDto personUpdateRequest)
@@ -97,6 +99,11 @@ namespace StepEbay.Main.Api.Common.Services.PersonalAccountServices
                 DateClosed = x.DateClose.Value,
                 Rate = x.Rate
             }).ToList();
+        }
+
+        public async Task<BoolResult> ToggleFavorite(int productId, int userId)
+        {
+            return new BoolResult(await _favoriteDbService.ToggleFavorite(productId, userId));
         }
     }
 }
