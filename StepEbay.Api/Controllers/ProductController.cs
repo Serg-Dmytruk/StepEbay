@@ -6,10 +6,12 @@ using StepEbay.Main.Api.Common.Services.ProductServices;
 using StepEbay.Main.Common.Models.Bet;
 using StepEbay.Main.Common.Models.Product;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StepEbay.Main.Api.Controllers
 {
     [Route("product")]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
