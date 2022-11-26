@@ -34,7 +34,7 @@ namespace StepEbay.Main.Client.Base.Pages.PersonalShop
 
         public async Task GetAllUserProducts()
         {
-            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetPersonalProduct(ProductPageNumber, _filters.Active, _filters.Closed));
+            var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetPersonalShopProducts(ProductPageNumber));
             _products = responce.Data;
         }
     }

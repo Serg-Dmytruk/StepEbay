@@ -4,7 +4,7 @@
 }
 
 .flexBlock {
-    width: 30vw;
+    width: 45vw;
     margin: 0 auto;
     margin-top: 20px;
 }
@@ -15,8 +15,14 @@
     border-radius:10px;
 }
 
-#flex a{
-    color:black;
+.flexBlock a {
+    color: black;
+    text-decoration: none;
+}
+
+.flexBlock a:hover {
+    color: black;
+    text-decoration: none;
 }
 
 .ml-10{

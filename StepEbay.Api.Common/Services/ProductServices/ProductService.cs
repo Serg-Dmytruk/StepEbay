@@ -216,6 +216,34 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             };
         }
 
+        public async Task<PaginatedList<ProductDto>> GetPersonalShopProductList(int id, int page)
+        {
+            var products = await _productDb.GetProducts();
+            var productList = products.Where(p => p.OwnerId == id).ToList();
+
+            return new PaginatedList<ProductDto>
+            {
+                List = productList.Select(x => new ProductDto
+                {
+                    Id = x.Id,
+                    Image1 = x.Image1,
+                    Image2 = x.Image2,
+                    Image3 = x.Image3,
+                    Title = x.Title,
+                    Description = x.Description,
+                    Price = x.Price,
+                    CategoryId = x.CategoryId,
+                    StateId = x.ProductStateId,
+                    OwnerId = x.OwnerId,
+                    PurchaseTypeId = x.PurchaseTypeId,
+                    DateCreated = x.DateCreated,
+                    DateClosed = (DateTime)x.DateClose,
+                    Rate = x.Rate
+                }).Skip(page * 6).Take(6).ToList(),
+                CountAll = productList.Count()
+            };
+        }
+
         public async Task<ResponseData<ProductDto>> GetProduct(int id)
         {
             
