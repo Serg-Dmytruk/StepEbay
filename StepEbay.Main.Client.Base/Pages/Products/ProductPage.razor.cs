@@ -84,8 +84,14 @@ namespace StepEbay.Main.Client.Base.Pages.Products
                     LastPurchase = new PurchaseDto { PurchasePrice = 0};
                 }
             }
-
-            isFavorite=(await ApiService.ExecuteRequest(()=> ApiService.ApiMethods.isFavorite(int.Parse(Id)))).Data.Value;
+            try
+            {
+                isFavorite = (await ApiService.ExecuteRequest(() => ApiService.ApiMethods.isFavorite(int.Parse(Id)))).Data.Value;
+            }
+            catch
+            {
+                isFavorite=false;
+            }
             StateHasChanged();
         }
 
@@ -116,7 +122,7 @@ namespace StepEbay.Main.Client.Base.Pages.Products
 
         async void Favorite()
         {
-            var result=await ApiService.ExecuteRequest(() => ApiService.ApiMethods.ToggleFavorite(int.Parse(Id)));
+            await ApiService.ExecuteRequest(() => ApiService.ApiMethods.ToggleFavorite(int.Parse(Id)));
             isFavorite = !isFavorite;
             StateHasChanged();
         }

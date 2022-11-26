@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace StepEbay.Main.Api.Controllers
 {
     [Route("product")]
-    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -89,6 +88,7 @@ namespace StepEbay.Main.Api.Controllers
         }
 
         [HttpPost("favorite/{product}")]
+        [Authorize]
         public async Task<BoolResult> ToggleFavorite(int product)
         {
             int userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
@@ -96,6 +96,7 @@ namespace StepEbay.Main.Api.Controllers
         }
 
         [HttpPost("isfavorite/{product}")]
+        [Authorize]
         public async Task<BoolResult> IsFavorite(int product)
         {
             int userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
