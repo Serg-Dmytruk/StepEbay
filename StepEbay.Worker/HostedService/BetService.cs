@@ -35,7 +35,7 @@ namespace StepEbay.Worker.HostedService
         {
             //запускаємо асинхронно відслідковування закриття товарів, ставок, та зміни цін
             await Task.WhenAll(Task.Run(() => CloseBets(), stoppingToken),
-                Task.Run(() => DeactivateProducts(), stoppingToken),
+                //Task.Run(() => DeactivateProducts(), stoppingToken),
                 Task.Run(() => PriceChange(), stoppingToken));
         }
 
@@ -52,7 +52,7 @@ namespace StepEbay.Worker.HostedService
                 await _betHubClient.SendOwnerClose(ownersClose);
             if (changedPrices is not null && changedPrices.Any())
                 await _betHubClient.SendPriceChanged(changedPrices);
-                
+
         }
 
         private async Task CloseBets()
@@ -112,10 +112,10 @@ namespace StepEbay.Worker.HostedService
                     try
                     {
                         //Вибераємо товари (тип покупки звичайний) де термін дії підходить кінця та змінюємо стан на закритий
-                         productsInvoke = await db.Products
-                            .Where(x => x.IsActive
-                            && x.DateClose <= DateTime.UtcNow.AddMinutes(-1)
-                            && !db.Purchases.Any(p => p.PoductId == x.Id)).ToListAsync();
+                        productsInvoke = await db.Products
+                           .Where(x => x.IsActive
+                           && x.DateClose <= DateTime.UtcNow.AddMinutes(-1)
+                           && !db.Purchases.Any(p => p.PoductId == x.Id)).ToListAsync();
 
                         productsInvoke.ForEach(x => { x.IsActive = false; });
 
@@ -134,7 +134,7 @@ namespace StepEbay.Worker.HostedService
                     var owners = productsInvoke.Select(x => new ProductInfo { UserId = x.OwnerId, ProductId = x.Id }).ToList();
 
                     await InvopkeBetIvent(null, null, owners);
-                    await Task.Delay(10000);                
+                    await Task.Delay(10000);
                 }
             }
         }
@@ -151,20 +151,28 @@ namespace StepEbay.Worker.HostedService
                     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
                     //Вибераємо все шо в покупаках аукціон та макс ціну де стан ще не закритий
-                    var auctiones = await db.Purchases.Include(p => p.Product).ThenInclude(p => p.PurchaseType)
-                        .Include(p => p.PurchaseState)
-                        .Where(p => p.Product.PurchaseType.Type == PurchaseTypesConstant.AUCTION
-                        && p.Product.IsActive
-                        && p.PurchaseState.State == PurchaseStatesConstant.OPEN)
-                        .GroupBy(p => p.PoductId)
-                        .Select(cp => new ChangedPrice 
+                    var auctiones = await db.Products.Include(p => p.PurchaseType)
+                        .Where(x => x.IsActive && x.PurchaseType.Type == PurchaseTypesConstant.AUCTION).GroupJoin
+                        (db.Purchases.Include(x => x.PurchaseState).Where(x => x.PurchaseState.State == PurchaseStatesConstant.OPEN),
+                        p => p.Id,
+                        pr => pr.PoductId,
+                        (p, pr) => new { p, pr })
+                        .SelectMany(x => x.pr.DefaultIfEmpty(),
+                        (product, purchase) => new 
                         {
-                            ProductId = cp.Key,
-                            Price = cp.Max(x => x.PurchasePrice),
-                        }).ToListAsync();
+                            ProductId = product.p.Id,
+                            Price = purchase == null ? product.p.Price : purchase.PurchasePrice
+                        })
+                        .GroupBy(x => x.ProductId)
+                        .Select(x => new ChangedPrice
+                        {
+                            ProductId = x.Key,
+                            Price = x.Max(x => x.Price)
+                        })
+                       .ToListAsync();
 
                     //Якщо в памяті ще нічого нема то просто присвоємо перевіремо в наступній ітерації
-                    if(!changedPrices.Any())
+                    if (!changedPrices.Any())
                         changedPrices = auctiones;
                     else
                     {
