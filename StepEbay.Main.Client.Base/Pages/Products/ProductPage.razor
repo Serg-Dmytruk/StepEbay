@@ -28,15 +28,27 @@
                              style=@($"--stDB: {(Product.Rate * 100) / 5}%;--starsRatingBlockWidth:0%; --starsRatingBG:#716B6B;")>
                             <img src="/images/stars.svg" alt="stars">
                         </div>
-
-                        <div id="heartBlock"
+                        @if (isFavorite)
+                        {
+                            <div id="heartBlock"
                              @onclick="Favorite"
                              onmouseup="hMU()"
                              onmousedown="hMD()"
                              class="heartBlockActive"
                              style="--heartBlockBeforeBG: #DA1A1A;--heartBlockAfterBG: #ffffff">
+                                <img src="/images/heart.svg" alt="stars">
+                            </div>
+                        }
+                        else
+                        {
+                        <div id="heartBlock"
+                             @onclick="Favorite"
+                             onmouseup="hMU()"
+                             onmousedown="hMD()"
+                             style="--heartBlockBeforeBG: #DA1A1A;--heartBlockAfterBG: #ffffff">
                             <img src="/images/heart.svg" alt="stars">
                         </div>
+                        }
                     </div>
                     <div class="mt-25">
                         @if (Product.PurchaseTypeId == 1)

@@ -6,6 +6,7 @@ using StepEbay.Data.Models.Products;
 using StepEbay.Main.Api.Common.Services.DataValidationServices;
 using StepEbay.Main.Common.Models.Product;
 using StepEbay.Common.Constans;
+using StepEbay.Data.Common.Services.UserDbServices;
 
 namespace StepEbay.Main.Api.Common.Services.ProductServices
 {
@@ -17,13 +18,15 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
         private readonly IProductStateDbService _productStateDb;
         private readonly IPurchaseTypeDbService _purchaseTypeDb;
         private readonly IPurchesDbService _purchaseDb;
+        IFavoriteDbService _favoriteDbService;
 
         public ProductService(IProductDbService productDb,
             IProductDescDbService productDescDb,
             ICategoryDbService categoryDb,
             IProductStateDbService productStateDb,
             IPurchaseTypeDbService purchaseTypeDb,
-            IPurchesDbService purchaseDb)
+            IPurchesDbService purchaseDb,
+            IFavoriteDbService favoriteDbService)
         {
             _productDb = productDb;
             _productDescDb = productDescDb;
@@ -31,6 +34,7 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             _productStateDb = productStateDb;
             _purchaseTypeDb = purchaseTypeDb;
             _purchaseDb = purchaseDb;
+            _favoriteDbService = favoriteDbService;
         }
         public async Task<List<ProductDto>> GetSearch(SearchIdsDto products)
         {
@@ -82,6 +86,49 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                     Rate=x.Rate
                 }).Skip(page * ProductListConstant.MAXONPAGE).Take(ProductListConstant.MAXONPAGE).ToList(),
                 CountAll = products.Count()
+            };
+        }
+
+        public async Task<PaginatedList<ProductDto>> GetFilteredFavoriteProducts(ProductFilterInfo info, int page, int userId)
+        {
+            var products = await _productDb.GetFilteredProducts(info);
+
+            var list = products.Select(x => new ProductDto
+            {
+                Id = x.Id,
+                Image1 = x.Image1,
+                Image2 = x.Image2,
+                Image3 = x.Image3,
+                Title = x.Title,
+                Description = x.Description,
+                Price = x.Price,
+                CategoryId = x.CategoryId,
+                StateId = x.ProductStateId,
+                OwnerId = x.OwnerId,
+                PurchaseTypeId = x.PurchaseTypeId,
+                DateCreated = x.DateCreated,
+                Rate = x.Rate
+            }).ToList();
+
+            var fav= await _favoriteDbService.GetAllFavorite(userId);
+
+            int count = list.Count;
+            for (int i=0;i<count;i++)
+            {
+                if (!fav.Any(n => n.ProductId == list[i].Id))
+                {
+                    list.RemoveAt(i);
+                    i--;
+                    count--;
+                }
+            }
+
+            list.Skip(page * ProductListConstant.MAXONPAGE).Take(ProductListConstant.MAXONPAGE).ToList();
+
+            return new PaginatedList<ProductDto>
+            {
+                List = list,
+                CountAll = list.Count()
             };
         }
 
@@ -177,6 +224,17 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
             if (productDb == null)
                 return ResponseData<ProductDto>.Fail("product", "Продукта нема");
 
+            var list = await _productDescDb.GetProductDescByProductId(productDb.Id);
+            var dictionary=new Dictionary<string, string>();
+            foreach (var item in list)
+            {
+                try {
+                    dictionary.Add(item.Name, item.About);
+                }
+                catch {
+                    dictionary.Add(item.Name+ '.', item.About);
+                }
+            }
             return new ResponseData<ProductDto>() { Data = new ProductDto()
             {
                 Id = productDb.Id,
@@ -193,8 +251,17 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
                 DateCreated = productDb.DateCreated,
                 DateClosed = (DateTime)productDb.DateClose,
                 Rate = productDb.Rate,
-                ProductDescs = (await _productDescDb.GetProductDescByProductId(productDb.Id)).ToDictionary(x => x.Name, x => x.About)
+                ProductDescs = dictionary
             } };
+        }
+        public async Task<BoolResult> ToggleFavorite(int productId, int userId)
+        {
+            return new BoolResult(await _favoriteDbService.ToggleFavorite(productId, userId));
+        }
+
+        public async Task<BoolResult> IsFavorite(int productId, int userId)
+        {
+            return new BoolResult(await _favoriteDbService.IsFavorite(productId, userId));
         }
     }
 }

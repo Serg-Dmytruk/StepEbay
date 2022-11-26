@@ -7,5 +7,6 @@ namespace StepEbay.Data.Common.Services.UserDbServices
     {
         public Task<bool> ToggleFavorite(int productId, int userId);
         public Task<bool> IsFavorite(int productId, int userId);
+        public Task<List<Favorite>> GetAllFavorite(int userId);
     }
 }

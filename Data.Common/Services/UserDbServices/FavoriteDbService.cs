@@ -28,5 +28,9 @@ namespace StepEbay.Data.Common.Services.UserDbServices
         {
             return await _context.Favorites.AnyAsync(n => n.ProductId == productId && n.UserId == userId);
         }
+        public async Task<List<Favorite>> GetAllFavorite(int userId)
+        {
+            return await _context.Favorites.Where(n => n.UserId == userId).ToListAsync();
+        }
     }
 }

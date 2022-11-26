@@ -15,5 +15,8 @@ namespace StepEbay.Main.Api.Common.Services.ProductServices
         public Task<ResponseData<ProductDto>> GetProduct(int id);
         public Task<SearchIdsDto> Search(string product);
         public Task<List<ProductDto>> GetSearch(SearchIdsDto products);
+        public Task<PaginatedList<ProductDto>> GetFilteredFavoriteProducts(ProductFilterInfo info, int page, int userId);
+        public Task<BoolResult> ToggleFavorite(int productId, int userId);
+        public Task<BoolResult> IsFavorite(int productId, int userId);
     }
 }

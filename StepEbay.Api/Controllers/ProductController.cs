@@ -37,6 +37,12 @@ namespace StepEbay.Main.Api.Controllers
         {
             return await _productService.GetFilteredProducts(info, page);
         }
+        [HttpPost("favorite")]
+        public async Task<PaginatedList<ProductDto>> GetFilteredFavoriteProducts([FromBody] ProductFilterInfo info, int page)
+        {
+            int userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
+            return await _productService.GetFilteredFavoriteProducts(info, page, userId);
+        }
 
         [HttpGet("states")]
         public async Task<List<ProductStateDto>> GetProductStates()
@@ -78,6 +84,21 @@ namespace StepEbay.Main.Api.Controllers
         public async Task<List<ProductDto>> GetSearch([FromBody] SearchIdsDto products)
         {
             return await _productService.GetSearch(products);
-        }        
+        }
+
+        [HttpPost("favorite/{product}")]
+        public async Task<BoolResult> ToggleFavorite(int product)
+        {
+            int userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
+            return await _productService.ToggleFavorite(product, userId);
+        }
+
+        [HttpPost("isfavorite/{product}")]
+        public async Task<BoolResult> IsFavorite(int product)
+        {
+            int userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
+            return await _productService.IsFavorite(product, userId);
+        }
+
     }
 }

@@ -37,18 +37,5 @@ namespace StepEbay.Main.Api.Controllers
         {
             return await _personService.GetProductsInfo(productInfos);
         }
-
-        [HttpPost("favorite/{product}")]
-        public async Task<BoolResult> ToggleFavorite(int product)
-        {
-            int userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
-            return await _personService.ToggleFavorite(product, userId);
-        }
-        [HttpPost("isfavorite/{product}")]
-        public async Task<BoolResult> IsFavorite(int product)
-        {
-            int userId = int.Parse(User.Claims.Single(c => c.Type == ClaimTypes.Name).Value);
-            return await _personService.IsFavorite(product, userId);
-        }
     }
 }

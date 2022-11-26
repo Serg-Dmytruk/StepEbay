@@ -32,6 +32,9 @@ namespace StepEbay.Main.Client.Common.RestServices
         [Post("/product/filtered")]
         Task<ApiResponse<PaginatedList<ProductDto>>> GetProductsWithFilters(ProductFilterInfo info, int page);
 
+        [Post("/product/favorite")]
+        Task<ApiResponse<PaginatedList<ProductDto>>> GetFavoriteProductsWithFilters(ProductFilterInfo info, int page);
+
         [Get("/product/states")]
         Task<ApiResponse<List<ProductStateDto>>> GetProductStates();
 
@@ -69,10 +72,10 @@ namespace StepEbay.Main.Client.Common.RestServices
         [Post("/product/search")]
         Task<ApiResponse<List<ProductDto>>> GetSearch(SearchIdsDto products);
 
-        [Post("/person/favorite/{product}")]
+        [Post("/product/favorite/{product}")]
         Task<ApiResponse<BoolResult>> ToggleFavorite(int product);
 
-        [Post("/person/isfavorite/{product}")]
+        [Post("/product/isfavorite/{product}")]
         Task<ApiResponse<BoolResult>> isFavorite(int product);
     }
 }

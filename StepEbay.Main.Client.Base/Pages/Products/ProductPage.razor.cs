@@ -117,6 +117,8 @@ namespace StepEbay.Main.Client.Base.Pages.Products
         async void Favorite()
         {
             var result=await ApiService.ExecuteRequest(() => ApiService.ApiMethods.ToggleFavorite(int.Parse(Id)));
+            isFavorite = !isFavorite;
+            StateHasChanged();
         }
     }
 }

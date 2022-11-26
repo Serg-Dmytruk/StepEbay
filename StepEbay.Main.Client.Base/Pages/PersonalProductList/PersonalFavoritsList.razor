@@ -1,0 +1,249 @@
+﻿<div class="mainBlock">
+    @if (!ShowPreloader)
+    {
+        <div class="filterBlock">
+            <div>
+                <span>Категорія:</span>
+                @foreach (var category in ProductFilters.Categories)
+                {
+                    <div>
+                        @if (category.Selected is true)
+                        {
+                            <input type="checkbox" @bind-value="category.Selected" checked />
+                            <label class="checkedColor">@category.Name</label>
+                        }
+                        else
+                        {
+                            <input type="checkbox" @bind-value="category.Selected" />
+                            <label>@category.Name</label>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="mt-20 testP">
+                <span>Стан:</span>
+                @foreach (var state in ProductFilters.States)
+                {
+                    <div>
+                        @if (state.Selected is true)
+                        {
+                            <input type="checkbox" @bind-value="state.Selected" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" @bind-value="state.Selected" />
+                        }
+                        @if (state.Name == "used")
+                        {
+                            @if (state.Selected is true)
+                            {
+                                <label class="checkedColor">Б/У</label>
+                            }
+                            else
+                            {
+                                <label>Б/У</label>
+                            }
+                        }
+                        @if (state.Name == "new")
+                        {
+                            @if (state.Selected is true)
+                            {
+                                <label class="checkedColor">Новий</label>
+                            }
+                            else
+                            {
+                                <label>Новий</label>
+                            }
+                        }
+
+                    </div>
+                }
+            </div>
+
+            <div class="mt-20">
+                <div>
+                    <span>Ціна:</span>
+                </div>
+                <div>
+                    <div>
+                        <span>від</span>
+                    </div>
+                    <div>
+                        <input type="number" @bind-value="ProductFilters.PriceStart" />
+                    </div>
+                </div>
+                <div class="mt-13">
+                    <div>
+                        <span>до</span>
+                    </div>
+                    <div>
+                        <input type="number" @bind-value="ProductFilters.PriceEnd" />
+                    </div>
+                </div>
+            </div>
+
+            <button class="filterButton centerOnParrentHorizontal mt-20" @onclick="SubmitFilters">Підтвердити</button>
+        </div>
+        <div class="catalogBlock">
+            @if (!ShowProductsPreloader)
+            {
+                @if (_products is not null && _products.List is not null)
+                {
+                    <ul class="catalogUl">
+                        @foreach (var product in _products.List)
+                        {
+                            @if (product.Description.Length > 45)
+                            {
+                                product.Description = product.Description[..45] + "...";
+                            }
+                            <li>
+                                <div class="productCard">
+                                    <div>
+                                        @if (product.PurchaseTypeId == 2)
+                                        {
+                                            <div id="aution"></div>
+                                        }
+                                        <a href="/product/@product.Id">
+                                            <img class="imgCard" src="@(string.IsNullOrEmpty(product.Image1) ? "icons/no_photo.png" : $"{ApiConnection}/images/{product.Image1}")" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="mt-20 pl-15">
+
+                                        <a class="linkText mtooltip" href="/product/@product.Id">
+                                            <span class="cardHeader"> @product.Title</span>
+                                            <span class="tooltiptext">@product.Title</span>
+                                        </a>
+                                    </div>
+                                    <div class="mt-13 descriptionBlock pl-15">
+                                        <span class="description"> @product.Description</span>
+                                    </div>
+                                    <div class="mt-20 pl-15">
+                                        <span>₴</span>
+                                        <span>@(Math.Round(product.Price + product.Price * (decimal)0.02, 2))</span>
+                                    </div>
+                                    <div class="mt-20">
+                                        <a href="/product/@product.Id">
+                                            <button>Детальніше</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+                @if (_products.List is not null && _products.List.Count != 0)
+                {
+                    <div class="pagePagination">
+
+                        <div class="borderRight">
+                            <button class="prevPageImg" @onclick="PrevProductPage"></button>
+                        </div>
+
+                        @if (MaxProductPageNumber <= 1)
+                        {
+                            <div class="currPage borderRight">
+                                <span>1</span>
+                            </div>
+                        }
+                        else if (MaxProductPageNumber == 2)
+                        {
+                            for (int i = 1; i <= MaxProductPageNumber; i++)
+                            {
+                                @if ((ProductPageNumber + 1) == i && i == 1)
+                                {
+                                    <div class="currPage borderRight">
+                                        <span>@(ProductPageNumber + 1)</span>
+                                    </div>
+                                    <div class="borderRight">
+                                        <span>2</span>
+                                    </div>
+                                }
+
+                                @if ((ProductPageNumber + 1) == i && i == 2)
+                                {
+                                    <div class="borderRight">
+                                        <span>1</span>
+                                    </div>
+                                    <div class="currPage borderRight">
+                                        <span>@(ProductPageNumber + 1)</span>
+                                    </div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            @if ((ProductPageNumber + 1) == 1)
+                            {
+                                <div class="currPage borderRight">
+                                    <span>@(ProductPageNumber + 1)</span>
+                                </div>
+                                <div class="borderRight">
+                                    <span>2</span>
+                                </div>
+                                <div class="borderRight">
+                                    <span>3</span>
+                                </div>
+                            }
+                            else if ((ProductPageNumber + 1) == MaxProductPageNumber)
+                            {
+                                <div class="borderRight">
+                                    <span>@(MaxProductPageNumber - 2)</span>
+                                </div>
+                                <div class="borderRight">
+                                    <span>@(MaxProductPageNumber - 1)</span>
+                                </div>
+                                <div class="currPage borderRight">
+                                    <span>@(ProductPageNumber + 1)</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="borderRight">
+                                    <span>@ProductPageNumber</span>
+                                </div>
+                                <div class="currPage borderRight">
+                                    <span>@(ProductPageNumber + 1)</span>
+                                </div>
+                                <div class="borderRight">
+                                    <span>@(ProductPageNumber + 2)</span>
+                                </div>
+                            }
+                        }
+
+                        <div>
+                            <button class="nextPageImg" @onclick="NextProductPage"></button>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <h3 class="header">Нічого не знайдено...</h3>
+                }
+
+            }
+            else if (_products is not null && _products.List is null)
+            {
+                <h3 class="header">Нічого не знайдено...</h3>
+            }
+            else
+            {
+                <div class="spinner-border centerOnParrentHorizontal" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div id="loading">
+            <h1>
+                Завантаження
+                <div class="dots">
+                    <span class="dot z"></span><span class="dot f"></span><span class="dot s"></span><span class="dot t"><span class="dot l"></span></span>
+                </div>
+            </h1>
+        </div>
+    }
+</div>
+
