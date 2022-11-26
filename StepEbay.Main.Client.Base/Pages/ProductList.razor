@@ -100,7 +100,7 @@
                             <li>
                                 <div class="productCard">
                                     <div>
-                                        @if(product.PurchaseTypeId == 2)
+                                        @if (product.PurchaseTypeId == 2)
                                         {
                                             <div id="aution"></div>
                                         }
@@ -109,7 +109,7 @@
                                         </a>
                                     </div>
                                     <div class="mt-20 pl-15">
-                                        
+
                                         <a class="linkText mtooltip" href="/product/@product.Id">
                                             <span class="cardHeader"> @product.Title</span>
                                             <span class="tooltiptext">@product.Title</span>
@@ -132,7 +132,7 @@
                         }
                     </ul>
                 }
-                @if (_products.List is not null && _products.List.Count != 0)
+                @if (_products is not null && _products.List is not null && _products.List.Count != 0)
                 {
                     <div class="pagePagination">
 
@@ -222,7 +222,7 @@
                 }
 
             }
-            else if(_products is not null && _products.List is null)
+            else if (_products is not null && _products.List is null)
             {
                 <h3 class="header">Нічого не знайдено...</h3>
             }
@@ -236,12 +236,9 @@
     }
     else
     {
-         <div id="loading">
-        <h1>Завантаження
-            <div class="dots"><span class="dot z"></span><span class="dot f"></span><span class="dot s"></span><span
-                    class="dot t"><span class="dot l"></span></span></div>
-        </h1>
-    </div>
+        <div class="spinner-border centerOnParrentHorizontal" role="status">
+            <span class="sr-only"></span>
+        </div>
     }
 </div>
 

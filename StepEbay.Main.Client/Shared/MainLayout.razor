@@ -59,47 +59,49 @@
         <Authorized>
             <div id="drop-down-menu" class="container-fluid">
                 <div class="dropdownmenu-nav container">
-                    <ul class="cat-icon">
-                        <li><a onclick="hideMenu()" href='#'><div></div></a></li>
-                        <li><a onclick="hideMenu()" id="cat-icon-name" href='#'>@@@UserName</a></li>
-                    </ul>
-                    <ul>
-                        <li><a onclick="hideMenu()" href='/add/product'>Мій магазин</a></li>
-                        <li><a onclick="hideMenu()" href='/personal/products'>Покупки</a></li>
-                        <li><a onclick="hideMenu()" href='personal/favorite'>Улюблене</a></li>
-                    </ul>
-                    <ul>
-                        <li><a onclick="hideMenu()" href='personal/setting'>Налаштування</a></li>
-                        <li><a onclick="hideMenu()" href='#'>abc</a></li>
-                    </ul>
-                    <ul @onclick="Logout" id="cat-icon-exit">
-                        <li><a id="cat-exit-name" href='#'>Вихід</a></li>
-                        <li><a href='#'><div></div></a></li>
-                    </ul>
+                    <div class="row">
+                        <ul class="cat-icon col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                            <li><a onclick="hideMenu()" href='#'><div></div></a></li>
+                            <li><a onclick="hideMenu()" id="cat-icon-name" href='#'>@@@UserName</a></li>
+                        </ul>
+                        <ul class="mMenu col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <li><a onclick="hideMenu()" href='/personal/products'>Покупки</a></li>
+                            <li><a onclick="hideMenu()" href='/personal/favorite'>Улюблене</a></li>
+                            <li><a onclick="hideMenu()" href='/add/product'>Додати товар</a></li>
+                            <li><a onclick="hideMenu()" href='/personal/shop'>Мій магазин</a></li>
+                            <li><a onclick="hideMenu()" href='personal/setting'>Налаштування</a></li>
+                        </ul>
+                        <ul @onclick="Logout" id="cat-icon-exit" class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                            <li><a id="cat-exit-name" href='#'>Вихід</a></li>
+                            <li><a href='#'><div></div></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </Authorized>
     </AuthorizeView>
     <AuthorizeView Roles="admin">
         <Authorized>
-            <div id="drop-down-menu" class="container-fluid">
+            <div id="drop-down-menu" class="container-fluid adminMenu">
                 <div class="dropdownmenu-nav container">
-                    <ul class="cat-icon">
-                        <li><a onclick="hideMenu()" href='#'><div></div></a></li>
-                        <li><a onclick="hideMenu()"id="cat-icon-name" href='#'>@@@UserName</a></li>
-                    </ul>
-                    <ul>
-                        <li><a onclick="hideMenu()" href='/add/product'>Мій магазин</a></li>
-                        <li><a onclick="hideMenu()" href='/personal/products'>Покупки</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href='#' @onclick="TestException">Перевірка обробника помилок</a></li>
-                        <li><a onclick="hideMenu()" href='personal/setting'>Налаштування</a></li>
-                    </ul>
-                    <ul id="cat-icon-exit" @onclick="Logout">
-                        <li><a id="cat-exit-name" href='#'>Вихід</a></li>
-                        <li><a href='#'><div></div></a></li>
-                    </ul>
+                    <div class="row">
+                        <ul class="cat-icon col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                            <li><a onclick="hideMenu()" href='#'><div></div></a></li>
+                            <li><a onclick="hideMenu()" id="cat-icon-name" href='#'>@@@UserName</a></li>
+                        </ul>
+                        <ul class="mMenu col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                            <li><a onclick="hideMenu()" href='/personal/products'>Покупки</a></li>
+                            <li><a onclick="hideMenu()" href='/personal/favorite'>Улюблене</a></li>
+                            <li><a onclick="hideMenu()" href='/add/product'>Додати товар</a></li>
+                            <li><a onclick="hideMenu()" href='/personal/shop'>Мій магазин</a></li>
+                            <li><a href='#' @onclick="TestException">Перевірка обробника помилок</a></li>
+                            <li><a onclick="hideMenu()" href='personal/setting'>Налаштування</a></li>
+                        </ul>
+                        <ul @onclick="Logout" id="cat-icon-exit" class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3">
+                            <li><a id="cat-exit-name" href='#'>Вихід</a></li>
+                            <li><a href='#'><div></div></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </Authorized>

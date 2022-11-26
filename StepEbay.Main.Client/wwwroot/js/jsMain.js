@@ -46,7 +46,7 @@ function clearCurrent(navItems) {
 
 function dropDownMenu() {
     let dropdown = document.getElementById('drop-down-menu');
-    dropdown.style.top = dropdown.style.top <= '0' ? '0' : '-300px';
+    dropdown.style.top = dropdown.style.top <= '0' ? '0' : '-400px';
 }
 
 function hideMenu() {

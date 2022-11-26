@@ -123,6 +123,8 @@ namespace StepEbay.Main.Client.Base.Pages
             {
                 MaxProductPageNumber = _products.CountAll % ProductListConstant.MAXONPAGE == 0 ? (_products.CountAll / ProductListConstant.MAXONPAGE) : (_products.CountAll / ProductListConstant.MAXONPAGE) + 1;
             }
+            else
+                _products = new();
 
             ShowProductsPreloader = false;
         }
@@ -133,7 +135,7 @@ namespace StepEbay.Main.Client.Base.Pages
             {
                 categories.ForEach(category => ProductFilters.Categories.Add(new Category { Id = category.Id, Name = category.Name, Selected = true }));
             }
-            else
+            else if (categories is not null)
             {
                 foreach (var category in categories)
                 {
@@ -148,7 +150,8 @@ namespace StepEbay.Main.Client.Base.Pages
         protected async Task GetProductStates()
         {
             var responce = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetProductStates());
-            ProductFilters.States = responce.Data.Select(r => new State { Id = r.Id, Name = r.Name, Selected = true }).ToList();
+            if(responce.Data is not null)
+                ProductFilters.States = responce.Data.Select(r => new State { Id = r.Id, Name = r.Name, Selected = true }).ToList();
         }
 
         private void ChangedPrice(List<ChangedPrice> changed)

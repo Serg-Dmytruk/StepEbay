@@ -152,7 +152,7 @@
   position: fixed;
   padding-top: 90px;
   background-color: white;
-  top: -300px;
+  top: -400px;
   z-index: 99;
   transition: 0.3s;
   -webkit-box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
@@ -161,9 +161,7 @@
   overflow: hidden;
 }
 #drop-down-menu .dropdownmenu-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  height: 250px;
+  height: 385px;
 }
 #drop-down-menu .dropdownmenu-nav ul {
   list-style: none;
@@ -219,6 +217,9 @@
   width: 100%;
   background-color: var(--clr-dark-grey);
   cursor: pointer;
+  /*    &:hover #cat-exit-name {
+          font-size: 10pt;
+      }*/
 }
 #cat-icon-exit:hover {
   background-color: var(--clr-red);
@@ -237,9 +238,6 @@
   background: url(../../icons/CatFaceSad-01.svg);
   background-color: var(--clr-red);
 }
-#cat-icon-exit:hover #cat-exit-name {
-  font-size: 10pt;
-}
 
 #cat-exit-name {
   display: block;
@@ -250,6 +248,12 @@
 }
 #cat-exit-name:active {
   color: var(--clr-orange) !important;
+}
+
+.mMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 footer {
@@ -1690,5 +1694,70 @@ body {
     height: 60px;
     display: flex;
     align-items: center;
+  }
+
+  .cat-icon div {
+    width: 60px;
+    height: 60px;
+  }
+
+  #cat-icon-exit div {
+    width: 60px;
+    height: 60px;
+  }
+
+  #cat-exit-name {
+    font-size: 22px;
+  }
+
+  #drop-down-menu {
+    font-size: smaller;
+  }
+
+  .mMenu {
+    flex-direction: column;
+  }
+  .mMenu li {
+    margin: 5px 0;
+  }
+}
+@media screen and (max-width: 999px) {
+  .adminMenu .mMenu {
+    flex-direction: column;
+  }
+
+  .adminMenu .cat-icon div {
+    width: 60px;
+    height: 60px;
+  }
+  .adminMenu #cat-icon-exit div {
+    width: 60px;
+    height: 60px;
+  }
+  .adminMenu #cat-exit-name {
+    font-size: 22px;
+  }
+  .adminMenu #drop-down-menu {
+    font-size: smaller;
+  }
+}
+@media screen and (max-width: 576px) {
+  .adminMenu .mMenu {
+    flex-direction: column;
+  }
+
+  .adminMenu .cat-icon div {
+    width: 40px;
+    height: 40px;
+  }
+  .adminMenu #cat-icon-exit div {
+    width: 40px;
+    height: 40px;
+  }
+  .adminMenu #cat-exit-name {
+    font-size: 22px;
+  }
+  .adminMenu #drop-down-menu {
+    font-size: smaller;
   }
 }

@@ -32,7 +32,9 @@ namespace StepEbay.Main.Client.Base.Pages
             ShowPreloader = true;
 
             var categoryResponse = await ApiService.ExecuteRequest(() => ApiService.ApiMethods.GetCategories());
-            ProductCategoryIdConstant.setConstants(categoryResponse.Data.ToDictionary(k=>k.Name,k=>k.Id));
+
+            if(categoryResponse.Data is not null)
+                ProductCategoryIdConstant.setConstants(categoryResponse.Data.ToDictionary(k=>k.Name,k=>k.Id));
 
             if (!string.IsNullOrEmpty(Id) && !string.IsNullOrEmpty(Key))
             {
